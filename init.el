@@ -447,6 +447,7 @@ negative ARG -N."
 	 (("k" projectile-kill-buffers "Kill Buffers")
 	  ("G" projectile-grep "Grep")
 	  ("g" consult-grep "Grep Quick")
+      ("D" (lambda () (interactive) (let ((default-directory "")) (call-interactively 'projectile-run-gdb))) "gdb")
 	  ("s" (lambda (&optional arg) (interactive "P") (let ((default-directory "")) (projectile-run-shell arg))) "Shell")
 	  ("c" projectile-compile-project "Compile")))))
 
@@ -915,12 +916,14 @@ This function should be used as around advice."
 (use-package cperl-mode
   :straight (cperl-mode :type built-in)
   :commands (perl-mode cperl-mode)
+  :hook
+  (cperl-mode . flycheck-mode)
   :init
   (fset 'perl-mode 'cperl-mode)
-  :custom-face
-  (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
-  (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
   :custom
+  (flycheck-check-syntax-automatically '(mode-enabled save))
+  (flycheck-display-errors-delay 0.3)
+
   (cperl-invalid-face nil)
   (cperl-indent-level 4)
   (cperl-close-paren-offset (- cperl-indent-level))
@@ -930,6 +933,9 @@ This function should be used as around advice."
   (cperl-electric-lbrace-space nil)
   (cperl-extra-newline-before-brace-multiline nil)
   (cperl-auto-newline nil)
+  :custom-face
+  (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
+  (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
   :config
   (general-define-key ;; the default behavior of { is annoying
    :keymaps 'cperl-mode-map
@@ -1207,15 +1213,15 @@ This function should be used as around advice."
 
 ;;; FLYCHECK
 
-;; (use-package flycheck
-;;   :straight t
-;;   :commands flycheck-mode
-;;   :custom
-;;   (flycheck-check-syntax-automatically '(mode-enabled save))
-;;   (flycheck-display-errors-delay 0.1)
-;;   :config
-;;   (advice-add 'flycheck-next-error :around 'my/better-jumper--around)
-;;   (advice-add 'flycheck-previous-error :around 'my/better-jumper--around))
+(use-package flycheck
+  :straight t
+  :commands flycheck-mode
+  :custom
+  (flycheck-check-syntax-automatically '(mode-enabled save))
+  (flycheck-display-errors-delay 0.1)
+  :config
+  (advice-add 'flycheck-next-error :around 'my/better-jumper--around)
+  (advice-add 'flycheck-previous-error :around 'my/better-jumper--around))
 
 ;;; FLYSPELL
 
@@ -2070,7 +2076,7 @@ This function should be used as around advice."
 (add-to-list 'shellhist-filters "^cd ?$")
 (add-to-list 'shellhist-filters "^ls$")
 (add-to-list 'shellhist-filters #'(lambda (str) (<= (length str) 3)))
-(setq shellhist-max-hist-size 1000)
+(setq shellhist-max-hist-size 2000)
 (add-hook 'shell-mode-hook 'shellhist-mode)
 (general-define-key
  :keymaps 'shell-mode-map
@@ -2180,6 +2186,10 @@ This function should be used as around advice."
   :init
   (fset 'gdb 'gud-gdb)
   :config
+  ;; (general-define-key
+  ;;  :keymaps 'gud-mode-map
+  ;;  :states 'insert
+  ;;  "TAB" nil)
   (defadvice gud-display-line (after my/gud-display-line-centered act)
     (let ((bf (gud-find-file true-file)))
       (save-excursion
@@ -2201,3 +2211,38 @@ This function should be used as around advice."
    "M-SPC" 'shman-pop-shell
    "M-S-SPC" 'shman-pop-shell-autocd
    "C-M-SPC" 'shman-pop-one-time-shell))
+
+;;; PROLOG
+
+(use-package prolog ; https://bruda.ca/_media/emacs/prolog.el
+  :load-path "/home/_73/.emacs.d/my/prolog"
+  :commands (prolog-mode run-prolog)
+  :custom
+  (prolog-program-name '((t "/home/_73/.local/bin/scryer-prolog"))))
+
+(use-package ediprolog
+  :straight t
+  :after prolog
+  :custom
+  (ediprolog-program "/home/_73/.local/bin/scryer-prolog"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(gnus-inhibit-images t nil nil "Customized with use-package mu4e")
+ '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
+ '(safe-local-variable-values
+   '((eval add-hook 'hack-local-variables-hook
+           (lambda nil
+             (when
+                 (string-equal
+                  (file-name-extension buffer-file-name)
+                  "pl")
+               (prolog-mode)))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
