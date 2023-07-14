@@ -2225,24 +2225,3 @@ This function should be used as around advice."
   :after prolog
   :custom
   (ediprolog-program "/home/_73/.local/bin/scryer-prolog"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(gnus-inhibit-images t nil nil "Customized with use-package mu4e")
- '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
- '(safe-local-variable-values
-   '((eval add-hook 'hack-local-variables-hook
-           (lambda nil
-             (when
-                 (string-equal
-                  (file-name-extension buffer-file-name)
-                  "pl")
-               (prolog-mode)))))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
