@@ -536,7 +536,7 @@ This function should be used as around advice."
 
 (setq shr-use-colors nil)
 
-(setq require-final-newline t)
+(setq-default require-final-newline t)
 
 (defun my/safe-kill-buffer ()
   "Like `kill-this-buffer' but prompt for y or n first."
