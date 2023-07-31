@@ -211,7 +211,7 @@
   (auth-source-pass-enable)
   (let ((root-password (password-store-get "root-password")))
 	(defun my/string-contains-root-password (str)
-	  (string-match-p (regexp-quote root-password) str)))
+	  (when root-password (string-match-p (regexp-quote root-password) str))))
   :custom
   (auth-source-debug t)
   (auth-source-do-cache nil)
@@ -2202,15 +2202,15 @@ This function should be used as around advice."
 
 ;;; SHMAN
 
-(use-package shman
-  :load-path "/home/_73/p/shman/"
-  :custom
-  (shman-cd-function #'(lambda () projectile-known-projects))
-  :config
-  (general-define-key
-   "M-SPC" 'shman-pop-shell
-   "M-S-SPC" 'shman-pop-shell-autocd
-   "C-M-SPC" 'shman-pop-one-time-shell))
+;; (use-package shman
+;;   :load-path "/home/_73/p/shman/"
+;;   :custom
+;;   (shman-cd-function #'(lambda () projectile-known-projects))
+;;   :config
+;;   (general-define-key
+;;    "M-SPC" 'shman-pop-shell
+;;    "M-S-SPC" 'shman-pop-shell-autocd
+;;    "C-M-SPC" 'shman-pop-one-time-shell))
 
 ;;; PROLOG
 
