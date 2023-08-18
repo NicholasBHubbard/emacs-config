@@ -918,6 +918,7 @@ This function should be used as around advice."
   :commands (perl-mode cperl-mode)
   :hook
   (cperl-mode . flycheck-mode)
+  (cperl-mode . my/cperl-select-correct-flycheck-checker)
   :init
   (fset 'perl-mode 'cperl-mode)
   :custom
@@ -937,6 +938,27 @@ This function should be used as around advice."
   (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
   (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
   :config
+  (flycheck-define-checker my/perl-plx
+    ""
+    :command ("plx" "-w" "-c"
+              (option-list "-I" flycheck-perl-include-path)
+              (option-list "-M" flycheck-perl-module-list concat))
+    :standard-input t
+    :error-patterns
+    ((error line-start (minimal-match (message))
+            " at - line " line
+            (or "." (and ", " (zero-or-more not-newline))) line-end))
+    :modes (perl-mode cperl-mode))
+
+  (defun my/cperl-select-correct-flycheck-checker ()
+    "If the current buffer is part of a plx project then use the `my/perl-plx'
+checker, otherwise use the `perl' checker."
+    (let ((proj-root (projectile-project-root (string-remove-suffix "/" default-directory))))
+      (if (and proj-root (file-directory-p (concat proj-root ".plx")))
+          (flycheck-select-checker 'my/perl-plx)
+        (flycheck-select-checker 'perl))))
+
+
   (general-define-key ;; the default behavior of { is annoying
    :keymaps 'cperl-mode-map
    "{" nil))
@@ -1627,49 +1649,21 @@ This function should be used as around advice."
   :config
   (bash-completion-setup))
 
-;; (use-package shell-pop
-;;   :straight t
-;;   :custom
-;;   (shell-pop-window-position "bottom")
-;;   (shell-pop-window-size 45)
-;;   (shell-pop-full-span nil)
-;;   (shell-pop-restore-window-configuration nil)
-;;   (shell-pop-cleanup-buffer-at-process-exit t)
-;;   :config
-;;   (general-define-key
-;;    "M-SPC" 'my/shell-pop)
-
-;;   (defun my/shell-pop (arg)
-;;     (interactive "P")
-;;     (let* ((shell-num (or arg 1)) ; default to primary pop-shell
-;;            (shell-name (concat "*shell-" (number-to-string shell-num) "*"))
-;;            (shell-win (get-buffer-window shell-name))
-;;            (primary-shell-name "*shell-1*")
-;;            (shell-name-re (concat "^\\*shell-[[:digit:]]+\\*$"))
-;;            (buf-name (buffer-name))
-;;            (shell-pop-autocd-to-working-dir (if (= shell-num 1) t nil)))
-;;       (if (or (and (string= primary-shell-name buf-name) (not (= shell-num 1)))
-;;               (not (string-match-p shell-name-re buf-name)))
-;;           (progn
-;;             (when shell-win (delete-window shell-win))
-;;             (shell-pop-up shell-num))
-;;         (delete-window)))))
-
-;; (use-package shell-pop
-;;   :straight t
-;;   :custom
-;;   (shell-pop-window-position "bottom")
-;;   (shell-pop-full-span nil)
-;;   (shell-pop-window-size 30)
-;;   (shell-pop-restore-window-configuration nil)
-;;   (shell-pop-cleanup-buffer-at-process-exit t)
-;;   (shell-pop-autocd-to-working-dir nil)
-;;   :config
-;;   (general-define-key
-;;    "M-SPC" 'shell-pop
-;;    "M-S-SPC" '(lambda () (interactive)
-;; 				(let ((shell-pop-autocd-to-working-dir t))
-;; 				  (call-interactively 'shell-pop)))))
+(use-package shell-pop
+  :straight t
+  :custom
+  (shell-pop-window-position "bottom")
+  (shell-pop-full-span nil)
+  (shell-pop-window-size 37)
+  (shell-pop-restore-window-configuration nil)
+  (shell-pop-cleanup-buffer-at-process-exit t)
+  (shell-pop-autocd-to-working-dir nil)
+  :config
+  (general-define-key
+   "M-SPC" 'shell-pop
+   "M-S-SPC" '(lambda () (interactive)
+				(let ((shell-pop-autocd-to-working-dir t))
+				  (call-interactively 'shell-pop)))))
 
 ;;; SHELL SCRIPT
 
