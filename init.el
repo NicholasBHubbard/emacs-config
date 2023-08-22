@@ -914,7 +914,7 @@ This function should be used as around advice."
 ;;; CPERL
 
 (use-package cperl-mode
-  :straight (cperl-mode :type built-in)
+  :load-path "/home/_73/.emacs.d/my/cperl"
   :commands (perl-mode cperl-mode)
   :hook
   (cperl-mode . flycheck-mode)
@@ -1335,7 +1335,7 @@ checker, otherwise use the `perl' checker."
 	  ("k" diff-hl-previous-hunk "previous"))
 	 "Hunk"
 	 (("s" diff-hl-stage-current-hunk "stage")
-	  ("r" diff-hl-revert-hunk "revert")
+	  ("r" diff-hl-revert-hunk "revert" :exit t)
 	  ("d" diff-hl-show-hunk "diff" :exit t)
 	  ("m" diff-hl-mark-hunk "mark" :exit t))
 	 "Magit"
@@ -2197,7 +2197,7 @@ checker, otherwise use the `perl' checker."
 ;;; SHMAN
 
 ;; (use-package shman
-;;   :load-path "/home/_73/p/shman/"
+;;   :load-path "/home/_73/p/shman"
 ;;   :custom
 ;;   (shman-cd-function #'(lambda () projectile-known-projects))
 ;;   :config
