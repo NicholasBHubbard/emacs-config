@@ -1397,6 +1397,8 @@ checker, otherwise use the `perl' checker."
   :load-path "/usr/share/emacs/site-lisp/mu4e"
   ;; :init
   ;; (defun mu4e--main-action-str (&rest _) nil)
+  :hook
+  (mu4e-compose-mode . (lambda () (auto-fill-mode 0)))
   :custom
   (send-mail-function 'smtpmail-send-it)
   (smtpmail-smtp-user "nicholashubbard@posteo.net")
@@ -1438,12 +1440,12 @@ checker, otherwise use the `perl' checker."
 
 ;;; MULTI COMPILE
 
-  (use-package multi-compile
-    :straight t
-    :custom
-    (multi-compile-default-directory-function #'projectile-project-root)
-    :config
-    (general-define-key "M-C" 'multi-compile-run))
+(use-package multi-compile
+  :straight t
+  :custom
+  (multi-compile-default-directory-function #'projectile-project-root)
+  :config
+  (general-define-key "M-C" 'multi-compile-run))
 
 ;;; ORG
 
