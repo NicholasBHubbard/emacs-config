@@ -43,6 +43,8 @@
   :config
   (load-theme 'alect-black t))
 
+(set-face-attribute 'region nil :background "#737")
+
 ;; ;; dark mode
 ;; (invert-face 'default)
 
