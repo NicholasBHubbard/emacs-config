@@ -165,6 +165,7 @@
    "M-k" nil)
   (general-define-key
    "M-J" 'evil-scroll-line-up
+   "M-m" 'evil-set-marker
    "M-K" 'evil-scroll-line-down)
   (general-define-key
    :states '(normal visual motion)
@@ -480,6 +481,7 @@ negative ARG -N."
 		  (better-jumper-set-jump new-pt)))))
   (advice-add 'evil-ex :around 'my/better-jumper--around)
   (advice-add 'evil-next-line :around 'my/better-jumper--around)
+  (advice-add 'evil-goto-mark :around 'my/better-jumper--around)
   (advice-add 'evil-previous-line :around 'my/better-jumper--around)
   (advice-add 'evil-goto :around 'my/better-jumper--around)
   (advice-add 'evil-goto-line :around 'my/better-jumper--around)
@@ -525,6 +527,7 @@ This function should be used as around advice."
 (advice-add 'evil-ex :around 'my/recenter-if-offscreen--around)
 (advice-add 'evil-next-line :around 'my/recenter-if-offscreen--around)
 (advice-add 'evil-previous-line :around 'my/recenter-if-offscreen--around)
+(advice-add 'evil-goto-mark :around 'my/recenter-if-offscreen--around)
 (advice-add 'evil-goto :around 'my/recenter-if-offscreen--around)
 (advice-add 'evil-goto-first-line :around 'my/recenter-if-offscreen--around)
 
@@ -1632,6 +1635,8 @@ checker, otherwise use the `perl' checker."
 	(shell-dirtrack-mode 0)
 	(setq-local dirtrack-list '("^[[][^@]*@[^ ]* \\([^]]*\\)\\]\\$ " 1))
 	(dirtrack-mode 1))
+  :custom
+  (setq comint-password-prompt-regexp (concat comint-password-prompt-regexp "|easy password|passphrase"))
   :hook
   (shell-mode . my/shell-dirtrack))
 
@@ -1897,7 +1902,9 @@ checker, otherwise use the `perl' checker."
 
 (use-package ruby-mode
   :straight (ruby-mode :type built-in)
-  :magic (".*\\.rb$" . ruby-mode))
+  :magic (".*\\.rb$" . ruby-mode)
+  :hook
+  (ruby-mode . (lambda () (flycheck-mode 1) (flycheck-select-checker 'ruby))))
 
 ;;; ORDERLESS
 
