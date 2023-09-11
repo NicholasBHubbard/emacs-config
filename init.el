@@ -1450,7 +1450,8 @@ checker, otherwise use the `perl' checker."
   :custom
   (multi-compile-default-directory-function #'projectile-project-root)
   :config
-  (general-define-key "M-C" 'multi-compile-run))
+  (general-define-key "M-C" 'multi-compile-run)
+  (evil-set-initial-state 'compilation-mode 'normal))
 
 ;;; ORG
 
