@@ -402,6 +402,15 @@ negative ARG -N."
 	"L" 'consult-locate
 	"f" 'consult-find))
 
+;;; MULTI COMPILE
+
+(use-package multi-compile
+  :straight t
+  :custom
+  (multi-compile-default-directory-function #'projectile-project-root)
+  :config
+  (evil-set-initial-state 'compilation-mode 'normal))
+
 ;;; PROJECTILE
 
 (use-package projectile
@@ -424,6 +433,13 @@ negative ARG -N."
   (projectile-switch-project-action #'consult-projectile)
   :config
   (projectile-mode 1)
+
+  (defun my/projectile-compile-project (&optional force-prompt)
+    (interactive)
+    (let* ((prompt-for-project (lambda () (completing-read "Project: " projectile-known-projects nil t)))
+           (root0 (projectile-project-root))
+           (default-directory (if force-prompt (funcall prompt-for-project) (or root0 (funcall prompt-for-project)))))
+      (call-interactively 'multi-compile-run)))
 
   ;; This lets Embark work with projectile
   (define-advice projectile-find-file (:around (orig-fn &optional arg) fix-dir)
@@ -452,7 +468,7 @@ negative ARG -N."
 	  ("g" consult-grep "Grep Quick")
       ("D" (lambda () (interactive) (let ((default-directory "")) (call-interactively 'projectile-run-gdb))) "gdb")
 	  ("s" (lambda (&optional arg) (interactive "P") (let ((default-directory "")) (projectile-run-shell arg))) "Shell")
-	  ("c" projectile-compile-project "Compile")))))
+      ("c" (lambda () (interactive) (my/projectile-compile-project t)) "Compile")))))
 
 ;;; BETTER JUMPER
 
@@ -943,6 +959,9 @@ This function should be used as around advice."
   (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
   (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
   :config
+  (add-to-list 'multi-compile-alist '(cperl-mode . (("perl-prove" . "prove")
+                                                    ("plx-prove" . "plx prove"))))
+
   (flycheck-define-checker my/perl-plx
     ""
     :command ("plx" "-w" "-c"
@@ -1442,16 +1461,6 @@ checker, otherwise use the `perl' checker."
    :states 'normal
    :keymaps 'mu4e-view-mode-map
    "SPC" nil))
-
-;;; MULTI COMPILE
-
-(use-package multi-compile
-  :straight t
-  :custom
-  (multi-compile-default-directory-function #'projectile-project-root)
-  :config
-  (general-define-key "M-C" 'multi-compile-run)
-  (evil-set-initial-state 'compilation-mode 'normal))
 
 ;;; ORG
 
