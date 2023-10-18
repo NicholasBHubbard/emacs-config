@@ -2227,6 +2227,12 @@ checker, otherwise use the `perl' checker."
 ;;    "M-S-SPC" 'shman-pop-shell-autocd
 ;;    "C-M-SPC" 'shman-pop-one-time-shell))
 
+;;; STRACE
+
+(use-package strace-mode
+  :straight t
+  :magic (".*\\.strace$" . strace-mode))
+
 ;;; PROLOG
 
 (use-package prolog ; https://bruda.ca/_media/emacs/prolog.el
