@@ -402,6 +402,18 @@ negative ARG -N."
 	"L" 'consult-locate
 	"f" 'consult-find))
 
+;;; YASNIPPET
+
+(use-package yasnippet
+  :straight t
+  :blackout yas-minor-mode
+  :config
+  (use-package yasnippet-snippets
+    :straight t)
+  (general-define-key
+   :keymaps 'yas-minor-mode-map
+   "M-TAB" 'yas-insert-snippet))
+
 ;;; MULTI COMPILE
 
 (use-package multi-compile
@@ -1689,6 +1701,8 @@ checker, otherwise use the `perl' checker."
 (use-package sh-script
   :straight (sh-script :type built-in)
   :commands sh-mode
+  :hook
+  (sh-mode . yas/minor-mode)
   :custom
   (sh-indentation 4)
   (sh-basic-offset 4))
@@ -1870,20 +1884,6 @@ checker, otherwise use the `perl' checker."
 			   (if (string-match-p link-hint-url-regexp thing)
 				   (browse-url thing)
 				 (call-interactively 'google-this)))))))
-
-;;; YASNIPPET
-
-(use-package yasnippet
-  :straight t
-  :blackout yas-minor-mode
-  :config
-  (general-define-key
-   :keymaps 'yas-minor-mode-map
-   "M-TAB" 'yas-insert-snippet))
-
-(use-package yasnippet-snippets
-  :straight t
-  :after yasnippet)
 
 ;;; CC MODE
 
