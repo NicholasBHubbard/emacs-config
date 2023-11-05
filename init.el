@@ -404,24 +404,24 @@ negative ARG -N."
 
 ;;; YASNIPPET
 
-;; (use-package yasnippet
-;;   :straight t
-;;   :blackout yas-minor-mode
-;;   :config
-;;   (use-package yasnippet-snippets
-;;     :straight t)
-;;   (general-define-key
-;;    :keymaps 'yas-minor-mode-map
-;;    "M-TAB" 'yas-insert-snippet))
+(use-package yasnippet
+  :straight t
+  :blackout yas-minor-mode
+  :config
+  (use-package yasnippet-snippets
+    :straight t)
+  (general-define-key
+   :keymaps 'yas-minor-mode-map
+   "M-TAB" 'yas-insert-snippet))
 
 ;;; MULTI COMPILE
 
-;; (use-package multi-compile
-;;   :straight t
-;;   :custom
-;;   (multi-compile-default-directory-function #'projectile-project-root)
-;;   :config
-;;   (evil-set-initial-state 'compilation-mode 'normal))
+(use-package multi-compile
+  :straight t
+  :custom
+  (multi-compile-default-directory-function #'projectile-project-root)
+  :config
+  (evil-set-initial-state 'compilation-mode 'normal))
 
 ;;; PROJECTILE
 
