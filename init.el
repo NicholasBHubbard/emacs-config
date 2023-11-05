@@ -559,7 +559,7 @@ This function should be used as around advice."
 (advice-add 'evil-goto :around 'my/recenter-if-offscreen--around)
 (advice-add 'evil-goto-first-line :around 'my/recenter-if-offscreen--around)
 
-;(which-func-mode 1)
+(which-function-mode 1)
 
 (savehist-mode 1)
 
