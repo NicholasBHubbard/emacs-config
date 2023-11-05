@@ -404,24 +404,24 @@ negative ARG -N."
 
 ;;; YASNIPPET
 
-(use-package yasnippet
-  :straight t
-  :blackout yas-minor-mode
-  :config
-  (use-package yasnippet-snippets
-    :straight t)
-  (general-define-key
-   :keymaps 'yas-minor-mode-map
-   "M-TAB" 'yas-insert-snippet))
+;; (use-package yasnippet
+;;   :straight t
+;;   :blackout yas-minor-mode
+;;   :config
+;;   (use-package yasnippet-snippets
+;;     :straight t)
+;;   (general-define-key
+;;    :keymaps 'yas-minor-mode-map
+;;    "M-TAB" 'yas-insert-snippet))
 
 ;;; MULTI COMPILE
 
-(use-package multi-compile
-  :straight t
-  :custom
-  (multi-compile-default-directory-function #'projectile-project-root)
-  :config
-  (evil-set-initial-state 'compilation-mode 'normal))
+;; (use-package multi-compile
+;;   :straight t
+;;   :custom
+;;   (multi-compile-default-directory-function #'projectile-project-root)
+;;   :config
+;;   (evil-set-initial-state 'compilation-mode 'normal))
 
 ;;; PROJECTILE
 
@@ -559,7 +559,7 @@ This function should be used as around advice."
 (advice-add 'evil-goto :around 'my/recenter-if-offscreen--around)
 (advice-add 'evil-goto-first-line :around 'my/recenter-if-offscreen--around)
 
-(which-func-mode 1)
+;(which-func-mode 1)
 
 (savehist-mode 1)
 
@@ -1136,6 +1136,7 @@ checker, otherwise use the `perl' checker."
 
 (use-package elisp-mode
   :straight (elisp-mode :type built-in)
+  :after smartparens
   :hook
   (emacs-lisp-mode . rainbow-delimiters-mode)
   (emacs-lisp-mode . aggressive-indent-mode)
@@ -2085,20 +2086,20 @@ checker, otherwise use the `perl' checker."
 
 ;;; SHELLHIST
 
-(load "~/p/shellhist/shellhist.el")
-(shellhist-mode 1)
-(add-to-list 'shellhist-filters 'my/string-contains-root-password)
-(add-to-list 'shellhist-filters "^cd ?$")
-(add-to-list 'shellhist-filters "^ls$")
-(add-to-list 'shellhist-filters #'(lambda (str) (<= (length str) 3)))
-(setq shellhist-max-hist-size 2000)
-(add-hook 'shell-mode-hook 'shellhist-mode)
-(general-define-key
- :keymaps 'shell-mode-map
- "C-r" '(lambda () (interactive)
-		  (let ((vertico-prescient-enable-sorting nil)
-				(vertico-sort-function nil))
-			(shellhist-history-search))))
+;;(load "~/p/shellhist/shellhist.el")
+;;(shellhist-mode 1)
+;;(add-to-list 'shellhist-filters 'my/string-contains-root-password)
+;;(add-to-list 'shellhist-filters "^cd ?$")
+;;(add-to-list 'shellhist-filters "^ls$")
+;;(add-to-list 'shellhist-filters #'(lambda (str) (<= (length str) 3)))
+;;(setq shellhist-max-hist-size 2000)
+;;(add-hook 'shell-mode-hook 'shellhist-mode)
+;;(general-define-key
+;; :keymaps 'shell-mode-map
+;; "C-r" '(lambda () (interactive)
+;;		  (let ((vertico-prescient-enable-sorting nil)
+;;				(vertico-sort-function nil))
+;;			(shellhist-history-search))))
 
 ;;; GITLAB CI
 
