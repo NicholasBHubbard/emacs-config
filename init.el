@@ -2086,20 +2086,22 @@ checker, otherwise use the `perl' checker."
 
 ;;; SHELLHIST
 
-;;(load "~/p/shellhist/shellhist.el")
-;;(shellhist-mode 1)
-;;(add-to-list 'shellhist-filters 'my/string-contains-root-password)
-;;(add-to-list 'shellhist-filters "^cd ?$")
-;;(add-to-list 'shellhist-filters "^ls$")
-;;(add-to-list 'shellhist-filters #'(lambda (str) (<= (length str) 3)))
-;;(setq shellhist-max-hist-size 2000)
-;;(add-hook 'shell-mode-hook 'shellhist-mode)
-;;(general-define-key
-;; :keymaps 'shell-mode-map
-;; "C-r" '(lambda () (interactive)
-;;		  (let ((vertico-prescient-enable-sorting nil)
-;;				(vertico-sort-function nil))
-;;			(shellhist-history-search))))
+(use-package shellhist
+  :straight (shellhist :type git :host github :repo "NicholasBHubbard/shellhist")
+  :config
+  (add-to-list 'shellhist-filters 'my/string-contains-root-password)
+  (add-to-list 'shellhist-filters "^cd ?$")
+  (add-to-list 'shellhist-filters #'(lambda (str) (<= (length str) 3)))
+  (general-define-key
+   :keymaps 'shell-mode-map
+   "C-r" '(lambda () (interactive)
+		    (let ((vertico-prescient-enable-sorting nil)
+				  (vertico-sort-function nil))
+			  (shellhist-history-search))))
+  :custom
+  (shellhist-max-hist-size 2000)
+  :hook
+  (shell-mode . shellhist-mode))
 
 ;;; GITLAB CI
 
@@ -2139,23 +2141,23 @@ checker, otherwise use the `perl' checker."
 
 ;;; CLUE
 
-(use-package clue
-  :straight (clue :type git :host github :repo "AmaiKinono/clue")
-  :blackout
-  :defer t
-  :init
-  (add-hook 'find-file-hook #'clue-auto-enable-clue-mode)
-  :custom
-  (clue-project-root-function #'(lambda () nil))
-  :config
-  (defun my/clue-goto ()
-	(interactive)
-	(when-let* ((loc (clue--link-location-at-point))
-				(aw-dispatch-when-more-than 1)
-				(aw (aw-select "Ace Window")))
-	  (select-window aw)
-	  (clue--goto-location loc)
-	  (run-hooks 'clue-after-jump-hook))))
+;; (use-package clue
+;;   :straight (clue :type git :host github :repo "AmaiKinono/clue")
+;;   :blackout
+;;   :defer t
+;;   :init
+;;   (add-hook 'find-file-hook #'clue-auto-enable-clue-mode)
+;;   :custom
+;;   (clue-project-root-function #'(lambda () nil))
+;;   :config
+;;   (defun my/clue-goto ()
+;; 	(interactive)
+;; 	(when-let* ((loc (clue--link-location-at-point))
+;; 				(aw-dispatch-when-more-than 1)
+;; 				(aw (aw-select "Ace Window")))
+;; 	  (select-window aw)
+;; 	  (clue--goto-location loc)
+;; 	  (run-hooks 'clue-after-jump-hook))))
 
 ;;; GGTAGS
 
