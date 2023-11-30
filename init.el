@@ -212,9 +212,6 @@
   :straight (auth-source-pass :type built-in)
   :config
   (auth-source-pass-enable)
-  (let ((root-password (password-store-get "root-password")))
-	(defun my/string-contains-root-password (str)
-	  (when root-password (string-match-p (regexp-quote root-password) str))))
   :custom
   (auth-source-debug t)
   (auth-source-do-cache nil)
@@ -2084,7 +2081,6 @@ checker, otherwise use the `perl' checker."
 (use-package shellhist
   :straight (shellhist :type git :host github :repo "NicholasBHubbard/shellhist")
   :config
-  (add-to-list 'shellhist-filters 'my/string-contains-root-password)
   (add-to-list 'shellhist-filters "^cd ?$")
   (add-to-list 'shellhist-filters #'(lambda (str) (<= (length str) 3)))
   (general-define-key
