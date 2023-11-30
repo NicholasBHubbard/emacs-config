@@ -220,11 +220,6 @@
   (auth-source-do-cache nil)
   (auth-sources '(password-store)))
 
-(use-package password-cache
-  :straight (password-cache :type built-in)
-  :custom
-  (password-cache-expiry nil))
-
 ;;; ACE WINDOW
 
 (use-package ace-window
