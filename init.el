@@ -1925,82 +1925,83 @@ checker, otherwise use the `perl' checker."
 
 ;;; IBUFFER
 
-;; (use-package ibuffer
-;;   :straight (ibuffer :type built-in)
-;;   :general
-;;   ("M-O" 'ibuffer)
-;;   :hook
-;;   (ibuffer-mode . (lambda () (display-line-numbers-mode 1)))
-;;   (ibuffer-mode . (lambda () (ibuffer-auto-mode 1)))
-;;   (ibuffer-mode . (lambda () (ibuffer-switch-to-saved-filter-groups "Default")))
-;;   :config
-;;   (evil-set-initial-state 'ibuffer-mode 'normal)
-;;   (general-define-key
-;;    :keymaps 'ibuffer-mode-map
-;;    "M-O" 'my/hydra-ibuffer/body)
-;;   (general-define-key
-;;    :states '(normal visual)
-;;    :keymaps 'ibuffer-mode-map
-;;    "M-j" 'ibuffer-forward-filter-group
-;;    "M-k" 'ibuffer-backward-filter-group
-;;    "RET" 'ibuffer-visit-buffer
-;;    "m" 'ibuffer-mark-forward
-;;    "u" 'ibuffer-unmark-forward)
-;;   (pretty-hydra-define my/hydra-ibuffer
-;;     (:color blue :title "Ibuffer" :quit-key "M-O")
-;;     ("Filter"
-;;      (("fm" (lambda () (interactive) (ibuffer-toggle-marks) (ibuffer-do-kill-lines)) "Marked")
-;;       ("fu" ibuffer-do-kill-lines "Unmarked")
-;;       ("fM" ibuffer-filter-by-mode "Major Mode")
-;;       ("fn" ibuffer-filter-by-name "Name")
-;;       ("fN" ibuffer-filter-by-filename "Filename")
-;;       ("fd" ibuffer-filter-by-directory "Directory")
-;;       ("fc" ibuffer-filter-by-content "Content"))
-;;      "Mark"
-;;      (("ma" (lambda () (interactive) (ibuffer-unmark-all nil) (ibuffer-toggle-marks)) "All")
-;;       ("mu" ibuffer-unmark-all "Unmark All")
-;;       ("mM" ibuffer-mark-by-mode "Major Mode")
-;;       ("mn" ibuffer-mark-by-name-regexp "Name (regex)")
-;;       ("mN" ibuffer-mark-by-file-name-regexp "Filename (regex)")
-;;       ("mc" ibuffer-mark-by-content-regexp "Content (regex)"))
-;;      "Sort"
-;;      (("sa" ibuffer-do-sort-by-alphabetic "Alphabetical")
-;;       ("sr" ibuffer-do-sort-by-recency "Recency")
-;;       ("ss" ibuffer-do-sort-by-size "Size"))
-;;      "Act"
-;;      (("ds" ibuffer-do-shell-command-file "Shell Command File")
-;;       ("dS" ibuffer-do-shell-command-pipe "Shell Command Pipe")
-;;       ("dk" ibuffer-do-delete "Kill Buffers")
-;;       ("dg" ibuffer-do-occur "Grep"))))
-;;   :custom
-;;   (ibuffer-default-sorting-mode 'alphabetic)
-;;   (ibuffer-saved-filter-groups
-;;    '(("Default"
-;;       ("Shell" (mode . shell-mode))
-;;       ("Dired" (mode . dired-mode))
-;;       ("Erc"   (mode . erc-mode))
-;;       ("Eww"   (mode . eww-mode))
-;;       ("MU4E"  (or (name . "^\\*mu4e")
-;;                    (mode . mu4e-compose-mode)))
-;;       ("Help"  (mode . helpful-mode))
-;;       ("Manual" (or (mode . Man-mode)
-;;                     (mode . Info-mode)))
-;;       ("Emacs" (or
-;;                 (name . "^\\*scratch\\*$")
-;;                 (name . "^\\*GNU Emacs\\*$")
-;;                 (name . "^\\*straight-process\\*$")
-;;                 (name . "^\\*Backtrace\\*$")
-;;                 (name . "^\\*ielm\\*$")
-;;                 (name . "^\\*tramp")
-;;                 (name . "^\\*Apropos\\*$")
-;;                 (name . "^\\*Warnings\\*$")
-;;                 (name . "^\\*Messages\\*$"))))))
-;;   (ibuffer-formats
-;;    '((mark
-;;       (name 25 25 :left :elide)
-;;       " "
-;;       (mode 16 16 :left :elide)
-;;       " " filename-and-process))))
+(use-package ibuffer
+  :straight (ibuffer :type built-in)
+  :commands ibuffer
+  :general
+  ("M-O" 'ibuffer)
+  :hook
+  (ibuffer-mode . (lambda () (display-line-numbers-mode 1)))
+  (ibuffer-mode . (lambda () (ibuffer-auto-mode 1)))
+  (ibuffer-mode . (lambda () (ibuffer-switch-to-saved-filter-groups "Default")))
+  :config
+  (evil-set-initial-state 'ibuffer-mode 'normal)
+  (general-define-key
+   :keymaps 'ibuffer-mode-map
+   "M-O" 'my/hydra-ibuffer/body)
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'ibuffer-mode-map
+   "M-j" 'ibuffer-forward-filter-group
+   "M-k" 'ibuffer-backward-filter-group
+   "RET" 'ibuffer-visit-buffer
+   "m" 'ibuffer-mark-forward
+   "u" 'ibuffer-unmark-forward)
+  (pretty-hydra-define my/hydra-ibuffer
+    (:color blue :title "Ibuffer" :quit-key "M-O")
+    ("Filter"
+     (("fm" (lambda () (interactive) (ibuffer-toggle-marks) (ibuffer-do-kill-lines)) "Marked")
+      ("fu" ibuffer-do-kill-lines "Unmarked")
+      ("fM" ibuffer-filter-by-mode "Major Mode")
+      ("fn" ibuffer-filter-by-name "Name")
+      ("fN" ibuffer-filter-by-filename "Filename")
+      ("fd" ibuffer-filter-by-directory "Directory")
+      ("fc" ibuffer-filter-by-content "Content"))
+     "Mark"
+     (("ma" (lambda () (interactive) (ibuffer-unmark-all nil) (ibuffer-toggle-marks)) "All")
+      ("mu" ibuffer-unmark-all "Unmark All")
+      ("mM" ibuffer-mark-by-mode "Major Mode")
+      ("mn" ibuffer-mark-by-name-regexp "Name (regex)")
+      ("mN" ibuffer-mark-by-file-name-regexp "Filename (regex)")
+      ("mc" ibuffer-mark-by-content-regexp "Content (regex)"))
+     "Sort"
+     (("sa" ibuffer-do-sort-by-alphabetic "Alphabetical")
+      ("sr" ibuffer-do-sort-by-recency "Recency")
+      ("ss" ibuffer-do-sort-by-size "Size"))
+     "Act"
+     (("ds" ibuffer-do-shell-command-file "Shell Command File")
+      ("dS" ibuffer-do-shell-command-pipe "Shell Command Pipe")
+      ("dk" ibuffer-do-delete "Kill Buffers")
+      ("dg" ibuffer-do-occur "Grep"))))
+  :custom
+  (ibuffer-default-sorting-mode 'alphabetic)
+  (ibuffer-saved-filter-groups
+   '(("Default"
+      ("Shell" (mode . shell-mode))
+      ("Dired" (mode . dired-mode))
+      ("Erc"   (mode . erc-mode))
+      ("Eww"   (mode . eww-mode))
+      ("MU4E"  (or (name . "^\\*mu4e")
+                   (mode . mu4e-compose-mode)))
+      ("Help"  (mode . helpful-mode))
+      ("Manual" (or (mode . Man-mode)
+                    (mode . Info-mode)))
+      ("Emacs" (or
+                (name . "^\\*scratch\\*$")
+                (name . "^\\*GNU Emacs\\*$")
+                (name . "^\\*straight-process\\*$")
+                (name . "^\\*Backtrace\\*$")
+                (name . "^\\*ielm\\*$")
+                (name . "^\\*tramp")
+                (name . "^\\*Apropos\\*$")
+                (name . "^\\*Warnings\\*$")
+                (name . "^\\*Messages\\*$"))))))
+  (ibuffer-formats
+   '((mark
+      (name 25 25 :left :elide)
+      " "
+      (mode 16 16 :left :elide)
+      " " filename-and-process))))
 
 ;;; EWW
 
