@@ -1843,25 +1843,10 @@ checker, otherwise use the `perl' checker."
 
 ;;; CSCOPE
 
-;; (use-package helm-cscope
-;;   :straight t
-;;   :config
-;;   (advice-add 'helm-cscope--goto-line :around 'my/better-jumper--around)
-;;   (general-define-key
-;;    :keymaps 'c-mode-map
-;;    "M-." 'my/hydra-helm-cscope/body
-;;    "M-," 'helm-cscope-pop-mark)
-;;   (pretty-hydra-define my/hydra-helm-cscope
-;;     (:color blue :hint nil :quit-key "M-." :title "CScope")
-;;     ("Find"
-;;      (("." helm-cscope-find-global-definition "Global Definition")
-;;       ("s" helm-cscope-find-this-symbol "Symbol")
-;;       ("S" helm-cscope-find-this-text-string "Text String")
-;;       ("a" helm-cscope-find-assignments-to-this-symbol "Assignments to Symbol")
-;;       ("c" helm-cscope-find-calling-this-function "Calling Function")
-;;       ("C" helm-cscope-find-called-function "Called Function")
-;;       ("f" helm-cscope-find-this-file "File")
-;;       ("F" helm-cscope-find-files-including-file "Including File")))))
+(use-package xcscope
+  :straight t
+  :config
+  (cscope-setup))
 
 ;;; GOOGLE THIS
 
