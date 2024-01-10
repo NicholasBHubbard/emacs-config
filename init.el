@@ -1401,7 +1401,8 @@ checker, otherwise use the `perl' checker."
 
   (general-define-key
    :keymaps '(emacs-lisp-mode-map helpful-mode-map ielm-map)
-   "C-h SPC" 'helpful-at-point)
+   "C-h SPC" 'helpful-at-point
+   "C-h M" 'helpful-macro)
 
   :hook
   (helpful-mode . (lambda () (let ((buf-name (buffer-name)))
@@ -2079,6 +2080,20 @@ checker, otherwise use the `perl' checker."
   (shellhist-max-hist-size 2000)
   :hook
   (shell-mode . shellhist-mode))
+
+;;; SHMAN
+
+(use-package shman
+  :straight (shman :type git :host github :repo "NicholasBHubbard/shman")
+  :config
+  (shman-mode 1)
+  (general-define-key
+   "M-SPC" 'shman-popup-one-time
+   "M-S-SPC" 'shman-popup
+   "M-S-<return>" '(lambda ()
+                     (interactive)
+                     (let ((shman-popup-autocd-to-working-dir t))
+                       (call-interactively 'shman-popup)))))
 
 ;;; GITLAB CI
 
