@@ -38,12 +38,12 @@
 
 ;;; THEME
 
-(use-package alect-themes
+(use-package leuven-theme
   :straight t
   :config
-  (load-theme 'alect-black t))
+  (load-theme 'leuven-dark t))
 
-(set-face-attribute 'region nil :background "#737")
+;; (set-face-attribute 'region nil :background "#737")
 
 ;; ;; dark mode
 ;; (invert-face 'default)
@@ -1400,9 +1400,11 @@ checker, otherwise use the `perl' checker."
   (advice-add 'describe-symbol   :override #'helpful-symbol)
 
   (general-define-key
-   :keymaps '(emacs-lisp-mode-map helpful-mode-map ielm-map)
-   "C-h SPC" 'helpful-at-point
    "C-h M" 'helpful-macro)
+
+  (general-define-key
+   :keymaps '(emacs-lisp-mode-map helpful-mode-map ielm-map)
+   "C-h SPC" 'helpful-at-point)
 
   :hook
   (helpful-mode . (lambda () (let ((buf-name (buffer-name)))
@@ -2088,12 +2090,12 @@ checker, otherwise use the `perl' checker."
   :config
   (shman-mode 1)
   (general-define-key
-   "M-SPC" 'shman-popup-one-time
-   "M-S-SPC" 'shman-popup
-   "M-S-<return>" '(lambda ()
-                     (interactive)
-                     (let ((shman-popup-autocd-to-working-dir t))
-                       (call-interactively 'shman-popup)))))
+   "M-S-<return>" 'shman-popup-one-time
+   "M-SPC" 'shman-popup
+   "M-S-SPC" '(lambda ()
+                (interactive)
+                (let ((shman-popup-autocd-to-working-dir t))
+                  (call-interactively 'shman-popup)))))
 
 ;;; GITLAB CI
 
