@@ -38,12 +38,12 @@
 
 ;;; THEME
 
-(use-package leuven-theme
+(use-package alect-themes
   :straight t
   :config
-  (load-theme 'leuven-dark t))
+  (load-theme 'alect-black t))
 
-;; (set-face-attribute 'region nil :background "#737")
+(set-face-attribute 'region nil :background "#737")
 
 ;; ;; dark mode
 ;; (invert-face 'default)
@@ -1298,7 +1298,9 @@ checker, otherwise use the `perl' checker."
 ;;; MAGIT
 
 (use-package diff-hl
-  :straight t
+  :straight (diff-hl :type git :host github :repo "dgutov/diff-hl" :branch "feature/diff-hl-stage-some")
+
+
   :demand t
   :config
   (global-diff-hl-mode 1)
@@ -2083,20 +2085,6 @@ checker, otherwise use the `perl' checker."
   :hook
   (shell-mode . shellhist-mode))
 
-;;; SHMAN
-
-(use-package shman
-  :straight (shman :type git :host github :repo "NicholasBHubbard/shman")
-  :config
-  (shman-mode 1)
-  (general-define-key
-   "M-S-<return>" 'shman-popup-one-time
-   "M-SPC" 'shman-popup
-   "M-S-SPC" '(lambda ()
-                (interactive)
-                (let ((shman-popup-autocd-to-working-dir t))
-                  (call-interactively 'shman-popup)))))
-
 ;;; GITLAB CI
 
 (use-package gitlab-ci-mode
@@ -2211,18 +2199,6 @@ checker, otherwise use the `perl' checker."
             (recenter)
             (which-func-update)))
         (set-buffer bf)))))
-
-;;; SHMAN
-
-;; (use-package shman
-;;   :load-path "/home/_73/p/shman"
-;;   :custom
-;;   (shman-cd-function #'(lambda () projectile-known-projects))
-;;   :config
-;;   (general-define-key
-;;    "M-SPC" 'shman-pop-shell
-;;    "M-S-SPC" 'shman-pop-shell-autocd
-;;    "C-M-SPC" 'shman-pop-one-time-shell))
 
 ;;; STRACE
 
