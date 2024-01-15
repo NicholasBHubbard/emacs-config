@@ -553,7 +553,7 @@ This function should be used as around advice."
 
 (which-function-mode 1)
 
-(savehist-mode 1)
+;; (savehist-mode 1)
 
 (show-paren-mode 0)
 
