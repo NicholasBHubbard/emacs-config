@@ -36,6 +36,15 @@
 ;;   :config
 ;;   (exec-path-from-shell-initialize))
 
+(setq exec-path '("~/p/scripts"
+                  "~/.local/bin"
+                  "/usr/local/sbin"
+                  "/usr/local/bin"
+                  "/usr/sbin"
+                  "/usr/bin"
+                  "/sbin"
+                  "/bin"))
+
 ;;; THEME
 
 (use-package alect-themes
