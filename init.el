@@ -1299,8 +1299,6 @@ checker, otherwise use the `perl' checker."
 
 (use-package diff-hl
   :straight (diff-hl :type git :host github :repo "dgutov/diff-hl" :branch "feature/diff-hl-stage-some")
-
-
   :demand t
   :config
   (global-diff-hl-mode 1)
