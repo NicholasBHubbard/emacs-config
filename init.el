@@ -1906,6 +1906,11 @@ checker, otherwise use the `perl' checker."
   :hook
   (ruby-mode . (lambda () (flycheck-mode 1) (flycheck-select-checker 'ruby))))
 
+(use-package robe
+  :straight t
+  :hook
+  (ruby-mode . robe-mode))
+
 ;;; ORDERLESS
 
 ;; (use-package orderless
