@@ -948,7 +948,6 @@ This function should be used as around advice."
 ;;; CPERL
 
 (use-package cperl-mode
-  :load-path "/home/_73/.emacs.d/my/cperl"
   :commands (perl-mode cperl-mode)
   :hook
   (cperl-mode . flycheck-mode)
