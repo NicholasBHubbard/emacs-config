@@ -945,6 +945,19 @@ This function should be used as around advice."
   :magic (".*\\.hs$" . haskell-mode)
   :straight t)
 
+;;; PYTHON
+
+(use-package python-mode
+  :commands (python-mode)
+  :hook
+  (python-mode . flycheck-mode)
+  :config
+  (flycheck-python-pycompile-executable "python3"))
+
+(use-package pyvenv
+  :straight t
+  :after python-mode)
+
 ;;; CPERL
 
 (use-package cperl-mode
