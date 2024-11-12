@@ -1672,7 +1672,7 @@ checker, otherwise use the `perl' checker."
   (defun my/shell-dirtrack ()
 	"Track directory via the prompt."
 	(shell-dirtrack-mode 0)
-	(setq-local dirtrack-list '("[[][^@]*@[^ ]* \\([^]]*\\)\\]\\$ " 1))
+	(setq-local dirtrack-list '("[[][^@]*@[^ ]* \\([^]]*\\)\\][$#] " 1))
 	(dirtrack-mode 1))
   :custom
   (setq comint-password-prompt-regexp (concat comint-password-prompt-regexp "|easy password|passphrase"))
