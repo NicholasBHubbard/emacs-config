@@ -2243,3 +2243,8 @@ checker, otherwise use the `perl' checker."
   :after prolog
   :custom
   (ediprolog-program "/home/_73/.local/bin/scryer-prolog"))
+
+;;; COQ
+
+(use-package proof-general
+  :straight t)
