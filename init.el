@@ -956,7 +956,9 @@ This function should be used as around advice."
 
 (use-package pyvenv
   :straight t
-  :after python-mode)
+  :after python-mode
+  :hook
+  (python-mode . (lambda () (pyvenv-mode 1))))
 
 ;;; CPERL
 
@@ -2097,6 +2099,7 @@ checker, otherwise use the `perl' checker."
   :straight (shellhist :type git :host github :repo "NicholasBHubbard/shellhist")
   :config
   (add-to-list 'shellhist-filters "^cd ?$")
+  (add-to-list 'shellhist-filters "^cd +[^/]")
   (add-to-list 'shellhist-filters #'(lambda (str) (<= (length str) 3)))
   (general-define-key
    :keymaps 'shell-mode-map
