@@ -36,14 +36,8 @@
 ;;   :config
 ;;   (exec-path-from-shell-initialize))
 
-(setq exec-path '("~/p/scripts"
-                  "~/.local/bin"
-                  "/usr/local/sbin"
-                  "/usr/local/bin"
-                  "/usr/sbin"
-                  "/usr/bin"
-                  "/sbin"
-                  "/bin"))
+;; idk why, but exec-path-from-shell just doesn't work for me. This is simpler.
+(setq exec-path (split-string (getenv "PATH") ":"))
 
 ;;; THEME
 
