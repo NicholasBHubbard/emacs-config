@@ -833,6 +833,13 @@ This function should be used as around advice."
   :blackout
   :commands aggressive-indent-mode)
 
+;;; EL FLY INDENT MODE
+
+(use-package el-fly-indent-mode
+  :straight t
+  :blackout
+  :commands el-fly-indent-mode)
+
 ;;; AVY
 
 (use-package avy
@@ -1148,7 +1155,7 @@ checker, otherwise use the `perl' checker."
   :after smartparens
   :hook
   (emacs-lisp-mode . rainbow-delimiters-mode)
-  (emacs-lisp-mode . aggressive-indent-mode)
+  (emacs-lisp-mode . el-fly-indent-mode)
   (emacs-lisp-mode . turn-on-smartparens-strict-mode))
 
 ;;; RCIRC
