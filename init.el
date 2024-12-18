@@ -2244,4 +2244,8 @@ checker, otherwise use the `perl' checker."
 ;;; COQ
 
 (use-package proof-general
-  :straight t)
+  :straight t
+  :custom
+  (proof-splash-enable nil)
+  (proof-three-window-mode-policy 'hybrid)
+  (proof-script-fly-past-comments t))
