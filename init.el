@@ -158,7 +158,7 @@
   (evil-mode-line-format nil)
   :config
   (evil-mode 1)
-  (advice-add 'evil-use-register :after '(lambda (&rest _args) (message "Using register: %s" (char-to-string evil-this-register))))
+  (advice-add 'evil-use-register :after #'(lambda (&rest _args) (message "Using register: %s" (char-to-string evil-this-register))))
   ;; I will rebind these to something more useful
   (general-define-key
    :states '(normal motion visual insert)
@@ -2019,9 +2019,9 @@ checker, otherwise use the `perl' checker."
   :straight (eww :type built-in)
   :commands eww
   :config
-  (advice-add 'eww-back-url :after '(lambda (&rest _) (recenter)))
-  (advice-add 'eww-forward-url :after '(lambda (&rest _) (recenter)))
-  (advice-add 'eww-follow-link :after '(lambda (&rest _) (recenter)))
+  (advice-add 'eww-back-url :after #'(lambda (&rest _) (recenter)))
+  (advice-add 'eww-forward-url :after #'(lambda (&rest _) (recenter)))
+  (advice-add 'eww-follow-link :after #'(lambda (&rest _) (recenter)))
   (general-define-key
    :keymaps 'eww-mode-map
    :states '(normal insert motion)
@@ -2110,9 +2110,9 @@ checker, otherwise use the `perl' checker."
 
 (use-package comint-histories
   :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories")
-  :custom
-  (comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
   :config
+  (setq comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
+
   (comint-histories-mode 1)
   (comint-histories-add-history gdb
     :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
@@ -2134,10 +2134,10 @@ checker, otherwise use the `perl' checker."
 
   (general-define-key
    :keymaps 'comint-mode-map
-   "C-r" '(lambda () (interactive)
-    	    (let ((vertico-prescient-enable-sorting nil)
-    			  (vertico-sort-function nil))
-    		  (call-interactively 'comint-histories-search-history)))))
+   "C-r" #'(lambda () (interactive)
+    	     (let ((vertico-prescient-enable-sorting nil)
+    			   (vertico-sort-function nil))
+    		   (call-interactively 'comint-histories-search-history)))))
 
 ;;; GITLAB CI
 
