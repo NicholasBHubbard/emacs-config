@@ -2089,22 +2089,66 @@ checker, otherwise use the `perl' checker."
 
 ;;; SHELLHIST
 
-(use-package shellhist
-  :straight (shellhist :type git :host github :repo "NicholasBHubbard/shellhist")
-  :config
-  (add-to-list 'shellhist-filters "^cd ?$")
-  (add-to-list 'shellhist-filters "^cd +[^/]")
-  (add-to-list 'shellhist-filters #'(lambda (str) (<= (length str) 3)))
-  (general-define-key
-   :keymaps 'shell-mode-map
-   "C-r" '(lambda () (interactive)
-		    (let ((vertico-prescient-enable-sorting nil)
-				  (vertico-sort-function nil))
-			  (shellhist-history-search))))
+;; (use-package shellhist
+;;   :straight (shellhist :type git :host github :repo "NicholasBHubbard/shellhist")
+;;   :config
+;;   (add-to-list 'shellhist-filters "^cd ?$")
+;;   (add-to-list 'shellhist-filters "^cd +[^/]")
+;;   (add-to-list 'shellhist-filters #'(lambda (str) (<= (length str) 3)))
+;;   (general-define-key
+;;    :keymaps 'shell-mode-map
+;;    "C-r" '(lambda () (interactive)
+;; 		    (let ((vertico-prescient-enable-sorting nil)
+;; 				  (vertico-sort-function nil))
+;; 			  (shellhist-history-search))))
+;;   :custom
+;;   (shellhist-max-hist-size 2000)
+;;   :hook
+;;   (shell-mode . shellhist-mode))
+
+;;; COMINT HISTORIES
+
+(use-package comint-histories
+  :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories")
   :custom
-  (shellhist-max-hist-size 2000)
-  :hook
-  (shell-mode . shellhist-mode))
+  (comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
+  :config
+  (comint-histories-mode 1)
+  (comint-histories-add-history gdb
+    :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
+    :length 2000)
+
+  (comint-histories-add-history python
+    :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
+                                 (string-match-p "^>>>" (comint-histories-get-prompt)))))
+    :length 2000)
+
+  (comint-histories-add-history ielm
+    :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
+    :length 2000)
+
+  (comint-histories-add-history shell
+    :predicates '((lambda () (derived-mode-p 'shell-mode)))
+    :filters '("^ls" "^cd")
+    :length 2000)
+
+  (define-key comint-mode-map (kbd "C-r") #'(lambda () (interactive)
+                                              (let ((ivy-sort-functions-alist nil)
+                                                    (ivy-prescient-enable-sorting nil)
+                                                    (vertico-sort-function nil)
+                                                    (vertico-sort-override-function nil)
+                                                    (vertico-prescient-enable-sorting nil)
+                                                    (selectrum-should-sort nil)
+                                                    (selectrum-prescient-enable-sorting nil))
+                                                (call-interactively 'comint-histories-search-history))))
+
+  ;; (general-define-key
+  ;;  :keymaps 'comint-mode-map
+  ;;  "C-r" '(lambda () (interactive)
+  ;;   	    (let ((vertico-prescient-enable-sorting nil)
+  ;;   			  (vertico-sort-function nil))
+  ;;   		  (call-interactively 'comint-histories-search-history))))
+  )
 
 ;;; GITLAB CI
 
