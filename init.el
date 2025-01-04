@@ -2132,23 +2132,12 @@ checker, otherwise use the `perl' checker."
     :filters '("^ls" "^cd")
     :length 2000)
 
-  (define-key comint-mode-map (kbd "C-r") #'(lambda () (interactive)
-                                              (let ((ivy-sort-functions-alist nil)
-                                                    (ivy-prescient-enable-sorting nil)
-                                                    (vertico-sort-function nil)
-                                                    (vertico-sort-override-function nil)
-                                                    (vertico-prescient-enable-sorting nil)
-                                                    (selectrum-should-sort nil)
-                                                    (selectrum-prescient-enable-sorting nil))
-                                                (call-interactively 'comint-histories-search-history))))
-
-  ;; (general-define-key
-  ;;  :keymaps 'comint-mode-map
-  ;;  "C-r" '(lambda () (interactive)
-  ;;   	    (let ((vertico-prescient-enable-sorting nil)
-  ;;   			  (vertico-sort-function nil))
-  ;;   		  (call-interactively 'comint-histories-search-history))))
-  )
+  (general-define-key
+   :keymaps 'comint-mode-map
+   "C-r" '(lambda () (interactive)
+    	    (let ((vertico-prescient-enable-sorting nil)
+    			  (vertico-sort-function nil))
+    		  (call-interactively 'comint-histories-search-history)))))
 
 ;;; GITLAB CI
 
