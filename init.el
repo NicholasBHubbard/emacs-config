@@ -27,7 +27,7 @@
 	  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; (straight-use-package 'use-package)
+;; (straight-use-package 'use-package) ; use-package comes with emacs version 29 and up
 
 ;;; ENV VARS
 
