@@ -27,7 +27,7 @@
 	  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(straight-use-package 'use-package)
+;; (straight-use-package 'use-package)
 
 ;;; ENV VARS
 
@@ -2109,7 +2109,7 @@ checker, otherwise use the `perl' checker."
 ;;; COMINT HISTORIES
 
 (use-package comint-histories
-  :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories")
+  :straight t
   :config
   (setq comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
 
