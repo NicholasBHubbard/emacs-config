@@ -2129,7 +2129,7 @@ checker, otherwise use the `perl' checker."
 
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
-    :filters '("^ls" "^cd")
+    :filters '("^ls" "^cd" "^C-c")
     :length 2000)
 
   (general-define-key
@@ -2278,7 +2278,35 @@ checker, otherwise use the `perl' checker."
 
 (use-package proof-general
   :straight t
+  :magic (".*\\.v$" . coq-mode)
+  :hook
+  (coq-mode . (lambda ()
+                (setq-local prettify-symbols-alist coq-prettify-symbols-alist)
+                (prettify-symbols-mode 1)))
   :custom
   (proof-splash-enable nil)
+  (proof-three-window-enable nil)
+  (proof-auto-raise-buffers nil)
   (proof-three-window-mode-policy 'hybrid)
-  (proof-script-fly-past-comments t))
+  (proof-script-fly-past-comments t)
+  :config
+  (general-define-key
+   :keymaps 'coq-mode-map
+   :states '(normal visual motion)
+   "M-RET" 'my/hydra-coq/body)
+  (pretty-hydra-define my/hydra-coq
+	(:color amaranth :hint nil :quit-key "M-RET" :title "Coq")
+    ("Assert"
+     (("n" proof-assert-next-command-interactive "next")
+      ("o" proof-assert-until-point-interactive "point"))
+     "Retract"
+     (("p" proof-undo-last-successful-command "previous")
+      ("r" proof-retract-buffer "buffer")
+      ("i" proof-retract-until-point-interactive "point"))
+     "Coq"
+     (("C" coq-Check "Check")
+      ("P" coq-Print "Print")
+      ("A" coq-About "About"))
+     "Info"
+     (("c" proof-ctxt "context"
+       ("s" proof-prf "proof state"))))))
