@@ -2129,7 +2129,7 @@ checker, otherwise use the `perl' checker."
 
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
-    :filters '("^ls" "^cd" "^C-c")
+    :filters '("^ls +[^~/]" "^cd +[^~/]" "^C-c")
     :length 3500)
 
   (general-define-key
