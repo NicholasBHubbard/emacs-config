@@ -645,8 +645,7 @@ This function should be used as around advice."
 
 (general-define-key
  :keymaps 'comint-mode-map
- "C-l" 'my/comint-clear
- "C-r" 'my/comint-history-search)
+ "C-l" 'my/comint-clear)
 
 (setq history-delete-duplicates t)
 
@@ -2129,7 +2128,7 @@ checker, otherwise use the `perl' checker."
 
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
-    :filters '("^ls +[^~/]" "^cd +[^~/]" "^C-c")
+    :filters '("^ls" "^cd" "^C-c")
     :length 3500)
 
   (general-define-key
