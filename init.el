@@ -699,7 +699,7 @@ This function should be used as around advice."
 (setq display-time-format "%H:%M")
 (setq display-time-default-load-average nil)
 (display-time-mode 1)
-(display-battery-mode 1)
+;; (display-battery-mode 1)
 
 (menu-bar-mode 0)
 (tool-bar-mode 0)
@@ -2129,6 +2129,15 @@ checker, otherwise use the `perl' checker."
   (comint-histories-add-history ocaml
     :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
     :length 2000)
+
+  (comint-histories-add-history shell-cds
+    :predicates '((lambda () (derived-mode-p 'shell-mode))
+                  (lambda () (string-match-p "^cd " (comint-histories-get-input)))))
+
+  (comint-histories-add-history shell
+    :predicates '((lambda () (derived-mode-p 'shell-mode)))
+    :filters '("^ls" "^cd" "^C-c")
+    :length 3500)
 
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
