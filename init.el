@@ -935,13 +935,13 @@ This function should be used as around advice."
 ;;; HASKELL
 
 (use-package haskell-mode
-  :magic (".*\\.hs$" . haskell-mode)
+  :mode ("\\.hs\\'" . haskell-mode)
   :straight t)
 
 ;;; PYTHON
 
 (use-package python-mode
-  :commands (python-mode)
+  :mode ("\\.py\\'" . python-mode)
   :hook
   (python-mode . flycheck-mode)
   :config
@@ -956,7 +956,7 @@ This function should be used as around advice."
 ;;; CPERL
 
 (use-package cperl-mode
-  :commands (perl-mode cperl-mode)
+  :mode ("\\.p[lm]\\'" . cperl-mode)
   :hook
   (cperl-mode . flycheck-mode)
   (cperl-mode . my/cperl-select-correct-flycheck-checker)
@@ -2257,27 +2257,21 @@ checker, otherwise use the `perl' checker."
 
 (use-package strace-mode
   :straight t
-  :magic (".*\\.strace$" . strace-mode))
+  :mode ("\\.strace\\'" . strace-mode))
 
 ;;; PROLOG
 
-(use-package prolog ; https://bruda.ca/_media/emacs/prolog.el
-  :load-path "/home/_73/.emacs.d/my/prolog"
-  :commands (prolog-mode run-prolog)
-  :custom
-  (prolog-program-name '((t "/home/_73/.local/bin/scryer-prolog"))))
-
-(use-package ediprolog
-  :straight t
-  :after prolog
-  :custom
-  (ediprolog-program "/home/_73/.local/bin/scryer-prolog"))
+;; (use-package prolog ; https://bruda.ca/_media/emacs/prolog.el
+;;   :load-path "/home/_73/.emacs.d/my/prolog"
+;;   :commands (prolog-mode run-prolog)
+;;   :custom
+;;   (prolog-program-name '((t "/home/_73/.local/bin/scryer-prolog"))))
 
 ;;; COQ
 
 (use-package proof-general
   :straight t
-  :magic (".*\\.v$" . coq-mode)
+  :mode ("\\.v\\'" . coq-mode)
   :hook
   (coq-mode . (lambda ()
                 (setq-local prettify-symbols-alist coq-prettify-symbols-alist)
@@ -2309,3 +2303,14 @@ checker, otherwise use the `perl' checker."
      "Info"
      (("c" proof-ctxt "context"
        ("s" proof-prf "proof state"))))))
+
+;;; OCAML
+
+(use-package tuareg
+  :straight t
+  :mode ("\\.mli?\\'" . tuareg-mode)
+  :hook
+  (tuareg-mode . (lambda ()
+                   (setq-local comment-style 'multi-line)
+                   (setq-local comment-continue "   ")))
+  )
