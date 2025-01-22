@@ -2126,6 +2126,10 @@ checker, otherwise use the `perl' checker."
     :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
     :length 2000)
 
+  (comint-histories-add-history ocaml
+    :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
+    :length 2000)
+
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
     :filters '("^ls" "^cd" "^C-c")
