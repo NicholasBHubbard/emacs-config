@@ -2109,6 +2109,7 @@ checker, otherwise use the `perl' checker."
 
 (use-package comint-histories
   :straight t
+  ;; :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "1.1")
   :config
   (setq comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
 
@@ -2132,12 +2133,8 @@ checker, otherwise use the `perl' checker."
 
   (comint-histories-add-history shell-cds
     :predicates '((lambda () (derived-mode-p 'shell-mode))
-                  (lambda () (string-match-p "^cd " (comint-histories-get-input)))))
-
-  (comint-histories-add-history shell
-    :predicates '((lambda () (derived-mode-p 'shell-mode)))
-    :filters '("^ls" "^cd" "^C-c")
-    :length 3500)
+                  (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
+    :length 100)
 
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
