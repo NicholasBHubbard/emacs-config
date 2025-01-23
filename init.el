@@ -782,21 +782,21 @@ This function should be used as around advice."
 
 ;;; XREF
 
-(use-package xref
-  :straight (xref :type built-in)
-  :config
-  (advice-add 'xref-find-definitions :around 'my/recenter-if-offscreen--around)
-  (advice-add 'xref-pop-marker-stack :around 'my/recenter-if-offscreen--around)
-  (general-define-key
-   :states 'normal
-   :keymaps 'xref--xref-buffer-mode-map
-   "RET" '(lambda () (interactive)
-			(let ((xref-buf (current-buffer))
-				  (xref (xref--item-at-point)))
-			  (if xref
-				  (xref-goto-xref t)
-				(find-file-at-point))
-			  (bury-buffer xref-buf)))))
+;; (use-package xref
+;;   :straight (xref :type built-in)
+;;   :config
+;;   (advice-add 'xref-find-definitions :around 'my/recenter-if-offscreen--around)
+;;   (advice-add 'xref-pop-marker-stack :around 'my/recenter-if-offscreen--around)
+;;   (general-define-key
+;;    :states 'normal
+;;    :keymaps 'xref--xref-buffer-mode-map
+;;    "RET" '(lambda () (interactive)
+;; 			(let ((xref-buf (current-buffer))
+;; 				  (xref (xref--item-at-point)))
+;; 			  (if xref
+;; 				  (xref-goto-xref t)
+;; 				(find-file-at-point))
+;; 			  (bury-buffer xref-buf)))))
 
 ;;; DUMB JUMP
 
@@ -815,15 +815,15 @@ This function should be used as around advice."
 
 ;;; WINDRESIZE
 
-(use-package windresize
-  :straight t
-  :commands windresize
-  :config
-  (general-define-key
-   :keymaps 'windresize-map
-   "RET" 'windresize-exit)
-  (window-key-def
-	"r" 'windresize))
+;; (use-package windresize
+;;   :straight t
+;;   :commands windresize
+;;   :config
+;;   (general-define-key
+;;    :keymaps 'windresize-map
+;;    "RET" 'windresize-exit)
+;;   (window-key-def
+;; 	"r" 'windresize))
 
 ;;; AGGRESSIVE INDENT
 
