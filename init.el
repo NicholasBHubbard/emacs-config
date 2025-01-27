@@ -1315,7 +1315,7 @@ checker, otherwise use the `perl' checker."
 
 (use-package diff-hl
   :straight (diff-hl :type git :host github :repo "dgutov/diff-hl" :branch "feature/diff-hl-stage-some")
-  :demand t
+  :after magit
   :config
   (global-diff-hl-mode 1)
   (diff-hl-margin-mode 1)
@@ -1441,7 +1441,8 @@ checker, otherwise use the `perl' checker."
 ;;; MU4E
 
 (use-package mu4e
-  :demand t
+  ;; :demand t
+  :commands mu4e
   :load-path "/usr/share/emacs/site-lisp/mu4e"
   ;; :init
   ;; (defun mu4e--main-action-str (&rest _) nil)
