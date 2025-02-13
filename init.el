@@ -1441,8 +1441,8 @@ checker, otherwise use the `perl' checker."
 ;;; MU4E
 
 (use-package mu4e
-  ;; :demand t
-  :commands mu4e
+  :demand t
+  ;; :commands mu4e
   :load-path "/usr/share/emacs/site-lisp/mu4e"
   ;; :init
   ;; (defun mu4e--main-action-str (&rest _) nil)
@@ -2116,31 +2116,41 @@ checker, otherwise use the `perl' checker."
 
   (comint-histories-mode 1)
   (comint-histories-add-history gdb
-    :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
-    :length 2000)
+                                :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
+                                :length 2000)
 
   (comint-histories-add-history python
-    :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
-                                 (string-match-p "^>>>" (comint-histories-get-prompt)))))
-    :length 2000)
+                                :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
+                                                             (string-match-p "^>>>" (comint-histories-get-prompt)))))
+                                :length 2000)
 
   (comint-histories-add-history ielm
-    :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
-    :length 2000)
+                                :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
+                                :length 2000)
 
   (comint-histories-add-history ocaml
-    :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
-    :length 2000)
+                                :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
+                                :length 2000)
+
+  ;; (comint-histories-add-history bashdb
+  ;;   :predicates '((lambda () (derived-mode-p ')))
+  ;;   :length 2000)
+
+  (comint-histories-add-history debugger-generic
+                                :predicates '((lambda () (or (derived-mode-p 'gud-mode)
+                                                             (derived-mode-p 'realgud-mode))))
+                                :length 2000)
 
   (comint-histories-add-history shell-cds
-    :predicates '((lambda () (derived-mode-p 'shell-mode))
-                  (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
-    :length 100)
+                                :predicates '((lambda () (derived-mode-p 'shell-mode))
+                                              (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
+                                :length 100)
+
 
   (comint-histories-add-history shell
-    :predicates '((lambda () (derived-mode-p 'shell-mode)))
-    :filters '("^ls" "^cd" "^C-c")
-    :length 3500)
+                                :predicates '((lambda () (derived-mode-p 'shell-mode)))
+                                :filters '("^ls" "^cd" "^C-c")
+                                :length 3500)
 
   (general-define-key
    :keymaps 'comint-mode-map
@@ -2264,6 +2274,9 @@ checker, otherwise use the `perl' checker."
             (which-func-update)))
         (set-buffer bf)))))
 
+(use-package realgud
+  :straight t)
+
 ;;; STRACE
 
 (use-package strace-mode
@@ -2293,6 +2306,7 @@ checker, otherwise use the `perl' checker."
   (proof-auto-raise-buffers nil)
   (proof-three-window-mode-policy 'hybrid)
   (proof-script-fly-past-comments t)
+  (coq-compile-before-require t)
   :config
   (general-define-key
    :keymaps 'coq-mode-map
@@ -2321,7 +2335,7 @@ checker, otherwise use the `perl' checker."
   :straight t
   :mode ("\\.mli?\\'" . tuareg-mode)
   :hook
+  (tuareg-mode . rainbow-delimiters-mode)
   (tuareg-mode . (lambda ()
                    (setq-local comment-style 'multi-line)
-                   (setq-local comment-continue "   ")))
-  )
+                   (setq-local comment-continue "   "))))
