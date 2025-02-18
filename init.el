@@ -2116,41 +2116,41 @@ checker, otherwise use the `perl' checker."
 
   (comint-histories-mode 1)
   (comint-histories-add-history gdb
-                                :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
-                                :length 2000)
+    :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
+    :length 2000)
 
   (comint-histories-add-history python
-                                :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
-                                                             (string-match-p "^>>>" (comint-histories-get-prompt)))))
-                                :length 2000)
+    :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
+                                 (string-match-p "^>>>" (comint-histories-get-prompt)))))
+    :length 2000)
 
   (comint-histories-add-history ielm
-                                :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
-                                :length 2000)
+    :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
+    :length 2000)
 
   (comint-histories-add-history ocaml
-                                :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
-                                :length 2000)
+    :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
+    :length 2000)
 
   ;; (comint-histories-add-history bashdb
   ;;   :predicates '((lambda () (derived-mode-p ')))
   ;;   :length 2000)
 
   (comint-histories-add-history debugger-generic
-                                :predicates '((lambda () (or (derived-mode-p 'gud-mode)
-                                                             (derived-mode-p 'realgud-mode))))
-                                :length 2000)
+    :predicates '((lambda () (or (derived-mode-p 'gud-mode)
+                                 (derived-mode-p 'realgud-mode))))
+    :length 2000)
 
   (comint-histories-add-history shell-cds
-                                :predicates '((lambda () (derived-mode-p 'shell-mode))
-                                              (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
-                                :length 100)
+    :predicates '((lambda () (derived-mode-p 'shell-mode))
+                  (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
+    :length 100)
 
 
   (comint-histories-add-history shell
-                                :predicates '((lambda () (derived-mode-p 'shell-mode)))
-                                :filters '("^ls" "^cd" "^C-c")
-                                :length 3500)
+    :predicates '((lambda () (derived-mode-p 'shell-mode)))
+    :filters '("^ls" "^cd" "^C-c")
+    :length 3500)
 
   (general-define-key
    :keymaps 'comint-mode-map
