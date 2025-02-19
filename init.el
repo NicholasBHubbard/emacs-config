@@ -389,6 +389,7 @@ negative ARG -N."
   :straight t
   :custom
   (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
+  (consult-preview-key "M-SPC")
   :config
   (general-define-key
    "M-o" 'consult-buffer)
@@ -1313,22 +1314,6 @@ checker, otherwise use the `perl' checker."
 
 ;;; MAGIT
 
-(use-package diff-hl
-  :straight (diff-hl :type git :host github :repo "dgutov/diff-hl" :branch "feature/diff-hl-stage-some")
-  :after magit
-  :config
-  (global-diff-hl-mode 1)
-  (diff-hl-margin-mode 1)
-  (diff-hl-flydiff-mode 1)
-  (advice-add 'diff-hl-next-hunk :around 'my/recenter-if-offscreen--around)
-  (advice-add 'diff-hl-previous-hunk :around 'my/recenter-if-offscreen--around)
-  (advice-add 'diff-hl-next-hunk :around 'my/better-jumper--around)
-  (advice-add 'diff-hl-previous-hunk :around 'my/better-jumper--around)
-  :custom
-  (diff-hl-show-staged-changes nil)
-  :hook
-  (dired-mode . diff-hl-dired-mode))
-
 ;; (use-package git-gutter
 ;;   :straight t
 ;;   :demand t
@@ -1389,6 +1374,23 @@ checker, otherwise use the `perl' checker."
   (git-commit-mode . evil-insert-state)
   (magit-pre-refresh . diff-hl-magit-pre-refresh)
   (magit-post-refresh . diff-hl-magit-post-refresh))
+
+(use-package diff-hl
+  :straight t
+  ;; :after magit
+  :demand t
+  :config
+  (global-diff-hl-mode 1)
+  (diff-hl-margin-mode 1)
+  (diff-hl-flydiff-mode 1)
+  (advice-add 'diff-hl-next-hunk :around 'my/recenter-if-offscreen--around)
+  (advice-add 'diff-hl-previous-hunk :around 'my/recenter-if-offscreen--around)
+  (advice-add 'diff-hl-next-hunk :around 'my/better-jumper--around)
+  (advice-add 'diff-hl-previous-hunk :around 'my/better-jumper--around)
+  :custom
+  (diff-hl-show-staged-changes nil)
+  :hook
+  (dired-mode . diff-hl-dired-mode))
 
 (use-package magit-todos
   :straight t
@@ -2150,6 +2152,7 @@ checker, otherwise use the `perl' checker."
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
     :filters '("^ls" "^cd" "^C-c")
+    :set-comint-input-ring t
     :length 3500)
 
   (general-define-key
