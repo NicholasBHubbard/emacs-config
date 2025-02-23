@@ -2108,60 +2108,6 @@ checker, otherwise use the `perl' checker."
 ;;   :hook
 ;;   (shell-mode . shellhist-mode))
 
-;;; COMINT HISTORIES
-
-(use-package comint-histories
-  :straight t
-  ;; :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "1.1")
-  :config
-  (setq comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
-
-  (comint-histories-mode 1)
-  (comint-histories-add-history gdb
-    :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
-    :length 2000)
-
-  (comint-histories-add-history python
-    :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
-                                 (string-match-p "^>>>" (comint-histories-get-prompt)))))
-    :length 2000)
-
-  (comint-histories-add-history ielm
-    :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
-    :length 2000)
-
-  (comint-histories-add-history ocaml
-    :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
-    :length 2000)
-
-  ;; (comint-histories-add-history bashdb
-  ;;   :predicates '((lambda () (derived-mode-p ')))
-  ;;   :length 2000)
-
-  (comint-histories-add-history debugger-generic
-    :predicates '((lambda () (or (derived-mode-p 'gud-mode)
-                                 (derived-mode-p 'realgud-mode))))
-    :length 2000)
-
-  (comint-histories-add-history shell-cds
-    :predicates '((lambda () (derived-mode-p 'shell-mode))
-                  (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
-    :length 100)
-
-
-  (comint-histories-add-history shell
-    :predicates '((lambda () (derived-mode-p 'shell-mode)))
-    :filters '("^ls" "^cd" "^C-c")
-    :set-comint-input-ring t
-    :length 3500)
-
-  (general-define-key
-   :keymaps 'comint-mode-map
-   "C-r" #'(lambda () (interactive)
-    	     (let ((vertico-prescient-enable-sorting nil)
-    			   (vertico-sort-function nil))
-    		   (call-interactively 'comint-histories-search-history)))))
-
 ;;; GITLAB CI
 
 (use-package gitlab-ci-mode
@@ -2342,3 +2288,55 @@ checker, otherwise use the `perl' checker."
   (tuareg-mode . (lambda ()
                    (setq-local comment-style 'multi-line)
                    (setq-local comment-continue "   "))))
+
+;;; COMINT HISTORIES
+
+(use-package comint-histories
+  :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "use-comint-input-ring")
+  :config
+  (comint-histories-mode 1)
+  (setq comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
+
+  (comint-histories-add-history gdb
+    :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
+    :length 2000)
+
+  (comint-histories-add-history python
+    :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
+                                 (string-match-p "^>>>" (comint-histories-get-prompt)))))
+    :length 2000)
+
+  (comint-histories-add-history ielm
+    :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
+    :length 2000)
+
+  (comint-histories-add-history ocaml
+    :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
+    :length 2000)
+
+  ;; (comint-histories-add-history bashdb
+  ;;   :predicates '((lambda () (derived-mode-p ')))
+  ;;   :length 2000)
+
+  (comint-histories-add-history debugger-generic
+    :predicates '((lambda () (or (derived-mode-p 'gud-mode)
+                                 (derived-mode-p 'realgud-mode))))
+    :length 2000)
+
+  (comint-histories-add-history shell-cds
+    :predicates '((lambda () (derived-mode-p 'shell-mode))
+                  (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
+    :length 100)
+
+
+  (comint-histories-add-history shell
+    :predicates '((lambda () (derived-mode-p 'shell-mode)))
+    :filters '("^ls" "^cd" "^C-c")
+    :length 3500)
+
+  (general-define-key
+   :keymaps 'comint-mode-map
+   "C-r" #'(lambda () (interactive)
+    	     (let ((vertico-prescient-enable-sorting nil)
+    			   (vertico-sort-function nil))
+    		   (call-interactively 'comint-histories-search-history)))))
