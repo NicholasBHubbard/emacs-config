@@ -24,6 +24,7 @@
   (delete-by-moving-to-trash nil)
   (make-backup-files nil)
   (disabled-command-function nil)
+  (auto-revert-use-notify nil)
   (warning-minimum-level :error)
   (kill-buffer-query-functions nil)
   (display-buffer-base-action '(display-buffer-same-window))
@@ -220,12 +221,13 @@
   (corfu-auto-delay 0)
   (corfu-auto-prefix 3)
   (corfu-quit-at-boundary t)
+  (corfu-quit-no-match t)
   (corfu-cycle nil)
   (corfu-preselect 'first)
   (corfu-preview-current nil)
   (global-corfu-minibuffer t)
   :config
-  (global-corfu-mode))
+  (global-corfu-mode 1))
 
 ;;; RAINBOW DELIMITERS
 
