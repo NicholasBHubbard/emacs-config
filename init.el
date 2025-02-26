@@ -218,7 +218,7 @@
   :straight t
   :custom
   (corfu-auto t)
-  (corfu-auto-delay 0)
+  (corfu-auto-delay 0.1)
   (corfu-auto-prefix 3)
   (corfu-quit-at-boundary t)
   (corfu-quit-no-match t)
