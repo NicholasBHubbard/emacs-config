@@ -16,7 +16,7 @@
   (scroll-step 1)
   (scroll-conservatively 101)
   (coding-system-for-write 'utf-8)
-  (display-line-numbers-type 'relative)
+  (display-line-numbers-type t)
   (redisplay-dont-pause t)
   (recentf-save-file (concat user-emacs-directory ".recentf"))
   (recentf-max-saved-items 1000)
@@ -35,7 +35,6 @@
   (tool-bar-mode 0)
   (show-paren-mode 0)
   (blink-cursor-mode 0)
-  (electric-pair-mode 1)
   (recentf-mode 1)
   (which-function-mode 1)
   (display-time-mode 1)
@@ -47,9 +46,13 @@
   (setq-default require-final-newline t)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
+  (setq-default display-fill-column-indicator-column 80)
+  (setq-default fill-column 80)
   :hook
   (prog-mode . display-line-numbers-mode)
-  (text-mode . display-line-numbers-mode))
+  (text-mode . display-line-numbers-mode)
+  (prog-mode . display-fill-column-indicator-mode)
+  (text-mode . display-fill-column-indicator-mode))
 
 ;;; STRAIGHT
 
@@ -87,6 +90,18 @@
   (global-set-key (kbd "C-z")   #'undo-fu-only-undo)
   (global-set-key (kbd "C-S-z") #'undo-fu-only-redo))
 
+;;; SMARTPARENS
+
+(use-package smartparens
+  :straight t
+  :blackout
+  :hook (prog-mode text-mode markdown-mode) ;; add `smartparens-mode` to these hooks
+  :config
+  (require 'smartparens-config)
+  :custom
+  (sp-highlight-pair-overlay nil)
+  (sp-highlight-wrap-overlay nil))
+
 ;;; MARGINALIA
 
 (use-package marginalia
@@ -99,7 +114,7 @@
 (use-package ace-window
   :straight t
   :bind
-  ("M-w" . ace-window)
+  ("C-;" . ace-window)
   :custom
   (aw-dispatch-always-nil)
   (aw-dispatch-when-more-than 2)
@@ -204,13 +219,15 @@
 (use-package cape
   :straight t
   :config
-  (add-to-list 'completion-at-point-functions 'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions 'cape-keyword)
-  (add-to-list 'completion-at-point-functions 'cape-file)
-  (add-to-list 'completion-at-point-functions 'cape-symbol)
-  (add-to-list 'completion-at-point-functions 'cape-line)
-  (add-to-list 'completion-at-point-functions 'cape-history)
-  (add-to-list 'completion-at-point-functions 'cape-dict))
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-history)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
+  (add-to-list 'completion-at-point-functions #'cape-history)
+  (add-to-list 'completion-at-point-functions #'cape-line)
+  (add-to-list 'completion-at-point-functions #'cape-dict))
 
 ;;; CORFU
 
@@ -365,7 +382,8 @@
 (use-package elisp-mode
   :hook
   (emacs-lisp-mode . rainbow-delimiters-mode)
-  (emacs-lisp-mode . aggressive-indent-mode))
+  (emacs-lisp-mode . aggressive-indent-mode)
+  (emacs-lisp-mode . smartparens-strict-mode))
 
 ;;; ELDOC
 
