@@ -25,6 +25,7 @@
   (disabled-command-function nil)
   (warning-minimum-level :error)
   (kill-buffer-query-functions nil)
+  (display-buffer-base-action '(display-buffer-same-window))
   :config
   (scroll-bar-mode 0)
   (set-fringe-mode 0)
@@ -32,6 +33,7 @@
   (tool-bar-mode 0)
   (show-paren-mode 0)
   (blink-cursor-mode 0)
+  (electric-pair-mode 1)
   (recentf-mode 1)
   (which-function-mode 1)
   (display-time-mode 1)
@@ -75,6 +77,8 @@
 
 (use-package undo-fu
   :straight t
+  :custom
+  (undo-fu-allow-undo-in-region t)
   :config
   (global-unset-key (kbd "C-z"))
   (global-set-key (kbd "C-z")   'undo-fu-only-undo)
@@ -92,7 +96,7 @@
 (use-package ace-window
   :straight t
   :bind
-  ("C-c w" . ace-window)
+  ("M-w" . ace-window)
   :custom
   (aw-dispatch-always-nil)
   (aw-dispatch-when-more-than 2)
@@ -131,9 +135,12 @@
   (vertico-mode 1)
   :custom
   (vertico-count 15)
-  (vertico-scroll-margin 0)
-  :custom-face
-  (vertico-current ((t (:foreground "green" :background "default")))))
+  (vertico-scroll-margin 0))
+
+(use-package vertico-prescient
+  :straight t
+  :config
+  (vertico-prescient-mode 1))
 
 ;;; PROJECTILE
 
@@ -213,6 +220,19 @@
 (use-package paredit
   :straight t
   :commands paredit-mode)
+
+;;; CTRLF
+
+(use-package ctrlf
+  :straight t
+  :custom
+  (ctrlf-auto-recenter t)
+  (ctrlf-go-to-end-of-match nil)
+  (ctrlf-default-search-style 'regexp)
+  :config
+  (ctrlf-mode 1)
+  (define-key ctrlf-minibuffer-mode-map (kbd "C-n") #'ctrlf-next-match)
+  (define-key ctrlf-minibuffer-mode-map (kbd "C-p") #'ctrlf-previous-match))
 
 ;;; SHELL
 
@@ -370,7 +390,8 @@
   :custom
   (diff-hl-show-staged-changes nil)
   :config
-  (global-diff-hl-mode 1))
+  (global-diff-hl-mode 1)
+  (diff-hl-margin-mode 1))
 
 ;;; EDITORCONFIG
 
