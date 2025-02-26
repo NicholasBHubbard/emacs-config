@@ -300,6 +300,13 @@
   (mu4e-completing-read-function #'completing-read)
   (mu4e-modeline-support nil))
 
+;;; EVIL NERD COMMENTER
+
+(use-package evil-nerd-commenter
+  :straight t
+  :config
+  (evilnc-default-hotkeys t))
+
 ;;; SHELL
 
 (use-package shell
