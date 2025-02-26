@@ -24,7 +24,6 @@
   (delete-by-moving-to-trash nil)
   (make-backup-files nil)
   (disabled-command-function nil)
-  (auto-revert-use-notify nil)
   (warning-minimum-level :error)
   (kill-buffer-query-functions nil)
   (display-buffer-base-action '(display-buffer-same-window))
