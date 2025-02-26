@@ -247,7 +247,9 @@
   :config
   (ctrlf-mode 1)
   (define-key ctrlf-minibuffer-mode-map (kbd "C-n") #'ctrlf-next-match)
-  (define-key ctrlf-minibuffer-mode-map (kbd "C-p") #'ctrlf-previous-match))
+  (define-key ctrlf-minibuffer-mode-map (kbd "C-p") #'ctrlf-previous-match)
+  (define-key ctrlf-minibuffer-mode-map (kbd "C-S-n") #'ctrlf-last-match)
+  (define-key ctrlf-minibuffer-mode-map (kbd "C-S-p") #'ctrlf-first-match))
 
 ;;; MU4E
 
