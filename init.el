@@ -159,7 +159,8 @@
   (projectile-current-project-on-switch 'keep)
   (projectile-find-dir-includes-top-level t)
   :config
-  (projectile-mode 1))
+  (projectile-mode 1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 ;;; AGGRESSIVE INDENT
 
@@ -233,6 +234,38 @@
   (ctrlf-mode 1)
   (define-key ctrlf-minibuffer-mode-map (kbd "C-n") #'ctrlf-next-match)
   (define-key ctrlf-minibuffer-mode-map (kbd "C-p") #'ctrlf-previous-match))
+
+;;; MU4E
+
+(use-package mu4e
+  :commands mu4e
+  :hook
+  (mu4e-compose-mode . (lambda () (auto-fill-mode 0)))
+  :custom
+  (send-mail-function 'smtpmail-send-it)
+  (smtpmail-smtp-user "nicholashubbard@posteo.net")
+  (smtpmail-default-smtp-server "posteo.de")
+  (smtpmail-smtp-server "posteo.de")
+  (smtpmail-smtp-service 587)
+  (message-kill-buffer-on-exit t)
+  (mml-secure-openpgp-sign-with-sender t)
+  (smtpmail-stream-type 'starttls)
+  (mu4e-drafts-folder "/Drafts")
+  (mu4e-sent-folder "/Sent")
+  (mu4e-trash-folder "/Trash")
+  (mu4e-get-mail-command "mbsync --config ~/.mbsyncrc --all nicholashubbard@posteo.net")
+  (mu4e-html2text-command "w3m -T text/html")
+  (mu4e-update-interval 90)
+  (mu4e-hide-index-messages t)
+  (mu4e-confirm-quit nil)
+  (mu4e-headers-auto-update nil)
+  (mu4e-view-inhibit-images t)
+  (mu4e-change-filenames-when-moving t)
+  (mu4e-compose-signature "Nicholas Hubbard")
+  (mu4e-compose-signature-auto-include t)
+  (mu4e-use-fancy-chars t)
+  (mu4e-completing-read-function #'completing-read)
+  (mu4e-modeline-support nil))
 
 ;;; SHELL
 
