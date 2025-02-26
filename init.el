@@ -26,6 +26,7 @@
   (disabled-command-function nil)
   (warning-minimum-level :error)
   (kill-buffer-query-functions nil)
+  (revert-without-query '(""))
   (display-buffer-base-action '(display-buffer-same-window))
   :config
   (scroll-bar-mode 0)
