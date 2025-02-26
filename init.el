@@ -83,8 +83,8 @@
   (undo-fu-allow-undo-in-region t)
   :config
   (global-unset-key (kbd "C-z"))
-  (global-set-key (kbd "C-z")   'undo-fu-only-undo)
-  (global-set-key (kbd "C-S-z") 'undo-fu-only-redo))
+  (global-set-key (kbd "C-z")   #'undo-fu-only-undo)
+  (global-set-key (kbd "C-S-z") #'undo-fu-only-redo))
 
 ;;; MARGINALIA
 
@@ -104,11 +104,6 @@
   (aw-dispatch-when-more-than 2)
   (aw-minibuffer-flag t))
 
-;;; EMBARK
-
-;; (use-package embark
-;;   :straight t)
-
 ;;; PRESCIENT
 
 (use-package prescient
@@ -127,7 +122,24 @@
   (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
   (consult-preview-key 'any)
   :config
-  (global-set-key (kbd "M-o") 'consult-buffer))
+  (global-set-key (kbd "M-o") #'consult-buffer))
+
+;;; EMBARK
+
+(use-package embark
+  :straight t
+  :bind
+  ("C-." . embark-act)
+  ("C-h B" . embark-bindings)
+  :custom
+  (embark-prompter #'embark-completing-read-prompter)
+  (embark-quit-after-action nil)
+  (embark-indicators '(embark-minimal-indicator)))
+
+(use-package embark-consult
+  :ensure t  ; only need to install it, embark loads it after consult if found
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 ;;; VERTICO
 
@@ -297,7 +309,7 @@
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
   :config
-  (global-set-key (kbd "M-SPC") 'shell-pop)
+  (global-set-key (kbd "M-SPC") #'shell-pop)
   (global-set-key (kbd "M-S-SPC") #'(lambda () (interactive)
                                       (let ((shell-pop-autocd-to-working-dir t))
                                         (call-interactively #'shell-pop)))))
@@ -331,7 +343,6 @@
   :straight t
   :bind
   ("C-," . avy-goto-char-2)
-  ("C-." . avy-goto-char-in-line)
   :custom
   (avy-timeout-seconds 0.5)
   (avy-single-candidate-jump t)
