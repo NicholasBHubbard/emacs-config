@@ -15,6 +15,7 @@
   (display-time-default-load-average nil)
   (scroll-step 1)
   (scroll-conservatively 101)
+  (coding-system-for-write 'utf-8)
   (display-line-numbers-type 'relative)
   (redisplay-dont-pause t)
   (recentf-save-file (concat user-emacs-directory ".recentf"))
@@ -40,6 +41,7 @@
   (global-auto-revert-mode 1)
   (transient-mark-mode 1)
   (delete-selection-mode 1)
+  (prefer-coding-system 'utf-8)
   (fset 'yes-or-no-p 'y-or-n-p)
   (setq-default require-final-newline t)
   (setq-default indent-tabs-mode nil)
@@ -215,12 +217,6 @@
   :blackout
   :commands rainbow-delimiters-mode)
 
-;;; PAREDIT
-
-(use-package paredit
-  :straight t
-  :commands paredit-mode)
-
 ;;; CTRLF
 
 (use-package ctrlf
@@ -305,11 +301,17 @@
   (avy-style 'at-full)
   (avy-case-fold-search nil))
 
+;;; EXPAND REGION.
+
+(use-package expand-region
+  :straight t
+  :bind
+  ("C-=" . er/expand-region))
+
 ;;; EMACS LISP
 
 (use-package elisp-mode
   :hook
-  (emacs-lisp-mode . paredit-mode)
   (emacs-lisp-mode . rainbow-delimiters-mode))
 
 ;;; ELDOC
@@ -389,6 +391,7 @@
   :straight t
   :custom
   (diff-hl-show-staged-changes nil)
+  (diff-hl-update-async t)
   :config
   (global-diff-hl-mode 1)
   (diff-hl-margin-mode 1))
