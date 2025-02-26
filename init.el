@@ -442,6 +442,7 @@
 
 (use-package ws-butler
   :straight t
+  :blackout
   :custom
   (ws-butler-keep-whitespace-before-point nil)
   :hook
@@ -468,16 +469,6 @@
   :config
   (global-diff-hl-mode 1)
   (diff-hl-margin-mode 1))
-
-;;; EDITORCONFIG
-
-(use-package editorconfig
-  :straight t
-  :blackout " ec"
-  :custom
-  (editorconfig-trim-whitespaces-mode 'ws-butler-mode)
-  :config
-  (editorconfig-mode 1))
 
 ;;; MAN
 
