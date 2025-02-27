@@ -18,8 +18,6 @@
   (coding-system-for-write 'utf-8)
   (display-line-numbers-type t)
   (redisplay-dont-pause t)
-  (recentf-save-file (concat user-emacs-directory ".recentf"))
-  (recentf-max-saved-items 1000)
   (auto-save-default nil)
   (delete-by-moving-to-trash nil)
   (make-backup-files nil)
@@ -35,7 +33,6 @@
   (tool-bar-mode 0)
   (show-paren-mode 0)
   (blink-cursor-mode 0)
-  (recentf-mode 1)
   (which-function-mode 1)
   (display-time-mode 1)
   (global-auto-revert-mode 1)
@@ -120,6 +117,17 @@
   (aw-dispatch-when-more-than 2)
   (aw-minibuffer-flag t))
 
+;;; RECENTF
+
+(use-package recentf
+  :custom
+  (recentf-save-file (concat user-emacs-directory ".recentf"))
+  (recentf-auto-cleanup 120)
+  (recentf-max-saved-items 500)
+  (recentf-exclude '("/tmp/" "/ssh:" "/sudo:" "/elpa/" "COMMIT_EDITMSG" ".*-autoloads\\.el$"))
+  :config
+  (recentf-mode 1))
+
 ;;; PRESCIENT
 
 (use-package prescient
@@ -180,7 +188,8 @@
   :custom
   (projectile-project-search-path '("~/p"))
   (projectile-track-known-projects-automatically nil)
-  (projectile-enable-caching nil)
+  (projectile-enable-caching t)
+  (projectile-auto-discover nil)
   (projectile-indexing-method 'alien)
   (projectile-file-exists-remote-cache-expire nil)
   (projectile-sort-order 'recently-active)
@@ -443,7 +452,8 @@
 ;;; REALGUD
 
 (use-package realgud
-  :straight t)
+  :straight t
+  :defer t)
 
 ;;; WS BUTLER
 
@@ -495,6 +505,7 @@
 ;;; CPERL
 
 (use-package cperl-mode
+  :init (fset 'perl-mode 'cperl-mode)
   :mode ("\\.p[lm]\\'" . cperl-mode)
   :custom
   (cperl-invalid-face nil)
@@ -537,3 +548,54 @@
   (tuareg-mode . (lambda ()
                    (setq-local comment-style 'multi-line)
                    (setq-local comment-continue "   "))))
+
+;;; COMINT HISTORIES
+
+(use-package comint-histories
+  :straight (comint-histories :type git :host github :repo "LaurenceWarne/comint-histories" :branch "add-history-to-comint-input")
+  :custom
+  (comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
+  :config
+  (comint-histories-mode 1)
+  (define-key comint-mode-map (kbd "C-r") #'(lambda () (interactive)
+                                              (let ((vertico-sort-function nil)
+                                                    (vertico-sort-override-function nil)
+                                                    (vertico-prescient-enable-sorting nil))
+                                                (call-interactively #'comint-histories-search-history))))
+
+  (comint-histories-add-history gdb
+    :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
+    :length 2000)
+
+  (comint-histories-add-history python
+    :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
+                                 (string-match-p "^>>>" (comint-histories-get-prompt)))))
+    :length 2000)
+
+  (comint-histories-add-history ielm
+    :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
+    :length 2000)
+
+  (comint-histories-add-history ocaml
+    :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
+    :length 2000)
+
+  ;; (comint-histories-add-history bashdb
+  ;;   :predicates '((lambda () (derived-mode-p ')))
+  ;;   :length 2000)
+
+  (comint-histories-add-history debugger-generic
+    :predicates '((lambda () (or (derived-mode-p 'gud-mode)
+                                 (derived-mode-p 'realgud-mode))))
+    :length 2000)
+
+  (comint-histories-add-history shell-cds
+    :predicates '((lambda () (derived-mode-p 'shell-mode))
+                  (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
+    :length 100)
+
+
+  (comint-histories-add-history shell
+    :predicates '((lambda () (derived-mode-p 'shell-mode)))
+    :filters '("^ls" "^cd" "^C-c")
+    :length 3500))
