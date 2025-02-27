@@ -233,10 +233,7 @@
   (add-to-list 'completion-at-point-functions #'cape-history)
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
-  (add-to-list 'completion-at-point-functions #'cape-history)
-  (add-to-list 'completion-at-point-functions #'cape-line)
-  (add-to-list 'completion-at-point-functions #'cape-dict))
+  (add-to-list 'completion-at-point-functions #'cape-elisp-symbol))
 
 ;;; CORFU
 
@@ -253,7 +250,18 @@
   (corfu-preview-current nil)
   (global-corfu-minibuffer t)
   :config
-  (global-corfu-mode 1))
+  (global-corfu-mode 1)
+  (unbind-key "RET" corfu-map))
+
+;;; PASS
+
+(use-package auth-source-pass
+  :custom
+  (auth-source-debug t)
+  (auth-source-do-cache nil)
+  (auth-sources '(password-store))
+  :config
+  (auth-source-pass-enable))
 
 ;;; RAINBOW DELIMITERS
 
@@ -550,6 +558,19 @@
   (tuareg-mode . (lambda ()
                    (setq-local comment-style 'multi-line)
                    (setq-local comment-continue "   "))))
+
+;;; GOTO LAST CHANGE
+
+(use-package goto-last-change
+  :straight t
+  :bind
+  ("C-c l" . goto-last-change))
+
+;;; COMINT
+
+(use-package comint
+  :config
+  (define-key comint-mode-map (kbd "C-l") #'comint-clear-buffer))
 
 ;;; COMINT HISTORIES
 
