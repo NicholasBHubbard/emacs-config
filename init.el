@@ -487,9 +487,7 @@
   (diff-hl-ask-before-revert-hunk nil)
   :config
   (global-diff-hl-mode 1)
-  (diff-hl-margin-mode 1)
-  :hook
-  (magit-post-refresh . diff-hl-update))
+  (diff-hl-margin-mode 1))
 
 ;;; MAN
 
