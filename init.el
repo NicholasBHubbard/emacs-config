@@ -480,11 +480,11 @@
 
 (use-package diff-hl
   :straight t
-  :after magit
   :custom
   (diff-hl-show-staged-changes nil)
   (diff-hl-update-async t)
   (diff-hl-ask-before-revert-hunk nil)
+  (diff-hl-timer 10)
   :config
   (global-diff-hl-mode 1)
   (diff-hl-margin-mode 1)
