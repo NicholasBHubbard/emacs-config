@@ -122,7 +122,7 @@
 (use-package recentf
   :custom
   (recentf-save-file (concat user-emacs-directory ".recentf"))
-  (recentf-auto-cleanup 120)
+  (recentf-auto-cleanup 180)
   (recentf-max-saved-items 500)
   (recentf-exclude '("/tmp/" "/ssh:" "/sudo:" "/elpa/" "COMMIT_EDITMSG" ".*-autoloads\\.el$"))
   :config
