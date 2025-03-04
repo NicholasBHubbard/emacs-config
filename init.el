@@ -128,6 +128,13 @@
   :config
   (recentf-mode 1))
 
+;;; EGLOT
+
+(use-package eglot
+  :custom
+  (eglot-send-changes-idle-time 99999)
+  :commands (eglot eglot-ensure))
+
 ;;; PRESCIENT
 
 (use-package prescient
@@ -144,7 +151,7 @@
   :straight t
   :custom
   (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
-  (consult-preview-key 'any)
+  (consult-preview-key "M-SPC")
   :config
   (global-set-key (kbd "M-o") #'consult-buffer))
 
@@ -554,6 +561,7 @@
   :straight t
   :mode ("\\.mli?\\'" . tuareg-mode)
   :hook
+  (tuareg-mode . eglot-ensure)
   (tuareg-mode . rainbow-delimiters-mode)
   (tuareg-mode . (lambda ()
                    (setq-local comment-style 'multi-line)
