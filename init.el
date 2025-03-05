@@ -325,7 +325,9 @@
   (mu4e-compose-signature-auto-include t)
   (mu4e-use-fancy-chars t)
   (mu4e-completing-read-function #'completing-read)
-  (mu4e-modeline-support nil))
+  (mu4e-modeline-support nil)
+  :config
+  (add-to-list 'display-buffer-alist `(,(regexp-quote mu4e-main-buffer-name) display-buffer-same-window)))
 
 ;;; EVIL NERD COMMENTER
 
