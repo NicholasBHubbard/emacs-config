@@ -135,6 +135,7 @@
 (use-package eglot
   :custom
   (eglot-send-changes-idle-time 99999)
+  (eglot-autoshutdown t)
   :commands (eglot eglot-ensure))
 
 ;;; PRESCIENT
