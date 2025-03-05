@@ -25,6 +25,7 @@
   (warning-minimum-level :error)
   (kill-buffer-query-functions nil)
   (revert-without-query '(".*"))
+  (scroll-margin 1)
   (display-buffer-base-action '(display-buffer-same-window))
   :config
   (scroll-bar-mode 0)
@@ -45,6 +46,7 @@
   (setq-default tab-width 4)
   (setq-default display-fill-column-indicator-column 80)
   (setq-default fill-column 80)
+  (global-set-key (kbd "M-r") #'revert-buffer-quick)
   :hook
   (prog-mode . display-line-numbers-mode)
   (text-mode . display-line-numbers-mode)
