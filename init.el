@@ -156,7 +156,9 @@
   (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
   (consult-preview-key "M-SPC")
   :config
-  (global-set-key (kbd "M-o") #'consult-buffer))
+  (global-set-key (kbd "M-o") #'consult-buffer)
+  (global-set-key (kbd "M-g g") #'consult-goto-line)
+  (global-set-key (kbd "C-y") #'consult-yank-from-kill-ring))
 
 ;;; VERTICO
 
