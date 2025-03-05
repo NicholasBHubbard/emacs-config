@@ -158,23 +158,6 @@
   :config
   (global-set-key (kbd "M-o") #'consult-buffer))
 
-;;; EMBARK
-
-(use-package embark
-  :straight t
-  :bind
-  ("C-." . embark-act)
-  ("C-h B" . embark-bindings)
-  :custom
-  (embark-prompter #'embark-completing-read-prompter)
-  (embark-quit-after-action nil)
-  (embark-indicators '(embark-minimal-indicator)))
-
-(use-package embark-consult
-  :ensure t  ; only need to install it, embark loads it after consult if found
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-
 ;;; VERTICO
 
 (use-package vertico
