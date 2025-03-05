@@ -421,6 +421,15 @@
   (emacs-lisp-mode . aggressive-indent-mode)
   (emacs-lisp-mode . smartparens-strict-mode))
 
+;;; IELM
+
+(use-package ielm
+  :commands ielm
+  :hook
+  (ielm-mode . rainbow-delimiters-mode)
+  (ielm-mode . aggressive-indent-mode)
+  (ielm-mode . smartparens-strict-mode))
+
 ;;; ELDOC
 
 (use-package eldoc
