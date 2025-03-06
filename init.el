@@ -190,6 +190,7 @@
   (projectile-sort-order 'recently-active)
   (projectile-current-project-on-switch 'keep)
   (projectile-find-dir-includes-top-level t)
+  (projectile-switch-project-action #'projectile-dired)
   :config
   (projectile-mode 1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
