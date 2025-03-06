@@ -562,7 +562,7 @@
   :straight t
   :mode ("\\.mli?\\'" . tuareg-mode)
   :hook
-  (tuareg-mode . eglot-ensure)
+  ;; (tuareg-mode . eglot-ensure)
   (tuareg-mode . rainbow-delimiters-mode)
   (tuareg-mode . (lambda ()
                    (setq-local comment-style 'multi-line)
@@ -578,6 +578,7 @@
 ;;; COMINT
 
 (use-package comint
+  :commands comint-mode
   :config
   (define-key comint-mode-map (kbd "C-l") #'comint-clear-buffer))
 
