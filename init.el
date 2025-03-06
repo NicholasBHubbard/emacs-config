@@ -461,6 +461,9 @@
   (which-key-idle-secondary-delay 0.1)
   (which-key-prefix-prefix "++")
   (which-key-sort-order 'which-key-prefix-then-key-order)
+  (which-key-popup-type 'minibuffer)
+  (which-key-allow-imprecise-window-fit t)
+  (which-key-separator " → ")
   :config
   (which-key-mode 1))
 
