@@ -555,6 +555,7 @@
   :mode ("\\.v\\'" . coq-mode)
   :custom
   (proof-splash-enable nil)
+  (proof-three-window-enable nil)
   (proof-three-window-mode-policy 'hybrid)
   (proof-script-fly-past-comments t)
   (coq-compile-before-require t))
