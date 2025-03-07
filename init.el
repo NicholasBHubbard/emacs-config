@@ -207,16 +207,6 @@
   :blackout
   :commands aggressive-indent-mode)
 
-;;; AVY
-
-(use-package avy
-  :straight t
-  :custom
-  (avy-timeout-seconds 0.5)
-  (avy-single-candidate-jump t)
-  (avy-style 'at-full)
-  (avy-case-fold-search nil))
-
 ;;; CLEAN KILL RING
 
 (use-package clean-kill-ring
@@ -390,7 +380,7 @@
 (use-package avy
   :straight t
   :bind
-  ("C-," . avy-goto-char-2)
+  ("C-'" . avy-goto-char-2)
   :custom
   (avy-timeout-seconds 0.5)
   (avy-single-candidate-jump t)
