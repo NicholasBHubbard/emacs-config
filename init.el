@@ -35,6 +35,7 @@
   (show-paren-mode 0)
   (blink-cursor-mode 0)
   (which-function-mode 1)
+  (winner-mode 1)
   (display-time-mode 1)
   (global-auto-revert-mode 1)
   (transient-mark-mode 1)
