@@ -606,7 +606,7 @@
 (use-package comint-histories
   :straight (comint-histories :type git :host github :repo "LaurenceWarne/comint-histories" :branch "add-history-to-comint-input")
   :custom
-  (comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
+  (comint-histories-global-filters '((lambda (x) (<= (length x) 3)) string-blank-p))
   :config
   (comint-histories-mode 1)
   (define-key comint-mode-map (kbd "C-r") #'(lambda () (interactive)
@@ -649,12 +649,13 @@
   (comint-histories-add-history shell-cds
     :predicates '((lambda () (derived-mode-p 'shell-mode))
                   (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
-    :length 100
+    :length 5
     :no-dups t)
-
 
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
     :filters '("^ls" "^cd" "^C-c")
     :length 3500
+    :ltrim nil
+    :rtrim nil
     :no-dups t))
