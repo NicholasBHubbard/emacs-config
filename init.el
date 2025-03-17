@@ -347,11 +347,11 @@
   (shell-pop-restore-window-configuration nil)
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
-  :config
-  (global-set-key (kbd "M-SPC") #'shell-pop)
-  (global-set-key (kbd "M-S-SPC") #'(lambda () (interactive)
-                                      (let ((shell-pop-autocd-to-working-dir t))
-                                        (call-interactively #'shell-pop)))))
+  :bind
+  ("M-SPC" . shell-pop)
+  ("M-S-SPC" . (lambda () (interactive)
+                 (let ((shell-pop-autocd-to-working-dir t))
+                   (call-interactively #'shell-pop)))))
 
 ;;; SHX
 
