@@ -451,7 +451,7 @@
 ;;; WHICH KEY
 
 (use-package which-key
-  :straight t
+  ; :straight t (included in emacs 30)
   :blackout
   :custom
   (which-key-idle-delay 0.8)
