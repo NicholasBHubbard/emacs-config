@@ -24,6 +24,7 @@
   (disabled-command-function nil)
   (warning-minimum-level :error)
   (kill-buffer-query-functions nil)
+  (ring-bell-function #'ignore)
   (revert-without-query '(".*"))
   (scroll-margin 1)
   (display-buffer-base-action '(display-buffer-same-window))
