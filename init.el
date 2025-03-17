@@ -27,6 +27,7 @@
   (ring-bell-function #'ignore)
   (revert-without-query '(".*"))
   (scroll-margin 1)
+  (auto-revert-verbose nil)
   (display-buffer-base-action '(display-buffer-same-window))
   :config
   (scroll-bar-mode 0)
