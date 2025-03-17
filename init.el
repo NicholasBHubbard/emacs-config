@@ -37,7 +37,6 @@
   (show-paren-mode 0)
   (blink-cursor-mode 0)
   (which-function-mode 1)
-  (winner-mode 1)
   (display-time-mode 1)
   (global-auto-revert-mode 1)
   (transient-mark-mode 1)
@@ -100,11 +99,13 @@
   :hook (prog-mode text-mode markdown-mode) ;; add `smartparens-mode` to these hooks
   :config
   (require 'smartparens-config)
-  (define-key smartparens-mode-map (kbd "M-(") 'sp-wrap-round)
-  (define-key smartparens-mode-map (kbd "M-)") 'sp-unwrap-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
-  (define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
+  :bind
+  (:map smartparens-mode-map
+        ("M-("   . sp-wrap-round)
+        ("M-)"   . sp-unwrap-sexp)
+        ("C-M-f" . sp-forward-sexp)
+        ("C-M-b" . sp-backward-sexp)
+        ("C-M-k" . sp-kill-sexp))
   :custom
   (sp-highlight-pair-overlay nil)
   (sp-highlight-wrap-overlay nil))
@@ -115,6 +116,16 @@
   :straight t
   :config
   (marginalia-mode 1))
+
+;;; WINNER
+
+(use-package winner
+  :init
+  (setq winner-dont-bind-my-keys t)
+  (winner-mode 1)
+  :bind
+  ("M-[" . winner-undo)
+  ("M-]" . winner-redo))
 
 ;;; ACE WINDOW
 
@@ -187,6 +198,7 @@
 
 (use-package projectile
   :straight t
+  :demand t
   :blackout
   :custom
   (projectile-project-search-path '("~/p"))
@@ -201,7 +213,9 @@
   (projectile-switch-project-action #'projectile-dired)
   :config
   (projectile-mode 1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+  :bind
+  (:map projectile-mode-map
+        ("C-c p" . projectile-command-map)))
 
 ;;; AGGRESSIVE INDENT
 
@@ -268,16 +282,19 @@
 
 (use-package ctrlf
   :straight t
+  :demand t
   :custom
   (ctrlf-auto-recenter t)
   (ctrlf-go-to-end-of-match nil)
   (ctrlf-default-search-style 'regexp)
   :config
   (ctrlf-mode 1)
-  (define-key ctrlf-minibuffer-mode-map (kbd "C-n") #'ctrlf-next-match)
-  (define-key ctrlf-minibuffer-mode-map (kbd "C-p") #'ctrlf-previous-match)
-  (define-key ctrlf-minibuffer-mode-map (kbd "C-S-n") #'ctrlf-last-match)
-  (define-key ctrlf-minibuffer-mode-map (kbd "C-S-p") #'ctrlf-first-match))
+  :bind
+  (:map ctrlf-minibuffer-mode-map
+        ("C-n" . ctrlf-next-match)
+        ("C-p" . ctrlf-previous-match)
+        ("C-S-n" . ctrlf-last-match)
+        ("C-S-p" . ctrlf-first-match)))
 
 ;;; MU4E
 
@@ -383,9 +400,9 @@
 (use-package avy
   :straight t
   :bind
-  ("C-'" . avy-goto-char-2)
+  ("C-'" . avy-goto-char-timer)
   :custom
-  (avy-timeout-seconds 0.5)
+  (avy-timeout-seconds 0.6)
   (avy-single-candidate-jump t)
   (avy-style 'at-full)
   (avy-case-fold-search nil))
@@ -503,6 +520,7 @@
 
 (use-package diff-hl
   :straight t
+  :demand t
   :custom
   (diff-hl-show-staged-changes nil)
   (diff-hl-update-async t)
@@ -511,7 +529,9 @@
   (global-diff-hl-mode 1)
   (diff-hl-margin-mode 1)
   (diff-hl-flydiff-mode 1)
-  (define-key diff-hl-mode-map (kbd "C-c g") 'diff-hl-command-map))
+  :bind
+  (:map diff-hl-mode-map
+        ("C-c g" . diff-hl-command-map)))
 
 ;;; DIRED
 
@@ -606,8 +626,12 @@
 
 (use-package comint
   :commands comint-mode
-  :config
-  (define-key comint-mode-map (kbd "C-l") #'comint-clear-buffer))
+  :bind
+  (:map comint-mode-map
+        ("C-l" . comint-clear-buffer)
+        ([S-return] . (lambda () (interactive)
+                        (comint-clear-buffer)
+                        (comint-send-input)))))
 
 ;;; COMINT HISTORIES
 
