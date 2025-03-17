@@ -681,7 +681,7 @@
   (comint-histories-add-history shell-cds
     :predicates '((lambda () (derived-mode-p 'shell-mode))
                   (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
-    :length 5
+    :length 200
     :no-dups t)
 
   (comint-histories-add-history shell
