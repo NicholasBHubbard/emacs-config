@@ -322,7 +322,7 @@
 
 (use-package shell
   :hook
-  (shell-mode . (lambda ()
+  (shell-mode . (lambda () ; compatible with bash prompt - PS1='[\u@\h \w]\$ '
                   (shell-dirtrack-mode 0)
 	              (setq-local dirtrack-list '("[[][^@]*@[^ ]* \\([^]]*\\)\\][$#] " 1))
                   (shell-dirtrack-mode 1))))
@@ -586,6 +586,12 @@
   (tuareg-mode . (lambda ()
                    (setq-local comment-style 'multi-line)
                    (setq-local comment-continue "   "))))
+
+(use-package merlin
+  :straight t
+  :after tuareg
+  :hook
+  (tuareg-mode . merlin-mode))
 
 ;;; GOTO LAST CHANGE
 
