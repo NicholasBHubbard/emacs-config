@@ -27,6 +27,7 @@
   (ring-bell-function #'ignore)
   (revert-without-query '(".*"))
   (scroll-margin 1)
+  (inhibit-startup-screen t)
   (auto-revert-verbose nil)
   (display-buffer-base-action '(display-buffer-same-window))
   :config
@@ -574,7 +575,8 @@
   (persp-mode-prefix-key (kbd "C-c v"))
   (persp-state-default-file (concat user-emacs-directory ".persp-state"))
   :hook
-  (kill-emacs . persp-state-save))
+  (kill-emacs . persp-state-save)
+  (after-init . (lambda () (persp-state-load persp-state-default-file))))
 
 ;;; CPERL
 
