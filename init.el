@@ -175,7 +175,7 @@
   (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
   (consult-preview-key "M-SPC")
   :config
-  (global-set-key (kbd "M-o") #'consult-buffer)
+  ;(global-set-key (kbd "M-o") #'consult-buffer)
   (global-set-key (kbd "M-g g") #'consult-goto-line)
   (global-set-key (kbd "C-y") #'consult-yank-from-kill-ring))
 
@@ -503,6 +503,8 @@
 (use-package magit
   :straight t
   :commands (magit magit-status)
+  :bind
+  ("C-x g" . magit-status)
   :custom
   (magit-clone-default-directory "~/p")
   :config
@@ -565,9 +567,12 @@
   :straight t
   :init
   (persp-mode 1)
+  :bind
+  ("M-o" . persp-switch-to-buffer*)
+  ("M-O" . persp-switch-to-buffer)
   :custom
   (persp-mode-prefix-key (kbd "C-c v"))
-  (persp-state-default-file (concat user-emacs-directory ".persp-states"))
+  (persp-state-default-file (concat user-emacs-directory ".persp-state"))
   :hook
   (kill-emacs . persp-state-save))
 
