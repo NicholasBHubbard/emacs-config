@@ -198,8 +198,9 @@
 
 (use-package projectile
   :straight t
-  :demand t
   :blackout
+  :init
+  (projectile-mode 1)
   :custom
   (projectile-project-search-path '("~/p"))
   (projectile-track-known-projects-automatically nil)
@@ -211,8 +212,6 @@
   (projectile-current-project-on-switch 'keep)
   (projectile-find-dir-includes-top-level t)
   (projectile-switch-project-action #'projectile-dired)
-  :config
-  (projectile-mode 1)
   :bind
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map)))
@@ -282,13 +281,12 @@
 
 (use-package ctrlf
   :straight t
-  :demand t
+  :init
+  (ctrlf-mode 1)
   :custom
   (ctrlf-auto-recenter t)
   (ctrlf-go-to-end-of-match nil)
   (ctrlf-default-search-style 'regexp)
-  :config
-  (ctrlf-mode 1)
   :bind
   (:map ctrlf-minibuffer-mode-map
         ("C-n" . ctrlf-next-match)
@@ -469,12 +467,13 @@
 ;;; WHICH KEY
 
 (use-package which-key
-  ; :straight t (included in emacs 30)
+  ;; :straight t (included in emacs 30)
   :blackout
   :custom
   (which-key-idle-delay 0.8)
   (which-key-idle-secondary-delay 0.1)
   (which-key-prefix-prefix "++")
+  (which-key-max-display-columns 4)
   (which-key-sort-order 'which-key-prefix-then-key-order)
   (which-key-popup-type 'minibuffer)
   (which-key-allow-imprecise-window-fit t)
@@ -520,13 +519,13 @@
 
 (use-package diff-hl
   :straight t
-  :demand t
+  :init
+  (global-diff-hl-mode 1)
   :custom
   (diff-hl-show-staged-changes nil)
   (diff-hl-update-async t)
   (diff-hl-ask-before-revert-hunk nil)
   :config
-  (global-diff-hl-mode 1)
   (diff-hl-margin-mode 1)
   (diff-hl-flydiff-mode 1)
   :bind
@@ -559,6 +558,18 @@
   :commands (google-this google-this-search)
   :bind
   ("C-c g" . google-this-search))
+
+;;; PERSPECTIVE
+
+(use-package perspective
+  :straight t
+  :init
+  (persp-mode 1)
+  :custom
+  (persp-mode-prefix-key (kbd "C-c v"))
+  (persp-state-default-file (concat user-emacs-directory ".persp-states"))
+  :hook
+  (kill-emacs . persp-state-save))
 
 ;;; CPERL
 
