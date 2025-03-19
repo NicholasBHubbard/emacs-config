@@ -37,7 +37,6 @@
   (tool-bar-mode 0)
   (show-paren-mode 0)
   (blink-cursor-mode 0)
-  (which-function-mode 1)
   (display-time-mode 1)
   (global-auto-revert-mode 1)
   (transient-mark-mode 1)
@@ -175,10 +174,9 @@
   :custom
   (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
   (consult-preview-key "M-SPC")
-  :config
-  ;(global-set-key (kbd "M-o") #'consult-buffer)
-  (global-set-key (kbd "M-g g") #'consult-goto-line)
-  (global-set-key (kbd "C-y") #'consult-yank-from-kill-ring))
+  :bind
+  ("M-g g" . consult-goto-line)
+  ("C-S-y" . consult-yank-from-kill-ring))
 
 ;;; VERTICO
 
@@ -573,10 +571,14 @@
   ("M-O" . persp-switch-to-buffer)
   :custom
   (persp-mode-prefix-key (kbd "C-c v"))
-  (persp-state-default-file (concat user-emacs-directory ".persp-state"))
+  (persp-state-default-file (expand-file-name "previous-state" (expand-file-name ".persp-states" user-emacs-directory)))
+  :config
+  (let ((persp-state-dir (file-name-directory persp-state-default-file)))
+    (unless (file-directory-p persp-state-dir)
+      (make-directory persp-state-dir)))
   :hook
   (kill-emacs . persp-state-save)
-  (after-init . (lambda () (persp-state-load persp-state-default-file))))
+  (persp-created . (lambda () (shell (generate-new-buffer-name "*persp-shell*")))))
 
 ;;; CPERL
 
@@ -654,17 +656,19 @@
 ;;; COMINT HISTORIES
 
 (use-package comint-histories
-  :straight (comint-histories :type git :host github :repo "LaurenceWarne/comint-histories" :branch "add-history-to-comint-input")
+  :straight t
+  :demand t
+  :bind
+  (:map comint-mode-map
+        ("C-r" . (lambda () (interactive)
+                   (let ((vertico-sort-function nil)
+                         (vertico-sort-override-function nil)
+                         (vertico-prescient-enable-sorting nil))
+                     (call-interactively #'comint-histories-search-history)))))
   :custom
   (comint-histories-global-filters '((lambda (x) (<= (length x) 3)) string-blank-p))
   :config
   (comint-histories-mode 1)
-  (define-key comint-mode-map (kbd "C-r") #'(lambda () (interactive)
-                                              (let ((vertico-sort-function nil)
-                                                    (vertico-sort-override-function nil)
-                                                    (vertico-prescient-enable-sorting nil))
-                                                (call-interactively #'comint-histories-search-history))))
-
   (comint-histories-add-history gdb
     :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
     :length 2000
@@ -685,10 +689,6 @@
     :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
     :length 2000
     :no-dups t)
-
-  ;; (comint-histories-add-history bashdb
-  ;;   :predicates '((lambda () (derived-mode-p ')))
-  ;;   :length 2000)
 
   (comint-histories-add-history debugger-generic
     :predicates '((lambda () (or (derived-mode-p 'gud-mode)
