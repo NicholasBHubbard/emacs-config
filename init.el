@@ -261,6 +261,10 @@
 
 ;;; PASS
 
+(use-package pass
+  :straight t
+  :commands password-store-get)
+
 (use-package auth-source-pass
   :custom
   (auth-source-debug t)
@@ -459,9 +463,15 @@
   (erc-kill-server-buffer-on-quit t)
   (erc-server-auto-reconnect t)
   (erc-server-reconnect-attempts 5)
-  (erc-server-reconnect-timeout 5)
+  (erc-server-reconnect-timeout 15)
   (erc-max-buffer-size 30000)
-  (erc-log-channels-directory "~/.irc-logs"))
+  :custom
+  (defun my/erc-libera ()
+    (interactive)
+    (erc-tls :server "irc.libera.chat"
+             :port 6697
+             :nick "_73"
+             :password (password-store-get "libera"))))
 
 ;;; WHICH KEY
 
