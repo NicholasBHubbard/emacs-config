@@ -581,14 +581,14 @@
   ("M-O" . persp-switch-to-buffer)
   :custom
   (persp-mode-prefix-key (kbd "C-c v"))
+  (persp-modestring-short t)
   (persp-state-default-file (expand-file-name "previous-state" (expand-file-name ".persp-states" user-emacs-directory)))
   :config
   (let ((persp-state-dir (file-name-directory persp-state-default-file)))
     (unless (file-directory-p persp-state-dir)
       (make-directory persp-state-dir)))
   :hook
-  (kill-emacs . persp-state-save)
-  (persp-created . (lambda () (shell (generate-new-buffer-name "*persp-shell*")))))
+  (kill-emacs . persp-state-save))
 
 ;;; CPERL
 
@@ -714,8 +714,7 @@
 
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
-    :filters '("^ls" "^cd" "^C-c")
+    :filters '("^ +" "^ls" "^cd" "^C-c" "^:e +[^~/]")
     :length 3500
     :ltrim nil
-    :rtrim nil
     :no-dups t))
