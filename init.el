@@ -15,7 +15,6 @@
   (display-time-default-load-average nil)
   (scroll-step 1)
   (scroll-conservatively 101)
-  (coding-system-for-write 'utf-8)
   (display-line-numbers-type t)
   (redisplay-dont-pause t)
   (auto-save-default nil)
@@ -48,6 +47,7 @@
   (setq-default tab-width 4)
   (setq-default display-fill-column-indicator-column 80)
   (setq-default fill-column 80)
+  (setq-default buffer-file-coding-system 'utf-8-unix)
   (global-set-key (kbd "M-r") #'revert-buffer-quick)
   :hook
   (prog-mode . display-line-numbers-mode)
@@ -141,13 +141,15 @@
 ;;; RECENTF
 
 (use-package recentf
+  :init
+  (recentf-mode 1)
   :custom
   (recentf-save-file (concat user-emacs-directory ".recentf"))
   (recentf-auto-cleanup 180)
   (recentf-max-saved-items 500)
   (recentf-exclude '("/tmp/" "/ssh:" "/sudo:" "/elpa/" "COMMIT_EDITMSG" ".*-autoloads\\.el$"))
-  :config
-  (recentf-mode 1))
+  :bind
+  ("C-c f" . recentf))
 
 ;;; EGLOT
 
@@ -165,7 +167,11 @@
   (prescient-save-file (concat user-emacs-directory "prescient"))
   (prescient-sort-full-matches-first t)
   :config
-  (prescient-persist-mode 1))
+  (prescient-persist-mode 1)
+  (advice-add 'prescient--save :around
+              (lambda (orig-fn &rest args)
+                (let ((coding-system-for-write 'utf-8))
+                  (apply orig-fn args)))))
 
 ;;; CONSULT
 
