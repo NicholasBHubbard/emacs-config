@@ -530,6 +530,7 @@
 (use-package vc
   :custom
   (mode-line-format (delete '(vc-mode vc-mode) mode-line-format))
+  (vc-follow-symlinks t)
   (auto-revert-check-vc-info t))
 
 ;;; DIFF HL
