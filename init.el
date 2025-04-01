@@ -209,7 +209,7 @@
   :custom
   (projectile-project-search-path '("~/p"))
   (projectile-track-known-projects-automatically nil)
-  (projectile-enable-caching t)
+  (projectile-enable-caching nil)
   (projectile-auto-discover nil)
   (projectile-indexing-method 'alien)
   (projectile-file-exists-remote-cache-expire nil)
