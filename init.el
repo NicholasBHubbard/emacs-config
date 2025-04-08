@@ -299,9 +299,7 @@
   :bind
   (:map ctrlf-minibuffer-mode-map
         ("C-n" . ctrlf-next-match)
-        ("C-p" . ctrlf-previous-match)
-        ("C-S-n" . ctrlf-last-match)
-        ("C-S-p" . ctrlf-first-match)))
+        ("C-p" . ctrlf-previous-match)))
 
 ;;; MU4E
 
