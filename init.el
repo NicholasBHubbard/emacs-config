@@ -322,6 +322,8 @@
   (mu4e-get-mail-command "mbsync --config ~/.mbsyncrc --all nicholashubbard@posteo.net")
   (mu4e-html2text-command "w3m -T text/html")
   (mu4e-update-interval 180)
+  (mu4e-index-lazy-check t)
+  (mu4e-index-cleanup nil)
   (mu4e-hide-index-messages t)
   (mu4e-confirm-quit nil)
   (mu4e-headers-auto-update nil)
