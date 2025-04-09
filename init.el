@@ -301,6 +301,13 @@
         ("C-n" . ctrlf-next-match)
         ("C-p" . ctrlf-previous-match)))
 
+;;; COMPILE
+
+(use-package compile
+  :commands compilation-mode
+  :custom
+  (compilation-ask-about-save nil))
+
 ;;; MU4E
 
 (use-package mu4e
