@@ -292,18 +292,18 @@
 
 ;;; CTRLF
 
-;; (use-package ctrlf
-;;   :straight t
-;;   :init
-;;   (ctrlf-mode 1)
-;;   :custom
-;;   (ctrlf-auto-recenter t)
-;;   (ctrlf-go-to-end-of-match nil)
-;;   (ctrlf-default-search-style 'regexp)
-;;   :bind
-;;   (:map ctrlf-minibuffer-mode-map
-;;         ("C-n" . ctrlf-next-match)
-;;         ("C-p" . ctrlf-previous-match)))
+(use-package ctrlf
+  :straight t
+  :init
+  (ctrlf-mode 1)
+  :custom
+  (ctrlf-auto-recenter t)
+  (ctrlf-go-to-end-of-match nil)
+  (ctrlf-default-search-style 'regexp)
+  :bind
+  (:map ctrlf-minibuffer-mode-map
+        ("C-n" . ctrlf-next-match)
+        ("C-p" . ctrlf-previous-match)))
 
 ;;; ISEARCH
 
