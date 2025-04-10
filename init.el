@@ -26,6 +26,7 @@
   (ring-bell-function #'ignore)
   (revert-without-query '(".*"))
   (scroll-margin 1)
+  (undo-in-region t)
   (inhibit-startup-screen t)
   (auto-revert-verbose nil)
   (display-buffer-base-action '(display-buffer-same-window))
@@ -79,17 +80,6 @@
 
 ;; dark mode
 (invert-face 'default)
-
-;;; UNDO FU
-
-(use-package undo-fu
-  :straight t
-  :custom
-  (undo-fu-allow-undo-in-region t)
-  :config
-  (global-unset-key (kbd "C-z"))
-  (global-set-key (kbd "C-z")   #'undo-fu-only-undo)
-  (global-set-key (kbd "C-S-z") #'undo-fu-only-redo))
 
 ;;; SMARTPARENS
 
@@ -286,20 +276,41 @@
   :blackout
   :commands rainbow-delimiters-mode)
 
-;;; CTRLF
+;;; GOD MODE
 
-(use-package ctrlf
+(use-package god-mode
   :straight t
   :init
-  (ctrlf-mode 1)
-  :custom
-  (ctrlf-auto-recenter t)
-  (ctrlf-go-to-end-of-match nil)
-  (ctrlf-default-search-style 'regexp)
+  (god-mode)
   :bind
-  (:map ctrlf-minibuffer-mode-map
-        ("C-n" . ctrlf-next-match)
-        ("C-p" . ctrlf-previous-match)))
+  ("<escape>" . (lambda () (interactive) (let ((inhibit-message t)) (god-local-mode 1))))
+  (:map god-local-mode-map
+        ("i" . (lambda () (interactive) (let ((inhibit-message t)) (god-local-mode 0))))
+        ("z" . repeat))
+  :hook
+  (post-command . (lambda () (setq cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar)))))
+
+;;; CTRLF
+
+;; (use-package ctrlf
+;;   :straight t
+;;   :init
+;;   (ctrlf-mode 1)
+;;   :custom
+;;   (ctrlf-auto-recenter t)
+;;   (ctrlf-go-to-end-of-match nil)
+;;   (ctrlf-default-search-style 'regexp)
+;;   :bind
+;;   (:map ctrlf-minibuffer-mode-map
+;;         ("C-n" . ctrlf-next-match)
+;;         ("C-p" . ctrlf-previous-match)))
+
+;;; ISEARCH
+
+(use-package isearch
+  :defer t
+  :custom
+  (isearch-wrap-pause 'no-ding))
 
 ;;; COMPILE
 
@@ -307,6 +318,17 @@
   :commands compilation-mode
   :custom
   (compilation-ask-about-save nil))
+
+;;; MULTIPLE CURSORS
+
+(use-package multiple-cursors
+  :straight t
+  :bind
+  ("C->" . mc/mark-next-like-this)
+  ("C-<" . mc/mark-previous-like-this)
+  ("C-c C->" . mc/mark-all-like-this)
+  (:map mc/keymap
+        ("<return>" . nil)))
 
 ;;; MU4E
 
