@@ -748,4 +748,6 @@
 (use-package imenu-anywhere
   :straight t
   :bind
-  ("C-S-s" . imenu-anywhere))
+  ("C-S-s" . imenu-anywhere)
+  :custom
+  (imenu-anywhere-delimiter " → "))
