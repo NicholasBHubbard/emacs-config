@@ -25,6 +25,7 @@
   (kill-buffer-query-functions nil)
   (ring-bell-function #'ignore)
   (revert-without-query '(".*"))
+  (use-package-enable-imenu-support t)
   (scroll-margin 1)
   (undo-in-region t)
   (inhibit-startup-screen t)
@@ -276,20 +277,6 @@
   :straight t
   :blackout
   :commands rainbow-delimiters-mode)
-
-;;; GOD MODE
-
-(use-package god-mode
-  :straight t
-  :init
-  (god-mode)
-  :bind
-  ("<escape>" . (lambda () (interactive) (let ((inhibit-message t)) (god-local-mode 1))))
-  (:map god-local-mode-map
-        ("i" . (lambda () (interactive) (let ((inhibit-message t)) (god-local-mode 0))))
-        ("z" . repeat))
-  :hook
-  (post-command . (lambda () (setq cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar)))))
 
 ;;; CTRLF
 
@@ -755,3 +742,10 @@
     :length 3500
     :ltrim nil
     :no-dups t))
+
+;;; IMENU ANYWHERE
+
+(use-package imenu-anywhere
+  :straight t
+  :bind
+  ("C-S-s" . imenu-anywhere))
