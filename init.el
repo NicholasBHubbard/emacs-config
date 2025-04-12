@@ -168,9 +168,10 @@
 (use-package consult
   :straight t
   :custom
-  (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
+  (consult-buffer-sources '(consult--source-buffer consult--source-project-root consult--source-recent-file))
   (consult-preview-key "M-SPC")
   :bind
+  ("M-o" . consult-buffer)
   ("M-g g" . consult-goto-line)
   ("C-S-y" . consult-yank-from-kill-ring))
 
@@ -608,23 +609,23 @@
 
 ;;; PERSPECTIVE
 
-(use-package perspective
-  :straight t
-  :init
-  (persp-mode 1)
-  :bind
-  ("M-o" . persp-switch-to-buffer*)
-  ("M-O" . persp-switch-to-buffer)
-  :custom
-  (persp-mode-prefix-key (kbd "C-c v"))
-  (persp-modestring-short t)
-  (persp-state-default-file (expand-file-name "previous-state" (expand-file-name ".persp-states" user-emacs-directory)))
-  :config
-  (let ((persp-state-dir (file-name-directory persp-state-default-file)))
-    (unless (file-directory-p persp-state-dir)
-      (make-directory persp-state-dir)))
-  :hook
-  (kill-emacs . persp-state-save))
+;; (use-package perspective
+;;   :straight t
+;;   :init
+;;   (persp-mode 1)
+;;   :bind
+;;   ("M-o" . persp-switch-to-buffer*)
+;;   ("M-O" . persp-switch-to-buffer)
+;;   :custom
+;;   (persp-mode-prefix-key (kbd "C-c v"))
+;;   (persp-modestring-short t)
+;;   (persp-state-default-file (expand-file-name "previous-state" (expand-file-name ".persp-states" user-emacs-directory)))
+;;   :config
+;;   (let ((persp-state-dir (file-name-directory persp-state-default-file)))
+;;     (unless (file-directory-p persp-state-dir)
+;;       (make-directory persp-state-dir)))
+;;   :hook
+;;   (kill-emacs . persp-state-save))
 
 ;;; CPERL
 
