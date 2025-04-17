@@ -213,6 +213,12 @@
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map)))
 
+(use-package consult-projectile
+  :straight t
+  :bind
+  (:map projectile-mode-map
+        ("C-c P" . consult-projectile)))
+
 ;;; AGGRESSIVE INDENT
 
 (use-package aggressive-indent
