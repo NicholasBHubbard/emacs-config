@@ -749,11 +749,8 @@
     :ltrim nil
     :no-dups t))
 
-;;; IMENU ANYWHERE
+;;; DPASTE
 
-(use-package imenu-anywhere
+(use-package dpaste
   :straight t
-  :bind
-  ("C-S-s" . imenu-anywhere)
-  :custom
-  (imenu-anywhere-delimiter " → "))
+  :defer t)
