@@ -51,6 +51,7 @@
   (setq-default fill-column 80)
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (global-set-key (kbd "M-r") #'revert-buffer-quick)
+  (global-set-key (kbd "C-S-q") #'kill-current-buffer)
   :hook
   (prog-mode . display-line-numbers-mode)
   (text-mode . display-line-numbers-mode)
@@ -494,7 +495,7 @@
   (erc-server-reconnect-attempts 5)
   (erc-server-reconnect-timeout 15)
   (erc-max-buffer-size 30000)
-  :custom
+  :config
   (defun my/erc-libera ()
     (interactive)
     (erc-tls :server "irc.libera.chat"
