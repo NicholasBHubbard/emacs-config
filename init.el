@@ -740,12 +740,12 @@
   (comint-histories-add-history shell-cds
     :predicates '((lambda () (derived-mode-p 'shell-mode))
                   (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
-    :length 200
+    :length 250
     :no-dups t)
 
   (comint-histories-add-history shell
     :predicates '((lambda () (derived-mode-p 'shell-mode)))
-    :filters '("^ +" "^ls" "^cd" "^C-c" "^:e +[^~/]")
+    :filters '("^ +" "^cd [^~/]" "^:e +[^~/]")
     :length 3500
     :ltrim nil
     :no-dups t))
