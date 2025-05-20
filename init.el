@@ -591,7 +591,9 @@
 (use-package man
   :commands man
   :custom
-  (Man-notify-method 'pushy))
+  (Man-notify-method 'pushy)
+  :bind
+  ("C-h m" . man))
 
 ;;; GOOGLE THIS
 
