@@ -325,42 +325,6 @@
   (:map mc/keymap
         ("<return>" . nil)))
 
-;;; MU4E
-
-(use-package mu4e
-  :commands mu4e
-  :hook
-  (mu4e-compose-mode . (lambda () (auto-fill-mode 0)))
-  :custom
-  (send-mail-function 'smtpmail-send-it)
-  (smtpmail-smtp-user "nicholashubbard@posteo.net")
-  (smtpmail-default-smtp-server "posteo.de")
-  (smtpmail-smtp-server "posteo.de")
-  (smtpmail-smtp-service 587)
-  (message-kill-buffer-on-exit t)
-  (mml-secure-openpgp-sign-with-sender t)
-  (smtpmail-stream-type 'starttls)
-  (mu4e-drafts-folder "/Drafts")
-  (mu4e-sent-folder "/Sent")
-  (mu4e-trash-folder "/Trash")
-  (mu4e-get-mail-command "mbsync --config ~/.mbsyncrc --all nicholashubbard@posteo.net")
-  (mu4e-html2text-command "w3m -T text/html")
-  (mu4e-update-interval 180)
-  (mu4e-index-lazy-check t)
-  (mu4e-index-cleanup nil)
-  (mu4e-hide-index-messages t)
-  (mu4e-confirm-quit nil)
-  (mu4e-headers-auto-update nil)
-  (mu4e-view-inhibit-images t)
-  (mu4e-change-filenames-when-moving t)
-  (mu4e-compose-signature "Nicholas Hubbard")
-  (mu4e-compose-signature-auto-include t)
-  (mu4e-use-fancy-chars t)
-  (mu4e-completing-read-function #'completing-read)
-  (mu4e-modeline-support nil)
-  :config
-  (add-to-list 'display-buffer-alist `(,(regexp-quote mu4e-main-buffer-name) display-buffer-same-window)))
-
 ;;; EVIL NERD COMMENTER
 
 (use-package evil-nerd-commenter
@@ -757,3 +721,15 @@
 (use-package dpaste
   :straight t
   :defer t)
+
+;;; XCSCOPE
+
+(use-package xcscope
+  :straight t)
+
+;;; GNUS
+
+(use-package gnus
+  :commands gnus
+  :custom
+  (gnus-init-file (concat user-emacs-directory "gnus.el")))

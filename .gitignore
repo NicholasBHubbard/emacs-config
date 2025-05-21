@@ -1,5 +1,6 @@
 *
 !.gitignore
 !init.el
+!gnus.el
 !old-init.el
 !README
