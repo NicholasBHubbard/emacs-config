@@ -733,3 +733,11 @@
   :commands gnus
   :custom
   (gnus-init-file (concat user-emacs-directory "gnus.el")))
+
+;;; GPTEL
+
+(use-package gptel
+  :straight t
+  :commands gptel
+  :custom
+  (gptel-api-key #'(lambda () (password-store-get "openai-api-key"))))
