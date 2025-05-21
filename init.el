@@ -595,7 +595,7 @@
   :custom
   (cperl-invalid-face nil)
   (cperl-indent-level 4)
-  (cperl-close-parent-offset (- cperl-indent-leve))
+  (cperl-close-parent-offset (- cperl-indent-level))
   (cperl-indent-parens-as-block t)
   (cperl-electric-keywords nil)
   (cperl-electric-parens nil)
