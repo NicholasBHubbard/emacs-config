@@ -176,7 +176,8 @@
   :bind
   ("M-o" . consult-buffer)
   ("M-g g" . consult-goto-line)
-  ("C-S-y" . consult-yank-from-kill-ring))
+  ("C-S-y" . consult-yank-from-kill-ring)
+  ("M-G" . consult-grep))
 
 ;;; VERTICO
 
