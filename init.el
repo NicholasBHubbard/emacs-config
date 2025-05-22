@@ -52,6 +52,7 @@
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (global-set-key (kbd "M-r") #'revert-buffer-quick)
   (global-set-key (kbd "C-q") #'kill-current-buffer)
+  (global-set-key (kbd "C-S-q") #'kill-buffer-and-window)
   :hook
   (prog-mode . display-line-numbers-mode)
   (text-mode . display-line-numbers-mode)
@@ -676,10 +677,17 @@
   (comint-histories-global-filters '((lambda (x) (<= (length x) 3)) string-blank-p))
   :config
   (comint-histories-mode 1)
+
   (comint-histories-add-history gdb
     :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
     :length 2000
     :no-dups t)
+
+  (comint-histories-add-history pdb
+    :predicates '((lambda () (string-match-p "^(Pdb)" (comint-histories-get-prompt))))
+    :length 2000
+    :no-dups t)
+
 
   (comint-histories-add-history python
     :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
