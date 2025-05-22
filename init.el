@@ -314,7 +314,11 @@
   :commands compilation-mode
   :custom
   (compilation-ask-about-save nil)
-  (compilation-scroll-output t))
+  (compilation-scroll-output t)
+  :hook
+  (compilation-filter . (lambda ()
+                          (let ((inhibit-read-only t))
+                            (ansi-color-apply-on-region (point-min) (point-max))))))
 
 ;;; MULTIPLE CURSORS
 
