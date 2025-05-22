@@ -510,7 +510,7 @@
   :bind
   ("C-x g" . magit-status)
   :custom
-  (magit-clone-default-directory "~/p")
+  (magit-clone-default-directory "~/p/")
   :config
   (magit-auto-revert-mode 1))
 
