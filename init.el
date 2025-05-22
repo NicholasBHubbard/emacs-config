@@ -313,7 +313,8 @@
 (use-package compile
   :commands compilation-mode
   :custom
-  (compilation-ask-about-save nil))
+  (compilation-ask-about-save nil)
+  (compilation-scroll-output t))
 
 ;;; MULTIPLE CURSORS
 
