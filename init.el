@@ -51,7 +51,7 @@
   (setq-default fill-column 80)
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (global-set-key (kbd "M-r") #'revert-buffer-quick)
-  (global-set-key (kbd "C-S-q") #'kill-current-buffer)
+  (global-set-key (kbd "C-q") #'kill-current-buffer)
   :hook
   (prog-mode . display-line-numbers-mode)
   (text-mode . display-line-numbers-mode)
