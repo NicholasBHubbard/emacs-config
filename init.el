@@ -569,9 +569,7 @@
 
 (use-package google-this
   :straight t
-  :commands (google-this google-this-search)
-  :bind
-  ("C-c g" . google-this-search))
+  :commands (google-this google-this-search))
 
 ;;; PERSPECTIVE
 
