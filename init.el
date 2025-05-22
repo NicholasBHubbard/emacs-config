@@ -752,6 +752,4 @@
   :straight t
   :commands gptel
   :custom
-  (gptel-api-key #'(lambda () (password-store-get "openai-api-key")))
-  :hook
-  (gptel-post-stream . gptel-auto-scroll))
+  (gptel-api-key #'(lambda () (password-store-get "openai-api-key"))))
