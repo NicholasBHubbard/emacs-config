@@ -173,7 +173,7 @@
   :custom
   (consult-buffer-sources '(consult--source-buffer consult--source-project-root consult--source-recent-file))
   (consult-preview-key "M-SPC")
-  ;; (consult-grep-args (append consult-grep-args '("-E")))
+  (consult-grep-args '("grep" (consult--grep-exclude-args) "--null --line-buffered --color=never --ignore-case --with-filename --line-number --extended-regexp -I -r"))
   :bind
   ("M-o" . consult-buffer)
   ("M-g g" . consult-goto-line)
