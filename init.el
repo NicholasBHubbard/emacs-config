@@ -173,6 +173,7 @@
   :custom
   (consult-buffer-sources '(consult--source-buffer consult--source-project-root consult--source-recent-file))
   (consult-preview-key "M-SPC")
+  ;; (consult-grep-args (append consult-grep-args '("-E")))
   :bind
   ("M-o" . consult-buffer)
   ("M-g g" . consult-goto-line)
@@ -751,6 +752,8 @@
 (use-package gptel
   :straight t
   :commands gptel
+  :bind
+  ("C-c RET" . gptel-send)
   :custom
   (gptel-api-key #'(lambda () (password-store-get "openai-api-key"))))
 
