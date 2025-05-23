@@ -753,3 +753,11 @@
   :commands gptel
   :custom
   (gptel-api-key #'(lambda () (password-store-get "openai-api-key"))))
+
+;;; JINJA
+
+(use-package jinja2-mode
+  :straight t
+  :mode ("\\.jinja2?\\'" . jinja2-mode)
+  :config
+  (setq jinja2-mode-map (make-sparse-keymap)))
