@@ -177,7 +177,8 @@
   ("M-o" . consult-buffer)
   ("M-g g" . consult-goto-line)
   ("C-S-y" . consult-yank-from-kill-ring)
-  ("M-G" . consult-grep))
+  ("M-G" . consult-grep)
+  ("M-F" . consult-find))
 
 ;;; VERTICO
 
@@ -658,6 +659,8 @@
 
 (use-package comint
   :commands comint-mode
+  :hook
+  (comint-mode . ansi-color-for-comint-mode-on)
   :bind
   (:map comint-mode-map
         ("C-l" . comint-clear-buffer)
@@ -755,3 +758,9 @@
   ("C-c RET" . gptel-send)
   :custom
   (gptel-api-key #'(lambda () (password-store-get "openai-api-key"))))
+
+;;; JINJA
+
+(use-package jinja2-mode
+  :straight t
+  :commands jinja2-mode)
