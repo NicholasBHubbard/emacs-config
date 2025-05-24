@@ -763,4 +763,14 @@
 
 (use-package jinja2-mode
   :straight t
-  :commands jinja2-mode)
+  :commands jinja2-mode
+  :bind
+  (:map jinja2-mode-map
+        ("M-o" . nil)))
+
+;;; DIFF
+
+(use-package diff
+  :commands (diff diff-mode)
+  (:map diff-mode-map
+        ("M-o" . nil)))
