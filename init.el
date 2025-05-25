@@ -525,8 +525,11 @@
   :hook
   (magit-post-commit . (lambda ()
                          (let* ((latest-commit (magit-rev-parse "HEAD"))
-                                (files (magit-changed-files latest-commit)))
-                           (dolist (file files)
+                                (snd-latest-commit (magit-rev-parse "HEAD~1"))
+                                (changed-files
+                                 (magit-changed-files
+                                  latest-commit snd-latest-commit)))
+                           (dolist (file changed-files)
                              (when-let ((buf (find-buffer-visiting file)))
                                (with-current-buffer buf
                                  (revert-buffer t t t))))))))
