@@ -524,9 +524,9 @@
   (magit-auto-revert-mode 1)
   :hook
   (magit-post-commit . (lambda ()
-                         (let ((files (magit-changed-files 1)))
+                         (let* ((latest-commit (magit-rev-parse "HEAD"))
+                                (files (magit-changed-files latest-commitf)))
                            (dolist (file files)
-                             (message "%s" file)
                              (when-let ((buf (find-buffer-visiting file)))
                                (with-current-buffer buf
                                  (revert-buffer t t t))))))))
