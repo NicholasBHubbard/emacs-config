@@ -533,6 +533,7 @@
                 latest-commit snd-latest-commit)))
          (dolist (file changed-files)
            (when-let ((buf (find-buffer-visiting (concat default-directory file))))
+             (message "HEREEE: %s" file)
              (with-current-buffer buf
                (revert-buffer t t t)))))))
 
