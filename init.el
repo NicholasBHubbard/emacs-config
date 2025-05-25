@@ -317,6 +317,8 @@
   :custom
   (compilation-ask-about-save nil)
   (compilation-scroll-output t)
+  :bind
+  ("<f6>" . recompile)
   :hook
   (compilation-filter . (lambda ()
                           (let ((inhibit-read-only t))
@@ -747,7 +749,10 @@
 (use-package gnus
   :commands gnus
   :custom
-  (gnus-init-file (concat user-emacs-directory "gnus.el")))
+  (gnus-group-buffer "*gnus*")
+  (gnus-select-method
+   '(nnimap "posteo.de"
+            (nnimap-user "nicholashubbard@posteo.net"))))
 
 ;;; GPTEL
 
@@ -770,7 +775,7 @@
 
 ;;; DIFF
 
-(use-package diff
-  :commands (diff diff-mode)
-  (:map diff-mode-map
-        ("M-o" . nil)))
+;; (use-package diff
+;;   :commands (diff diff-mode)
+;;   (:map diff-mode-map
+;;         ("M-o" . nil)))
