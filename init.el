@@ -528,13 +528,13 @@
    . (lambda ()
        (let* ((latest-commit (magit-rev-parse "HEAD"))
               (snd-latest-commit (magit-rev-parse "HEAD~1"))
-              (git-root (magit-rev-parse "--show-toplevel"))
+              (git-root (magit-toplevel))
               (changed-files
                (magit-changed-files
                 latest-commit snd-latest-commit)))
          (dolist (file changed-files)
            (let ((file (concat git-root "/" file)))
-             (message "HERE: %s" file)
+             ;; (message "HERE: %s" file)
              (when-let ((buf (find-buffer-visiting (concat git-root "/" file))))
                (with-current-buffer buf
                  (revert-buffer t t t)))
