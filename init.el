@@ -752,7 +752,8 @@
   (gnus-group-buffer "*gnus*")
   (gnus-select-method
    '(nnimap "posteo.de"
-            (nnimap-user "nicholashubbard@posteo.net"))))
+            (nnimap-user "nicholashubbard@posteo.net")))
+  (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)))
 
 ;;; GPTEL
 
