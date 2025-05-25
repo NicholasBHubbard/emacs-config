@@ -524,12 +524,12 @@
   (magit-auto-revert-mode 1)
   :hook
   (magit-post-commit . (lambda ()
+                         (message "HERE")
                          (let* ((latest-commit (magit-rev-parse "HEAD"))
                                 (snd-latest-commit (magit-rev-parse "HEAD~1"))
                                 (changed-files
                                  (magit-changed-files
                                   latest-commit snd-latest-commit)))
-                           (message "HERE2")
                            (dolist (file changed-files)
                              (message "HERE: %s" file)
                              (when-let ((buf (find-buffer-visiting file)))
