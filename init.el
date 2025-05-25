@@ -526,6 +526,7 @@
   (magit-post-commit . (lambda ()
                          (let ((files (magit-changed-files 1)))
                            (dolist (file files)
+                             (message "%s" file)
                              (when-let ((buf (find-buffer-visiting file)))
                                (with-current-buffer buf
                                  (revert-buffer t t t))))))))
