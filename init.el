@@ -534,7 +534,7 @@
                 latest-commit snd-latest-commit)))
          (dolist (file changed-files)
            (let ((file (concat git-root "/" file)))
-             ;; (message "HERE: %s" file)
+             (message "HERE: %s" file)
              (when-let ((buf (find-buffer-visiting (concat git-root "/" file))))
                (with-current-buffer buf
                  (revert-buffer t t t)))
