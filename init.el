@@ -529,6 +529,7 @@
                                 (changed-files
                                  (magit-changed-files
                                   latest-commit snd-latest-commit)))
+                           (message "HERE2")
                            (dolist (file changed-files)
                              (message "HERE: %s" file)
                              (when-let ((buf (find-buffer-visiting file)))
