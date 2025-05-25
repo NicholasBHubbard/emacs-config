@@ -524,6 +524,7 @@
   (magit-auto-revert-mode 1)
   :hook
   (git-commit-post-finish . (lambda ()
+                              (message "HEREEE")
                               (let* ((latest-commit (magit-rev-parse "HEAD"))
                                      (snd-latest-commit (magit-rev-parse "HEAD~1"))
                                      (changed-files
