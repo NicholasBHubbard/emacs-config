@@ -775,7 +775,8 @@
 
 ;;; DIFF
 
-;; (use-package diff
-;;   :commands (diff diff-mode)
-;;   (:map diff-mode-map
-;;         ("M-o" . nil)))
+(use-package diff
+  :commands (diff diff-mode)
+  :bind
+  (:map diff-mode-map
+        ("M-o" . nil)))
