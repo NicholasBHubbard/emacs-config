@@ -520,6 +520,7 @@
   ("C-x g" . magit-status)
   :custom
   (magit-clone-default-directory "~/p/")
+  (git-commit-post-finish-hook-timeout 5)
   :config
   (magit-auto-revert-mode 1)
   :hook
