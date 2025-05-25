@@ -531,9 +531,9 @@
                                       (magit-changed-files
                                        latest-commit snd-latest-commit)))
                                 (dolist (file changed-files)
-                                  (message "HEREEEE: %s" file)
                                   (when-let ((buf (find-buffer-visiting file)))
                                     (with-current-buffer buf
+                                      (message "FINALLY")
                                       (revert-buffer t t t)))))))
 
 
