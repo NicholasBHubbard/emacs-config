@@ -525,13 +525,13 @@
   (magit-auto-revert-mode 1)
   :hook
   (git-commit-post-finish . (lambda ()
-                              (message "HEREEE")
                               (let* ((latest-commit (magit-rev-parse "HEAD"))
                                      (snd-latest-commit (magit-rev-parse "HEAD~1"))
                                      (changed-files
                                       (magit-changed-files
                                        latest-commit snd-latest-commit)))
                                 (dolist (file changed-files)
+                                  (message "HEREEEE: %s" file)
                                   (when-let ((buf (find-buffer-visiting file)))
                                     (with-current-buffer buf
                                       (revert-buffer t t t)))))))
