@@ -520,7 +520,7 @@
   ("C-x g" . magit-status)
   :custom
   (magit-clone-default-directory "~/p/")
-  (git-commit-post-finish-hook-timeout 5)
+  (git-commit-post-finish-hook-timeout 10)
   :config
   (magit-auto-revert-mode 1)
   :hook
@@ -533,9 +533,13 @@
                (magit-changed-files
                 latest-commit snd-latest-commit)))
          (dolist (file changed-files)
-           (when-let ((buf (find-buffer-visiting (concat git-root "/" file))))
-             (with-current-buffer buf
-               (revert-buffer t t t)))))))
+           (let ((file (concat git-root "/" file)))
+             (message "HERE: %s" file)
+             (when-let ((buf (find-buffer-visiting (concat git-root "/" file))))
+               (with-current-buffer buf
+                 (revert-buffer t t t)))
+             )
+           ))))
 
 
   )
