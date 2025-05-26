@@ -524,18 +524,15 @@
   :config
   (magit-auto-revert-mode 1)
   :hook
-  (git-commit-post-finish
-   . (lambda ()
-       (let* ((latest-commit (magit-rev-parse "HEAD"))
-              (snd-latest-commit (magit-rev-parse "HEAD~1"))
-              (git-root (magit-toplevel))
-              (changed-files
-               (magit-changed-files
-                latest-commit snd-latest-commit)))
-         (dolist (file changed-files)
-           (when-let ((buf (find-buffer-visiting (concat git-root file))))
-             (with-current-buffer buf
-               (revert-buffer t t t))))))))
+  (git-commit-post-finish . (lambda ()
+                              (let* ((latest-commit (magit-rev-parse "HEAD"))
+                                     (snd-latest-commit (magit-rev-parse "HEAD~1"))
+                                     (git-root (magit-toplevel))
+                                     (changed-files (magit-changed-files latest-commit snd-latest-commit)))
+                                (dolist (file changed-files)
+                                  (when-let ((buf (find-buffer-visiting (concat git-root file))))
+                                    (with-current-buffer buf
+                                      (revert-buffer t t t))))))))
 
 ;;; VC
 
