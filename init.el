@@ -761,9 +761,15 @@
   :commands gnus
   :custom
   (gnus-group-buffer "*gnus*")
-  (gnus-select-method
-   '(nnimap "posteo.de"
-            (nnimap-user "nicholashubbard@posteo.net")))
+  (gnus-select-method '(nnnil nil))
+  (gnus-secondary-select-methods
+   '((nnimap "nicholashubbard@posteo.net"
+             (nnimap-user "nicholashubbard@posteo.net")
+             (nnimap-address "posteo.de"))
+     ;; (nnimap "nhubbard@redhat.com"
+     ;;         (nnimap-user "nhubbard@redhat.com")
+     ;;         (nnimap-address "imap.gmail.com"))
+     ))
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)))
 
 ;;; GPTEL
