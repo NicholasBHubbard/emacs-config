@@ -1,5 +1,5 @@
 *
 !.gitignore
-!init.el
-!old-init.el
 !README
+!init.el
+!init.el.old
