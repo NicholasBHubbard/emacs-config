@@ -317,6 +317,8 @@
   :custom
   (compilation-ask-about-save nil)
   (compilation-scroll-output t)
+  (compilation-auto-jump-to-next nil)
+  (compilation-skip-threshold 0)
   :bind
   ("<f6>" . recompile)
   :hook
@@ -780,7 +782,9 @@
   :bind
   ("C-c RET" . gptel-send)
   :custom
-  (gptel-api-key #'(lambda () (password-store-get "openai-api-key"))))
+  (gptel-api-key #'(lambda () (password-store-get "openai-api-key")))
+  :config
+  (gptel-make-anthropic "Claude" :stream t :key #'(lambda () (password-store-get "anthropic-api-key"))))
 
 ;;; JINJA
 
