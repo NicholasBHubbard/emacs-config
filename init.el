@@ -317,8 +317,7 @@
   :custom
   (compilation-ask-about-save nil)
   (compilation-scroll-output t)
-  (compilation-auto-jump-to-next nil)
-  (compilation-skip-threshold 0)
+  (compilation-max-output-line-length nil)
   :bind
   ("<f6>" . recompile)
   :hook
