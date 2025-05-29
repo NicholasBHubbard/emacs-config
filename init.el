@@ -624,7 +624,22 @@
   (cperl-auto-newline nil)
   :custom-face
   (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
-  (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec))
+  (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
+  :hook
+  (cperl-mode . which-function-mode))
+
+;;; PYTHON
+
+(use-package python-mode
+  :mode ("\\.py\\'" . python-mode)
+  :hook
+  (python-mode . which-function-mode))
+
+(use-package pyvenv
+  :straight t
+  :after python-mode
+  :hook
+  (python-mode . (lambda () (pyvenv-mode 1))))
 
 ;;; HASKELL
 
