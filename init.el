@@ -622,14 +622,16 @@
   (cperl-indent-parens-as-block t)
   (cperl-electric-keywords nil)
   (cperl-electric-parens nil)
-  (cperl-electric-lbrace-space nil)
   (cperl-extra-newline-before-brace-multiline nil)
   (cperl-auto-newline nil)
   :custom-face
   (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
   (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
   :hook
-  (cperl-mode . which-function-mode))
+  (cperl-mode . which-function-mode)
+  :bind
+  (:map cperl-mode-map
+        ("{" . nil)))
 
 ;;; PYTHON
 
