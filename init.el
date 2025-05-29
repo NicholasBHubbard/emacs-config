@@ -87,7 +87,12 @@
 ;;; HYDRA
 
 (use-package pretty-hydra
-  :straight t)
+  :straight t
+  :demand t
+  :bind
+  (:map hydra-base-map
+        ("q"   . hydra-keyboard-quit)
+        ("C-g" . hydra-keyboard-quit)))
 
 ;;; SMARTPARENS
 
@@ -566,7 +571,15 @@
   (diff-hl-flydiff-mode 1)
   :bind
   (:map diff-hl-mode-map
-        ("C-c g" . diff-hl-command-map)))
+        ("C-c g" . diff-hl-hydra/body))
+  :pretty-hydra
+  ((:color amaranth)
+   ("Git"
+    (("n" (lambda () (interactive) (diff-hl-next-hunk) (recenter-top-bottom)) "next hunk")
+     ("p" (lambda () (interactive) (diff-hl-previous-hunk) (recenter-top-bottom)) "previous hunk")
+     ("s" diff-hl-stage-current-hunk "stage hunk")
+     ("r" diff-hl-revert-hunk "revert hunk")
+     ("g" magit-status "magit" :exit t)))))
 
 ;;; DIRED
 
