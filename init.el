@@ -573,13 +573,12 @@
   (:map diff-hl-mode-map
         ("C-c g" . diff-hl-hydra/body))
   :pretty-hydra
-  ((:color pink)
-   ("Git"
+  ((:color pink :quit-key "q")
+   ("diff-hl"
     (("n" diff-hl-next-hunk "next hunk")
      ("p" diff-hl-previous-hunk "previous hunk")
      ("s" diff-hl-stage-current-hunk "stage hunk")
-     ("r" diff-hl-revert-hunk "revert hunk")
-     ("g" magit-status "magit" :exit t)))))
+     ("r" diff-hl-revert-hunk "revert hunk")))))
 
 ;;; DIRED
 
