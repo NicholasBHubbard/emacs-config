@@ -244,8 +244,8 @@
   :config
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-history)
   (add-to-list 'completion-at-point-functions #'cape-file)
+  ;; (add-to-list 'completion-at-point-functions #'cape-history)
   (add-to-list 'completion-at-point-functions #'cape-elisp-block)
   (add-to-list 'completion-at-point-functions #'cape-elisp-symbol))
 
@@ -771,7 +771,8 @@
      ;;         (nnimap-user "nhubbard@redhat.com")
      ;;         (nnimap-address "imap.gmail.com"))
      ))
-  (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)))
+  (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
+  (gnus-use-full-window nil))
 
 ;;; GPTEL
 
