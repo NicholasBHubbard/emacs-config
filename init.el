@@ -426,6 +426,7 @@
 
 (use-package elisp-mode
   :hook
+  (emacs-lisp-mode . which-function-mode)
   (emacs-lisp-mode . rainbow-delimiters-mode)
   (emacs-lisp-mode . aggressive-indent-mode)
   (emacs-lisp-mode . smartparens-strict-mode))
