@@ -34,6 +34,7 @@
   (auto-revert-verbose nil)
   (display-buffer-base-action '(display-buffer-same-window))
   :config
+  (invert-face 'default)
   (scroll-bar-mode 0)
   (set-fringe-mode 0)
   (tooltip-mode 0)
@@ -83,10 +84,10 @@
 (use-package blackout
   :straight t)
 
-;;; THEME
+;;; HYDRA
 
-;; dark mode
-(invert-face 'default)
+(use-package pretty-hydra
+  :straight t)
 
 ;;; SMARTPARENS
 
@@ -130,6 +131,7 @@
   :straight t
   :bind
   ("C-;" . ace-window)
+  ("C-:" . ace-swap-window)
   :custom
   (aw-dispatch-always-nil)
   (aw-dispatch-when-more-than 2)
@@ -249,7 +251,8 @@
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-keyword)
   (add-to-list 'completion-at-point-functions #'cape-file)
-  ;; (add-to-list 'completion-at-point-functions #'cape-history)
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+  (add-to-list 'completion-at-point-functions #'cape-line)
   (add-to-list 'completion-at-point-functions #'cape-elisp-block)
   (add-to-list 'completion-at-point-functions #'cape-elisp-symbol))
 
