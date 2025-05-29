@@ -255,7 +255,7 @@
   :config
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-file)
+  ;; (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-abbrev)
   (add-to-list 'completion-at-point-functions #'cape-line)
   (add-to-list 'completion-at-point-functions #'cape-elisp-block)
@@ -573,10 +573,10 @@
   (:map diff-hl-mode-map
         ("C-c g" . diff-hl-hydra/body))
   :pretty-hydra
-  ((:color amaranth)
+  ((:color pink)
    ("Git"
-    (("n" (lambda () (interactive) (diff-hl-next-hunk) (recenter-top-bottom)) "next hunk")
-     ("p" (lambda () (interactive) (diff-hl-previous-hunk) (recenter-top-bottom)) "previous hunk")
+    (("n" diff-hl-next-hunk "next hunk")
+     ("p" diff-hl-previous-hunk "previous hunk")
      ("s" diff-hl-stage-current-hunk "stage hunk")
      ("r" diff-hl-revert-hunk "revert hunk")
      ("g" magit-status "magit" :exit t)))))
