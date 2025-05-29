@@ -29,6 +29,7 @@
   (scroll-margin 1)
   (undo-in-region t)
   (inhibit-startup-screen t)
+  (mode-line-percent-position nil)
   (auto-revert-verbose nil)
   (display-buffer-base-action '(display-buffer-same-window))
   :config
@@ -39,6 +40,7 @@
   (show-paren-mode 0)
   (blink-cursor-mode 0)
   (display-time-mode 1)
+  (line-number-mode 0)
   (global-auto-revert-mode 1)
   (transient-mark-mode 1)
   (delete-selection-mode 1)
