@@ -359,7 +359,7 @@
 
 (use-package shell
   :hook
-  (shell-mode . (lambda () ; compatible with bash prompt - PS1='[\u@\h \w]\$ '
+  (shell-mode . (lambda () ; compatible with shell prompt: PS1='[\u@\h \w]\$ '
                   (shell-dirtrack-mode 0)
 	              (setq-local dirtrack-list '("[[][^@]*@[^ ]* \\([^]]*\\)\\][$#] " 1))
                   (shell-dirtrack-mode 1))))
