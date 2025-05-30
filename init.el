@@ -606,6 +606,7 @@
      ("md" dired-create-directory "Make Dir"))
     "Act"
     (("sh" dired-do-shell-command "Shell Command")
+     ("SH" dired-do-async-shell-command "Shell Command Async")
      ("un" dired-undo "Undo")
      ("ca" dired-do-compress-to "Compress to Archive"))
     "Find"
