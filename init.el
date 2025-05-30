@@ -590,7 +590,34 @@
   :custom
   (dired-listing-switches "-DAlh --group-directories-first")
   (dired-recursive-copies 'always)
-  (dired-recursive-deletes 'always))
+  (dired-recursive-deletes 'always)
+  :bind
+  (:map dired-mode-map
+        ("SPC" . dired-hydra/body))
+  :pretty-hydra
+  ((:color blue :quit-key "SPC")
+   ("Command"
+    (("rm" dired-do-delete "Remove")
+     ("mv" dired-do-rename "Move")
+     ("cp" dired-do-copy "Copy")
+     ("cm" dired-do-chmod "Chmod")
+     ("co" dired-do-chown "Chown")
+     ("mf" dired-create-empty-file "Make File")
+     ("md" dired-create-directory "Make Dir"))
+    "Act"
+    (("sh" dired-do-shell-command "Shell Command")
+     ("un" dired-undo "Undo")
+     ("ca" dired-do-compress-to "Compress to Archive"))
+    "Find"
+    (("fg" find-grep-dired "Find Grep Regexp")
+     ("fn" find-name-dired "Find Name"))
+    "Mark"
+    (("ma" (lambda () (interactive) (dired-unmark-all-marks) (dired-toggle-marks)) "All" :color red)
+     ("um" dired-unmark-all-marks "Unmark All" :exit nil)
+     ("re" dired-mark-files-regexp "Regexp" :exit nil)
+     ("RE" dired-mark-files-containing-regexp "Containing Regexp" :exit nil)
+     ("su" dired-mark-suffix "Suffix" :exit nil)
+     ("di" dired-mark-directories "Directories" :exit nil)))))
 
 ;;; MAN
 
