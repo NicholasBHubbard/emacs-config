@@ -8,10 +8,10 @@
 (use-package emacs
   :demand t
   :custom
-  (confirm-kill-emacs #'y-or-n-p)
-  (enable-recursive-minibuffers t)
   (user-full-name "Nicholas Hubbard")
   (user-mail-address "nicholashubbard@posteo.net")
+  (confirm-kill-emacs #'y-or-n-p)
+  (enable-recursive-minibuffers t)
   (display-time-format "%H:%M")
   (display-time-default-load-average nil)
   (scroll-step 1)
