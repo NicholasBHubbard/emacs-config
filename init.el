@@ -248,36 +248,11 @@
   :config
   (clean-kill-ring-mode 1))
 
-;;; CAPE
+;;; HIPPIE
 
-(use-package cape
-  :straight t
-  :config
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  ;; (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-abbrev)
-  (add-to-list 'completion-at-point-functions #'cape-line)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-symbol))
-
-;;; CORFU
-
-(use-package corfu
-  :straight t
-  :custom
-  (corfu-auto t)
-  (corfu-auto-delay 0.1)
-  (corfu-auto-prefix 3)
-  (corfu-quit-at-boundary t)
-  (corfu-quit-no-match t)
-  (corfu-cycle nil)
-  (corfu-preselect 'first)
-  (corfu-preview-current nil)
-  (global-corfu-minibuffer t)
-  :config
-  (global-corfu-mode 1)
-  (unbind-key "RET" corfu-map))
+(use-package hippie-exp
+  :bind
+  ("<M-tab>" . hippie-expand))
 
 ;;; PASS
 
