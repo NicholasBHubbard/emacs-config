@@ -312,17 +312,6 @@
                           (let ((inhibit-read-only t))
                             (ansi-color-apply-on-region (point-min) (point-max))))))
 
-;;; MULTIPLE CURSORS
-
-(use-package multiple-cursors
-  :straight t
-  :bind
-  ("C->" . mc/mark-next-like-this)
-  ("C-<" . mc/mark-previous-like-this)
-  ("C-c C->" . mc/mark-all-like-this)
-  (:map mc/keymap
-        ("<return>" . nil)))
-
 ;;; EVIL NERD COMMENTER
 
 (use-package evil-nerd-commenter
