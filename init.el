@@ -253,7 +253,12 @@
 (use-package hippie-exp
   :bind
   ("M-SPC" . hippie-expand)
-  ("M-S-SPC" . (lambda () (interactive) (hippie-expand -1))))
+  ("M-S-SPC" . (lambda () (interactive) (hippie-expand -1)))
+  :custom
+  (hippie-expand-try-functions-list
+   (cl-remove-if
+    #'(lambda (fn) (memq fn '(try-expand-line try-expand-list)))
+    hippie-expand-try-functions-list)))
 
 ;;; PASS
 
