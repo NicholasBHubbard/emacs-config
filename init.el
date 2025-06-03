@@ -252,8 +252,8 @@
 
 (use-package hippie-exp
   :bind
-  ("M-SPC" . hippie-expand)
-  ("M-S-SPC" . (lambda () (interactive) (hippie-expand -1)))
+  ("<M-tab>" . hippie-expand)
+  ("M-<iso-lefttab>" . (lambda () (interactive) (hippie-expand -1)))
   :custom
   (hippie-expand-try-functions-list
    (cl-remove-if
@@ -355,9 +355,9 @@
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
   :bind
-  ("<M-tab>" . (lambda (arg) (interactive "P")
-                 (let ((shell-pop-autocd-to-working-dir arg))
-                   (call-interactively #'shell-pop)))))
+  ("M-SPC" . (lambda (arg) (interactive "P")
+               (let ((shell-pop-autocd-to-working-dir arg))
+                 (call-interactively #'shell-pop)))))
 
 ;;; SHX
 
