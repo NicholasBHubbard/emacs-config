@@ -217,7 +217,7 @@
   (corfu-cycle t)
   :bind
   (:map corfu-mode-map
-        ("M-SPC" . completion-at-point)))
+        ("M-<tab>" . completion-at-point)))
 
 ;;; CAPE
 
@@ -366,10 +366,11 @@
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
   :bind
-  ("<f8>" . shell-pop)
-  ("S-<f8>" . (lambda () (interactive)
-                (let ((shell-pop-autocd-to-working-dir t))
-                  (call-interactively #'shell-pop)))))
+  ("M-SPC" . shell-pop)
+  ("M-S-SPC" . (lambda () (interactive)
+                 (let ((shell-pop-autocd-to-working-dir t))
+                   (call-interactively #'shell-pop)
+                   (comint-clear-buffer)))))
 
 ;;; SHX
 
