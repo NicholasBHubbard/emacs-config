@@ -366,7 +366,7 @@
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
   :bind
-  ("<f8>" . (lambda (arg) (interactive "P")
+  ("<f8>" . (lambda (arg) (interactive "p")
                (let ((shell-pop-autocd-to-working-dir arg))
                  (call-interactively #'shell-pop)))))
 
@@ -824,7 +824,6 @@
 
 (use-package gptel
   :straight t
-  :commands gptel
   :bind
   ("C-c RET" . gptel-send)
   :custom
