@@ -389,7 +389,7 @@
 
 (use-package sudo-edit
   :straight t
-  :commands sudo-edit
+  :commands (sudo-edit sudo-edit-find-file)
   :config
   (sudo-edit-indicator-mode 1))
 
