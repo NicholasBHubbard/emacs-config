@@ -366,9 +366,10 @@
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
   :bind
-  ("<f8>" . (lambda (arg) (interactive "p")
-               (let ((shell-pop-autocd-to-working-dir arg))
-                 (call-interactively #'shell-pop)))))
+  ("<f8>" . shell-pop)
+  ("S-<f8>" . (lambda () (interactive)
+                (let ((shell-pop-autocd-to-working-dir t))
+                  (call-interactively #'shell-pop)))))
 
 ;;; SHX
 
