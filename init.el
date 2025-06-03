@@ -219,6 +219,16 @@
   (:map corfu-mode-map
         ("M-SPC" . completion-at-point)))
 
+;;; CAPE
+
+(use-package cape
+  :straight t
+  :bind
+  ("C-M-SPC" . cape-prefix-map)
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev))
+
 ;;; PROJECTILE
 
 (use-package projectile
@@ -356,7 +366,7 @@
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
   :bind
-  ("M-SPC" . (lambda (arg) (interactive "P")
+  ("<f8>" . (lambda (arg) (interactive "P")
                (let ((shell-pop-autocd-to-working-dir arg))
                  (call-interactively #'shell-pop)))))
 
