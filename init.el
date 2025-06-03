@@ -206,6 +206,19 @@
   :config
   (vertico-prescient-mode 1))
 
+;;; CORFU
+
+(use-package corfu
+  :straight t
+  :init
+  (global-corfu-mode 1)
+  (corfu-history-mode 1)
+  :custom
+  (corfu-cycle t)
+  :bind
+  (:map corfu-mode-map
+        ("M-SPC" . completion-at-point)))
+
 ;;; PROJECTILE
 
 (use-package projectile
@@ -247,18 +260,6 @@
   :straight t
   :config
   (clean-kill-ring-mode 1))
-
-;;; HIPPIE
-
-(use-package hippie-exp
-  :bind
-  ("<M-tab>" . hippie-expand)
-  ("M-<iso-lefttab>" . (lambda () (interactive) (hippie-expand -1)))
-  :custom
-  (hippie-expand-try-functions-list
-   (cl-remove-if
-    #'(lambda (fn) (memq fn '(try-expand-line try-expand-list)))
-    hippie-expand-try-functions-list)))
 
 ;;; PASS
 
