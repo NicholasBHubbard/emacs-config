@@ -679,6 +679,17 @@
   :hook
   (python-mode . (lambda () (pyvenv-mode 1))))
 
+;;; MERCURY
+
+(use-package metal-mercury-mode
+  :straight (metal-mercury-mode :type git :host github :repo "ahungry/metal-mercury-mode")
+  :mode ("\\.m\\'" . metal-mercury-mode)
+  :config
+  (let* ((mercury-path (car (reverse (directory-files "/usr/local" t "mercury-"))))
+         (mercury-bin (concat mercury-path "/bin")))
+    (unless (member mercury-bin exec-path)
+      (add-to-list 'exec-path mercury-bin))))
+
 ;;; HASKELL
 
 (use-package haskell-mode
