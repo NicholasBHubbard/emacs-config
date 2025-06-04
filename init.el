@@ -684,11 +684,9 @@
 (use-package metal-mercury-mode
   :straight (metal-mercury-mode :type git :host github :repo "ahungry/metal-mercury-mode")
   :mode ("\\.m\\'" . metal-mercury-mode)
-  :config
-  (let* ((mercury-path (car (reverse (directory-files "/usr/local" t "mercury-"))))
-         (mercury-bin (concat mercury-path "/bin")))
-    (unless (member mercury-bin exec-path)
-      (add-to-list 'exec-path mercury-bin))))
+  :custom
+  (metal-mercury-mode-compile-function #'(lambda (module-name)
+                                           (cl-concatenate 'string "_mercury mmc --make " module-name))))
 
 ;;; HASKELL
 
