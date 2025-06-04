@@ -218,7 +218,7 @@
   (corfu-auto-delay 0)
   (corfu-auto-prefix 3)
   (corfu-cycle t)
-  (corfu-quit-at-boundary t)
+  (corfu-on-exact-match nil)
   (corfu-preselect 'valid)
   (corfu-preview-current nil)
   (corfu-quit-no-match t))
