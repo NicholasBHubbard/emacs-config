@@ -214,17 +214,19 @@
   (global-corfu-mode 1)
   (corfu-history-mode 1)
   :custom
+  (corfu-auto t)
+  (corfu-auto-delay 0)
+  (corfu-auto-prefix 3)
   (corfu-cycle t)
-  :bind
-  (:map corfu-mode-map
-        ("M-<tab>" . completion-at-point)))
+  (corfu-preselect 'prompt)
+  (corfu-preview-current nil))
 
 ;;; CAPE
 
 (use-package cape
   :straight t
   :bind
-  ("C-M-SPC" . cape-prefix-map)
+  ("M-<tab>" . cape-prefix-map)
   :init
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev))
@@ -347,12 +349,12 @@
 
 ;;; BASH COMPLETION
 
-(use-package bash-completion
-  :straight t
-  :custom
-  (bash-completion-use-separate-processes t)
-  :config
-  (bash-completion-setup))
+;; (use-package bash-completion
+;;   :straight t
+;;   :custom
+;;   (bash-completion-use-separate-processes t)
+;;   :hook
+;;   (bash-completion-setup))
 
 ;;; SHELL POP
 
