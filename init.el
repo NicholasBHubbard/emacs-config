@@ -846,6 +846,16 @@
   (:map jinja2-mode-map
         ("M-o" . nil)))
 
+;;; SGML
+
+(use-package sgml-mode
+  :commands sgml-mode
+  :bind
+  (:map sgml-mode-map
+        ("M-o" . nil)
+        :map html-mode-map
+        ("M-o" . nil)))
+
 ;;; DIFF
 
 (use-package diff
