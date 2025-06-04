@@ -218,7 +218,7 @@
   (corfu-auto-delay 0)
   (corfu-auto-prefix 3)
   (corfu-cycle t)
-  (corfu-preselect 'prompt)
+  (corfu-preselect 'valid)
   (corfu-preview-current nil)
   (corfu-quit-no-match t))
 
@@ -577,6 +577,7 @@
   (dired-listing-switches "-DAlh --group-directories-first")
   (dired-recursive-copies 'always)
   (dired-recursive-deletes 'always)
+  (dired-kill-when-opening-new-dired-buffer t)
   :bind
   (:map dired-mode-map
         ("SPC" . dired-hydra/body))
