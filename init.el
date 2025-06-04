@@ -219,7 +219,8 @@
   (corfu-auto-prefix 3)
   (corfu-cycle t)
   (corfu-preselect 'prompt)
-  (corfu-preview-current nil))
+  (corfu-preview-current nil)
+  (corfu-quit-no-match t))
 
 ;;; CAPE
 
