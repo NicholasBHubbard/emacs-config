@@ -685,8 +685,9 @@
   :straight (metal-mercury-mode :type git :host github :repo "ahungry/metal-mercury-mode")
   :mode ("\\.m\\'" . metal-mercury-mode)
   :custom
-  (metal-mercury-mode-compile-function #'(lambda (module-name)
-                                           (cl-concatenate 'string "_mercury mmc --make " module-name))))
+  (metal-mercury-mode-compile-function
+   #'(lambda (module-name)
+       (cl-concatenate 'string "_mercury mmc --make " module-name))))
 
 ;;; HASKELL
 
