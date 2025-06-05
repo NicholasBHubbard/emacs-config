@@ -237,6 +237,7 @@
   (corfu-on-exact-match nil)
   (corfu-preselect 'prompt)
   (corfu-preview-current nil)
+  (corfu-quit-at-boundary t)
   (corfu-quit-no-match t))
 
 ;;; CAPE
