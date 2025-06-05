@@ -191,6 +191,22 @@
   ("M-G" . consult-grep)
   ("M-F" . consult-find))
 
+;;; CONSULT DIR
+
+(use-package consult-dir
+  :straight t
+  :after consult
+  :bind
+  ("M-O" . consult-dir)
+  :custom
+  (consult-dir-project-list-function #'consult-dir-projectile-dirs)
+  (consult-dir-sources
+   '(consult-dir--source-default
+     consult-dir--source-project
+     consult-dir--source-recentf
+     consult-dir--source-tramp-local
+     consult-dir--source-tramp-ssh)))
+
 ;;; VERTICO
 
 (use-package vertico
@@ -219,7 +235,7 @@
   (corfu-auto-prefix 3)
   (corfu-cycle t)
   (corfu-on-exact-match nil)
-  (corfu-preselect 'valid)
+  (corfu-preselect 'prompt)
   (corfu-preview-current nil)
   (corfu-quit-no-match t))
 
@@ -683,11 +699,7 @@
 
 (use-package metal-mercury-mode
   :straight (metal-mercury-mode :type git :host github :repo "ahungry/metal-mercury-mode")
-  :mode ("\\.m\\'" . metal-mercury-mode)
-  :custom
-  (metal-mercury-mode-compile-function
-   #'(lambda (module-name)
-       (cl-concatenate 'string "_mercury mmc --make " module-name))))
+  :mode ("\\.m\\'" . metal-mercury-mode))
 
 ;;; HASKELL
 
