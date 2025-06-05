@@ -887,3 +887,9 @@
   :bind
   (:map diff-mode-map
         ("M-o" . nil)))
+
+;;; DOCKER
+
+(use-package dockerfile-mode
+  :straight t
+  :magic ("Dockerfile" . dockerfile-mode))
