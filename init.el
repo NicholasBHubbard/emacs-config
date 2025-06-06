@@ -478,6 +478,7 @@
 ;;; ERC
 
 (use-package erc
+  :commands (erc erc-tls)
   :custom
   (erc-hide-list '("JOIN" "PART" "QUIT"))
   (erc-kill-buffer-on-part t)
@@ -487,13 +488,24 @@
   (erc-server-reconnect-attempts 5)
   (erc-server-reconnect-timeout 15)
   (erc-max-buffer-size 30000)
-  :config
+  (erc-log-channels-directory "~/.irc-logs")
+  (erc-generate-log-file-name-function #'erc-generate-log-file-name-short)
+  (erc-modules
+   '(autojoin button completion fill imenu irccontrols list match menu
+              move-to-prompt netsplit networks readonly ring stamp track log
+              notifications))
+  :init
   (defun my/erc-libera ()
+    (interactive)
+    (erc :server "irc.libera.chat"
+         :nick "_73"
+         :password (password-store-get "libera.irc")))
+  (defun my/erc-libera-tls ()
     (interactive)
     (erc-tls :server "irc.libera.chat"
              :port 6697
              :nick "_73"
-             :password (password-store-get "libera"))))
+             :password (password-store-get "libera.irc"))))
 
 ;;; WHICH KEY
 
