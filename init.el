@@ -60,6 +60,8 @@
   (prog-mode . display-fill-column-indicator-mode)
   (text-mode . display-fill-column-indicator-mode)
   :bind
+  ("M-F" . forward-whitespace)
+  ("M-B" . (lambda () (interactive) (forward-whitespace -1)))
   ("M-r" . revert-buffer-quick)
   ("C-q" . kill-current-buffer)
   ("C-S-q" . kill-buffer-and-window))
@@ -163,6 +165,12 @@
   (eglot-autoshutdown t)
   :commands (eglot eglot-ensure))
 
+;;; WHICH FUNCTION
+
+(use-package which-func
+  :init
+  (which-function-mode 1))
+
 ;;; PRESCIENT
 
 (use-package prescient
@@ -188,8 +196,7 @@
   ("M-o" . consult-buffer)
   ("M-g g" . consult-goto-line)
   ("C-S-y" . consult-yank-from-kill-ring)
-  ("M-G" . consult-grep)
-  ("M-F" . consult-find))
+  ("M-G" . consult-grep))
 
 ;;; CONSULT DIR
 
@@ -440,7 +447,6 @@
 
 (use-package elisp-mode
   :hook
-  (emacs-lisp-mode . which-function-mode)
   (emacs-lisp-mode . rainbow-delimiters-mode)
   (emacs-lisp-mode . aggressive-indent-mode)
   (emacs-lisp-mode . smartparens-strict-mode))
@@ -495,6 +501,11 @@
               move-to-prompt netsplit networks readonly ring stamp track log
               notifications))
   :init
+  (defun my/erc-regain-73 ()
+	(interactive)
+	(erc-move-to-prompt)
+	(erc-kill-input)
+	(erc-send-input (concat "/msg NickServ REGAIN _73 " (password-store-get "libera.irc"))))
   (defun my/erc-libera ()
     (interactive)
     (erc :server "irc.libera.chat"
@@ -594,7 +605,8 @@
     (("n" diff-hl-next-hunk "next hunk")
      ("p" diff-hl-previous-hunk "previous hunk")
      ("s" diff-hl-stage-current-hunk "stage hunk")
-     ("r" diff-hl-revert-hunk "revert hunk")))))
+     ("r" diff-hl-revert-hunk "revert hunk")
+     ("g" magit-status "magit" :exit t)))))
 
 ;;; DIRED
 
@@ -689,8 +701,6 @@
   :custom-face
   (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
   (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
-  :hook
-  (cperl-mode . which-function-mode)
   :bind
   (:map cperl-mode-map
         ("{" . nil)))
@@ -698,9 +708,7 @@
 ;;; PYTHON
 
 (use-package python-mode
-  :mode ("\\.py\\'" . python-mode)
-  :hook
-  (python-mode . which-function-mode))
+  :mode ("\\.py\\'" . python-mode))
 
 (use-package pyvenv
   :straight t
