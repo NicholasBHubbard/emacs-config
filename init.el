@@ -583,6 +583,16 @@
   (vc-follow-symlinks t)
   (auto-revert-check-vc-info t))
 
+;;; TRAMP
+
+(use-package tramp
+  :custom
+  (tramp-default-method "ssh")
+  (tramp-default-remote-shell "/bin/bash")
+  (tramp-connection-local-default-shell-variables
+   '((shell-file-name . "/bin/bash")
+     (shell-command-switch . "-c"))))
+
 ;;; DIFF HL
 
 (use-package diff-hl
@@ -718,9 +728,14 @@
 
 ;;; MERCURY
 
-(use-package metal-mercury-mode
-  :straight (metal-mercury-mode :type git :host github :repo "ahungry/metal-mercury-mode")
-  :mode ("\\.m\\'" . metal-mercury-mode))
+(use-package mercury-mode
+  :mode ("\\.m\\'" . mercury-mode)
+  :custom
+  (load-path (cons (expand-file-name
+                    "/usr/local/mercury-22.01.8/lib/mercury/elisp")
+                   load-path))
+  :config
+  (autoload 'mdb "gud" "Invoke the Mercury debugger" t))
 
 ;;; HASKELL
 
