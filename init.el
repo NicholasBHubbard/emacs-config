@@ -733,7 +733,10 @@
 ;;; PROLOG
 
 (use-package prolog-mode
-  :commands prolog-mode)
+  :commands prolog-mode
+  :bind
+  (:map prolog-mode-map
+        ("C-c RET" . nil)))
 
 ;;; MERCURY
 
