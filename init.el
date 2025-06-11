@@ -730,16 +730,15 @@
   :hook
   (python-mode . (lambda () (pyvenv-mode 1))))
 
+;;; PROLOG
+
+(use-package prolog-mode
+  :commands prolog-mode)
+
 ;;; MERCURY
 
 (use-package mercury-mode
-  :mode ("\\.m\\'" . mercury-mode)
-  :custom
-  (load-path (cons (expand-file-name
-                    "/usr/local/mercury-22.01.8/lib/mercury/elisp")
-                   load-path))
-  :config
-  (autoload 'mdb "gud" "Invoke the Mercury debugger" t))
+  :mode ("\\.m\\'" . mercury-mode))
 
 ;;; HASKELL
 
@@ -828,6 +827,11 @@
   (comint-histories-add-history python
     :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
                                  (string-match-p "^>>>" (comint-histories-get-prompt)))))
+    :length 2000
+    :no-dups t)
+
+  (comint-histories-add-history prolog
+    :predicates '((lambda () (derived-mode-p 'prolog-inferior-mode)))
     :length 2000
     :no-dups t)
 
