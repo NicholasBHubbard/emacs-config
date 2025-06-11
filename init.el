@@ -60,6 +60,10 @@
   (prog-mode . display-fill-column-indicator-mode)
   (text-mode . display-fill-column-indicator-mode)
   :bind
+  ("C-<up>" . enlarge-window)
+  ("C-<down>" . shrink-window)
+  ("C-<left>" . shrink-window-horizontally)
+  ("C-<right>" . enlarge-window-horizontally)
   ("M-F" . forward-whitespace)
   ("M-B" . (lambda () (interactive) (forward-whitespace -1)))
   ("M-r" . revert-buffer-quick)
