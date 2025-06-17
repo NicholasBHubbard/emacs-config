@@ -896,6 +896,18 @@
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
   (gnus-use-full-window nil))
 
+;;; SMTPMAIL
+
+(use-package smtpmail
+  :commands message-send-and-exit
+  :custom
+  (send-mail-function 'smtpmail-send-it)
+  (smtpmail-smtp-user user-mail-address)
+  (smtpmail-default-smtp-server "posteo.de")
+  (smtpmail-smtp-server "posteo.de")
+  (smtpmail-smtp-service 587)
+  (smtpmail-stream-type 'starttls))
+
 ;;; GPTEL
 
 (use-package gptel
