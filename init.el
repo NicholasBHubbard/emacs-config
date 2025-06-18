@@ -602,9 +602,20 @@
                                     (with-current-buffer buf
                                       (revert-buffer t t t))))))))
 
+;;; MAGIT TODOS
+
+(use-package magit-todos
+  :straight t
+  :after magit
+  :config
+  (magit-todos-mode 1)
+  :custom
+  (magit-todos-keywords-list '("TODO" "HACK")))
+
 ;;; VC
 
 (use-package vc
+  :defer t
   :custom
   (mode-line-format (delete '(vc-mode vc-mode) mode-line-format))
   (vc-follow-symlinks t)
