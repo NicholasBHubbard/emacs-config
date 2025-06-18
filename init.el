@@ -339,6 +339,13 @@
         ("C-n" . ctrlf-next-match)
         ("C-p" . ctrlf-previous-match)))
 
+;;; PROCED
+
+(use-package proced
+  :commands proced
+  :custom
+  (proced-auto-update-flag t))
+
 ;;; ISEARCH
 
 (use-package isearch
