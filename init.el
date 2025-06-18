@@ -603,7 +603,7 @@
                                       (revert-buffer t t t))))))))
 
 ;;; MAGIT TODOS
-;TODO
+; TODO
 (use-package magit-todos
   :straight t
   :after magit
