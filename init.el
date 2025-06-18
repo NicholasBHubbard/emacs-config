@@ -64,7 +64,6 @@
   ("C-M-<down>" . shrink-window)
   ("C-M-<left>" . shrink-window-horizontally)
   ("C-M-<right>" . enlarge-window-horizontally)
-  ("C-z" . pop-global-mark)
   ("M-F" . forward-whitespace)
   ("M-B" . (lambda () (interactive) (forward-whitespace -1)))
   ("M-r" . revert-buffer-quick)
@@ -211,10 +210,11 @@
   (consult-buffer-sources '(consult--source-buffer consult--source-project-root consult--source-recent-file))
   (consult-preview-key "M-SPC")
   :bind
-  ("M-o" . consult-buffer)
+  ("M-o"   . consult-buffer)
   ("M-g g" . consult-goto-line)
+  ("C-z"   . consult-global-mark)
   ("C-S-y" . consult-yank-from-kill-ring)
-  ("M-G" . consult-grep))
+  ("M-G"   . consult-grep))
 
 ;;; CONSULT DIR
 
