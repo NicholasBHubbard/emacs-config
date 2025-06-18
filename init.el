@@ -34,7 +34,7 @@
   (auto-revert-verbose nil)
   (display-buffer-base-action '(display-buffer-same-window))
   :config
-  (invert-face 'default)
+  ;; (invert-face 'default)
   (scroll-bar-mode 0)
   (set-fringe-mode 0)
   (tooltip-mode 0)
@@ -84,6 +84,19 @@
 	  (goto-char (point-max))
 	  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+;;; MODUS THEMES
+
+(use-package modus-themes
+  :straight t
+  :ensure t
+  :custom
+  (modus-themes-disable-other-themes t)
+  (modus-themes-common-palette-overrides
+   '((bg-line-number-active unspecified)
+     (bg-line-number-inactive unspecified)))
+  :config
+  (load-theme 'modus-vivendi-deuteranopia t))
 
 ;;; BLACKOUT
 
