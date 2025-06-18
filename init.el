@@ -344,7 +344,8 @@
 (use-package proced
   :commands proced
   :custom
-  (proced-auto-update-flag t))
+  (proced-auto-update-flag t)
+  (proced-auto-update-interval 2))
 
 ;;; ISEARCH
 
