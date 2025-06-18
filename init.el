@@ -345,7 +345,8 @@
   :commands proced
   :custom
   (proced-auto-update-flag t)
-  (proced-auto-update-interval 2))
+  (proced-auto-update-interval 1)
+  (proced-enable-color-flag t))
 
 ;;; ISEARCH
 
