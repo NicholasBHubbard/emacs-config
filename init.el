@@ -64,6 +64,7 @@
   ("C-M-<down>" . shrink-window)
   ("C-M-<left>" . shrink-window-horizontally)
   ("C-M-<right>" . enlarge-window-horizontally)
+  ("C-z" . pop-global-mark)
   ("M-F" . forward-whitespace)
   ("M-B" . (lambda () (interactive) (forward-whitespace -1)))
   ("M-r" . revert-buffer-quick)
