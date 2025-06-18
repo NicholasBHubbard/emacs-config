@@ -444,7 +444,7 @@
   :bind
   ("C-'" . avy-goto-char-timer)
   :custom
-  (avy-timeout-seconds 0.6)
+  (avy-timeout-seconds 0.4)
   (avy-single-candidate-jump t)
   (avy-style 'at-full)
   (avy-case-fold-search nil))
