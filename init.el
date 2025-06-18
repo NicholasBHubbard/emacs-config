@@ -346,6 +346,7 @@
   :custom
   (proced-auto-update-flag t)
   (proced-auto-update-interval 1)
+  (proced-goal-attribute nil)
   (proced-enable-color-flag t))
 
 ;;; ISEARCH
