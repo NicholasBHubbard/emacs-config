@@ -379,7 +379,7 @@
   (compilation-scroll-output t)
   (compilation-max-output-line-length nil)
   :bind
-  ("<f6>" . recompile)
+  ("<f6>" . compile)
   :hook
   (compilation-filter . (lambda ()
                           (let ((inhibit-read-only t))
