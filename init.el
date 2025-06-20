@@ -432,7 +432,7 @@
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
   :bind
-  ("M-SPC" . shell-pop)
+  ("M-SPC"   . shell-pop)
   ("M-S-SPC" . (lambda () (interactive)
                  (let ((shell-pop-autocd-to-working-dir t))
                    (call-interactively #'shell-pop)
