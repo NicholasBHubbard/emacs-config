@@ -28,6 +28,7 @@
   (revert-without-query '(".*"))
   (use-package-enable-imenu-support t)
   (scroll-margin 1)
+  (display-line-numbers-widen t)
   (undo-in-region t)
   (inhibit-startup-screen t)
   (mode-line-percent-position nil)
