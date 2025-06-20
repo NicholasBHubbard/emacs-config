@@ -138,9 +138,6 @@
 (use-package yasnippet
   :straight t
   :blackout yas-minor-mode
-  :bind
-  ("C-M-SPC" . yas-expand)
-  ("C-c y"   . yas-insert-snippet)
   :config
   (use-package yasnippet-snippets :straight t)
   (yas-global-mode 1))
