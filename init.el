@@ -187,10 +187,11 @@
 ;;; EGLOT
 
 (use-package eglot
+  :commands (eglot eglot-ensure)
   :custom
   (eglot-send-changes-idle-time 99999)
   (eglot-autoshutdown t)
-  :commands (eglot eglot-ensure))
+  (eglot-ignored-server-capabilities '(:documentHighlightProvider)))
 
 ;;; WHICH FUNCTION
 
@@ -768,13 +769,18 @@
 ;;; PYTHON
 
 (use-package python-mode
-  :mode ("\\.py\\'" . python-mode))
+  :mode ("\\.py\\'" . python-mode)
+  :hook
+  (python-mode . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("ruff" "server"))))
 
-(use-package pyvenv
+(use-package pet
   :straight t
   :after python-mode
-  :hook
-  (python-mode . (lambda () (pyvenv-mode 1))))
+  :config
+  (add-hook 'python-base-mode-hook 'pet-mode -10))
 
 ;;; PROLOG
 
