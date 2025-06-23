@@ -61,15 +61,16 @@
   (prog-mode . display-fill-column-indicator-mode)
   (text-mode . display-fill-column-indicator-mode)
   :bind
-  ("C-M-<up>" . enlarge-window)
-  ("C-M-<down>" . shrink-window)
-  ("C-M-<left>" . shrink-window-horizontally)
+  ("C-M-<up>"    . enlarge-window)
+  ("C-M-<down>"  . shrink-window)
+  ("C-M-<left>"  . shrink-window-horizontally)
   ("C-M-<right>" . enlarge-window-horizontally)
-  ("M-F" . forward-whitespace)
-  ("M-B" . (lambda () (interactive) (forward-whitespace -1)))
-  ("M-r" . revert-buffer-quick)
-  ("C-q" . kill-current-buffer)
-  ("C-S-q" . kill-buffer-and-window))
+  ("<f7>"        . query-replace-regexp)
+  ("M-F"         . forward-whitespace)
+  ("M-B"         . (lambda () (interactive) (forward-whitespace -1)))
+  ("M-r"         . revert-buffer-quick)
+  ("C-q"         . kill-current-buffer)
+  ("C-S-q"       . kill-buffer-and-window))
 
 ;;; STRAIGHT
 
