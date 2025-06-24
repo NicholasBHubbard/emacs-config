@@ -66,6 +66,7 @@
   ("C-M-<left>"  . shrink-window-horizontally)
   ("C-M-<right>" . enlarge-window-horizontally)
   ("<f7>"        . query-replace-regexp)
+  ("C-c j"       . join-line)
   ("M-F"         . forward-whitespace)
   ("M-B"         . (lambda () (interactive) (forward-whitespace -1)))
   ("M-r"         . revert-buffer-quick)
@@ -708,7 +709,8 @@
     (("sh" dired-do-shell-command "Shell Command")
      ("SH" dired-do-async-shell-command "Shell Command Async")
      ("un" dired-undo "Undo")
-     ("ca" dired-do-compress-to "Compress to Archive"))
+     ("ca" dired-do-compress-to "Compress to Archive")
+     ("wd" wdired-change-to-wdired-mode "Wdired"))
     "Find"
     (("fg" find-grep-dired "Find Grep Regexp")
      ("fn" find-name-dired "Find Name"))
