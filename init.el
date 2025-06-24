@@ -463,6 +463,15 @@
   :config
   (sudo-edit-indicator-mode 1))
 
+;;; ULTRA-SCROLL
+
+(use-package ultra-scroll
+  :straight (ultra-scroll :type git
+                          :host github
+                          :repo "jdtsmith/ultra-scroll")
+  :config
+  (ultra-scroll-mode 1))
+
 ;;; AVY
 
 (use-package avy
@@ -475,7 +484,7 @@
   (avy-style 'at-full)
   (avy-case-fold-search nil))
 
-;;; EXPAND REGION.
+;;; EXPAND REGION
 
 (use-package expand-region
   :straight t
