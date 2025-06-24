@@ -694,7 +694,8 @@
   (dired-kill-when-opening-new-dired-buffer t)
   :bind
   (:map dired-mode-map
-        ("SPC" . dired-hydra/body))
+        ("SPC" . dired-hydra/body)
+        ("C-s" . dired-goto-file))
   :pretty-hydra
   ((:color blue :quit-key "SPC")
    ("Command"
