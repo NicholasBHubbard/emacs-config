@@ -1016,3 +1016,15 @@
 (use-package dockerfile-mode
   :straight t
   :magic ("Dockerfile" . dockerfile-mode))
+
+;;; JIRA
+
+(use-package jira
+  :straight t
+  :commands (jira-issues jira-issues-menu)
+  :custom
+  (jira-base-url "https://issues.redhat.com")
+  (jira-username "nhubbard@redhat.com")
+  (jira-token (password-store-get "jira-token"))
+  (jira-token-is-personal-access-token t)
+  (jira-api-version 2))
