@@ -1011,6 +1011,14 @@
   (:map diff-mode-map
         ("M-o" . nil)))
 
+;;; ALERT
+
+(use-package alert
+  :straight t
+  :commands alert
+  :init
+  (setq alert-default-style 'notifier))
+
 ;;; DOCKER
 
 (use-package dockerfile-mode
