@@ -464,15 +464,6 @@
   :config
   (sudo-edit-indicator-mode 1))
 
-;;; ULTRA-SCROLL
-
-(use-package ultra-scroll
-  :straight (ultra-scroll :type git
-                          :host github
-                          :repo "jdtsmith/ultra-scroll")
-  :config
-  (ultra-scroll-mode 1))
-
 ;;; AVY
 
 (use-package avy
@@ -950,6 +941,9 @@
   :custom
   (gnus-group-buffer "*gnus*")
   (gnus-select-method '(nnnil nil))
+  (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
+  (gnus-use-full-window nil)
+  (nnrss-directory (concat user-emacs-directory "nnrss"))
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
@@ -957,9 +951,7 @@
      ;; (nnimap "nhubbard@redhat.com"
      ;;         (nnimap-user "nhubbard@redhat.com")
      ;;         (nnimap-address "imap.gmail.com"))
-     ))
-  (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
-  (gnus-use-full-window nil))
+     )))
 
 ;;; SMTPMAIL
 
