@@ -537,10 +537,7 @@
   (erc-max-buffer-size 30000)
   (erc-log-channels-directory "~/.irc-logs")
   (erc-generate-log-file-name-function #'erc-generate-log-file-name-short)
-  (erc-modules
-   '(autojoin button completion fill imenu irccontrols list match menu
-              move-to-prompt netsplit networks readonly ring stamp track log
-              notifications))
+  (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track log desktop-notifications))
   :init
   (defun my/erc-regain-73 ()
 	(interactive)
