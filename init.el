@@ -306,6 +306,10 @@
   (projectile-current-project-on-switch 'keep)
   (projectile-find-dir-includes-top-level t)
   (projectile-switch-project-action #'projectile-dired)
+  :config
+  (advice-add 'projectile-project-root :before-while
+              (lambda (&optional dir)
+                (not (file-remote-p (or dir default-directory)))))
   :bind
   (:map projectile-mode-map
         ("C-c p" . projectile-command-map)))
@@ -803,6 +807,12 @@
 (use-package haskell-mode
   :mode ("\\.hs\\'" . haskell-mode)
   :straight t)
+
+;;; RUST
+
+(use-package rust-mode
+  :straight t
+  :mode ("\\.rs\\'" . rust-mode))
 
 ;;; PROOF GENERAL
 
