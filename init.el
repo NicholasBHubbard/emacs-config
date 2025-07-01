@@ -334,7 +334,8 @@
                 (not (file-remote-p (or dir default-directory)))))
   :bind
   (:map projectile-mode-map
-        ("C-c p" . projectile-command-map)))
+        ("C-c p" . projectile-command-map)
+        ("S-<f6>" . projectile-compile-project)))
 
 (use-package consult-projectile
   :straight t
