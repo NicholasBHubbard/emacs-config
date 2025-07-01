@@ -198,14 +198,16 @@
   (:map eglot-mode-map
         ("C-c e" . eglot-hydra/body))
   :pretty-hydra
-  ((:color amaranth :quit-key "C-c e")
+  ((:color teal :quit-key "C-c e")
    ("Flymake"
-    (("n" flymake-goto-next-error "next error")
-     ("p" flymake-goto-prev-error "previous error"))
+    (("n" flymake-goto-next-error "next error" :exit nil)
+     ("p" flymake-goto-prev-error "previous error" :exit nil)
+     ("db" flymake-show-buffer-diagnostics "diagnostics buffer")
+     ("dp" flymake-show-project-diagnostics "diagnostics project"))
     "Find"
-    (("fd" eglot-find-declaration "declaration" :exit t)
-     ("ft" eglot-find-typeDefinition "type def" :exit t)
-     ("fi" eglot-find-implementation "implementation" :exit t))
+    (("fd" eglot-find-declaration "declaration")
+     ("ft" eglot-find-typeDefinition "type def")
+     ("fi" eglot-find-implementation "implementation"))
     "Format"
     (("Fr" eglot-format "region")
      ("Fb" eglot-format-buffer "buffer"))
