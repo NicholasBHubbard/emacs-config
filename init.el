@@ -193,7 +193,26 @@
   :custom
   (eglot-send-changes-idle-time 99999)
   (eglot-autoshutdown t)
-  (eglot-ignored-server-capabilities '(:documentHighlightProvider)))
+  (eglot-ignored-server-capabilities '(:documentHighlightProvider))
+  :bind
+  (:map eglot-mode-map
+        ("C-c e" . eglot-hydra/body))
+  :pretty-hydra
+  ((:color amaranth :quit-key "C-c e")
+   ("Flymake"
+    (("n" flymake-goto-next-error "next error")
+     ("p" flymake-goto-prev-error "previous error"))
+    "Find"
+    (("fd" eglot-find-declaration "declaration" :exit t)
+     ("ft" eglot-find-typeDefinition "type def" :exit t)
+     ("fi" eglot-find-implementation "implementation" :exit t))
+    "Format"
+    (("Fr" eglot-format "region")
+     ("Fb" eglot-format-buffer "buffer"))
+    "Server"
+    (("ss" eglot-shutdown "shutdown")
+     ("sS" eglot-shutdown-all "shutdown all")
+     ("sa" eglot-code-actions "code actions")))))
 
 ;;; WHICH FUNCTION
 
