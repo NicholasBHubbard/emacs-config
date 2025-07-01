@@ -99,7 +99,7 @@
    '((bg-line-number-active unspecified)
      (bg-line-number-inactive unspecified)))
   :config
-  (load-theme 'modus-vivendi-deuteranopia t))
+  (load-theme 'modus-vivendi-tritanopia t))
 
 ;;; BLACKOUT
 
