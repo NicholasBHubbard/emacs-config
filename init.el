@@ -217,8 +217,9 @@
 ;;; WHICH FUNCTION
 
 (use-package which-func
-  :init
-  (which-function-mode 1))
+  :commands which-function-mode
+  :hook
+  (prog-mode . (lambda () (which-function-mode 1))))
 
 ;;; PRESCIENT
 
