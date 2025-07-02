@@ -669,7 +669,10 @@
   (tramp-default-remote-shell "/bin/bash")
   (tramp-connection-local-default-shell-variables
    '((shell-file-name . "/bin/bash")
-     (shell-command-switch . "-c"))))
+     (shell-command-switch . "-c")))
+  (tramp-ssh-controlmaster-options
+   (concat "-o ControlPath=\~/.ssh/cons/ssh-%%r@%%h:%%p "
+           "-o ControlMaster=auto -o ControlPersist=yes")))
 
 ;;; DIFF HL
 
@@ -927,6 +930,11 @@
     :length 2000
     :no-dups t)
 
+  (comint-histories-add-history chatgpt-shell
+    :predicates '((lambda () (derived-mode-p 'chatgpt-shell-mode)))
+    :length 2000
+    :no-dups t)
+
   (comint-histories-add-history ielm
     :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
     :length 2000
@@ -1008,6 +1016,15 @@
   (gptel-api-key #'(lambda () (password-store-get "openai-api-key")))
   :config
   (gptel-make-anthropic "Claude" :stream t :key #'(lambda () (password-store-get "anthropic-api-key"))))
+
+
+;;; CHATGPT SHELL
+
+(use-package chatgpt-shell
+  :straight t
+  :commands chatgpt-shell
+  :custom
+  (chatgpt-shell-anthropic-key (password-store-get "anthropic-api-key")))
 
 ;;; JINJA
 
