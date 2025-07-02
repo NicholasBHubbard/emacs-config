@@ -664,15 +664,15 @@
 ;;; TRAMP
 
 (use-package tramp
-  :custom
-  (tramp-default-method "ssh")
-  (tramp-default-remote-shell "/bin/bash")
-  (tramp-connection-local-default-shell-variables
-   '((shell-file-name . "/bin/bash")
-     (shell-command-switch . "-c")))
-  (tramp-ssh-controlmaster-options
-   (concat "-o ControlPath=\~/.ssh/cons/ssh-%%r@%%h:%%p "
-           "-o ControlMaster=auto -o ControlPersist=yes")))
+  :init
+  (setq tramp-default-method "ssh")
+  (setq tramp-default-remote-shell "/bin/bash")
+  (setq tramp-connection-local-default-shell-variables
+        '((shell-file-name . "/bin/bash")
+          (shell-command-switch . "-c")))
+  (setq tramp-ssh-controlmaster-options
+        (concat "-o ControlPath=\~/.ssh/cons/ssh-%%r@%%h:%%p "
+                "-o ControlMaster=auto -o ControlPersist=yes")))
 
 ;;; DIFF HL
 
