@@ -1024,7 +1024,8 @@
   :straight t
   :commands chatgpt-shell
   :custom
-  (chatgpt-shell-anthropic-key (password-store-get "anthropic-api-key")))
+  (chatgpt-shell-anthropic-key (password-store-get "anthropic-api-key"))
+  (chatgpt-shell-system-prompt 2))
 
 ;;; JINJA
 
