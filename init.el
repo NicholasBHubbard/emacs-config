@@ -1033,6 +1033,12 @@
   (chatgpt-shell-anthropic-key (password-store-get "anthropic-api-key"))
   (chatgpt-shell-system-prompt 2))
 
+;;; YAML
+
+(use-package yaml-mode
+  :straight t
+  :mode ("\\.ya?ml\\'" . yaml-mode))
+
 ;;; JINJA
 
 (use-package jinja2-mode
