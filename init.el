@@ -242,7 +242,7 @@
 (use-package consult
   :straight t
   :custom
-  (consult-buffer-sources '(consult--source-buffer consult--source-project-root consult--source-recent-file))
+  (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
   (consult-preview-key "M-SPC")
   :bind
   ("M-o"   . consult-buffer)
