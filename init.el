@@ -436,6 +436,7 @@
 ;;; SHELL
 
 (use-package shell
+  :commands (shell shell-mode)
   :hook
   (shell-mode . (lambda () ; compatible with shell prompt: PS1='[\u@\h \w]\$ '
                   (shell-dirtrack-mode 0)
@@ -942,6 +943,11 @@
 
   (comint-histories-add-history ocaml
     :predicates '((lambda () (derived-mode-p 'tuareg-interactive-mode)))
+    :length 2000
+    :no-dups t)
+
+  (comint-histories-add-history bashdb
+    :predicates '((lambda () (string-match-p "^bashdb" (comint-histories-get-prompt))))
     :length 2000
     :no-dups t)
 
