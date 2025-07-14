@@ -65,6 +65,8 @@
   ("C-M-<down>"  . shrink-window)
   ("C-M-<left>"  . shrink-window-horizontally)
   ("C-M-<right>" . enlarge-window-horizontally)
+  ("C-M-p"       . (lambda () (interactive) (scroll-up 1)))
+  ("C-M-n"       . (lambda () (interactive) (scroll-down 1)))
   ("<f7>"        . query-replace-regexp)
   ("C-c j"       . join-line)
   ("M-F"         . forward-whitespace)
@@ -512,6 +514,15 @@
   :bind
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
+
+;;; MULTIPLE CURSORS
+
+(use-package multiple-cursors
+  :straight t
+  :bind
+  ("C-M-SPC" . set-rectangular-region-anchor)
+  (:map mc/keymap
+        ("RET" . nil)))
 
 ;;; EMACS LISP
 
