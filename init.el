@@ -1102,3 +1102,8 @@
   (jira-token (password-store-get "jira-token"))
   (jira-token-is-personal-access-token t)
   (jira-api-version 2))
+
+;;; AUTOTEST
+
+(use-package autotest-mode
+  :mode ("\\.at\\'" . autotest-mode))
