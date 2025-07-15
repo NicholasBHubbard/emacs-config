@@ -386,7 +386,7 @@
 (use-package ctrlf
   :straight t
   :init
-  (ctrlf-mode 1)
+  (fset 'isearch-forward 'ctrlf-forward-default)
   :custom
   (ctrlf-auto-recenter t)
   (ctrlf-go-to-end-of-match nil)
