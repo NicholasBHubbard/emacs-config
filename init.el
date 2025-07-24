@@ -713,6 +713,7 @@
   (dired-recursive-copies 'always)
   (dired-recursive-deletes 'always)
   (dired-kill-when-opening-new-dired-buffer t)
+  (dired-clean-confirm-killing-deleted-buffers nil)
   :bind
   (:map dired-mode-map
         ("SPC" . dired-hydra/body)
