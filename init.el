@@ -689,6 +689,8 @@
   :config
   (diff-hl-margin-mode 1)
   (diff-hl-flydiff-mode 1)
+  :hook
+  (magit-post-refresh . diff-hl-magit-post-refresh)
   :bind
   (:map diff-hl-mode-map
         ("C-c g" . diff-hl-hydra/body))
