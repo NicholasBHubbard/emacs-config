@@ -983,7 +983,12 @@
 ;;; XCSCOPE
 
 (use-package xcscope
-  :straight t)
+  :straight t
+  :after cc-mode
+  :custom
+  (cscope-display-cscope-buffer nil)
+  :config
+  (cscope-setup))
 
 ;;; GNUS
 
