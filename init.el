@@ -55,6 +55,7 @@
   (setq-default display-fill-column-indicator-column 80)
   (setq-default fill-column 80)
   (setq-default buffer-file-coding-system 'utf-8-unix)
+  (setq-default c-basic-offset 4)
   :hook
   (prog-mode . display-line-numbers-mode)
   (text-mode . display-line-numbers-mode)
