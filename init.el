@@ -573,8 +573,6 @@
   (erc-kill-queries-on-quit t)
   (erc-kill-server-buffer-on-quit t)
   (erc-server-auto-reconnect t)
-  (erc-server-reconnect-attempts 5)
-  (erc-server-reconnect-timeout 15)
   (erc-max-buffer-size 30000)
   (erc-log-channels-directory "~/.irc-logs")
   (erc-generate-log-file-name-function #'erc-generate-log-file-name-short)
@@ -720,7 +718,8 @@
   :bind
   (:map dired-mode-map
         ("SPC" . dired-hydra/body)
-        ("C-s" . dired-goto-file))
+        ("C-s" . dired-goto-file)
+        ("M-G" . nil))
   :pretty-hydra
   ((:color blue :quit-key "SPC")
    ("Command"
