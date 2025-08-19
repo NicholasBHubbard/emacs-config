@@ -450,6 +450,7 @@
 
 ;; (use-package bash-completion
 ;;   :straight t
+;;   :after shell-mode
 ;;   :custom
 ;;   (bash-completion-use-separate-processes t)
 ;;   :hook
@@ -487,6 +488,12 @@
   :custom
   (sh-indentation 4)
   (sh-basic-offset 4))
+
+(use-package flymake-shellcheck
+  :straight t
+  :after sh-script
+  :hook
+  (sh-mode . flymake-shellcheck-load))
 
 ;;; SUDO EDIT
 
