@@ -760,6 +760,7 @@
   :commands man
   :custom
   (Man-notify-method 'pushy)
+  (Man-prefer-synchronous-call t)
   :bind
   ("C-h m" . man))
 
