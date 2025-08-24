@@ -468,9 +468,14 @@
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
   :bind
-  ("M-SPC"   . shell-pop)
+  ("M-SPC"   . (lambda () (interactive)
+                 (let ((default-directory (if (file-remote-p default-directory)
+                                              "~" default-directory)))
+                   (call-interactively #'shell-pop))))
   ("M-S-SPC" . (lambda () (interactive)
-                 (let ((shell-pop-autocd-to-working-dir t))
+                 (let ((shell-pop-autocd-to-working-dir t)
+                       (default-directory (if (file-remote-p default-directory)
+                                              "~" default-directory)))
                    (call-interactively #'shell-pop)
                    (comint-clear-buffer)))))
 
