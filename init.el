@@ -580,7 +580,7 @@
 (use-package erc
   :commands (erc erc-tls)
   :custom
-  (erc-hide-list '("JOIN" "PART" "QUIT"))
+  (erc-hide-list '("JOIN" "PART" "QUIT" "353" "366"))
   (erc-kill-buffer-on-part t)
   (erc-kill-queries-on-quit t)
   (erc-kill-server-buffer-on-quit t)
