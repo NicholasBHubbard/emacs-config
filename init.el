@@ -679,7 +679,7 @@
         '((shell-file-name . "/bin/bash")
           (shell-command-switch . "-c")))
   (setq tramp-ssh-controlmaster-options
-        (concat "-o ControlPath=\~/.ssh/cons/ssh-%%r@%%h:%%p "
+        (concat "-o ControlPath=\~/.ssh/connections/ssh-%%r@%%h:%%p "
                 "-o ControlMaster=auto -o ControlPersist=yes")))
 
 ;;; DIFF HL
