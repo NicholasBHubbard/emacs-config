@@ -590,6 +590,12 @@
   (erc-generate-log-file-name-function #'erc-generate-log-file-name-short)
   (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track log notifications))
   :init
+  (defun my/erc-znc ()
+    (interactive)
+    (erc-tls :server (password-store-get "znc-server-ip")
+             :port 5000
+             :nick "bnc"
+             :password (concat "bnc:" (password-store-get "libera.irc"))))
   (defun my/erc-regain-73 ()
 	(interactive)
 	(erc-move-to-prompt)
