@@ -1027,6 +1027,7 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
 ;;; GNUS
 
 (use-package gnus
+  :defer t
   :commands gnus
   :hook
   (gnus-summary-exit . (lambda () (when (or (window-in-direction 'above) (window-in-direction 'below))
