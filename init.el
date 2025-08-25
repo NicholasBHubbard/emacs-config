@@ -1033,6 +1033,9 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gnus-summary-exit . (lambda () (when (or (window-in-direction 'above) (window-in-direction 'below))
                                     (delete-window))))
   (gnus-started . gnus-group-list-all-groups)
+  :bind
+  (:map gnus-article-mode-map
+        ("q" . gnus-summary-expand-window))
   :custom
   (gnus-group-buffer "*gnus*")
   (gnus-select-method '(nnnil nil))
