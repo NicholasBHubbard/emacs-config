@@ -1037,8 +1037,8 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gnus-startup-file (concat user-emacs-directory ".newsrc"))
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
   (gnus-use-full-window nil)
-  (gnus-use-cache nil)
   (gnus-auto-select-next nil)
+  (gnus-always-read-dribble-file t)
   (gnus-summary-next-group-on-exit nil)
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
@@ -1049,8 +1049,9 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
              (nnimap-stream ssl)
              (nnimap-split-methods
               (("INBOX.me" "From:.*nicholashubbard@posteo\\.net")
-               ("INBOX.ml.emacs-devel" "From:.*emacs-devel@gnu\\.org")
-               ("INBOX.ml.btrfs" "From:.*linux-btrfs.*kernel\\.org")
+               ("INBOX.ml.emacs-devel" "^\\(To\\|Cc\\):.*emacs-devel@gnu\\.org")
+               ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs.*kernel\\.org")
+               ("INBOX.ml.linux-crypto" "^\\(To\\|Cc\\):.*linux-crypto.*kernel\\.org")
                ("INBOX" "")))))))
 
 ;;; SMTPMAIL
