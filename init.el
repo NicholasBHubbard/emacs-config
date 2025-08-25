@@ -1017,10 +1017,9 @@
   :commands (message-send message-send-and-exit)
   :custom
   (mml-secure-openpgp-signers '("508022AE06C2C446D8072447C700A066BB25F148"))
-  (message-signature (concat "-- " "
-Nicholas B. Hubbard
+  (message-signature "Nicholas B. Hubbard
 Keys: https://github.com/NicholasBHubbard/public-keys
-Key ID: 508022AE06C2C446D8072447C700A066BB25F148"))
+Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   :hook
   (message-send . mml-secure-message-sign-pgpmime))
 
