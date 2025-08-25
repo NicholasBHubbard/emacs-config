@@ -1048,7 +1048,8 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
              (nnimap-server-port "993")
              (nnimap-stream ssl)
              (nnimap-split-methods
-              (("INBOX.me" "From:.*nicholashubbard@posteo\\.net")
+              (
+               ;; ("INBOX.me" "From: nicholashubbard@posteo\\.net")
                ("INBOX.emacs-devel" "From:.*emacs-devel@gnu\\.org")
                ("INBOX" ""))))))
   )
@@ -1072,19 +1073,10 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   :bind
   ("C-c RET" . gptel-send)
   :custom
+  (gptel-default-mode 'org-mode)
   (gptel-api-key #'(lambda () (password-store-get "openai-api-key")))
   :config
-  (gptel-make-anthropic "Claude" :stream t :key #'(lambda () (password-store-get "anthropic-api-key"))))
-
-
-;;; CHATGPT SHELL
-
-(use-package chatgpt-shell
-  :straight t
-  :commands chatgpt-shell
-  :custom
-  (chatgpt-shell-anthropic-key (password-store-get "anthropic-api-key"))
-  (chatgpt-shell-system-prompt 2))
+  (gptel-make-anthropic "Claude" :key #'(lambda () (password-store-get "anthropic-api-key"))))
 
 ;;; YAML
 
