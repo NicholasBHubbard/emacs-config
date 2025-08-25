@@ -1020,6 +1020,7 @@
   (message-signature "Nicholas B. Hubbard
 Keys: https://github.com/NicholasBHubbard/public-keys
 Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
+  (message-kill-buffer-on-exit t)
   :hook
   (message-send . mml-secure-message-sign-pgpmime))
 
@@ -1027,20 +1028,30 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
 
 (use-package gnus
   :commands gnus
+  :hook
+  (gnus-summary-exit . (lambda () (when (or (window-in-direction 'above) (window-in-direction 'below))
+                                    (delete-window))))
   :custom
   (gnus-group-buffer "*gnus*")
   (gnus-select-method '(nnnil nil))
+  (gnus-startup-file (concat user-emacs-directory ".newsrc"))
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
   (gnus-use-full-window nil)
-  (nnrss-directory (concat user-emacs-directory "nnrss"))
-  (gnus-secondary-select-methods
+  (gnus-use-cache nil)
+  (gnus-auto-select-next nil)
+  (gnus-summary-next-group-on-exit nil)
+  (setgnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
-             (nnimap-address "posteo.de"))
-     ;; (nnimap "nhubbard@redhat.com"
-     ;;         (nnimap-user "nhubbard@redhat.com")
-     ;;         (nnimap-address "imap.gmail.com"))
-     )))
+             (nnimap-address "posteo.de")
+             (nnimap-inbox "INBOX")
+             (nnimap-server-port "993")
+             (nnimap-stream ssl)
+             (nnimap-split-methods
+              (("INBOX.me" "From:.*nicholashubbard@posteo\\.net")
+               ("INBOX.emacs-devel" "From:.*emacs-devel@gnu\\.org")
+               ("INBOX" ""))))))
+  )
 
 ;;; SMTPMAIL
 
