@@ -1051,8 +1051,8 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
               (("INBOX.me" "From:.*nicholashubbard@posteo\\.net")
                ("INBOX.ml.emacs-devel" "^\\(To\\|Cc\\):.*emacs-devel@gnu\\.org")
                ("INBOX.ml.p5p" "^\\(To\\|Cc\\):.*perl5-porters@perl\\.org")
-               ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs.*kernel\\.org")
-               ("INBOX.ml.linux-crypto" "^\\(To\\|Cc\\):.*linux-crypto.*kernel\\.org")
+               ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs@vger\\.kernel\\.org")
+               ("INBOX.ml.linux-crypto" "^\\(To\\|Cc\\):.*linux-crypto@vger\\.kernel\\.org")
                ("INBOX" "")))))))
 
 ;;; SMTPMAIL
