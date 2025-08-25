@@ -1040,7 +1040,7 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gnus-use-cache nil)
   (gnus-auto-select-next nil)
   (gnus-summary-next-group-on-exit nil)
-  (setgnus-secondary-select-methods
+  (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
              (nnimap-address "posteo.de")
@@ -1048,11 +1048,10 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
              (nnimap-server-port "993")
              (nnimap-stream ssl)
              (nnimap-split-methods
-              (
-               ;; ("INBOX.me" "From: nicholashubbard@posteo\\.net")
-               ("INBOX.emacs-devel" "From:.*emacs-devel@gnu\\.org")
-               ("INBOX" ""))))))
-  )
+              (("INBOX.me" "From:.*nicholashubbard@posteo\\.net")
+               ("INBOX.ml.emacs-devel" "From:.*emacs-devel@gnu\\.org")
+               ("INBOX.ml.btrfs" "From:.*linux-btrfs.*kernel\\.org")
+               ("INBOX" "")))))))
 
 ;;; SMTPMAIL
 
