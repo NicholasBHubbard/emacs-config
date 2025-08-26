@@ -1104,6 +1104,8 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   :straight t
   :bind
   ("C-c RET" . gptel-send)
+  :hook
+  (gptel-mode . visual-line-mode)
   :custom
   (gptel-default-mode 'org-mode)
   (gptel-api-key #'(lambda () (password-store-get "openai-api-key")))
