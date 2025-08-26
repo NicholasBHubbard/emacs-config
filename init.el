@@ -224,6 +224,8 @@
 (use-package org
   :ensure nil
   :bind ("C-c c" . org-capture)
+  :hook
+  (org-mode . visual-line-mode)
   :custom
   (org-directory (concat user-emacs-directory "org/"))
   (org-default-notes-file (concat org-directory "brain.org"))
@@ -367,9 +369,30 @@
                 (not (file-remote-p (or dir default-directory)))))
   :bind
   (:map projectile-mode-map
-        ("C-c p"  . projectile-command-map)
-        ("M-X"    . projectile-run-command-in-root)
-        ("S-<f6>" . projectile-compile-project)))
+        ("C-c p"  . projectile-hydra/body))
+  :pretty-hydra
+  ((:color blue :title (or (projectile-project-root) "No Project") :quit-key "q")
+   ("Run"
+    (("rc" projectile-compile-project "Compile")
+     ("rC" projectile-recompile)
+     ("rt" projectile-test-project "Test"))
+    "Shell"
+    (("sh" projectile-run-shell-command-in-project-root "Shell Command")
+     ("sH" projectile-run-async-shell-command-in-project-root "Shell Command Async")
+     ("ss" projectile-run-shell "Shell Spawn"))
+    "Find File"
+    (("ff" projectile-find-file "Find File")
+     ("fF" projectile-find-file-other-window "Find File (other window)")
+     ("fd" projectile-find-dir "Find Dir")
+     ("fD" projectile-find-dir-other-window "Find Dir (other window)")
+     ("fb" projectile-switch-to-buffer "Switch To Buffer")
+     ("fB" projectile-switch-to-buffer-other-window "Switch To Buffer (other window)"))
+    "Misc"
+    (("ms" projectile-switch-project "Switch Project")
+     ("mg" projectile-grep "Grep")
+     ("mk" projectile-kill-buffers "Kill Buffers")
+     ("md" projectile-discover-projects-in-search-path "Discover Projects")
+     ("mx" projectile-run-command-in-root "Run Command In Project")))))
 
 (use-package consult-projectile
   :straight t
@@ -1104,8 +1127,6 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   :straight t
   :bind
   ("C-c RET" . gptel-send)
-  :hook
-  (gptel-mode . visual-line-mode)
   :custom
   (gptel-default-mode 'org-mode)
   (gptel-api-key #'(lambda () (password-store-get "openai-api-key")))
