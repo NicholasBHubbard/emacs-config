@@ -648,26 +648,25 @@
   :init
   (defun my/erc-znc ()
     (interactive)
-    (erc-tls :server (password-store-get "znc-server-ip")
-             :port 5000
-             :nick "admin"
-             :password (concat "admin:" (password-store-get "libera.irc"))))
-  (defun my/erc-regain-73 ()
+    (unless (and (get-process "ssh-znc-tunnel")
+                 (process-live-p (get-process "ssh-znc-tunnel")))
+      (message "Starting SSH tunnel...")
+      (make-process :name "ssh-znc-tunnel"
+                    :command '("ssh" "-L" "6667:localhost:6667" "-n" "-N"
+                               "-o" "ServerAliveInterval=60"
+                               "-o" "ServerAliveCountMax=2"
+                               "hetzner-debian-vps")
+                    :connection-type 'pty)
+      (sleep-for 3))
+    (erc :server "localhost"
+         :port 6667
+         :nick "seven3"
+         :password (concat "admin/libera:" (password-store-get "znc-admin"))))
+  (defun my/erc-regain-seven3 ()
 	(interactive)
 	(erc-move-to-prompt)
 	(erc-kill-input)
-	(erc-send-input (concat "/msg NickServ REGAIN _73 " (password-store-get "libera.irc"))))
-  (defun my/erc-libera ()
-    (interactive)
-    (erc :server "irc.libera.chat"
-         :nick "_73"
-         :password (password-store-get "libera.irc")))
-  (defun my/erc-libera-tls ()
-    (interactive)
-    (erc-tls :server "irc.libera.chat"
-             :port 6697
-             :nick "_73"
-             :password (password-store-get "libera.irc"))))
+	(erc-send-input (concat "/msg NickServ REGAIN seven3 " (password-store-get "irc")))))
 
 ;;; WHICH KEY
 
@@ -967,6 +966,7 @@
   :bind
   (:map comint-mode-map
         ("C-l" . comint-clear-buffer)
+        ("C-c RET" . nil)
         ([S-return] . (lambda () (interactive)
                         (comint-clear-buffer)
                         (comint-send-input)))))
