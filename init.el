@@ -219,6 +219,36 @@
      ("sS" eglot-shutdown-all "shutdown all")
      ("sa" eglot-code-actions "code actions")))))
 
+;;; ORG
+
+(use-package org
+  :ensure nil
+  :bind ("C-c c" . org-capture)
+  :custom
+  (org-directory (concat user-emacs-directory "org/"))
+  (org-default-notes-file (concat org-directory "brain.org"))
+
+  (org-capture-templates
+   '(("t" "TODO" entry (file org-default-notes-file)
+      "* TODO: %?\n  [%a]\n  %U" :prepend t :empty-lines-after 2)
+
+     ("r" "Remember" entry (file org-default-notes-file)
+      "* NOTE: %?\n  [%a]\n  %U" :prepend t :empty-lines-after 2)))
+
+  :config
+  (setopt
+   display-buffer-alist
+   (cons '("\\*Org Select\\*" (display-buffer-below-selected))
+         display-buffer-alist))
+  (setopt
+   display-buffer-alist
+   (cons '("CAPTURE*" (display-buffer-below-selected))
+         display-buffer-alist))
+
+
+  (unless (file-directory-p org-directory)
+    (make-directory org-directory)))
+
 ;;; WHICH FUNCTION
 
 (use-package which-func
@@ -433,8 +463,9 @@
 
 (use-package evil-nerd-commenter
   :straight t
-  :config
-  (evilnc-default-hotkeys t))
+  :bind
+  (:map prog-mode-map
+        ("M-;" . evilnc-comment-or-uncomment-lines)))
 
 ;;; SHELL
 
@@ -956,11 +987,6 @@
     :length 2000
     :no-dups t)
 
-  (comint-histories-add-history chatgpt-shell
-    :predicates '((lambda () (derived-mode-p 'chatgpt-shell-mode)))
-    :length 2000
-    :no-dups t)
-
   (comint-histories-add-history ielm
     :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
     :length 2000
@@ -1033,6 +1059,9 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gnus-summary-exit . (lambda () (when (or (window-in-direction 'above) (window-in-direction 'below))
                                     (delete-window))))
   (gnus-started . gnus-group-list-all-groups)
+  :bind
+  (:map gnus-article-mode-map
+        ("q" . gnus-summary-expand-window))
   :custom
   (gnus-group-buffer "*gnus*")
   (gnus-select-method '(nnnil nil))
