@@ -1092,7 +1092,7 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
   (gnus-use-full-window nil)
   (gnus-auto-select-next nil)
-  (gnus-always-read-dribble-file t)
+  (gnus-always-read-dribble-file nil)
   (gnus-summary-next-group-on-exit nil)
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
