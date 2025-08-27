@@ -1063,16 +1063,20 @@
 ;;; MESSAGE
 
 (use-package message
-  :commands (message-send message-send-and-exit)
+  :commands (compose-mail message-send message-send-and-exit)
   :custom
+  (message-mail-alias-type 'ecomplete)
+  (message-self-insert-commands nil)
+  (message-expand-name-standard-ui t)
+  (message-kill-buffer-on-exit t)
   (message-send-mail-function #'message-smtpmail-send-it)
   (mml-secure-openpgp-signers '("508022AE06C2C446D8072447C700A066BB25F148"))
   (message-signature "Nicholas B. Hubbard
 Keys: https://github.com/NicholasBHubbard/public-keys
 Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
-  (message-kill-buffer-on-exit t)
   :hook
-  (message-send . mml-secure-message-sign-pgpmime))
+  (message-send . mml-secure-message-sign-pgpmime)
+  (message-sent . message-put-addresses-in-ecomplete))
 
 ;;; GNUS
 
