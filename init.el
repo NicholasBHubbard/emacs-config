@@ -752,19 +752,6 @@
   :straight t
   :commands git-timemachine)
 
-;;; TRAMP
-
-(use-package tramp
-  :init
-  (setq tramp-default-method "ssh")
-  (setq tramp-default-remote-shell "/bin/bash")
-  (setq tramp-connection-local-default-shell-variables
-        '((shell-file-name . "/bin/bash")
-          (shell-command-switch . "-c")))
-  (setq tramp-ssh-controlmaster-options
-        (concat "-o ControlPath=\~/.ssh/ssh-connection:%%r@%%h:%%p "
-                "-o ControlMaster=auto -o ControlPersist=yes")))
-
 ;;; DIFF HL
 
 (use-package diff-hl
@@ -791,6 +778,19 @@
      ("s" diff-hl-stage-current-hunk "stage hunk")
      ("r" diff-hl-revert-hunk "revert hunk")
      ("g" magit-status "magit" :exit t)))))
+
+;;; TRAMP
+
+(use-package tramp
+  :init
+  (setq tramp-default-method "ssh")
+  (setq tramp-default-remote-shell "/bin/bash")
+  (setq tramp-connection-local-default-shell-variables
+        '((shell-file-name . "/bin/bash")
+          (shell-command-switch . "-c")))
+  (setq tramp-ssh-controlmaster-options
+        (concat "-o ControlPath=\~/.ssh/ssh-connection:%%r@%%h:%%p "
+                "-o ControlMaster=auto -o ControlPersist=yes")))
 
 ;;; DIRED
 
