@@ -284,7 +284,7 @@
   ("M-g g" . consult-goto-line)
   ("C-z"   . consult-global-mark)
   ("C-S-y" . consult-yank-from-kill-ring)
-  ("M-G"   . consult-grep))
+  ("C-c g" . consult-grep))
 
 ;;; CONSULT DIR
 
@@ -791,8 +791,7 @@
   :bind
   (:map dired-mode-map
         ("SPC" . dired-hydra/body)
-        ("C-s" . dired-goto-file)
-        ("M-G" . nil))
+        ("C-s" . dired-goto-file))
   :pretty-hydra
   ((:color blue :quit-key "SPC")
    ("Command"
