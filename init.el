@@ -658,9 +658,9 @@
                  (or arg (not (process-live-p tunnel-process))))
         (message "Deleting existing SSH tunnel...")
         (delete-process tunnel-process)
+        (setq tunnel-process nil)
         (sleep-for 2))
-      (unless (and (get-process "ssh-znc-tunnel")
-                   (process-live-p (get-process "ssh-znc-tunnel")))
+      (when (or (not tunnel-process) (not (process-live-p tunnel-process)))
         (message "Starting SSH tunnel...")
         (make-process :name "ssh-znc-tunnel"
                       :command '("ssh" "-L" "6667:localhost:6667" "-n" "-N"
@@ -668,11 +668,11 @@
                                  "-o" "ServerAliveCountMax=2"
                                  "hetzner-debian-vps")
                       :connection-type 'pty)
-        (sleep-for 3))
-      (erc :server "localhost"
-           :port 6667
-           :nick erc-nick
-           :password (concat "admin@emacs-erc/libera:" (password-store-get "znc-admin")))))
+        (sleep-for 3)))
+    (erc :server "localhost"
+         :port 6667
+         :nick erc-nick
+         :password (concat "admin@emacs-erc/libera:" (password-store-get "znc-admin"))))
   (defun my/erc-regain-nick ()
 	(interactive)
 	(erc-move-to-prompt)
