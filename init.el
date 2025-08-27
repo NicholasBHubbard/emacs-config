@@ -1094,6 +1094,8 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gnus-use-full-window nil)
   (gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))
   (gnus-auto-select-next nil)
+  (gnus-use-trees t)
+  (gnus-generate-tree-function #'gnus-generate-horizontal-tree)
   (gnus-always-read-dribble-file nil)
   (gnus-summary-next-group-on-exit nil)
   (gnus-secondary-select-methods
