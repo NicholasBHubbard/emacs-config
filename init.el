@@ -640,9 +640,14 @@
   (erc-kill-server-buffer-on-quit t)
   (erc-server-auto-reconnect t)
   (erc-max-buffer-size 30000)
+  (erc-nick "seven3")
+  (erc-user-full-name erc-nick)
+  (erc-email-userid erc-nick)
   (erc-log-channels-directory "~/.irc-logs")
   (erc-generate-log-file-name-function #'erc-generate-log-file-name-short)
   (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track log))
+  :hook
+  (erc-after-connect . (lambda () (erc-send-line "ZNC *playback play * 0" #'ignore)))
   :config
   (remove-hook 'erc-kill-channel-hook #'erc-part-channel-on-kill)
   :init
@@ -660,13 +665,13 @@
       (sleep-for 3))
     (erc :server "localhost"
          :port 6667
-         :nick "seven3"
+         :nick erc-nick
          :password (concat "admin/libera:" (password-store-get "znc-admin"))))
-  (defun my/erc-regain-seven3 ()
+  (defun my/erc-regain-nick ()
 	(interactive)
 	(erc-move-to-prompt)
 	(erc-kill-input)
-	(erc-send-input (concat "/msg NickServ REGAIN seven3 " (password-store-get "irc")))))
+	(erc-send-line (concat "PRIVMSG NickServ REGAIN " erc-nick " " (password-store-get "irc")) #'ignore)))
 
 ;;; WHICH KEY
 
