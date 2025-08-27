@@ -639,6 +639,7 @@
   (erc-kill-queries-on-quit t)
   (erc-kill-server-buffer-on-quit t)
   (erc-server-auto-reconnect t)
+  (erc-track-position-in-mode-line nil)
   (erc-max-buffer-size 30000)
   (erc-nick "seven3")
   (erc-user-full-name erc-nick)
