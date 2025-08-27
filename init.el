@@ -1065,6 +1065,7 @@
 (use-package message
   :commands (message-send message-send-and-exit)
   :custom
+  (message-send-mail-function #'message-smtpmail-send-it)
   (mml-secure-openpgp-signers '("508022AE06C2C446D8072447C700A066BB25F148"))
   (message-signature "Nicholas B. Hubbard
 Keys: https://github.com/NicholasBHubbard/public-keys
@@ -1114,7 +1115,7 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
 (use-package smtpmail
   :commands message-send-and-exit
   :custom
-  (send-mail-function 'smtpmail-send-it)
+  ;; (send-mail-function 'smtpmail-send-it)
   (smtpmail-smtp-user user-mail-address)
   (smtpmail-default-smtp-server "posteo.de")
   (smtpmail-smtp-server "posteo.de")
