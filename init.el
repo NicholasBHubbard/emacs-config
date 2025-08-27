@@ -746,6 +746,12 @@
   (vc-follow-symlinks t)
   (auto-revert-check-vc-info t))
 
+;;; GIT TIMEMACHINE
+
+(use-package git-timemachine
+  :straight t
+  :commands git-timemachine)
+
 ;;; TRAMP
 
 (use-package tramp
