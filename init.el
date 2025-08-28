@@ -506,7 +506,7 @@
   :straight t
   :after shell
   :custom
-  (bash-completion-use-separate-processes t)
+  (bash-completion-use-separate-processes nil)
   :config
   (bash-completion-setup))
 
@@ -1077,9 +1077,27 @@
   :config
   (cscope-setup))
 
+;;; SMTPMAIL
+
+(use-package smtpmail
+  :commands message-send-and-exit
+  :custom
+  ;; (send-mail-function 'smtpmail-send-it)
+  (smtpmail-smtp-user user-mail-address)
+  (smtpmail-default-smtp-server "posteo.de")
+  (smtpmail-smtp-server "posteo.de")
+  (smtpmail-smtp-service 587)
+  (smtpmail-stream-type 'starttls))
+
+;;; ECOMPLETE
+
+(use-package ecomplete
+  :after (:any message gnus))
+
 ;;; MESSAGE
 
 (use-package message
+  :after gnus
   :commands (compose-mail message-send message-send-and-exit)
   :custom
   (message-mail-alias-type 'ecomplete)
@@ -1132,18 +1150,6 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
                ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs@vger\\.kernel\\.org")
                ("INBOX.ml.linux-crypto" "^\\(To\\|Cc\\):.*linux-crypto@vger\\.kernel\\.org")
                ("INBOX" "")))))))
-
-;;; SMTPMAIL
-
-(use-package smtpmail
-  :commands message-send-and-exit
-  :custom
-  ;; (send-mail-function 'smtpmail-send-it)
-  (smtpmail-smtp-user user-mail-address)
-  (smtpmail-default-smtp-server "posteo.de")
-  (smtpmail-smtp-server "posteo.de")
-  (smtpmail-smtp-service 587)
-  (smtpmail-stream-type 'starttls))
 
 ;;; GPTEL
 
