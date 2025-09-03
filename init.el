@@ -652,9 +652,9 @@
   :config
   (remove-hook 'erc-kill-channel-hook #'erc-part-channel-on-kill)
   :init
-  (defun my/erc-znc (&optional arg)
+  (defun my/erc-znc-libera (&optional arg)
     (interactive "P")
-    (let ((tunnel-process (get-process "ssh-znc-tunnel")))
+    (let ((tunnel-process (get-process "ssh-znc-libera-tunnel")))
       (when (and tunnel-process
                  (or arg (not (process-live-p tunnel-process))))
         (message "Deleting existing SSH tunnel...")
@@ -663,17 +663,25 @@
         (sleep-for 2))
       (when (or (not tunnel-process) (not (process-live-p tunnel-process)))
         (message "Starting SSH tunnel...")
-        (make-process :name "ssh-znc-tunnel"
+        (make-process :name "ssh-znc-libera-tunnel"
                       :command '("ssh" "-L" "6667:localhost:6667" "-n" "-N"
                                  "-o" "ServerAliveInterval=60"
-                                 "-o" "ServerAliveCountMax=2"
+                                 "-o" "ServerAliveCountMax=3"
                                  "hetzner-debian-vps")
+                      :buffer " *ssh-znc-libera-tunnel*"
                       :connection-type 'pty)
         (sleep-for 3)))
     (erc :server "localhost"
          :port 6667
+         :id "Libera.Chat"
          :nick erc-nick
-         :password (concat "admin@emacs-erc/libera:" (password-store-get "znc-admin"))))
+         :password (concat "admin@emacs-erc/libera:" (password-store-get "znc-admin")))
+    (with-current-buffer "Libera.Chat"
+      (add-hook 'kill-buffer-hook #'(lambda ()
+                                      (let ((p (get-process "erc-localhost-6667")))
+                                        (erc-kill-query-buffers p)
+                                        (when-let ((buf (get-buffer " *ssh-znc-libera-tunnel*")))
+                                          (kill-buffer buf)))) nil t)))
   (defun my/erc-regain-nick ()
 	(interactive)
 	(erc-move-to-prompt)
