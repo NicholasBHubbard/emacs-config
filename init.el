@@ -672,7 +672,8 @@
                       :connection-type 'pty)
         (sleep-for 3)
         (with-current-buffer " *ssh-znc-libera-tunnel*"
-          (add-hook 'kill-buffer-hook #'(lambda () (kill-buffer "Libera.Chat")) nil t))))
+          (add-hook 'kill-buffer-hook #'(lambda () (when-let ((buf (get-buffer "Libera.Chat")))
+                                                     (kill-buffer buf))) nil t))))
     (erc :server "localhost"
          :port 6667
          :id "Libera.Chat"
