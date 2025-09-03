@@ -681,7 +681,7 @@
          :password (concat "admin@emacs-erc/libera:" (password-store-get "znc-admin")))
     (with-current-buffer "Libera.Chat"
       (add-hook 'kill-buffer-hook #'(lambda ()
-                                      (let ((p (get-process "erc-localhost-6667")))
+                                      (when-let ((p (get-process "erc-localhost-6667")))
                                         (erc-kill-query-buffers p))) nil t)))
   (defun my/erc-regain-nick ()
 	(interactive)
