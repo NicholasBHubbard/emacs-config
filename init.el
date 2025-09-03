@@ -670,7 +670,9 @@
                                  "hetzner-debian-vps")
                       :buffer " *ssh-znc-libera-tunnel*"
                       :connection-type 'pty)
-        (sleep-for 3)))
+        (sleep-for 3)
+        (with-current-buffer " *ssh-znc-libera-tunnel*"
+          (add-hook 'kill-buffer-hook #'(lambda () (kill-buffer "Libera.Chat")) nil t))))
     (erc :server "localhost"
          :port 6667
          :id "Libera.Chat"
@@ -679,9 +681,7 @@
     (with-current-buffer "Libera.Chat"
       (add-hook 'kill-buffer-hook #'(lambda ()
                                       (let ((p (get-process "erc-localhost-6667")))
-                                        (erc-kill-query-buffers p)
-                                        (when-let ((buf (get-buffer " *ssh-znc-libera-tunnel*")))
-                                          (kill-buffer buf)))) nil t)))
+                                        (erc-kill-query-buffers p))) nil t)))
   (defun my/erc-regain-nick ()
 	(interactive)
 	(erc-move-to-prompt)
