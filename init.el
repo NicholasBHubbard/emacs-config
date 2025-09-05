@@ -506,7 +506,7 @@
   :straight t
   :after shell
   :custom
-  (bash-completion-use-separate-processes nil)
+  (bash-completion-use-separate-processes t)
   :config
   (bash-completion-setup))
 
@@ -1000,7 +1000,8 @@
 ;;; COMINT HISTORIES
 
 (use-package comint-histories
-  :straight t
+  ;; :straight t
+  :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "ring-start-size-0")
   :demand t
   :bind
   (:map comint-mode-map
@@ -1149,12 +1150,11 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
              (nnimap-address "posteo.de")
-             (nnimap-inbox "INBOX")
+             (nnimap-inbox ("INBOX" "Sent"))
              (nnimap-server-port "993")
              (nnimap-stream ssl)
              (nnimap-split-methods
-              (("INBOX.me" "From:.*nicholashubbard@posteo\\.net")
-               ("INBOX.ml.emacs-devel" "^\\(To\\|Cc\\):.*emacs-devel@gnu\\.org")
+              (("INBOX.ml.emacs-devel" "^\\(To\\|Cc\\):.*emacs-devel@gnu\\.org")
                ("INBOX.ml.p5p" "^\\(To\\|Cc\\):.*perl5-porters@perl\\.org")
                ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs@vger\\.kernel\\.org")
                ("INBOX.ml.linux-crypto" "^\\(To\\|Cc\\):.*linux-crypto@vger\\.kernel\\.org")
