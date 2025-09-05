@@ -678,17 +678,13 @@
                       :connection-type 'pty)
         (sleep-for 3)
         (with-current-buffer " *ssh-znc-libera-tunnel*"
-          (add-hook 'kill-buffer-hook #'(lambda () (when-let ((buf (get-buffer "Libera.Chat")))
+          (add-hook 'kill-buffer-hook #'(lambda () (dolist (buf (buffers-with-mode 'erc-mode))
                                                      (kill-buffer buf))) nil t))))
     (erc :server "localhost"
          :port 6667
          :id "Libera.Chat"
          :nick erc-nick
-         :password (concat "admin@emacs-erc/libera:" (password-store-get "znc-admin")))
-    (with-current-buffer "Libera.Chat"
-      (add-hook 'kill-buffer-hook #'(lambda ()
-                                      (when-let ((p (get-process "erc-localhost-6667")))
-                                        (erc-kill-query-buffers p))) nil t)))
+         :password (concat "admin@emacs-erc/libera:" (password-store-get "znc-admin"))))
   (defun my/erc-regain-nick ()
 	(interactive)
 	(erc-move-to-prompt)
@@ -1135,8 +1131,9 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   :defer t
   :commands gnus
   :hook
-  (gnus-summary-exit . (lambda () (when (or (window-in-direction 'above) (window-in-direction 'below))
-                                    (delete-window))))
+  (gnus-summary-exit . (lambda () (dolist (buf (buffers-with-mode 'gnus-article-mode))
+                                    (when-let ((win (get-buffer-window buf)))
+                                      (delete-window win)))))
   (gnus-started . gnus-group-list-all-groups)
   :bind
   (:map gnus-article-mode-map
