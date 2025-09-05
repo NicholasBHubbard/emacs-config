@@ -91,6 +91,12 @@
 	  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;;; BUFFERS WITH MODE
+
+(use-package buffers-with-mode
+  :straight (buffers-with-mode :type git :host github :repo "NicholasBHubbard/buffers-with-mode")
+  :commands buffers-with-mode)
+
 ;;; MODUS THEMES
 
 (use-package modus-themes
