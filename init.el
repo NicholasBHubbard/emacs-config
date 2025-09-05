@@ -290,6 +290,7 @@
   ("M-g g" . consult-goto-line)
   ("C-z"   . consult-global-mark)
   ("C-S-y" . consult-yank-from-kill-ring)
+  ("C-c f" . consult-find)
   ("C-c s" . consult-grep))
 
 ;;; CONSULT DIR
