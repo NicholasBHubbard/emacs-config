@@ -676,7 +676,10 @@
                                  "-o" "ServerAliveCountMax=3"
                                  "hetzner-debian-vps")
                       :buffer " *ssh-znc-libera-tunnel*"
-                      :connection-type 'pty)
+                      :connection-type 'pty
+                      :sentinel #'(lambda (_ msg)
+                                    (when (string-match "exited abnormally" msg)
+                                      (kill-buffer " *ssh-znc-libera-tunnel*"))))
         (sleep-for 3)
         (with-current-buffer " *ssh-znc-libera-tunnel*"
           (add-hook 'kill-buffer-hook #'(lambda () (dolist (buf (buffers-with-mode 'erc-mode))
