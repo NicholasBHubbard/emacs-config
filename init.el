@@ -720,14 +720,14 @@
 
 ;;; WS BUTLER
 
-;(use-package ws-butler
-;  :straight t
-;  :blackout
-;  :custom
-;  (ws-butler-keep-whitespace-before-point nil)
-;  :hook
-;  (prog-mode . ws-butler-mode)
-;  (text-mode . ws-butler-mode))
+(use-package ws-butler
+  :straight (ws-butlet :type git :host github :repo "lewang/ws-butler")
+  :blackout
+  :custom
+  (ws-butler-keep-whitespace-before-point nil)
+  :hook
+  (prog-mode . ws-butler-mode)
+  (text-mode . ws-butler-mode))
 
 ;;; MAGIT
 
