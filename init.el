@@ -653,7 +653,7 @@
   (erc-email-userid erc-nick)
   (erc-log-channels-directory "~/.irc-logs")
   (erc-generate-log-file-name-function #'erc-generate-log-file-name-short)
-  (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track log notifications))
+  (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track log))
   :hook
   (erc-after-connect . (lambda () (erc-send-line "ZNC *playback play * 0" #'ignore)))
   :config
@@ -720,14 +720,14 @@
 
 ;;; WS BUTLER
 
-(use-package ws-butler
-  :straight t
-  :blackout
-  :custom
-  (ws-butler-keep-whitespace-before-point nil)
-  :hook
-  (prog-mode . ws-butler-mode)
-  (text-mode . ws-butler-mode))
+;(use-package ws-butler
+;  :straight t
+;  :blackout
+;  :custom
+;  (ws-butler-keep-whitespace-before-point nil)
+;  :hook
+;  (prog-mode . ws-butler-mode)
+;  (text-mode . ws-butler-mode))
 
 ;;; MAGIT
 
@@ -1006,8 +1006,8 @@
 ;;; COMINT HISTORIES
 
 (use-package comint-histories
-  ;; :straight t
-  :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "ring-start-size-0")
+  :straight t
+  ;; :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "ring-start-size-0")
   :demand t
   :bind
   (:map comint-mode-map
