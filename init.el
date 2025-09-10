@@ -37,6 +37,7 @@
   :config
   ;; (invert-face 'default)
   (scroll-bar-mode 0)
+  (menu-bar-mode 0)
   (set-fringe-mode 0)
   (tooltip-mode 0)
   (tool-bar-mode 0)
