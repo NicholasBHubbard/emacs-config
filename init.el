@@ -915,18 +915,20 @@
 ;;; PYTHON
 
 (use-package python-mode
-  :mode ("\\.py\\'" . python-mode)
-  :hook
-  (python-mode . eglot-ensure)
-  :config
-  (add-to-list 'eglot-server-programs
-               '(python-mode . ("ruff" "server"))))
+  :mode ("\\.py\\'" . python-mode))
 
 (use-package pet
   :straight t
   :after python-mode
   :config
   (add-hook 'python-base-mode-hook 'pet-mode -10))
+
+(use-package flymake-ruff
+  :straight t
+  :after python-mode
+  :hook
+  (python-mode . flymake-ruff-load)
+  (python-mode . flymake-mode-on))
 
 ;;; PROLOG
 
