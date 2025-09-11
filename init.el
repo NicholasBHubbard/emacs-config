@@ -463,7 +463,7 @@
 (use-package proced
   :commands proced
   :custom
-  (proced-auto-update-flag t)
+  (proced-auto-update-flag nil)
   (proced-auto-update-interval 1)
   (proced-goal-attribute nil)
   (proced-enable-color-flag t))
