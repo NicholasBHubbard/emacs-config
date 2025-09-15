@@ -402,12 +402,6 @@
      ("md" projectile-discover-projects-in-search-path "Discover Projects")
      ("mx" projectile-run-command-in-root "Run Command In Project")))))
 
-(use-package consult-projectile
-  :straight t
-  :bind
-  (:map projectile-mode-map
-        ("C-c P" . consult-projectile)))
-
 ;;; AGGRESSIVE INDENT
 
 (use-package aggressive-indent
