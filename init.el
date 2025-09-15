@@ -651,6 +651,9 @@
   (erc-log-channels-directory "~/.irc-logs")
   (erc-generate-log-file-name-function #'erc-generate-log-file-name-short)
   (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track log))
+  :bind
+  (:map erc-mode-map
+        ("C-q" . ignore))
   :hook
   (erc-after-connect . (lambda () (erc-send-line "ZNC *playback play * 0" #'ignore)))
   :config
