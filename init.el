@@ -502,6 +502,8 @@
 
 (use-package shell
   :commands (shell shell-mode)
+  :custom
+  (shell-kill-buffer-on-exit t)
   :hook
   (shell-mode . (lambda () ; compatible with shell prompt: PS1='[\u@\h \w]\$ '
                   (shell-dirtrack-mode 0)
