@@ -1169,7 +1169,7 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
                ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs@vger\\.kernel\\.org")
                ("INBOX.ml.overlayfs" "^\\(To\\|Cc\\):.*linux-unionfs@vger\\.kernel\\.org")
                ("INBOX.ml.linux-crypto" "^\\(To\\|Cc\\):.*linux-crypto@vger\\.kernel\\.org")
-               ("INBOX.junk" "^\\(Subject\\): Bounce probe for linux")
+               ("INBOX.junk" "^\\(Subject\\): Bounce probe for linux.*")
                ("INBOX" "")))))))
 
 ;;; GPTEL
