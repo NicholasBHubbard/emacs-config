@@ -168,7 +168,7 @@
   :init
   (setq winner-dont-bind-my-keys t)
   (winner-mode 1)
-  :bind
+  :bind*
   ("M-[" . winner-undo)
   ("M-]" . winner-redo))
 
@@ -625,7 +625,7 @@
 
 (use-package helpful
   :straight t
-  :bind
+  :bind*
   ("C-h f" . helpful-callable)
   ("C-h v" . helpful-variable)
   ("C-h k" . helpful-key)
