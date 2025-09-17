@@ -638,6 +638,7 @@
 (use-package erc
   :commands (erc erc-tls)
   :custom
+  (erc-nick "seven3")
   (erc-hide-list '("JOIN" "PART" "QUIT" "AWAY" "NICK" "353" "366"))
   (erc-kill-buffer-on-part t)
   (erc-kill-queries-on-quit t)
@@ -645,23 +646,21 @@
   (erc-server-auto-reconnect t)
   (erc-track-position-in-mode-line nil)
   (erc-max-buffer-size 30000)
-  (erc-nick "seven3")
   (erc-user-full-name erc-nick)
   (erc-email-userid erc-nick)
   (erc-log-channels-directory "~/.irc-logs")
-  (erc-generate-log-file-name-function #'erc-generate-log-file-name-short)
+  (erc-generate-log-file-name-function #'erc-generate-log-file-name-network)
   (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track log))
   :bind
   (:map erc-mode-map
-        ("C-q" . ignore))
+        ("C-q" . bury-buffer))
   :hook
   (erc-after-connect . (lambda () (erc-send-line "ZNC *playback play * 0" #'ignore)))
   :config
   (remove-hook 'erc-kill-channel-hook #'erc-part-channel-on-kill)
   :init
-  (defun my/erc-znc-libera (&optional arg)
-    (interactive "P")
-    (let ((tunnel-process (get-process "ssh-znc-libera-tunnel")))
+  (defun my/hetzner-ssh-znc-tunnel (&optional arg)
+    (let ((tunnel-process (get-process "hetzner-ssh-znc-tunnel")))
       (when (and tunnel-process
                  (or arg (not (process-live-p tunnel-process))))
         (message "Deleting existing SSH tunnel...")
@@ -670,25 +669,36 @@
         (sleep-for 2))
       (when (or (not tunnel-process) (not (process-live-p tunnel-process)))
         (message "Starting SSH tunnel...")
-        (make-process :name "ssh-znc-libera-tunnel"
-                      :command '("ssh" "-L" "6667:localhost:6667" "-n" "-N"
+        (make-process :name "hetzner-ssh-znc-tunnel"
+                      :command '("ssh" "-L" "6697:localhost:6697" "-n" "-N"
                                  "-o" "ServerAliveInterval=60"
                                  "-o" "ServerAliveCountMax=3"
                                  "hetzner-debian-vps")
-                      :buffer " *ssh-znc-libera-tunnel*"
+                      :buffer " *hetzner-ssh-znc-tunnel*"
                       :connection-type 'pty
                       :sentinel #'(lambda (_ msg)
                                     (when (string-match "exited abnormally" msg)
-                                      (kill-buffer " *ssh-znc-libera-tunnel*"))))
+                                      (kill-buffer " *hetzner-ssh-znc-tunnel*"))))
         (sleep-for 3)
-        (with-current-buffer " *ssh-znc-libera-tunnel*"
-          (add-hook 'kill-buffer-hook #'(lambda () (dolist (buf (buffers-with-mode 'erc-mode))
-                                                     (kill-buffer buf))) nil t))))
+        (with-current-buffer " *hetzner-ssh-znc-tunnel*"
+          (add-hook
+           'kill-buffer-hook
+           #'(lambda () (dolist (buf (buffers-with-mode 'erc-mode)) (kill-buffer buf))) nil t)))))
+
+  (defun my/erc (&optional arg)
+    (interactive "P")
+    (my/hetzner-ssh-znc-tunnel arg)
     (erc :server "localhost"
-         :port 6667
-         :id "Libera.Chat"
+         :port 6697
+         :id "*znc-libera-server*"
          :nick erc-nick
-         :password (concat "admin@emacs-erc/libera:" (password-store-get "znc-admin"))))
+         :password (concat "admin@erc/libera:" (password-store-get "znc-admin")))
+    (erc :server "localhost"
+         :port 6697
+         :id "*znc-perl-server*"
+         :nick erc-nick
+         :password (concat "admin@erc/irc-perl:" (password-store-get "znc-admin"))))
+
   (defun my/erc-regain-nick ()
 	(interactive)
 	(erc-move-to-prompt)
