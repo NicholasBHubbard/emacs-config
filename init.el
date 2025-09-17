@@ -1164,6 +1164,8 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))
   (gnus-auto-select-next nil)
   (gnus-use-trees nil)
+  (mm-verify-option 'known)
+  (mm-decrypt-option 'known)
   (gnus-always-read-dribble-file nil)
   (gnus-summary-next-group-on-exit nil)
   (gnus-secondary-select-methods
