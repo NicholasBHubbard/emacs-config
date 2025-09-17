@@ -527,18 +527,17 @@
   (shell-pop-restore-window-configuration nil)
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
-  :bind
-  ("C-c b" . (lambda () (interactive)
+  :bind*
+  ("M-SPC" . (lambda () (interactive)
                (let ((default-directory (if (file-remote-p default-directory)
                                             "~" default-directory)))
                  (call-interactively #'shell-pop))))
-  ("C-c B" . (lambda () (interactive)
-               (let ((shell-pop-autocd-to-working-dir t)
-                     (default-directory (if (file-remote-p default-directory)
-                                            "~" default-directory)))
-                 (call-interactively #'shell-pop)
-                 (comint-clear-buffer)))))
-
+  ("M-S-SPC" . (lambda () (interactive)
+                 (let ((shell-pop-autocd-to-working-dir t)
+                       (default-directory (if (file-remote-p default-directory)
+                                              "~" default-directory)))
+                   (call-interactively #'shell-pop)
+                   (comint-clear-buffer)))))
 ;;; SHX
 
 (use-package shx
@@ -753,6 +752,7 @@
   (git-commit-major-mode 'git-commit-elisp-text-mode)
   :config
   (setenv "GIT_EDITOR" "")
+
   (magit-auto-revert-mode 1))
 
 ;;; MAGIT TODOS
