@@ -63,7 +63,7 @@
   (text-mode . display-line-numbers-mode)
   (prog-mode . display-fill-column-indicator-mode)
   (text-mode . display-fill-column-indicator-mode)
-  :bind
+  :bind*
   ("C-M-<up>"    . enlarge-window)
   ("C-M-<down>"  . shrink-window)
   ("C-M-<left>"  . shrink-window-horizontally)
@@ -176,9 +176,8 @@
 
 (use-package ace-window
   :straight t
-  :bind
+  :bind*
   ("C-;" . ace-window)
-  ("C-:" . ace-swap-window)
   :custom
   (aw-dispatch-always-nil)
   (aw-dispatch-when-more-than 2)
@@ -194,7 +193,7 @@
   (recentf-auto-cleanup 'never)
   (recentf-max-saved-items 500)
   (recentf-exclude '("/tmp/" "/ssh:" "/sudo:" "/elpa/" "COMMIT_EDITMSG" ".*-autoloads\\.el$" file-remote-p))
-  :bind
+  :bind*
   ("C-c f" . recentf))
 
 ;;; EGLOT
@@ -231,7 +230,7 @@
 
 (use-package org
   :ensure nil
-  :bind ("C-c c" . org-capture)
+  :bind* ("C-c c" . org-capture)
   :hook
   (org-mode . visual-line-mode)
   :custom
@@ -287,7 +286,7 @@
   :custom
   (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
   (consult-preview-key "M-SPC")
-  :bind
+  :bind*
   ("M-o"   . consult-buffer)
   ("M-g g" . consult-goto-line)
   ("C-z"   . consult-global-mark)
@@ -300,7 +299,7 @@
 (use-package consult-dir
   :straight t
   :after consult
-  :bind
+  :bind*
   ("M-O" . consult-dir)
   :custom
   (consult-dir-project-list-function #'consult-dir-projectile-dirs)
@@ -571,7 +570,7 @@
 
 (use-package avy
   :straight t
-  :bind
+  :bind*
   ("C-'" . avy-goto-char-timer)
   :custom
   (avy-timeout-seconds 0.4)
@@ -583,7 +582,7 @@
 
 (use-package expand-region
   :straight t
-  :bind
+  :bind*
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
 
@@ -591,7 +590,7 @@
 
 (use-package multiple-cursors
   :straight t
-  :bind
+  :bind*
   ("C-M-SPC" . set-rectangular-region-anchor)
   (:map mc/keymap
         ("RET" . nil)))
@@ -745,8 +744,6 @@
 (use-package magit
   :straight t
   :commands (magit magit-status)
-  :bind
-  ("C-x g" . magit-status)
   :custom
   (magit-clone-default-directory "~/p/")
   (git-commit-major-mode 'git-commit-elisp-text-mode)
@@ -872,7 +869,7 @@
   :custom
   (Man-notify-method 'pushy)
   (Man-prefer-synchronous-call t)
-  :bind
+  :bind*
   ("C-h m" . man))
 
 ;;; GOOGLE THIS
@@ -880,7 +877,7 @@
 (use-package google-this
   :straight t
   :commands (google-this google-this-search)
-  :bind
+  :bind*
   ("C-c G" . google-this))
 
 ;;; PERSPECTIVE
@@ -1002,7 +999,7 @@
 
 (use-package goto-last-change
   :straight t
-  :bind
+  :bind*
   ("C-c l" . goto-last-change))
 
 ;;; COMINT
@@ -1191,7 +1188,7 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
 
 (use-package gptel
   :straight t
-  :bind
+  :bind*
   ("C-c RET" . gptel-send)
   :custom
   (gptel-default-mode 'org-mode)
