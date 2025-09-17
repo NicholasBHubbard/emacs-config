@@ -57,6 +57,7 @@
   (setq-default fill-column 80)
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (setq-default c-basic-offset 4)
+  (setenv "EDITOR" "")
   :hook
   (prog-mode . display-line-numbers-mode)
   (text-mode . display-line-numbers-mode)
@@ -751,6 +752,7 @@
   (magit-clone-default-directory "~/p/")
   (git-commit-major-mode 'git-commit-elisp-text-mode)
   :config
+  (setenv "GIT_EDITOR" "")
   (magit-auto-revert-mode 1))
 
 ;;; MAGIT TODOS
