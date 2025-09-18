@@ -507,13 +507,13 @@
 
 ;;; BASH COMPLETION
 
-;; (use-package bash-completion
-;;   :straight t
-;;   :after shell
-;;   :custom
-;;   (bash-completion-use-separate-processes t)
-;;   :config
-;;   (bash-completion-setup))
+(use-package bash-completion
+  :straight t
+  :after shell
+  :custom
+  (bash-completion-use-separate-processes t)
+  :config
+  (bash-completion-setup))
 
 ;;; SHELL POP
 
