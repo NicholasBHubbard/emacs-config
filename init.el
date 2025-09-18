@@ -57,7 +57,6 @@
   (setq-default fill-column 80)
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (setq-default c-basic-offset 4)
-  (setenv "EDITOR" "")
   :hook
   (prog-mode . display-line-numbers-mode)
   (text-mode . display-line-numbers-mode)
@@ -484,14 +483,6 @@
                           (let ((inhibit-read-only t))
                             (ansi-color-apply-on-region (point-min) (point-max))))))
 
-;;; EVIL NERD COMMENTER
-
-(use-package evil-nerd-commenter
-  :straight t
-  :bind
-  (:map prog-mode-map
-        ("M-;" . evilnc-comment-or-uncomment-lines)))
-
 ;;; SHELL
 
 (use-package shell
@@ -747,9 +738,6 @@
   :custom
   (magit-clone-default-directory "~/p/")
   (git-commit-major-mode 'git-commit-elisp-text-mode)
-  :config
-  (setenv "GIT_EDITOR" "")
-
   (magit-auto-revert-mode 1))
 
 ;;; MAGIT TODOS
