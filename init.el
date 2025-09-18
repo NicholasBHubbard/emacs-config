@@ -35,7 +35,7 @@
   (auto-revert-verbose nil)
   (display-buffer-base-action '(display-buffer-same-window))
   :config
-  ;; (invert-face 'default)
+  (invert-face 'default)
   (scroll-bar-mode 0)
   (menu-bar-mode 0)
   (set-fringe-mode 0)
@@ -147,12 +147,12 @@
 
 ;;; YASNIPPET
 
-(use-package yasnippet
-  :straight t
-  :blackout yas-minor-mode
-  :config
-  (use-package yasnippet-snippets :straight t)
-  (yas-global-mode 1))
+;; (use-package yasnippet
+;;   :straight t
+;;   :blackout yas-minor-mode
+;;   :config
+;;   (use-package yasnippet-snippets :straight t)
+;;   (yas-global-mode 1))
 
 ;;; MARGINALIA
 
@@ -998,8 +998,6 @@
   (comint-pager "cat")
   :bind
   (:map comint-mode-map
-        ("C-l" . comint-clear-buffer)
-        ("C-c RET" . nil)
         ([S-return] . (lambda () (interactive)
                         (comint-clear-buffer)
                         (comint-send-input)))))
