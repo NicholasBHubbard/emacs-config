@@ -63,7 +63,7 @@
   (text-mode . display-line-numbers-mode)
   (prog-mode . display-fill-column-indicator-mode)
   (text-mode . display-fill-column-indicator-mode)
-  :bind*
+  :bind
   ("C-M-<up>"    . enlarge-window)
   ("C-M-<down>"  . shrink-window)
   ("C-M-<left>"  . shrink-window-horizontally)
@@ -507,13 +507,13 @@
 
 ;;; BASH COMPLETION
 
-(use-package bash-completion
-  :straight t
-  :after shell
-  :custom
-  (bash-completion-use-separate-processes t)
-  :config
-  (bash-completion-setup))
+;; (use-package bash-completion
+;;   :straight t
+;;   :after shell
+;;   :custom
+;;   (bash-completion-use-separate-processes t)
+;;   :config
+;;   (bash-completion-setup))
 
 ;;; SHELL POP
 
