@@ -440,13 +440,12 @@
 
 (use-package ctrlf
   :straight t
-  :init
-  (fset 'isearch-forward 'ctrlf-forward-default)
   :custom
   (ctrlf-auto-recenter t)
   (ctrlf-go-to-end-of-match nil)
   (ctrlf-default-search-style 'regexp)
-  :bind
+  :bind*
+  ("C-s" . ctrlf-forward-default)
   (:map ctrlf-minibuffer-mode-map
         ("C-n" . ctrlf-next-match)
         ("C-p" . ctrlf-previous-match)))
@@ -989,6 +988,14 @@
   :straight t
   :bind*
   ("C-c l" . goto-last-change))
+
+;;; IY GO TO CHAR
+
+(use-package iy-go-to-char
+  :straight t
+  :bind*
+  ("C-c \'" . iy-go-up-to-char)
+  ("C-c \"" . iy-go-to-char-backward))
 
 ;;; COMINT
 
