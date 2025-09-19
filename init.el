@@ -1014,7 +1014,7 @@
 (use-package comint-histories
   :straight t
   ;; :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "ring-start-size-0")
-  :demand t
+  :after comint
   :bind
   (:map comint-mode-map
         ("C-r" . (lambda () (interactive)
