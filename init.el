@@ -773,11 +773,11 @@
   (global-diff-hl-mode 1)
   :custom
   (diff-hl-show-staged-changes nil)
-  (diff-hl-update-async t)
+  (diff-hl-update-async nil)
   (diff-hl-ask-before-revert-hunk nil)
   :config
   (diff-hl-margin-mode 1)
-  (diff-hl-flydiff-mode 1)
+  (diff-hl-flydiff-mode 0)
   :hook
   (magit-post-refresh . diff-hl-magit-post-refresh)
   :bind
