@@ -333,7 +333,7 @@
   (corfu-history-mode 1)
   :custom
   (corfu-auto t)
-  (corfu-auto-delay 0)
+  (corfu-auto-delay 0.3)
   (corfu-auto-prefix 3)
   (corfu-cycle t)
   (corfu-on-exact-match nil)
@@ -608,7 +608,7 @@
   :blackout
   :commands (eldoc eldoc-mode)
   :custom
-  (eldoc-idle-delay 0)
+  (eldoc-idle-delay 0.5)
   (eldoc-echo-area-use-multiline-p nil))
 
 ;;; HELPFUL
