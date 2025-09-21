@@ -1119,6 +1119,7 @@
 ;;; MESSAGE
 
 (use-package message
+  :commands compose-mail
   :after gnus
   :commands (compose-mail message-send message-send-and-exit)
   :custom
@@ -1134,6 +1135,14 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   :hook
   (message-send . mml-secure-message-sign-pgpmime)
   (message-sent . message-put-addresses-in-ecomplete))
+
+;;; MESSAGES ARE FLOWING
+
+(use-package messages-are-flowing
+  :straight t
+  :after message
+  :hook
+  (message-mode . messages-are-flowing-use-and-mark-hard-newlines))
 
 ;;; GNUS
 
