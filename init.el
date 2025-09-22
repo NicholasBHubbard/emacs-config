@@ -333,7 +333,7 @@
   (corfu-history-mode 1)
   :custom
   (corfu-auto t)
-  (corfu-auto-delay 0.3)
+  (corfu-auto-delay 0)
   (corfu-auto-prefix 3)
   (corfu-cycle t)
   (corfu-on-exact-match nil)
