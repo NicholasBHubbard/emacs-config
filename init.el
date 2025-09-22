@@ -134,6 +134,8 @@
   :hook (prog-mode text-mode markdown-mode) ;; add `smartparens-mode` to these hooks
   :config
   (require 'smartparens-config)
+  (sp-with-modes sp-c-modes
+    (sp-local-pair "{" nil :post-handlers '()))
   :bind
   (:map smartparens-mode-map
         ("M-("   . sp-wrap-round)
