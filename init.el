@@ -1178,12 +1178,12 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
              (nnimap-server-port "993")
              (nnimap-stream ssl)
              (nnimap-split-methods
-              (("INBOX.ml.emacs-devel" "^\\(To\\|Cc\\):.*emacs-devel@gnu\\.org")
+              (("INBOX.junk" "^Subject: Bounce probe")
+               ("INBOX.ml.emacs-devel" "^\\(To\\|Cc\\):.*emacs-devel@gnu\\.org")
                ("INBOX.ml.p5p" "^\\(To\\|Cc\\):.*perl5-porters@perl\\.org")
                ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs@vger\\.kernel\\.org")
                ("INBOX.ml.overlayfs" "^\\(To\\|Cc\\):.*linux-unionfs@vger\\.kernel\\.org")
                ("INBOX.ml.linux-crypto" "^\\(To\\|Cc\\):.*linux-crypto@vger\\.kernel\\.org")
-               ("INBOX.junk" "^Subject: Bounce probe")
                ("INBOX" "")))))))
 
 ;;; GPTEL
