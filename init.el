@@ -1242,6 +1242,10 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
 
 ;;; DOCKER
 
+(use-package docker
+  :straight t
+  :commands docker)
+
 (use-package dockerfile-mode
   :straight t
   :magic ("Dockerfile" . dockerfile-mode))
