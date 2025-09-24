@@ -475,8 +475,6 @@
   (compilation-ask-about-save nil)
   (compilation-scroll-output t)
   (compilation-max-output-line-length nil)
-  :bind
-  ("<f6>" . compile)
   :hook
   (compilation-filter . (lambda ()
                           (let ((inhibit-read-only t))
