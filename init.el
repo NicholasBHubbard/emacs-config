@@ -1230,6 +1230,19 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (:map diff-mode-map
         ("M-o" . nil)))
 
+;;; PDF TOOLS
+
+(use-package pdf-tools
+  :straight t
+  :init
+  (pdf-tools-install t)
+  (pdf-loader-install t)
+  :hook
+  (pdf-view-mode . pdf-view-midnight-minor-mode)
+  (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
+  :custom
+  (pdf-view-have-image-mode-pixel-vscroll nil))
+
 ;;; ALERT
 
 (use-package alert
