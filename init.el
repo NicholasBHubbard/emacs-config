@@ -41,7 +41,7 @@
   (set-fringe-mode 0)
   (tooltip-mode 0)
   (tool-bar-mode 0)
-  (show-paren-mode 0)
+  (show-paren-mode 1)
   (blink-cursor-mode 0)
   (display-time-mode 1)
   (line-number-mode 0)
