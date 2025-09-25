@@ -1235,7 +1235,8 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
 
 (use-package pdf-tools
   :straight t
-  :init
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :config
   (pdf-tools-install t)
   (pdf-loader-install t)
   :hook
@@ -1243,6 +1244,12 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
   :custom
   (pdf-view-have-image-mode-pixel-vscroll nil))
+
+(use-package pdf-view-restore
+  :straight t
+  :after pdf-tools
+  :hook
+  (pdf-view-mode . pdf-view-restore-mode))
 
 ;;; ALERT
 
