@@ -1241,15 +1241,15 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (pdf-loader-install t)
   :hook
   (pdf-view-mode . pdf-view-midnight-minor-mode)
-  (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
-  :custom
-  (pdf-view-have-image-mode-pixel-vscroll nil))
+  (TeX-after-compilation-finished-functions . TeX-revert-document-buffer))
 
 (use-package pdf-view-restore
   :straight t
   :after pdf-tools
   :hook
-  (pdf-view-mode . pdf-view-restore-mode))
+  (pdf-view-mode . pdf-view-restore-mode)
+  :custom
+  (pdf-view-restore-filename (concat user-emacs-directory ".pdf-view-restore")))
 
 ;;; ALERT
 
