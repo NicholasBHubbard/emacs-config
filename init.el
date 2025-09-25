@@ -1177,6 +1177,7 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
              (nnimap-stream ssl)
              (nnimap-split-methods
               (("INBOX.junk" "^Subject: Bounce probe")
+               ("INBOX.send-confirmation" "^From: MAILER-DAEMON@.*posteo.de")
                ("INBOX.ml.emacs-devel" "^\\(To\\|Cc\\):.*emacs-devel@gnu\\.org")
                ("INBOX.ml.p5p" "^\\(To\\|Cc\\):.*perl5-porters@perl\\.org")
                ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs@vger\\.kernel\\.org")
