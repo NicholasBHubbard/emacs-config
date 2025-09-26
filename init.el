@@ -571,6 +571,8 @@
   :straight t
   :custom
   (expand-region-smart-cursor t)
+  (expand-region-skip-whitespace nil)
+  (expand-region-subword-enabled t)
   :bind*
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
