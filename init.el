@@ -569,6 +569,8 @@
 
 (use-package expand-region
   :straight t
+  :custom
+  (expand-region-smart-cursor t)
   :bind*
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
