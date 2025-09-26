@@ -381,7 +381,6 @@
   ((:color blue :title (or (projectile-project-root) "No Project") :quit-key "q")
    ("Run"
     (("rc" projectile-compile-project "Compile")
-     ("rC" projectile-recompile "Recompile")
      ("rt" projectile-test-project "Test"))
     "Shell"
     (("sh" projectile-run-shell-command-in-project-root "Shell Command")
