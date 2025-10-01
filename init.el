@@ -581,6 +581,8 @@
 
 (use-package multiple-cursors
   :straight t
+  :custom
+  (mc/always-run-for-all t)
   :bind*
   ("C-M-SPC" . set-rectangular-region-anchor)
   (:map mc/keymap
@@ -1270,6 +1272,12 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
 (use-package dockerfile-mode
   :straight t
   :magic ("Dockerfile" . dockerfile-mode))
+
+;;; MARKDOWN
+
+(use-package markdown-mode
+  :straight t
+  :mode ("\\.md\\'" . markdown-mode))
 
 ;;; JIRA
 
