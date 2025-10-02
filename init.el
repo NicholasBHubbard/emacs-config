@@ -1040,6 +1040,10 @@
     :length 2000
     :no-dups t)
 
+  (comint-histories-add-history rdbg
+    :predicates '((lambda () (string-match-p "^(rdbg)" (comint-histories-get-prompt))))
+    :length 2000
+    :no-dups t)
 
   (comint-histories-add-history python
     :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
