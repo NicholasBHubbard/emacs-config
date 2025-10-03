@@ -67,6 +67,7 @@
   ("C-M-<down>"  . shrink-window)
   ("C-M-<left>"  . shrink-window-horizontally)
   ("C-M-<right>" . enlarge-window-horizontally)
+  ("C-S-<backspace>" . (lambda () (interactive) (call-interactively #'kill-whole-line)))
   ("C-M-p"       . (lambda () (interactive) (scroll-up 1)))
   ("C-M-n"       . (lambda () (interactive) (scroll-down 1)))
   ("<f7>"        . query-replace-regexp)
