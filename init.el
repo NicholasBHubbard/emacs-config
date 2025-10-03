@@ -1041,7 +1041,8 @@
     :no-dups t)
 
   (comint-histories-add-history rdbg
-    :predicates '((lambda () (string-match-p "^(rdbg)" (comint-histories-get-prompt))))
+    :predicates '((lambda () (string-match-p "^\\[[0-9]+\\] pry(") (comint-histories-get-prompt))
+                  (lambda () (string-match-p "^(rdbg)" (comint-histories-get-prompt))))
     :length 2000
     :no-dups t)
 
