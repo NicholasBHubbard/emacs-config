@@ -355,51 +355,33 @@
 
 ;;; PROJECTILE
 
-(use-package projectile
-  :straight t
-  :blackout
-  :init
-  (projectile-mode 1)
+(use-package project
   :custom
-  (projectile-project-search-path '("~/p"))
-  (projectile-track-known-projects-automatically nil)
-  (projectile-enable-caching nil)
-  (projectile-auto-discover nil)
-  (projectile-indexing-method 'alien)
-  (projectile-file-exists-remote-cache-expire nil)
-  (projectile-sort-order 'recently-active)
-  (projectile-current-project-on-switch 'keep)
-  (projectile-find-dir-includes-top-level t)
-  (projectile-switch-project-action #'projectile-dired)
+  (project-list-file (expand-file-name "projects" user-emacs-directory))
+  (project-switch-commands 'project-dired)
   :config
-  (advice-add 'projectile-project-root :before-while
-              (lambda (&optional dir)
-                (not (file-remote-p (or dir default-directory)))))
   :bind
-  (:map projectile-mode-map
-        ("C-c p"  . projectile-hydra/body))
+  ("C-c p" . project-hydra/body)
   :pretty-hydra
-  ((:color blue :title (or (projectile-project-root) "No Project") :quit-key "q")
+  ((:color blue :title (if-let ((proj (project-current))) (project-root proj) "No Project") :quit-key "q")
    ("Run"
-    (("rc" projectile-compile-project "Compile")
-     ("rt" projectile-test-project "Test"))
+    (("rc" project-compile "Compile"))
     "Shell"
-    (("sh" projectile-run-shell-command-in-project-root "Shell Command")
-     ("sH" projectile-run-async-shell-command-in-project-root "Shell Command Async")
-     ("ss" projectile-run-shell "Shell Spawn"))
-    "Find File"
-    (("ff" projectile-find-file "Find File")
-     ("fF" projectile-find-file-other-window "Find File (other window)")
-     ("fd" projectile-find-dir "Find Dir")
-     ("fD" projectile-find-dir-other-window "Find Dir (other window)")
-     ("fb" projectile-switch-to-buffer "Switch To Buffer")
-     ("fB" projectile-switch-to-buffer-other-window "Switch To Buffer (other window)"))
+    (("sh" project-shell-command "Shell Command")
+     ("sH" project-async-shell-command "Shell Command Async")
+     ("ss" project-shell "Shell Spawn"))
+    "Nav"
+    (("ff" project-find-file "Find File")
+     ("fd" project-find-dir "Find Dir")
+     ("fD" project-dired "Dired")
+     ("fp" project-switch-project "Project")
+     ("fb" project-switch-to-buffer "Switch To Buffer"))
     "Misc"
-    (("ms" projectile-switch-project "Switch Project")
-     ("mg" projectile-grep "Grep")
-     ("mk" projectile-kill-buffers "Kill Buffers")
-     ("md" projectile-discover-projects-in-search-path "Discover Projects")
-     ("mx" projectile-run-command-in-root "Run Command In Project")))))
+    (("ms" project-switch-project "Switch Project")
+     ("mg" project-find-regexp "Grep")
+     ("mk" project-kill-buffers "Kill Buffers")
+     ("mx" project-any-command "Run Command In Project")))))
+
 
 ;;; AGGRESSIVE INDENT
 
