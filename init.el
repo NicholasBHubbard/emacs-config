@@ -371,14 +371,13 @@
      ("sH" project-async-shell-command "Shell Command Async")
      ("ss" project-shell "Shell Spawn"))
     "Nav"
-    (("ff" project-find-file "Find File")
+    (("fp" project-switch-project "Project")
+     ("ff" project-find-file "Find File")
      ("fd" project-find-dir "Find Dir")
      ("fD" project-dired "Dired")
-     ("fp" project-switch-project "Project")
      ("fb" project-switch-to-buffer "Switch To Buffer"))
     "Misc"
-    (("ms" project-switch-project "Switch Project")
-     ("mg" project-find-regexp "Grep")
+    (("mg" project-find-regexp "Grep")
      ("mk" project-kill-buffers "Kill Buffers")
      ("mx" project-any-command "Run Command In Project")))))
 
