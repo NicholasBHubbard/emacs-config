@@ -62,19 +62,17 @@
   (text-mode . display-line-numbers-mode)
   (prog-mode . display-fill-column-indicator-mode)
   (text-mode . display-fill-column-indicator-mode)
-  :bind
+  :bind*
+  ("C-S-<backspace>" . (lambda () (interactive) (call-interactively #'kill-whole-line)))
+  ("C-M-p"       . (lambda () (interactive) (scroll-up 1)))
+  ("C-M-n"       . (lambda () (interactive) (scroll-down 1)))
   ("C-M-<up>"    . enlarge-window)
   ("C-M-<down>"  . shrink-window)
   ("C-M-<left>"  . shrink-window-horizontally)
   ("C-M-<right>" . enlarge-window-horizontally)
-  ("C-S-<backspace>" . (lambda () (interactive) (call-interactively #'kill-whole-line)))
-  ("C-M-p"       . (lambda () (interactive) (scroll-up 1)))
-  ("C-M-n"       . (lambda () (interactive) (scroll-down 1)))
-  ("<f7>"        . query-replace-regexp)
   ("C-c j"       . join-line)
-  ("M-F"         . forward-whitespace)
-  ("M-B"         . (lambda () (interactive) (forward-whitespace -1)))
   ("M-r"         . revert-buffer-quick)
+  :bind
   ("C-q"         . kill-current-buffer)
   ("C-S-q"       . kill-buffer-and-window))
 
