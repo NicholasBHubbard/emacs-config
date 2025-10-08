@@ -353,34 +353,18 @@
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev))
 
-;;; PROJECTILE
+;;; PROJECT
 
 (use-package project
+  :defer t
   :custom
-  (project-list-file (expand-file-name "projects" user-emacs-directory))
-  (project-switch-commands 'project-dired)
-  :config
-  :bind
-  ("C-c p" . project-hydra/body)
-  :pretty-hydra
-  ((:color blue :title (if-let ((proj (project-current))) (project-root proj) "No Project") :quit-key "q")
-   ("Run"
-    (("rc" project-compile "Compile"))
-    "Shell"
-    (("sh" project-shell-command "Shell Command")
-     ("sH" project-async-shell-command "Shell Command Async")
-     ("ss" project-shell "Shell Spawn"))
-    "Nav"
-    (("fp" project-switch-project "Project")
-     ("ff" project-find-file "Find File")
-     ("fd" project-find-dir "Find Dir")
-     ("fD" project-dired "Dired")
-     ("fb" project-switch-to-buffer "Switch To Buffer"))
-    "Misc"
-    (("mg" project-find-regexp "Grep")
-     ("mk" project-kill-buffers "Kill Buffers")
-     ("mx" project-any-command "Run Command In Project")))))
+  (project-list-file (expand-file-name ".projects" user-emacs-directory))
+  (project-switch-commands 'project-dired))
 
+(use-package disproject
+  :straight t
+  :bind*
+  ("C-c p" . disproject-dispatch))
 
 ;;; AGGRESSIVE INDENT
 
