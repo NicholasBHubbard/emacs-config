@@ -286,7 +286,6 @@
   (consult-preview-key "M-SPC")
   :bind*
   ("M-o"   . consult-buffer)
-  ("M-g g" . consult-goto-line)
   ("C-z"   . consult-global-mark)
   ("C-S-y" . consult-yank-from-kill-ring)
   ("C-c f" . consult-find)
@@ -307,6 +306,43 @@
      consult-dir--source-recentf
      consult-dir--source-tramp-local
      consult-dir--source-tramp-ssh)))
+
+;;; BETTER JUMPER
+
+(use-package better-jumper
+  :straight t
+  :blackout better-jumper-local-mode
+  :demand t
+  :init
+  (better-jumper-mode 1)
+  :custom
+  (better-jumper-use-savehist nil)
+  (better-jumper-use-evil-jump-advice nil)
+  (better-jumper-context 'buffer)
+  :config
+  (defun my/better-jumper-advice (fn &rest args)
+    (let ((old-pos (point)))
+      (apply fn args)
+      (let ((new-pos (point)))
+        (when (> (abs (- (line-number-at-pos old-pos) (line-number-at-pos new-pos)))
+                 1)
+          (better-jumper-set-jump old-pos)
+          (better-jumper-set-jump new-pos)))))
+  (defmacro my/with-better-jumper (&rest functions)
+    `(progn
+       ,@(mapcar (lambda (fn)
+                   `(advice-add ',fn :around #'my/better-jumper-advice))
+                 functions)))
+  (my/with-better-jumper goto-line beginning-of-buffer end-of-buffer imenu xref-find-definition))
+
+;;; CONSULT BETTER JUMPER
+
+(use-package consult-better-jumper
+  :straight (consult-better-jumper :type git :host github :repo "NicholasBHubbard/consult-better-jumper")
+  :bind*
+  ("C-c SPC" . (lambda () (interactive)
+                 (let ((consult-preview-key 'any))
+                   (call-interactively #'consult-better-jumper)))))
 
 ;;; VERTICO
 
@@ -420,7 +456,9 @@
   ("C-s" . ctrlf-forward-default)
   (:map ctrlf-minibuffer-mode-map
         ("C-n" . ctrlf-next-match)
-        ("C-p" . ctrlf-previous-match)))
+        ("C-p" . ctrlf-previous-match))
+  :config
+  (my/with-better-jumper ctrlf-forward))
 
 ;;; PROCED
 
@@ -536,7 +574,9 @@
   (avy-timeout-seconds 0.4)
   (avy-single-candidate-jump t)
   (avy-style 'at-full)
-  (avy-case-fold-search nil))
+  (avy-case-fold-search nil)
+  :config
+  (my/with-better-jumper avy-goto-char-timer))
 
 ;;; EXPAND REGION
 
@@ -759,6 +799,8 @@
   :bind
   (:map diff-hl-mode-map
         ("C-c g" . diff-hl-hydra/body))
+  :config
+  (my/with-better-jumper diff-hl-next-hunk diff-hl-previous-hunk)
   :pretty-hydra
   ((:color pink :quit-key "q")
    ("diff-hl"
@@ -957,13 +999,6 @@
   :after tuareg
   :hook
   (tuareg-mode . merlin-mode))
-
-;;; GOTO LAST CHANGE
-
-(use-package goto-last-change
-  :straight t
-  :bind*
-  ("C-c l" . goto-last-change))
 
 ;;; IY GO TO CHAR
 
