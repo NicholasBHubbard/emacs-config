@@ -351,6 +351,13 @@
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev))
 
+;;; DABBREV
+
+(use-package dabbrev
+  :defer t
+  :custom
+  (dabbrev-case-fold-search t))
+
 ;;; PROJECT
 
 (use-package project
