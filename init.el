@@ -368,6 +368,8 @@
 
 (use-package disproject
   :straight t
+  :custom
+  (disproject-shell-command #'project-shell)
   :bind*
   ("C-c p" . disproject-dispatch))
 
