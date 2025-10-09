@@ -356,7 +356,7 @@
 (use-package dabbrev
   :defer t
   :custom
-  (dabbrev-case-fold-search t))
+  (dabbrev-case-fold-search nil))
 
 ;;; PROJECT
 
