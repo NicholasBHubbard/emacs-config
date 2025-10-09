@@ -5,7 +5,6 @@
 
 ;;; DEFAULT
 
-
 (use-package emacs
   :demand t
   :custom
