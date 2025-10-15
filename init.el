@@ -301,7 +301,7 @@
   :bind*
   ("M-O" . consult-dir)
   :custom
-  (consult-dir-project-list-function #'consult-dir-projectile-dirs)
+  (consult-dir-project-list-function #'consult-dir-project-dirs)
   (consult-dir-sources
    '(consult-dir--source-default
      consult-dir--source-project
