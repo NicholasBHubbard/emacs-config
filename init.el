@@ -283,12 +283,13 @@
   :straight t
   :custom
   (consult-buffer-sources '(consult--source-buffer consult--source-recent-file))
-  (consult-preview-key "M-SPC")
+  (consult-preview-key 'any)
   :bind*
-  ("M-o"   . consult-buffer)
-  ("C-z"   . (lambda () (interactive)
-               (let ((consult-preview-key 'any))
-                 (call-interactively #'consult-global-mark))))
+  ("M-g g"  . consult-goto-line)
+  ("M-o"   . (lambda () (interactive)
+               (let ((consult-preview-key "M-SPC"))
+                 (call-interactively #'consult-buffer))))
+  ("C-z"   . consult-global-mark)
   ("C-S-y" . consult-yank-from-kill-ring)
   ("C-c f" . consult-find)
   ("C-c s" . consult-grep))
