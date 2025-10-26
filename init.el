@@ -287,8 +287,10 @@
   :bind*
   ("M-g g"  . consult-goto-line)
   ("M-o"   . (lambda () (interactive)
-               (let ((consult-preview-key "M-SPC"))
-                 (call-interactively #'consult-buffer))))
+               (setq consult-preview-key "M-SPC")
+               (unwind-protect
+                   (call-interactively #'consult-buffer)
+                 (setq consult-preview-key 'any))))
   ("C-z"   . consult-global-mark)
   ("C-S-y" . consult-yank-from-kill-ring)
   ("C-c f" . consult-find)
