@@ -926,6 +926,14 @@
   :mode ("\\.hs\\'" . haskell-mode)
   :straight t)
 
+;;; SLY
+
+(use-package sly
+  :straight t
+  :after lisp-mode
+  :custom
+  (inferior-lisp-program "sbcl"))
+
 ;;; RUST
 
 (use-package rust-mode
