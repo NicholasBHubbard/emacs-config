@@ -66,6 +66,7 @@
   ("C-S-<backspace>" . (lambda () (interactive) (call-interactively #'kill-whole-line)))
   ("C-M-p"       . (lambda () (interactive) (scroll-up 1)))
   ("C-M-n"       . (lambda () (interactive) (scroll-down 1)))
+  ("C-M-z"       . delete-pair)
   ("C-M-<up>"    . enlarge-window)
   ("C-M-<down>"  . shrink-window)
   ("C-M-<left>"  . shrink-window-horizontally)
@@ -919,6 +920,14 @@
 
 (use-package mercury-mode
   :mode ("\\.m\\'" . mercury-mode))
+
+;;; CC MODE
+
+(use-package cc-mode
+  :defer t
+  :after eglot
+  :config
+  (add-to-list 'eglot-server-programs '((c-mode c++-mode) . ("clangd" "--background-index" "--clang-tidy"))))
 
 ;;; HASKELL
 
