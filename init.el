@@ -562,9 +562,12 @@
   :custom
   (mc/always-run-for-all t)
   :bind*
-  ("C-M-SPC" . set-rectangular-region-anchor)
+  ("C-c m" . mc/edit-lines)
   (:map mc/keymap
-        ("RET" . nil)))
+        ("RET" . nil)
+        ("C->" . mc/mark-next-like-this)
+        ("C-<" . mc/mark-previous-like-this)
+        ("C-c >" . mc/mark-all-like-this)))
 
 ;;; EMACS LISP
 
@@ -671,10 +674,10 @@
          :password (concat "admin@erc/irc-perl:" (password-store-get "znc-admin"))))
 
   (defun my/erc-regain-nick ()
-	(interactive)
-	(erc-move-to-prompt)
-	(erc-kill-input)
-	(erc-send-line (concat "PRIVMSG NickServ REGAIN " erc-nick " " (password-store-get "irc")) #'ignore)))
+    (interactive)
+    (erc-move-to-prompt)
+    (erc-kill-input)
+    (erc-send-line (concat "PRIVMSG NickServ REGAIN " erc-nick " " (password-store-get "irc")) #'ignore)))
 
 ;;; WHICH KEY
 
@@ -975,6 +978,8 @@
 
 (use-package iy-go-to-char
   :straight t
+  :custom
+  (iy-go-to-char-stop-position 'include)
   :bind*
   ("C-c \'" . iy-go-up-to-char)
   ("C-c \"" . iy-go-to-char-backward))
