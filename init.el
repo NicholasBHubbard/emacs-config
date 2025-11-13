@@ -100,16 +100,16 @@
 
 ;;; MODUS THEMES
 
-(use-package modus-themes
-  :straight t
-  :ensure t
-  :custom
-  (modus-themes-disable-other-themes t)
-  (modus-themes-common-palette-overrides
-   '((bg-line-number-active unspecified)
-     (bg-line-number-inactive unspecified)))
-  :config
-  (load-theme 'modus-vivendi-tritanopia t))
+;; (use-package modus-themes
+;;   :straight t
+;;   :ensure t
+;;   :custom
+;;   (modus-themes-disable-other-themes t)
+;;   (modus-themes-common-palette-overrides
+;;    '((bg-line-number-active unspecified)
+;;      (bg-line-number-inactive unspecified)))
+;;   :config
+;;   (load-theme 'modus-vivendi-tritanopia t))
 
 ;;; BLACKOUT
 
