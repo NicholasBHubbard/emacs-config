@@ -1170,21 +1170,15 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
              (nnimap-inbox ("INBOX" "Sent"))
              (nnimap-server-port "993")
              (nnimap-stream ssl)
-             (nnimap-split-fancy
-              (|
-               ("Subject" "Bounce probe" "INBOX.junk")
-               ("From" "MAILER-DAEMON@[^ ]+\\.posteo.de" "INBOX.send-confirmation")
-               (| ("To" "perl5-porters@perl\\.org" "INBOX.ml.p5p")
-                  ("Cc" "perl5-porters@perl\\.org" "INBOX.ml.p5p"))
-               (| ("To" "linux-btrfs@vger\\.kernel\\.org" "INBOX.ml.btrfs")
-                  ("Cc" "linux-btrfs@vger\\.kernel\\.org" "INBOX.ml.btrfs"))
-               (| ("To" "linux-bcachefs@vger\\.kernel\\.org" "INBOX.ml.bcachefs")
-                  ("Cc" "linux-bcachefs@vger\\.kernel\\.org" "INBOX.ml.bcachefs"))
-               (| ("To" "linux-unionfs@vger\\.kernel\\.org" "INBOX.ml.overlayfs")
-                  ("Cc" "linux-unionfs@vger\\.kernel\\.org" "INBOX.ml.overlayfs"))
-               (| ("To" "linux-crypto@vger\\.kernel\\.org" "INBOX.ml.linux-crypto")
-                  ("Cc" "linux-crypto@vger\\.kernel\\.org" "INBOX.ml.linux-crypto"))
-               "INBOX"))))))
+             (nnimap-split-methods
+              (("INBOX.junk" "^Subject: Bounce probe")
+               ("INBOX.send-confirmation" "^From: MAILER-DAEMON@[^ ]+\\.posteo.de")
+               ("INBOX.ml.p5p" "^\\(To\\|Cc\\):.*perl5-porters@perl\\.org")
+               ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs@vger\\.kernel\\.org")
+               ("INBOX.ml.bcachefs" "^\\(To\\|Cc\\):.*linux-bcachefs@vger\\.kernel\\.org")
+               ("INBOX.ml.overlayfs" "^\\(To\\|Cc\\):.*linux-unionfs@vger\\.kernel\\.org")
+               ("INBOX.ml.linux-crypto" "^\\(To\\|Cc\\):.*linux-crypto@vger\\.kernel\\.org")
+               ("INBOX" "")))))))
 
 ;;; GPTEL
 
