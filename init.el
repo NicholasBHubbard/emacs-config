@@ -385,6 +385,12 @@
   :blackout
   :commands aggressive-indent-mode)
 
+;;; YANK INDENT
+
+(use-package yank-indent
+  :straight (:host github :repo "jimeh/yank-indent")
+  :config (global-yank-indent-mode t))
+
 ;;; CLEAN KILL RING
 
 (use-package clean-kill-ring
