@@ -1007,8 +1007,8 @@
 ;;; COMINT HISTORIES
 
 (use-package comint-histories
-  :straight t
-  ;; :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "ring-start-size-0")
+  ;; :straight t
+  :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "reselect-after")
   :after comint
   :bind
   (:map comint-mode-map
@@ -1025,11 +1025,13 @@
   (comint-histories-add-history gdb
     :predicates '((lambda () (string-match-p "^(gdb)" (comint-histories-get-prompt))))
     :length 2000
+    :reselect-after t
     :no-dups t)
 
   (comint-histories-add-history pdb
     :predicates '((lambda () (string-match-p "^(Pdb)" (comint-histories-get-prompt))))
     :length 2000
+    :reselect-after t
     :no-dups t)
 
   (comint-histories-add-history rdbg
@@ -1037,12 +1039,14 @@
                                (or (string-match-p "^\\[[0-9]+\\] pry(" prompt)
                                    (string-match-p "^(rdbg)" prompt)))))
     :length 2000
+    :reselect-after t
     :no-dups t)
 
   (comint-histories-add-history python
     :predicates '((lambda () (or (derived-mode-p 'inferior-python-mode)
                                  (string-match-p "^>>>" (comint-histories-get-prompt)))))
     :length 2000
+    :reselect-after t
     :no-dups t)
 
   (comint-histories-add-history prolog
@@ -1063,6 +1067,7 @@
   (comint-histories-add-history bashdb
     :predicates '((lambda () (string-match-p "^bashdb" (comint-histories-get-prompt))))
     :length 2000
+    :reselect-after t
     :no-dups t)
 
   (comint-histories-add-history debugger-generic
@@ -1075,6 +1080,7 @@
     :predicates '((lambda () (derived-mode-p 'shell-mode))
                   (lambda () (string-match-p "^cd [~/]" (comint-histories-get-input))))
     :length 250
+    :reselect-after t
     :no-dups t)
 
   (comint-histories-add-history shell
