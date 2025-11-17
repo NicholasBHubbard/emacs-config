@@ -1007,8 +1007,8 @@
 ;;; COMINT HISTORIES
 
 (use-package comint-histories
-  ;; :straight t
-  :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "reselect-after")
+  :straight t
+  ;; :straight (comint-histories :type git :host github :repo "NicholasBHubbard/comint-histories" :branch "reselect-after")
   :after comint
   :bind
   (:map comint-mode-map
