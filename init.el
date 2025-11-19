@@ -195,6 +195,11 @@
   :bind*
   ("C-c f" . recentf))
 
+;;; FLYMAKE
+
+(use-package flymake
+  :commands (flymake-mode flymake-start))
+
 ;;; EGLOT
 
 (use-package eglot
