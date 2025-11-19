@@ -889,8 +889,9 @@
 ;;; CPERL
 
 (use-package cperl-mode
-  :init (fset 'perl-mode 'cperl-mode)
-  :mode ("\\.p[lm]\\'" . cperl-mode)
+  :hook
+  (perl-mode  . cperl-mode)
+  (cperl-mode . flymake-mode)
   :custom
   (cperl-invalid-face nil)
   (cperl-indent-level 4)
