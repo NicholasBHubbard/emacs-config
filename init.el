@@ -198,7 +198,9 @@
 ;;; FLYMAKE
 
 (use-package flymake
-  :commands (flymake-mode flymake-start))
+  :commands (flymake-mode flymake-start)
+  :custom
+  (flymake-no-changes-timeout nil))
 
 ;;; EGLOT
 
