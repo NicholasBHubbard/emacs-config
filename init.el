@@ -1281,7 +1281,9 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
 
 (use-package docker
   :straight t
-  :commands docker)
+  :commands docker
+  :bind*
+  ("C-c d" . docker))
 
 (use-package dockerfile-mode
   :straight t
