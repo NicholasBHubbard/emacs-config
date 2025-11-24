@@ -491,7 +491,7 @@
   :straight t
   :after shell
   :custom
-  (bash-completion-use-separate-processes t)
+  (bash-completion-use-separate-processes nil)
   :config
   (bash-completion-setup))
 
@@ -1006,6 +1006,8 @@
   :commands comint-mode
   :custom
   (comint-pager "cat")
+  :hook
+  (comint-mode . (lambda () (setq-local comint-process-echoes t)))
   :bind
   (:map comint-mode-map
         ([S-return] . (lambda () (interactive)
