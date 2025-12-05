@@ -491,7 +491,7 @@
   :straight t
   :after shell
   :custom
-  (bash-completion-use-separate-processes nil)
+  (bash-completion-use-separate-processes t)
   :config
   (bash-completion-setup))
 
