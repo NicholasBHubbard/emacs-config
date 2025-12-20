@@ -1214,7 +1214,9 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gptel-default-mode 'markdown-mode)
   (gptel-api-key #'(lambda () (password-store-get "openai-api-key")))
   :config
-  (gptel-make-anthropic "Claude" :key #'(lambda () (password-store-get "anthropic-api-key"))))
+  (gptel-make-anthropic "Claude"
+    :stream t
+    :key #'(lambda () (password-store-get "anthropic-api-key"))))
 
 ;;; YAML
 
