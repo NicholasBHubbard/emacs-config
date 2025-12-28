@@ -30,6 +30,7 @@
   (scroll-margin 1)
   (display-line-numbers-widen t)
   (undo-in-region t)
+  (use-short-answers t)
   (inhibit-startup-screen t)
   (mode-line-percent-position nil)
   (auto-revert-verbose nil)
@@ -56,7 +57,6 @@
   (transient-mark-mode 1)
   (delete-selection-mode 1)
   (prefer-coding-system 'utf-8)
-  (fset 'yes-or-no-p 'y-or-n-p)
   :hook
   (prog-mode . display-line-numbers-mode)
   (text-mode . display-line-numbers-mode)
@@ -191,9 +191,7 @@
   (recentf-save-file (concat user-emacs-directory ".recentf"))
   (recentf-auto-cleanup 'never)
   (recentf-max-saved-items 500)
-  (recentf-exclude '("^/tmp/" "^/ssh:" "^/sudo:" "/elpa/" "COMMIT_EDITMSG" ".*-autoloads\\.el$" file-remote-p))
-  :bind*
-  ("C-c f" . recentf))
+  (recentf-exclude '("^/tmp/" "^/ssh:" "^/sudo:" "/elpa/" "COMMIT_EDITMSG" ".*-autoloads\\.el$" file-remote-p)))
 
 ;;; FLYMAKE
 
@@ -720,7 +718,7 @@
 ;;; WS BUTLER
 
 (use-package ws-butler
-  :straight (ws-butlet :type git :host github :repo "lewang/ws-butler")
+  :straight (ws-butler :type git :host github :repo "lewang/ws-butler")
   :blackout
   :custom
   (ws-butler-keep-whitespace-before-point nil)
