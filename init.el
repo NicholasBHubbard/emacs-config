@@ -1185,15 +1185,6 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (mm-decrypt-option 'known)
   (gnus-always-read-dribble-file nil)
   (gnus-summary-next-group-on-exit nil)
-  (nnimap-split-fancy
-   '(| ("subject" "Bounce probe.*" "INBOX.junk")
-       (from "MAILER-DAEMON@[^ ]+\\.posteo.de" "INBOX.send-confirmation")
-       (to "perl5-porters@perl\\.org" "INBOX.ml.p5p")
-       (to "linux-btrfs@vger\\.kernel\\.org" "INBOX.ml.btrfs")
-       (to "linux-bcachefs@vger\\.kernel\\.org" "INBOX.ml.bcachefs")
-       (to "linux-unionfs@vger\\.kernel\\.org" "INBOX.ml.overlayfs")
-       (to "linux-crypto@vger\\.kernel\\.org" "INBOX.ml.linux-crypto")
-       "INBOX"))
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
@@ -1201,7 +1192,15 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
              (nnimap-inbox ("INBOX" "Sent"))
              (nnimap-server-port "993")
              (nnimap-stream ssl)
-             (nnimap-split-methods nnimap-split-fancy)))))
+             (nnimap-split-methods
+              (("INBOX.junk" "^Subject: Bounce probe.*")
+               ("INBOX.send-confirmation" "^From: MAILER-DAEMON@[^ ]+\\.posteo.de")
+               ("INBOX.ml.p5p" "^\\(To\\|Cc\\):.*perl5-porters@perl\\.org")
+               ("INBOX.ml.btrfs" "^\\(To\\|Cc\\):.*linux-btrfs@vger\\.kernel\\.org")
+               ("INBOX.ml.bcachefs" "^\\(To\\|Cc\\):.*linux-bcachefs@vger\\.kernel\\.org")
+               ("INBOX.ml.overlayfs" "^\\(To\\|Cc\\):.*linux-unionfs@vger\\.kernel\\.org")
+               ("INBOX.ml.linux-crypto" "^\\(To\\|Cc\\):.*linux-crypto@vger\\.kernel\\.org")
+               ("INBOX" "")))))))
 
 ;;; GPTEL
 
@@ -1216,11 +1215,6 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gptel-make-anthropic "Claude"
     :stream t
     :key #'(lambda () (password-store-get "anthropic-api-key"))))
-
-(use-package gptel-agent
-  :after gptel
-  :commands gptel-agent
-  :straight t)
 
 ;;; YAML
 
