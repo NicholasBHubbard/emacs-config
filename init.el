@@ -1186,7 +1186,6 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (mm-decrypt-option 'known)
   (gnus-always-read-dribble-file nil)
   (gnus-summary-next-group-on-exit nil)
-  (nnmail-debug-splitting t)
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
@@ -1194,6 +1193,7 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
              (nnimap-inbox ("INBOX" "Sent"))
              (nnimap-server-port "993")
              (nnimap-stream ssl)
+             (nnmail-debug-splitting t)
              (nnmail-split-fancy-match-partial-words t)
              (nnimap-split-methods 'nnimap-split-fancy)
              (nnimap-split-fancy
