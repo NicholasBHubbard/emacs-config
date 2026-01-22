@@ -1193,7 +1193,7 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
              (nnimap-inbox ("INBOX" "Sent"))
              (nnimap-server-port "993")
              (nnimap-stream ssl)
-             (nnimap-split-fancy-match-partial-words t)
+             (nnmail-split-fancy-match-partial-words t)
              (nnimap-split-fancy
               (| ("subject" "^Bounce probe.*" "INBOX.junk")
                  (from "MAILER-DAEMON@[^ ]+\\.posteo\\.de" "INBOX.send-confirmation")
