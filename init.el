@@ -1287,7 +1287,9 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   :straight t
   :commands docker
   :bind*
-  ("C-c d" . docker))
+  ("C-c d" . docker)
+  :custom
+  (docker-image-default-sort-key '("Repository" . "Ascending")))
 
 (use-package dockerfile-mode
   :straight t
