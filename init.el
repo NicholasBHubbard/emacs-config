@@ -131,7 +131,10 @@
 (use-package smartparens
   :straight t
   :blackout
-  :hook (prog-mode text-mode markdown-mode) ;; add `smartparens-mode` to these hooks
+  :hook
+  (prog-mode . smartparens-mode)
+  (text-mode . smartparens-mode)
+  (markdown-mode . smartparens-mode)
   :config
   (require 'smartparens-config)
   :bind
@@ -178,7 +181,7 @@
   :bind*
   ("C-;" . ace-window)
   :custom
-  (aw-dispatch-always-nil)
+  (aw-dispatch-always nil)
   (aw-dispatch-when-more-than 2)
   (aw-minibuffer-flag t))
 
