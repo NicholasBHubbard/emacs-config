@@ -203,36 +203,6 @@
   :custom
   (flymake-no-changes-timeout nil))
 
-;;; EGLOT
-
-(use-package eglot
-  :commands (eglot eglot-ensure)
-  :custom
-  (eglot-send-changes-idle-time 99999)
-  (eglot-autoshutdown t)
-  (eglot-ignored-server-capabilities '(:documentHighlightProvider))
-  :bind
-  (:map eglot-mode-map
-        ("C-c e" . eglot-hydra/body))
-  :pretty-hydra
-  ((:color teal :quit-key "C-c e")
-   ("Flymake"
-    (("n" flymake-goto-next-error "next error" :exit nil)
-     ("p" flymake-goto-prev-error "previous error" :exit nil)
-     ("db" flymake-show-buffer-diagnostics "diagnostics buffer")
-     ("dp" flymake-show-project-diagnostics "diagnostics project"))
-    "Find"
-    (("fd" eglot-find-declaration "declaration")
-     ("ft" eglot-find-typeDefinition "type def")
-     ("fi" eglot-find-implementation "implementation"))
-    "Format"
-    (("Fr" eglot-format "region")
-     ("Fb" eglot-format-buffer "buffer"))
-    "Server"
-    (("ss" eglot-shutdown "shutdown")
-     ("sS" eglot-shutdown-all "shutdown all")
-     ("sa" eglot-code-actions "code actions")))))
-
 ;;; ORG
 
 (use-package org
@@ -887,6 +857,19 @@
 ;;   :hook
 ;;   (kill-emacs . persp-state-save))
 
+;;; LSP MODE
+
+(use-package lsp-mode
+  :straight t
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  )
+
+(use-package consult-lsp
+  :straight t
+  :after lsp-mode)
+
 ;;; CPERL
 
 (use-package cperl-mode
@@ -921,13 +904,6 @@
   :config
   (add-hook 'python-base-mode-hook 'pet-mode -10))
 
-(use-package flymake-ruff
-  :straight t
-  :after python
-  :hook
-  (python-mode . flymake-ruff-load)
-  (python-mode . flymake-mode-on))
-
 ;;; PROLOG
 
 (use-package prolog-mode
@@ -944,10 +920,7 @@
 ;;; CC MODE
 
 (use-package cc-mode
-  :defer t
-  :after eglot
-  :config
-  (add-to-list 'eglot-server-programs '((c-mode c++-mode) . ("clangd" "--background-index" "--clang-tidy"))))
+  :defer t)
 
 ;;; HASKELL
 
@@ -979,7 +952,6 @@
   :straight t
   :mode ("\\.mli?\\'" . tuareg-mode)
   :hook
-  ;; (tuareg-mode . eglot-ensure)
   (tuareg-mode . rainbow-delimiters-mode)
   (tuareg-mode . (lambda ()
                    (setq-local comment-style 'multi-line)
