@@ -857,8 +857,7 @@
   :straight t
   :commands (lsp lsp-deferred)
   :init
-  (setq lsp-keymap-prefix "C-c l")
-  )
+  (setq lsp-keymap-prefix "C-c l"))
 
 (use-package consult-lsp
   :straight t
