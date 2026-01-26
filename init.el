@@ -503,12 +503,6 @@
   (sh-indentation 4)
   (sh-basic-offset 4))
 
-(use-package flymake-shellcheck
-  :straight t
-  :after sh-script
-  :hook
-  (sh-mode . flymake-shellcheck-load))
-
 ;;; SUDO EDIT
 
 (use-package sudo-edit
@@ -875,7 +869,6 @@
 (use-package cperl-mode
   :hook
   (perl-mode  . cperl-mode)
-  (cperl-mode . flymake-mode)
   :custom
   (cperl-invalid-face nil)
   (cperl-indent-level 4)
