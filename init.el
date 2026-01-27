@@ -96,6 +96,9 @@
 
 (use-package exec-path-from-shell
   :straight t
+  :custom
+  (exec-path-from-shell-shell-name "bash")
+  (exec-path-from-shell-arguments '("-i"))
   :config
   (exec-path-from-shell-initialize))
 
@@ -926,6 +929,14 @@
 (use-package haskell-mode
   :mode ("\\.hs\\'" . haskell-mode)
   :straight t)
+
+(use-package ghcid
+  :straight (ghcid :type git
+                   :host github
+                   :repo "ndmitchell/ghcid"
+                   :files ("plugins/emacs/ghcid.el"))
+  :after haskell-mode
+  :commands ghcid)
 
 ;;; RUST
 
