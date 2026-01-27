@@ -461,10 +461,9 @@
   (shell-file-name "/bin/bash")
   (shell-kill-buffer-on-exit t)
   :hook
-  (shell-mode . (lambda () ; compatible with shell prompt: PS1='[\u@\h \w]\$ '
+  (shell-mode . (lambda ()
                   (shell-dirtrack-mode -1)
-	              (add-hook 'comint-output-filter-functions
-                            #'comint-osc-process-output nil t))))
+	              (add-hook 'comint-output-filter-functions #'comint-osc-process-output nil t))))
 
 ;;; BASH COMPLETION
 
