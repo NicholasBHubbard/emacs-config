@@ -971,8 +971,6 @@
   :commands comint-mode
   :custom
   (comint-pager "cat")
-  :hook
-  (comint-mode . (lambda () (setq-local comint-process-echoes t)))
   :bind
   (:map comint-mode-map
         ([S-return] . (lambda () (interactive)
