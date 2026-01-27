@@ -92,6 +92,13 @@
 	  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;;; EXEC PATH FROM SHELL
+
+(use-package exec-path-from-shell
+  :straight t
+  :config
+  (exec-path-from-shell-initialize))
+
 ;;; BUFFERS WITH MODE
 
 (use-package buffers-with-mode
