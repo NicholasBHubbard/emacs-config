@@ -463,8 +463,8 @@
   :hook
   (shell-mode . (lambda () ; compatible with shell prompt: PS1='[\u@\h \w]\$ '
                   (shell-dirtrack-mode -1)
-	              (setq-local dirtrack-list '("[[][^@]*@[^ ]* \\([^]]*\\)\\][$#] " 1))
-                  (shell-dirtrack-mode 1))))
+	              (add-hook 'comint-output-filter-functions
+                            #'comint-osc-process-output nil t))))
 
 ;;; BASH COMPLETION
 
