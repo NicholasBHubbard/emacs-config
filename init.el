@@ -898,12 +898,12 @@
 (use-package python
   :mode ("\\.py\\'" . python-mode))
 
-(use-package pet
-  :straight t
-  :blackout
-  :after python
-  :config
-  (add-hook 'python-base-mode-hook 'pet-mode -10))
+;; (use-package pet
+;;   :straight t
+;;   :blackout
+;;   :after python
+;;   :config
+;;   (add-hook 'python-base-mode-hook 'pet-mode -10))
 
 ;;; PROLOG
 
