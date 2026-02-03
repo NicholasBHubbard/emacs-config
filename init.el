@@ -864,13 +864,17 @@
 
 (use-package lsp-mode
   :straight t
+  :blackout
   :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l"))
+  :custom
+  (lsp-enable-symbol-highlighting nil))
 
 (use-package consult-lsp
   :straight t
-  :after lsp-mode)
+  :after lsp-mode
+  :bind*
+  (:map lsp-mode-map
+        ("C-c l" . consult-lsp-diagnostics)))
 
 ;;; CPERL
 
