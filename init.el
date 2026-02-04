@@ -608,12 +608,10 @@
   (erc-kill-server-buffer-on-quit t)
   (erc-server-auto-reconnect t)
   (erc-track-position-in-mode-line nil)
-  (erc-max-buffer-size 30000)
+  (erc-max-buffer-size 500)
   (erc-user-full-name erc-nick)
   (erc-email-userid erc-nick)
-  (erc-log-channels-directory "~/.irc-logs")
-  (erc-generate-log-file-name-function #'erc-generate-log-file-name-network)
-  (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track log))
+  (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track))
   :bind
   (:map erc-mode-map
         ("C-q" . bury-buffer))
@@ -622,8 +620,8 @@
   :config
   (remove-hook 'erc-kill-channel-hook #'erc-part-channel-on-kill)
   :init
-  (defun my/hetzner-ssh-znc-tunnel (&optional arg)
-    (let ((tunnel-process (get-process "hetzner-ssh-znc-tunnel")))
+  (defun my/slackserver-ssh-znc-tunnel (&optional arg)
+    (let ((tunnel-process (get-process "slackserver-ssh-znc-tunnel")))
       (when (and tunnel-process
                  (or arg (not (process-live-p tunnel-process))))
         (message "Deleting existing SSH tunnel...")
@@ -632,35 +630,30 @@
         (sleep-for 2))
       (when (or (not tunnel-process) (not (process-live-p tunnel-process)))
         (message "Starting SSH tunnel...")
-        (make-process :name "hetzner-ssh-znc-tunnel"
+        (make-process :name "slackserver-ssh-znc-tunnel"
                       :command '("ssh" "-L" "6697:localhost:6697" "-n" "-N"
                                  "-o" "ServerAliveInterval=60"
                                  "-o" "ServerAliveCountMax=3"
-                                 "hetzner-debian-vps")
-                      :buffer " *hetzner-ssh-znc-tunnel*"
+                                 "slackserver")
+                      :buffer " *slackserver-ssh-znc-tunnel*"
                       :connection-type 'pty
                       :sentinel #'(lambda (_ msg)
                                     (when (string-match "exited abnormally" msg)
-                                      (kill-buffer " *hetzner-ssh-znc-tunnel*"))))
+                                      (kill-buffer " *slackserver-ssh-znc-tunnel*"))))
         (sleep-for 3)
-        (with-current-buffer " *hetzner-ssh-znc-tunnel*"
+        (with-current-buffer " *slackserver-ssh-znc-tunnel*"
           (add-hook
            'kill-buffer-hook
            #'(lambda () (dolist (buf (buffers-with-mode 'erc-mode)) (kill-buffer buf))) nil t)))))
 
   (defun my/erc (&optional arg)
     (interactive "P")
-    (my/hetzner-ssh-znc-tunnel arg)
-    (erc :server "localhost"
-         :port 6697
-         :id "*znc-libera-server*"
-         :nick erc-nick
-         :password (concat "admin@erc/libera:" (password-store-get "znc-admin")))
-    (erc :server "localhost"
-         :port 6697
-         :id "*znc-perl-server*"
-         :nick erc-nick
-         :password (concat "admin@erc/irc-perl:" (password-store-get "znc-admin"))))
+    (my/slackserver-ssh-znc-tunnel arg)
+    (erc-tls :server "localhost"
+             :port 6697
+             :id "*znc-libera-server*"
+             :nick erc-nick
+             :password (concat "admin@erc/libera:" (password-store-get "znc-admin"))))
 
   (defun my/erc-regain-nick ()
     (interactive)
@@ -933,13 +926,11 @@
   :mode ("\\.hs\\'" . haskell-mode)
   :straight t)
 
-(use-package ghcid
-  :straight (ghcid :type git
-                   :host github
-                   :repo "ndmitchell/ghcid"
-                   :files ("plugins/emacs/ghcid.el"))
+(use-package lsp-haskell
+  :straight t
   :after haskell-mode
-  :commands ghcid)
+  :hook
+  (haskell-mode . lsp))
 
 ;;; RUST
 
