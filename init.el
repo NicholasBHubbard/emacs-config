@@ -926,11 +926,11 @@
   :mode ("\\.hs\\'" . haskell-mode)
   :straight t)
 
-(use-package lsp-haskell
-  :straight t
-  :after haskell-mode
-  :hook
-  (haskell-mode . lsp))
+;; (use-package lsp-haskell
+;;   :straight t
+;;   :after haskell-mode
+;;   :hook
+;;   (haskell-mode . lsp))
 
 ;;; RUST
 
