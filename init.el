@@ -629,18 +629,19 @@
         (sleep-for 2))
       (when (or (not tunnel-process) (not (process-live-p tunnel-process)))
         (message "Starting SSH tunnel...")
-        (if (make-process :name "slackserver-ssh-znc-tunnel"
-                          :command '("ssh" "-L" "6697:localhost:6697" "-n" "-N"
-                                     "-o" "ServerAliveInterval=60"
-                                     "-o" "ServerAliveCountMax=3"
-                                     "slackserver")
-                          :buffer " *slackserver-ssh-znc-tunnel*"
-                          :connection-type 'pty
-                          :sentinel #'(lambda (_ msg)
-                                        (when (string-match "exited abnormally" msg)
-                                          (when-let ((buf (get-buffer " *slackserver-ssh-znc-tunnel*")))
-                                            (kill-buffer buf)))))
-            (user-error "Failed to create ssh tunnel"))
+        (unless (processp
+                 (make-process :name "slackserver-ssh-znc-tunnel"
+                               :command '("ssh" "-L" "6697:localhost:6697" "-n" "-N"
+                                          "-o" "ServerAliveInterval=60"
+                                          "-o" "ServerAliveCountMax=3"
+                                          "slackserver")
+                               :buffer " *slackserver-ssh-znc-tunnel*"
+                               :connection-type 'pty
+                               :sentinel #'(lambda (_ msg)
+                                             (when (string-match "exited abnormally" msg)
+                                               (when-let ((buf (get-buffer " *slackserver-ssh-znc-tunnel*")))
+                                                 (kill-buffer buf))))))
+          (user-error "Failed to create ssh tunnel"))
         (sleep-for 5)
         (with-current-buffer " *slackserver-ssh-znc-tunnel*"
           (add-hook
