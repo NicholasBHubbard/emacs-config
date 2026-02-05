@@ -610,7 +610,6 @@
   (erc-track-position-in-mode-line nil)
   (erc-max-buffer-size 500)
   (erc-user-full-name erc-nick)
-  (erc-email-userid erc-nick)
   (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track))
   :bind
   (:map erc-mode-map
@@ -630,17 +629,19 @@
         (sleep-for 2))
       (when (or (not tunnel-process) (not (process-live-p tunnel-process)))
         (message "Starting SSH tunnel...")
-        (make-process :name "slackserver-ssh-znc-tunnel"
-                      :command '("ssh" "-L" "6697:localhost:6697" "-n" "-N"
-                                 "-o" "ServerAliveInterval=60"
-                                 "-o" "ServerAliveCountMax=3"
-                                 "slackserver")
-                      :buffer " *slackserver-ssh-znc-tunnel*"
-                      :connection-type 'pty
-                      :sentinel #'(lambda (_ msg)
-                                    (when (string-match "exited abnormally" msg)
-                                      (kill-buffer " *slackserver-ssh-znc-tunnel*"))))
-        (sleep-for 3)
+        (if (make-process :name "slackserver-ssh-znc-tunnel"
+                          :command '("ssh" "-L" "6697:localhost:6697" "-n" "-N"
+                                     "-o" "ServerAliveInterval=60"
+                                     "-o" "ServerAliveCountMax=3"
+                                     "slackserver")
+                          :buffer " *slackserver-ssh-znc-tunnel*"
+                          :connection-type 'pty
+                          :sentinel #'(lambda (_ msg)
+                                        (when (string-match "exited abnormally" msg)
+                                          (when-let ((buf (get-buffer " *slackserver-ssh-znc-tunnel*")))
+                                            (kill-buffer buf)))))
+            (user-error "Failed to create ssh tunnel"))
+        (sleep-for 5)
         (with-current-buffer " *slackserver-ssh-znc-tunnel*"
           (add-hook
            'kill-buffer-hook
