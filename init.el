@@ -929,6 +929,11 @@
   :mode ("\\.hs\\'" . haskell-mode)
   :straight t)
 
+(use-package ghcid
+  :straight (ghcid :type git :host github :repo "NicholasBHubbard/ghcid.el")
+  :custom
+  (ghcid-default-opts '("--color=always")))
+
 ;; (use-package lsp-haskell
 ;;   :straight t
 ;;   :after haskell-mode
