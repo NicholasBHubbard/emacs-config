@@ -931,6 +931,7 @@
 
 (use-package ghcid
   :straight (ghcid :type git :host github :repo "NicholasBHubbard/ghcid.el")
+  :commands (ghcid ghcid-mode)
   :custom
   (ghcid-default-opts '("--color=always")))
 
