@@ -631,7 +631,8 @@
         (message "Starting SSH tunnel...")
         (unless (processp
                  (make-process :name "slackserver-ssh-znc-tunnel"
-                               :command '("ssh" "-L" "6697:localhost:6697" "-n" "-N"
+                               :command '("ssh" "-p" "22"
+                                          "-L" "6697:localhost:6697" "-n" "-N"
                                           "-o" "ServerAliveInterval=60"
                                           "-o" "ServerAliveCountMax=3"
                                           "slackserver")
