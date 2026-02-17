@@ -909,7 +909,7 @@
 
 (use-package prolog-mode
   :commands prolog-mode
-  :bind
+  :bind*
   (:map prolog-mode-map
         ("C-c RET" . nil)))
 
