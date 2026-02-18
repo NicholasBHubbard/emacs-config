@@ -1169,6 +1169,8 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (mm-verify-option 'known)
   (mm-decrypt-option 'known)
   (gnus-always-read-dribble-file nil)
+  (gnus-parameters '((".*" (display . all))))
+  (gnus-use-scoring nil)
   (gnus-summary-next-group-on-exit nil)
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
