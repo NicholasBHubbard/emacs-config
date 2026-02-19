@@ -931,7 +931,7 @@
 
 (use-package ghcid
   :straight (ghcid :type git :host github :repo "NicholasBHubbard/ghcid.el")
-  :commands (ghcid-start ghcid-pop-to-buffer ghcid-pop-to-buffer-or-start))
+  :commands (ghcid-start ghcid-pop-to-buffer-or-start))
 
 ;; (use-package lsp-haskell
 ;;   :straight t
