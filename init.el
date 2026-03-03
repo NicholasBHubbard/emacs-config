@@ -539,7 +539,8 @@
   :bind*
   ("C-'" . flash-jump)
   :custom
-  (flash-multi-window t))
+  (flash-multi-window t)
+  (flash-rainbow t))
 
 ;;; EXPAND REGION
 
