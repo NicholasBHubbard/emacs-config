@@ -542,7 +542,8 @@
   (flash-multi-window t)
   (flash-jumplist t)
   (flash-label-uppercase t)
-  (flash-rainbow t))
+  (flash-rainbow t)
+  (flash-rainbow-shade 5))
 
 ;;; EXPAND REGION
 
