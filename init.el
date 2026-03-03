@@ -215,35 +215,35 @@
 
 ;;; ORG
 
-(use-package org
-  :ensure nil
-  :bind* ("C-c c" . org-capture)
-  :hook
-  (org-mode . visual-line-mode)
-  :custom
-  (org-directory (concat user-emacs-directory "org/"))
-  (org-default-notes-file (concat org-directory "brain.org"))
+;; (use-package org
+;;   :ensure nil
+;;   :bind* ("C-c c" . org-capture)
+;;   :hook
+;;   (org-mode . visual-line-mode)
+;;   :custom
+;;   (org-directory (concat user-emacs-directory "org/"))
+;;   (org-default-notes-file (concat org-directory "brain.org"))
 
-  (org-capture-templates
-   '(("t" "TODO" entry (file org-default-notes-file)
-      "* TODO: %?\n  [%a]\n  %U" :prepend t :empty-lines-after 2)
+;;   (org-capture-templates
+;;    '(("t" "TODO" entry (file org-default-notes-file)
+;;       "* TODO: %?\n  [%a]\n  %U" :prepend t :empty-lines-after 2)
 
-     ("r" "Remember" entry (file org-default-notes-file)
-      "* NOTE: %?\n  [%a]\n  %U" :prepend t :empty-lines-after 2)))
+;;      ("r" "Remember" entry (file org-default-notes-file)
+;;       "* NOTE: %?\n  [%a]\n  %U" :prepend t :empty-lines-after 2)))
 
-  :config
-  (setopt
-   display-buffer-alist
-   (cons '("\\*Org Select\\*" (display-buffer-below-selected))
-         display-buffer-alist))
-  (setopt
-   display-buffer-alist
-   (cons '("CAPTURE*" (display-buffer-below-selected))
-         display-buffer-alist))
+;;   :config
+;;   (setopt
+;;    display-buffer-alist
+;;    (cons '("\\*Org Select\\*" (display-buffer-below-selected))
+;;          display-buffer-alist))
+;;   (setopt
+;;    display-buffer-alist
+;;    (cons '("CAPTURE*" (display-buffer-below-selected))
+;;          display-buffer-alist))
 
 
-  (unless (file-directory-p org-directory)
-    (make-directory org-directory)))
+;;   (unless (file-directory-p org-directory)
+;;     (make-directory org-directory)))
 
 ;;; WHICH FUNCTION
 
