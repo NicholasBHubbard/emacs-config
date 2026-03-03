@@ -522,15 +522,24 @@
 
 ;;; AVY
 
-(use-package avy
+;; (use-package avy
+;;   :straight t
+;;   :bind*
+;;   ("C-'" . avy-goto-char-timer)
+;;   :custom
+;;   (avy-timeout-seconds 0.4)
+;;   (avy-single-candidate-jump t)
+;;   (avy-style 'at-full)
+;;   (avy-case-fold-search nil))
+
+;;; FLASH
+
+(use-package flash
   :straight t
   :bind*
-  ("C-'" . avy-goto-char-timer)
+  ("C-'" . flash-jump)
   :custom
-  (avy-timeout-seconds 0.4)
-  (avy-single-candidate-jump t)
-  (avy-style 'at-full)
-  (avy-case-fold-search nil))
+  (flash-multi-window t))
 
 ;;; EXPAND REGION
 
