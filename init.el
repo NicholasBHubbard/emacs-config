@@ -540,6 +540,7 @@
   ("C-'" . flash-jump)
   :custom
   (flash-multi-window t)
+  (flash-jumplist t)
   (flash-rainbow t))
 
 ;;; EXPAND REGION
