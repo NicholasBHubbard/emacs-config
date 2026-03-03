@@ -541,6 +541,7 @@
   :custom
   (flash-multi-window t)
   (flash-jumplist t)
+  (flash-label-uppercase t)
   (flash-rainbow t))
 
 ;;; EXPAND REGION
