@@ -453,6 +453,18 @@
                           (let ((inhibit-read-only t))
                             (ansi-color-apply-on-region compilation-filter-start (point-max))))))
 
+;;; EAT
+
+(use-package eat
+  :straight t
+  :commands (eat eat-mode))
+
+;;; VTERM
+
+(use-package vterm
+  :straight t
+  :commands (vterm vterm-mode))
+
 ;;; SHELL
 
 (use-package shell
@@ -1217,6 +1229,15 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
   (gptel-make-anthropic "Claude"
     :stream t
     :key #'(lambda () (password-store-get "anthropic-api-key"))))
+
+;;; CLAUDE CODE
+
+(use-package claude-code
+  :straight t
+  :bind*
+  ("C-c c" . claude-code-transient)
+  :custom
+  (claude-code-terminal-backend 'eat))
 
 ;;; YAML
 
