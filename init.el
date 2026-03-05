@@ -17,7 +17,6 @@
   (scroll-step 1)
   (scroll-conservatively 101)
   (display-line-numbers-type t)
-  (redisplay-dont-pause t)
   (auto-save-default nil)
   (delete-by-moving-to-trash nil)
   (make-backup-files nil)
@@ -325,7 +324,7 @@
   (corfu-history-mode 1)
   :custom
   (corfu-auto t)
-  (corfu-auto-delay 0)
+  (corfu-auto-delay 0.1)
   (corfu-auto-prefix 3)
   (corfu-cycle t)
   (corfu-on-exact-match nil)
@@ -731,6 +730,7 @@
   :custom
   (magit-clone-default-directory "~/p/")
   (git-commit-major-mode 'git-commit-elisp-text-mode)
+  :config
   (magit-auto-revert-mode 1))
 
 ;;; MAGIT TODOS
@@ -749,7 +749,7 @@
 (use-package vc
   :defer t
   :custom
-  (mode-line-format (delete '(vc-mode vc-mode) mode-line-format))
+  (mode-line-format (remove '(vc-mode vc-mode) mode-line-format))
   (vc-follow-symlinks t)
   (auto-revert-check-vc-info t))
 
@@ -1143,7 +1143,6 @@
 ;;; MESSAGE
 
 (use-package message
-  :commands compose-mail
   :after gnus
   :commands (compose-mail message-send message-send-and-exit)
   :custom
@@ -1294,11 +1293,11 @@ Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
 
 ;;; ALERT
 
-(use-package alert
-  :straight t
-  :commands alert
-  :init
-  (setq alert-default-style 'notifier))
+;; (use-package alert
+;;   :straight t
+;;   :commands alert
+;;   :init
+;;   (setq alert-default-style 'notifier))
 
 ;;; DOCKER
 
