@@ -1152,9 +1152,11 @@
   (message-kill-buffer-on-exit t)
   (message-send-mail-function #'message-smtpmail-send-it)
   (mml-secure-openpgp-signers '("508022AE06C2C446D8072447C700A066BB25F148"))
-  (message-signature "Nicholas B. Hubbard
-Keys: https://github.com/NicholasBHubbard/public-keys
-Key ID: 508022AE06C2C446D8072447C700A066BB25F148")
+  (message-signature
+   (let ((nl (propertize "\n" 'hard t)))
+     (concat "Nicholas B. Hubbard" nl
+             "Keys: https://github.com/NicholasBHubbard/public-keys" nl
+             "Key ID: 508022AE06C2C446D8072447C700A066BB25F148")))
   :hook
   (message-send . mml-secure-message-sign-pgpmime)
   (message-sent . message-put-addresses-in-ecomplete))
