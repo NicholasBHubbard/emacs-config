@@ -1219,26 +1219,34 @@
 
 ;;; GPTEL
 
-(use-package gptel
-  :straight t
-  :bind*
-  ("C-c RET" . gptel-send)
-  :custom
-  (gptel-default-mode 'markdown-mode)
-  (gptel-api-key #'(lambda () (password-store-get "openai-api-key")))
-  :config
-  (gptel-make-anthropic "Claude"
-    :stream t
-    :key #'(lambda () (password-store-get "anthropic-api-key"))))
+;; (use-package gptel
+;;   :straight t
+;;   :bind*
+;;   ("C-c RET" . gptel-send)
+;;   :custom
+;;   (gptel-default-mode 'markdown-mode)
+;;   (gptel-api-key #'(lambda () (password-store-get "openai-api-key")))
+;;   :config
+;;   (gptel-make-anthropic "Claude"
+;;     :stream t
+;;     :key #'(lambda () (password-store-get "anthropic-api-key"))))
 
 ;;; CLAUDE CODE
 
-(use-package claude-code
+;; (use-package claude-code
+;;   :straight t
+;;   :bind*
+;;   ("C-c c" . claude-code-transient)
+;;   :custom
+;;   (claude-code-terminal-backend 'eat))
+
+;;; AGENT SHELL
+
+(use-package agent-shell
   :straight t
-  :bind*
-  ("C-c c" . claude-code-transient)
+  :commands agent-shell
   :custom
-  (claude-code-terminal-backend 'eat))
+  (agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)))
 
 ;;; YAML
 
