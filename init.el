@@ -680,7 +680,12 @@
              :port 6697
              :id "*znc-libera-server*"
              :nick erc-nick
-             :password (concat "admin@erc/libera:" (password-store-get "znc-admin"))))
+             :password (concat "admin@erc/libera:" (password-store-get "znc-admin")))
+    (erc-tls :server "localhost"
+             :port 6697
+             :id "*znc-perl-server*"
+             :nick erc-nick
+             :password (concat "admin@erc/perl:" (password-store-get "znc-admin"))))
 
   (defun my/erc-regain-nick ()
     (interactive)
@@ -1245,6 +1250,8 @@
 (use-package agent-shell
   :straight t
   :commands agent-shell
+  :bind*
+  ("C-c c" . agent-shell-help-menu)
   :custom
   (agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)))
 
@@ -1317,6 +1324,7 @@
   :bind*
   ("C-c d" . docker)
   :custom
+  (docker-terminal-backend 'shell)
   (docker-image-default-sort-key '("Repository" . "Ascending")))
 
 (use-package dockerfile-mode
