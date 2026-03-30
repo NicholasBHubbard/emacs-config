@@ -1253,7 +1253,8 @@
   :bind*
   ("C-c c" . agent-shell-help-menu)
   :custom
-  (agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)))
+  (agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config))
+  (agent-shell-anthropic-default-model-id "opus"))
 
 ;;; YAML
 
