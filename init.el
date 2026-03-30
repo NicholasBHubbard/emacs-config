@@ -626,13 +626,13 @@
   :commands (erc erc-tls)
   :custom
   (erc-nick "seven3")
-  (erc-hide-list '("JOIN" "PART" "QUIT" "AWAY" "NICK" "353" "366"))
+  ;; (erc-hide-list '("JOIN" "PART" "QUIT" "AWAY" "NICK" "353" "366"))
   (erc-kill-buffer-on-part t)
   (erc-kill-queries-on-quit t)
   (erc-kill-server-buffer-on-quit t)
   (erc-server-auto-reconnect t)
   (erc-track-position-in-mode-line nil)
-  (erc-max-buffer-size 500)
+  (erc-max-buffer-size 1150)
   (erc-user-full-name erc-nick)
   (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track))
   :bind
