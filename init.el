@@ -774,6 +774,7 @@
   (diff-hl-show-staged-changes nil)
   (diff-hl-update-async nil)
   (diff-hl-ask-before-revert-hunk nil)
+  (diff-hl-next-previous-hunk-auto-recenter t)
   :config
   (diff-hl-margin-mode 1)
   (diff-hl-flydiff-mode 0)
