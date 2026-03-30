@@ -42,7 +42,7 @@
   (setq-default fill-column 80)
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (setq-default c-basic-offset 4)
-  (invert-face 'default)
+  ;; (invert-face 'default)
   (scroll-bar-mode 0)
   (menu-bar-mode 0)
   (set-fringe-mode 0)
@@ -119,6 +119,16 @@
 ;;      (bg-line-number-inactive unspecified)))
 ;;   :config
 ;;   (load-theme 'modus-vivendi-tritanopia t))
+
+;;; EF THEMES
+
+(use-package ef-themes
+  :straight t
+  :ensure t
+  :custom
+  (modus-themes-disable-other-themes t)
+  :config
+  (load-theme 'ef-dark t))
 
 ;;; BLACKOUT
 
