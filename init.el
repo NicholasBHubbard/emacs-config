@@ -639,7 +639,7 @@
   (:map erc-mode-map
         ("C-q" . bury-buffer))
   :hook
-  (erc-after-connect . (lambda () (erc-send-line "ZNC *playback PLAY * 0" #'ignore)))
+  (erc-after-connect . (lambda () (erc-send-line "/ZNC *playback PLAY * 0" #'ignore)))
   :config
   (remove-hook 'erc-kill-channel-hook #'erc-part-channel-on-kill)
   :init
