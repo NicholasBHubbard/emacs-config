@@ -626,7 +626,7 @@
   :commands (erc erc-tls)
   :custom
   (erc-nick "seven3")
-  ;; (erc-hide-list '("JOIN" "PART" "QUIT" "AWAY" "NICK" "353" "366"))
+  (erc-hide-list '("353" "366")) ; hide user list
   (erc-kill-buffer-on-part t)
   (erc-kill-queries-on-quit t)
   (erc-kill-server-buffer-on-quit t)
