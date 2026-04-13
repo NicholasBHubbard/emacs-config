@@ -1269,7 +1269,12 @@
   ("C-c c" . agent-shell-help-menu)
   :custom
   (agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config))
-  (agent-shell-anthropic-default-model-id "opus"))
+  (agent-shell-anthropic-default-model-id "opus")
+  (agent-shell-dot-subdir-function
+   (lambda (subdir)
+     (let ((project-path (directory-file-name (agent-shell-cwd))))
+       (expand-file-name (file-name-concat ".agent-shell" project-path subdir)
+                         user-emacs-directory)))))
 
 ;;; YAML
 
