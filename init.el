@@ -366,7 +366,11 @@
   :defer t
   :custom
   (project-list-file (expand-file-name ".projects" user-emacs-directory))
-  (project-switch-commands 'project-dired))
+  (project-switch-commands 'project-dired)
+  :hook
+  (project-find-functions . (lambda (dir)
+                              (when-let ((root (locate-dominating-file dir ".project")))
+                                (cons 'transient root)))))
 
 (use-package disproject
   :straight t
