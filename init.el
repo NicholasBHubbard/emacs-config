@@ -1273,7 +1273,7 @@
   (agent-shell-dot-subdir-function
    (lambda (subdir)
      (let ((project-path (directory-file-name (agent-shell-cwd))))
-       (expand-file-name (file-name-concat ".agent-shell" project-path subdir)
+       (expand-file-name (file-name-concat ".agent-shell/" project-path subdir)
                          user-emacs-directory)))))
 
 ;;; YAML
