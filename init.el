@@ -3,6 +3,13 @@
 (setq debug-on-error t)
 (add-hook 'after-init-hook #'(lambda () (setq debug-on-error nil)))
 
+;;; USE PACKAGE
+
+(use-package use-package
+  :demand t
+  :custom
+  (use-package-hook-name-suffix nil))
+
 ;;; DEFAULT
 
 (use-package emacs
@@ -57,10 +64,10 @@
   (delete-selection-mode 1)
   (prefer-coding-system 'utf-8)
   :hook
-  (prog-mode . display-line-numbers-mode)
-  (text-mode . display-line-numbers-mode)
-  (prog-mode . display-fill-column-indicator-mode)
-  (text-mode . display-fill-column-indicator-mode)
+  (prog-mode-hook . display-line-numbers-mode)
+  (text-mode-hook . display-line-numbers-mode)
+  (prog-mode-hook . display-fill-column-indicator-mode)
+  (text-mode-hook . display-fill-column-indicator-mode)
   :bind*
   ("C-S-<backspace>" . (lambda () (interactive) (call-interactively #'kill-whole-line)))
   ("C-M-p"       . (lambda () (interactive) (scroll-up 1)))
@@ -151,9 +158,9 @@
   :straight t
   :blackout
   :hook
-  (prog-mode . smartparens-mode)
-  (text-mode . smartparens-mode)
-  (markdown-mode . smartparens-mode)
+  (prog-mode-hook . smartparens-mode)
+  (text-mode-hook . smartparens-mode)
+  (markdown-mode-hook . smartparens-mode)
   :config
   (require 'smartparens-config)
   :bind
@@ -259,7 +266,7 @@
 (use-package which-func
   :commands which-function-mode
   :hook
-  (prog-mode . (lambda () (which-function-mode 1))))
+  (prog-mode-hook . (lambda () (which-function-mode 1))))
 
 ;;; PRESCIENT
 
@@ -392,7 +399,7 @@
   :straight (:host github :repo "jimeh/yank-indent")
   :blackout
   :hook
-  (prog-mode . yank-indent-mode))
+  (prog-mode-hook . yank-indent-mode))
 
 ;;; CLEAN KILL RING
 
@@ -462,9 +469,9 @@
   (compilation-scroll-output t)
   (compilation-max-output-line-length nil)
   :hook
-  (compilation-filter . (lambda ()
-                          (let ((inhibit-read-only t))
-                            (ansi-color-apply-on-region compilation-filter-start (point-max))))))
+  (compilation-filter-hook . (lambda ()
+                               (let ((inhibit-read-only t))
+                                 (ansi-color-apply-on-region compilation-filter-start (point-max))))))
 
 ;;; EAT
 
@@ -486,9 +493,9 @@
   (shell-file-name "/bin/bash")
   (shell-kill-buffer-on-exit t)
   :hook
-  (shell-mode . (lambda ()
-                  (shell-dirtrack-mode -1)
-	              (add-hook 'comint-output-filter-functions #'comint-osc-process-output nil t))))
+  (shell-mode-hook . (lambda ()
+                       (shell-dirtrack-mode -1)
+		               (add-hook 'comint-output-filter-functions #'comint-osc-process-output nil t))))
 
 ;;; BASH COMPLETION
 
@@ -527,7 +534,7 @@
 (use-package shx
   :straight t
   :hook
-  (shell-mode . shx-mode))
+  (shell-mode-hook . shx-mode))
 
 ;;; SH SCRIPT
 
@@ -600,18 +607,18 @@
 
 (use-package elisp-mode
   :hook
-  (emacs-lisp-mode . rainbow-delimiters-mode)
-  (emacs-lisp-mode . aggressive-indent-mode)
-  (emacs-lisp-mode . smartparens-strict-mode))
+  (emacs-lisp-mode-hook . rainbow-delimiters-mode)
+  (emacs-lisp-mode-hook . aggressive-indent-mode)
+  (emacs-lisp-mode-hook . smartparens-strict-mode))
 
 ;;; IELM
 
 (use-package ielm
   :commands ielm
   :hook
-  (ielm-mode . rainbow-delimiters-mode)
-  (ielm-mode . aggressive-indent-mode)
-  (ielm-mode . smartparens-strict-mode))
+  (ielm-mode-hook . rainbow-delimiters-mode)
+  (ielm-mode-hook . aggressive-indent-mode)
+  (ielm-mode-hook . smartparens-strict-mode))
 
 ;;; ELDOC
 
@@ -653,10 +660,13 @@
   (:map erc-mode-map
         ("C-q" . bury-buffer))
   :hook
-  (erc-after-connect . (lambda () (erc-send-line "ZNC *playback PLAY * 0" #'ignore)))
+  (erc-after-connect . my/erc-znc-request-playback)
   :config
   (remove-hook 'erc-kill-channel-hook #'erc-part-channel-on-kill)
   :init
+  (defun my/erc-znc-request-playback (_server _nick)
+    (erc-send-line "ZNC *playback PLAY * 0" #'ignore))
+
   (defun my/slackserver-ssh-znc-tunnel (&optional arg)
     (let ((tunnel-process (get-process "slackserver-ssh-znc-tunnel")))
       (when (and tunnel-process
@@ -738,8 +748,8 @@
   :custom
   (ws-butler-keep-whitespace-before-point nil)
   :hook
-  (prog-mode . ws-butler-mode)
-  (text-mode . ws-butler-mode))
+  (prog-mode-hook . ws-butler-mode)
+  (text-mode-hook . ws-butler-mode))
 
 ;;; MAGIT
 
@@ -793,7 +803,7 @@
   (diff-hl-margin-mode 1)
   (diff-hl-flydiff-mode 0)
   :hook
-  (magit-post-refresh . diff-hl-magit-post-refresh)
+  (magit-post-refresh-hook . diff-hl-magit-post-refresh)
   :bind
   (:map diff-hl-mode-map
         ("C-c g" . diff-hl-hydra/body))
@@ -824,8 +834,8 @@
 (use-package dired
   :commands dired
   :hook
-  (dired-mode . auto-revert-mode)
-  (dired-mode . (lambda () (rename-buffer (concat "dired: " dired-directory))))
+  (dired-mode-hook . auto-revert-mode)
+  (dired-mode-hook . (lambda () (rename-buffer (concat "dired: " dired-directory))))
   :custom
   (dired-listing-switches "-DAlh --group-directories-first")
   (dired-recursive-copies 'always)
@@ -921,7 +931,7 @@
 
 (use-package cperl-mode
   :hook
-  (perl-mode  . cperl-mode)
+  (perl-mode-hook  . cperl-mode)
   :custom
   (cperl-invalid-face nil)
   (cperl-indent-level 4)
@@ -1008,16 +1018,16 @@
   :straight t
   :mode ("\\.mli?\\'" . tuareg-mode)
   :hook
-  (tuareg-mode . rainbow-delimiters-mode)
-  (tuareg-mode . (lambda ()
-                   (setq-local comment-style 'multi-line)
-                   (setq-local comment-continue "   "))))
+  (tuareg-mode-hook . rainbow-delimiters-mode)
+  (tuareg-mode-hook . (lambda ()
+                        (setq-local comment-style 'multi-line)
+                        (setq-local comment-continue "   "))))
 
 (use-package merlin
   :straight t
   :after tuareg
   :hook
-  (tuareg-mode . merlin-mode))
+  (tuareg-mode-hook . merlin-mode))
 
 ;;; IY GO TO CHAR
 
@@ -1178,8 +1188,8 @@
              "Keys: https://github.com/NicholasBHubbard/public-keys" nl
              "Key ID: 508022AE06C2C446D8072447C700A066BB25F148")))
   :hook
-  (message-send . mml-secure-message-sign-pgpmime)
-  (message-sent . message-put-addresses-in-ecomplete))
+  (message-send-hook . mml-secure-message-sign-pgpmime)
+  (message-sent-hook . message-put-addresses-in-ecomplete))
 
 ;;; MESSAGES ARE FLOWING
 
@@ -1187,7 +1197,7 @@
   :straight t
   :after message
   :hook
-  (message-mode . messages-are-flowing-use-and-mark-hard-newlines))
+  (message-mode-hook . messages-are-flowing-use-and-mark-hard-newlines))
 
 ;;; GNUS
 
@@ -1195,10 +1205,10 @@
   :defer t
   :commands gnus
   :hook
-  (gnus-summary-exit . (lambda () (dolist (buf (buffers-with-mode 'gnus-article-mode))
-                                    (when-let ((win (get-buffer-window buf)))
-                                      (delete-window win)))))
-  (gnus-started . gnus-group-list-all-groups)
+  (gnus-summary-exit-hook . (lambda () (dolist (buf (buffers-with-mode 'gnus-article-mode))
+                                         (when-let ((win (get-buffer-window buf)))
+                                           (delete-window win)))))
+  (gnus-started-hook . gnus-group-list-all-groups)
   :bind
   (:map gnus-article-mode-map
         ("q" . gnus-summary-expand-window))
@@ -1318,14 +1328,14 @@
   (pdf-tools-install t)
   (pdf-loader-install t)
   :hook
-  (pdf-view-mode . pdf-view-midnight-minor-mode)
+  (pdf-view-mode-hook . pdf-view-midnight-minor-mode)
   (TeX-after-compilation-finished-functions . TeX-revert-document-buffer))
 
 (use-package pdf-view-restore
   :straight t
   :after pdf-tools
   :hook
-  (pdf-view-mode . pdf-view-restore-mode)
+  (pdf-view-mode-hook . pdf-view-restore-mode)
   :custom
   (pdf-view-restore-filename (concat user-emacs-directory ".pdf-view-restore")))
 
