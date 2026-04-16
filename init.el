@@ -176,12 +176,34 @@
 
 ;;; YASNIPPET
 
-;; (use-package yasnippet
-;;   :straight t
-;;   :blackout yas-minor-mode
-;;   :config
-;;   (use-package yasnippet-snippets :straight t)
-;;   (yas-global-mode 1))
+(use-package yasnippet
+  :straight t
+  :blackout yas-minor-mode
+  :hook
+  (prog-mode-hook . yas-minor-mode)
+  (text-mode-hook . yas-minor-mode)
+  (conf-mode-hook . yas-minor-mode)
+  :config
+  (yas-reload-all))
+
+(use-package yasnippet-snippets
+  :straight t
+  :after yasnippet)
+
+(use-package yasnippet-capf
+  :straight t
+  :preface
+  (defun my/yas-capf-setup ()
+    (setq-local corfu-auto-trigger ";")
+    (add-hook 'completion-at-point-functions
+              (cape-capf-properties
+               (cape-capf-trigger #'yasnippet-capf ?\;)
+               :annotation-function #'(lambda (&rest _args) " YAS"))
+              nil t))
+  :hook
+  (prog-mode-hook . my/yas-capf-setup)
+  (text-mode-hook . my/yas-capf-setup)
+  (conf-mode-hook . my/yas-capf-setup))
 
 ;;; MARGINALIA
 
@@ -343,7 +365,7 @@
   (corfu-auto t)
   (corfu-auto-delay 0.1)
   (corfu-auto-prefix 3)
-  (corfu-auto-trigger "/")
+  (corfu-auto-trigger nil)
   (corfu-cycle t)
   (corfu-on-exact-match nil)
   (corfu-preselect 'prompt)
