@@ -354,8 +354,6 @@
 
 (use-package cape
   :straight t
-  :bind
-  ("M-<tab>" . cape-prefix-map)
   :init
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev))
