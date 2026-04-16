@@ -343,6 +343,7 @@
   (corfu-auto t)
   (corfu-auto-delay 0.1)
   (corfu-auto-prefix 3)
+  (corfu-auto-trigger "/")
   (corfu-cycle t)
   (corfu-on-exact-match nil)
   (corfu-preselect 'prompt)
