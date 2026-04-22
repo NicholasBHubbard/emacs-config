@@ -722,17 +722,17 @@
                :port 6697
                :id "*znc-libera-server*"
                :nick erc-nick
-               :password pass)
+               :password (concat "admin@erc/libera:" pass))
       (erc-tls :server "localhost"
                :port 6697
                :id "*znc-perl-server*"
                :nick erc-nick
-               :password pass)
+               :password (concat "admin@erc/perl:" pass))
       (erc-tls :server "localhost"
                :port 6697
                :id "*znc-overnet-canary-server*"
                :nick erc-nick
-               :password pass)))
+               :password (concat "admin@erc/overnet:" pass))))
 
   (defun my/erc-regain-nick ()
     (interactive)
