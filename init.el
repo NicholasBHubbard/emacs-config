@@ -1029,6 +1029,16 @@
   (proof-script-fly-past-comments t)
   (coq-compile-before-require t))
 
+;;; PLLISP
+
+(use-package pllisp-mode
+  :straight (pllisp-mode
+             :type git
+             :host github
+             :repo "NicholasBHubbard/pllisp"
+             :files ("extras/pllisp-mode.el"))
+  :mode ("\\.pll\\'" . pllisp-mode))
+
 ;;; OCAML
 
 (use-package tuareg
