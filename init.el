@@ -339,6 +339,15 @@
      consult-dir--source-tramp-local
      consult-dir--source-tramp-ssh)))
 
+;;; WGREP
+
+(use-package wgrep
+  :straight t
+  :commands wgrep-change-to-wgrep-mode
+  :custom
+  (wgrep-auto-save-buffer t)
+  (wgrep-change-readonly-file t))
+
 ;;; VERTICO
 
 (use-package vertico
