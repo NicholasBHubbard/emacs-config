@@ -1052,7 +1052,8 @@
              :host github
              :repo "NicholasBHubbard/pllisp"
              :files ("extras/pllisp-mode.el"))
-  :mode ("\\.pll\\'" . pllisp-mode)
+  :mode (("\\.pll\\'" . pllisp-mode)
+         ("\\.pllisp\\'" . pllisp-mode))
   :hook
   (pllisp-mode-hook . rainbow-delimiters-mode))
 
