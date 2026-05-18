@@ -775,7 +775,7 @@
 ;;; WS BUTLER
 
 (use-package ws-butler
-  :straight (ws-butler :type git :host github :repo "lewang/ws-butler")
+  :straight t
   :blackout
   :custom
   (ws-butler-keep-whitespace-before-point nil)
