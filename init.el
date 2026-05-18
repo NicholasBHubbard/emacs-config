@@ -519,6 +519,7 @@
   (shell-file-name "/bin/bash")
   (shell-kill-buffer-on-exit t)
   :hook
+  (shell-mode-hook . (lambda () (setq-local corfu-auto nil)))
   (shell-mode-hook . (lambda ()
                        (shell-dirtrack-mode -1)
 		               (add-hook 'comint-output-filter-functions #'comint-osc-process-output nil t))))
@@ -529,7 +530,7 @@
   :straight t
   :after shell
   :custom
-  (bash-completion-use-separate-processes t)
+  (bash-completion-use-separate-processes nil)
   :config
   (bash-completion-setup))
 
