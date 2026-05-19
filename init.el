@@ -1332,6 +1332,8 @@
   :custom
   (agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config))
   (agent-shell-anthropic-default-model-id "opus")
+  (agent-shell-header-style 'text)
+  (agent-shell-show-config-icons nil)
   (agent-shell-dot-subdir-function
    (lambda (subdir)
      (let ((project-path (agent-shell-cwd)))
