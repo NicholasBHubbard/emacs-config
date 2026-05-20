@@ -1325,7 +1325,8 @@
   ("C-c c" . agent-shell-help-menu)
   :config
   (exec-path-from-shell-copy-envs
-   '("CLAUDE_CODE_MAX_OUTPUT_TOKENS"
+   '("CLAUDE_CODE_EFFORT_LEVEL"
+     "CLAUDE_CODE_MAX_OUTPUT_TOKENS"
      "CLOUD_ML_REGION"
      "CLAUDE_CODE_USE_VERTEX"
      "ANTHROPIC_VERTEX_PROJECT_ID"))
