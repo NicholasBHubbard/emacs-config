@@ -106,7 +106,9 @@
   (exec-path-from-shell-shell-name "bash")
   (exec-path-from-shell-arguments '("-i"))
   :config
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-envs
+   '("SUDO_ASKPASS")))
 
 ;;; BUFFERS WITH MODE
 
