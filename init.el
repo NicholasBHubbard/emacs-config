@@ -426,8 +426,7 @@
 (use-package yank-indent
   :straight (:host github :repo "jimeh/yank-indent")
   :blackout
-  :hook
-  (prog-mode-hook . yank-indent-mode))
+  :commands yank-indent-mode)
 
 ;;; CLEAN KILL RING
 
