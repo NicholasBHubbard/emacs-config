@@ -730,21 +730,21 @@
     (interactive "P")
     (when-let ((pass (password-store-get "znc-admin")))
       (my/slackserver-ssh-znc-tunnel arg)
+      ;; (erc-tls :server "localhost"
+      ;;          :port 6697
+      ;;          :id "*znc-perl-server*"
+      ;;          :nick erc-nick
+      ;;          :password (concat "admin@erc/perl:" pass))
+      ;; (erc-tls :server "localhost"
+      ;;          :port 6697
+      ;;          :id "*znc-overnet-canary-server*"
+      ;;          :nick erc-nick
+      ;;          :password (concat "admin@erc/overnet:" pass)))
       (erc-tls :server "localhost"
                :port 6697
                :id "*znc-libera-server*"
                :nick erc-nick
-               :password (concat "admin@erc/libera:" pass))
-      (erc-tls :server "localhost"
-               :port 6697
-               :id "*znc-perl-server*"
-               :nick erc-nick
-               :password (concat "admin@erc/perl:" pass))
-      (erc-tls :server "localhost"
-               :port 6697
-               :id "*znc-overnet-canary-server*"
-               :nick erc-nick
-               :password (concat "admin@erc/overnet:" pass))))
+               :password (concat "admin@erc/libera:" pass)))
 
   (defun my/erc-regain-nick ()
     (interactive)
