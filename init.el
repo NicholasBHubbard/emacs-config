@@ -40,6 +40,7 @@
   (inhibit-startup-screen t)
   (mode-line-percent-position nil)
   (auto-revert-verbose nil)
+  (window-sides-vertical t)
   (display-buffer-base-action '(display-buffer-same-window))
   :config
   (setq-default require-final-newline t)
@@ -1401,6 +1402,12 @@
 ;;   :commands alert
 ;;   :init
 ;;   (setq alert-default-style 'notifier))
+
+;;; DAPE
+
+(use-package dape
+  :straight t
+  :commands dape)
 
 ;;; DOCKER
 
