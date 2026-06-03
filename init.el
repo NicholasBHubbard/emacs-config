@@ -952,6 +952,10 @@
   :blackout
   :commands (lsp lsp-deferred)
   :custom
+  (lsp-auto-guess-root t)
+  (lsp-enable-snippet nil)
+  (lsp-enable-folding nil)
+  (lsp-idle-delay 0.5)
   (lsp-enable-symbol-highlighting nil))
 
 (use-package consult-lsp
