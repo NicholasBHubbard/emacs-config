@@ -1014,7 +1014,10 @@
 ;;; CC MODE
 
 (use-package cc-mode
-  :defer t)
+  :defer t
+  :hook
+  (c-mode-hook . lsp)
+  (c++-mode-hook . lsp))
 
 ;;; HASKELL
 
