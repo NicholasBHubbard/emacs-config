@@ -260,6 +260,7 @@
   :commands (flymake-mode flymake-start)
   :custom
   (flymake-no-changes-timeout nil)
+  (flymake-fringe-indicator-position nil)
   (flymake-fringe-indicators nil))
 
 ;;; ORG
