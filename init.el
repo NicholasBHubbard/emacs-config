@@ -215,6 +215,13 @@
   :config
   (marginalia-mode 1))
 
+;;; TRANSIENT
+
+(use-package transient
+  :defer t
+  :custom
+  (transient-default-level 7))
+
 ;;; WINNER
 
 (use-package winner
