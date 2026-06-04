@@ -1455,7 +1455,7 @@
   (jira-base-url "https://redhat.atlassian.net")
   (jira-username "nhubbard@redhat.com")
   (jira-token (password-store-get "jira-token"))
-  (jira-token-is-personal-access-token t)
+  (jira-token-is-personal-access-token nil)
   (jira-api-version 2))
 
 ;;; AUTOTEST
