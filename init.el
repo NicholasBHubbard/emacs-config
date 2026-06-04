@@ -1338,6 +1338,8 @@
   :commands agent-shell
   :bind*
   ("C-c c" . agent-shell-help-menu)
+  (:map agent-shell-mode-map
+        ("C-q" . bury-buffer))
   :config
   (exec-path-from-shell-copy-envs
    '("CLAUDE_CODE_EFFORT_LEVEL"
