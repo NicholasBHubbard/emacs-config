@@ -1452,7 +1452,7 @@
   :straight t
   :commands (jira-issues jira-issues-menu)
   :custom
-  (jira-base-url "https://issues.redhat.com")
+  (jira-base-url "https://redhat.atlassian.net")
   (jira-username "nhubbard@redhat.com")
   (jira-token (password-store-get "jira-token"))
   (jira-token-is-personal-access-token t)
