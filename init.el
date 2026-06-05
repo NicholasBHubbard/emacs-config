@@ -41,6 +41,7 @@
   (mode-line-percent-position nil)
   (auto-revert-verbose nil)
   (window-sides-vertical t)
+  (gc-cons-threshold (* 2 gc-cons-threshold))
   (display-buffer-base-action '(display-buffer-same-window))
   :config
   (setq-default require-final-newline t)
