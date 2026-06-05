@@ -1240,8 +1240,7 @@
 ;;; MESSAGE
 
 (use-package message
-  :after gnus
-  :commands (compose-mail message-send message-send-and-exit)
+  :commands (compose-mail message-send)
   :custom
   (message-mail-alias-type 'ecomplete)
   (message-self-insert-commands nil)
