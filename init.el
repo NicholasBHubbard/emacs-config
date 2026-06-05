@@ -1308,9 +1308,7 @@
   (gnus-parameters '((".*" (display . all))))
   (gnus-use-scoring nil)
   (gnus-summary-next-group-on-exit nil)
-  (gnus-posting-styles
-   '(("^nnimap\\+nhubbard@redhat\\.com:"
-      (address "nhubbard@redhat.com"))))
+  (gnus-posting-styles '(("^nnimap\\+nhubbard@redhat\\.com:" (address "nhubbard@redhat.com"))))
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
