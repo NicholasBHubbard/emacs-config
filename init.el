@@ -453,11 +453,17 @@
 
 (use-package auth-source-pass
   :custom
-  (auth-source-debug t)
+  (auth-source-debug nil)
   (auth-source-do-cache nil)
-  (auth-sources '(password-store))
+  (auth-sources '("~/.authinfo.json.gpg" password-store))
   :config
   (auth-source-pass-enable))
+
+(use-package auth-source-xoauth2-plugin
+  :straight t
+  :after (:any gnus message)
+  :config
+  (auth-source-xoauth2-plugin-mode 1))
 
 ;;; RAINBOW DELIMITERS
 
@@ -1231,7 +1237,7 @@
   :commands message-send-and-exit
   :custom
   ;; (send-mail-function 'smtpmail-send-it)
-  (smtpmail-smtp-user user-mail-address)
+  (smtpmail-smtp-user nil)
   (smtpmail-default-smtp-server "posteo.de")
   (smtpmail-smtp-server "posteo.de")
   (smtpmail-smtp-service 587)
@@ -1252,6 +1258,9 @@
   (message-expand-name-standard-ui t)
   (message-kill-buffer-on-exit t)
   (message-send-mail-function #'message-smtpmail-send-it)
+  (message-server-alist
+   '(("nicholashubbard@posteo.net" . "smtp posteo.de 587 nicholashubbard@posteo.net")
+     ("nhubbard@redhat.com" . "smtp smtp.gmail.com 587 nhubbard@redhat.com")))
   (mml-secure-openpgp-signers '("508022AE06C2C446D8072447C700A066BB25F148"))
   (message-signature
    (let ((nl (propertize "\n" 'hard t)))
@@ -1299,6 +1308,9 @@
   (gnus-parameters '((".*" (display . all))))
   (gnus-use-scoring nil)
   (gnus-summary-next-group-on-exit nil)
+  (gnus-posting-styles
+   '(("^nnimap\\+nhubbard@redhat\\.com:"
+      (address "nhubbard@redhat.com"))))
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
@@ -1316,7 +1328,14 @@
                  (list "linux-bcachefs@vger\\.kernel\\.org" "INBOX.ml.bcachefs")
                  (list "linux-unionfs@vger\\.kernel\\.org" "INBOX.ml.overlayfs")
                  (list "linux-crypto@vger\\.kernel\\.org" "INBOX.ml.linux-crypto")
-                 "INBOX"))))))
+                 "INBOX")))
+     (nnimap "nhubbard@redhat.com"
+             (nnimap-user "nhubbard@redhat.com")
+             (nnimap-address "imap.gmail.com")
+             (nnimap-server-port "993")
+             (nnimap-stream ssl)
+             (nnimap-authenticator xoauth2)
+             (nnimap-inbox ("INBOX" "[Gmail]/Sent Mail"))))))
 
 ;;; GPTEL
 
