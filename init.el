@@ -1352,7 +1352,7 @@
      "CLAUDE_CODE_USE_VERTEX"
      "ANTHROPIC_VERTEX_PROJECT_ID"))
   :custom
-  (agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config))
+  (agent-shell-preferred-agent-config (agent-shell-openai-make-codex-config))
   (agent-shell-anthropic-default-model-id "opus")
   (agent-shell-header-style 'text)
   (agent-shell-show-config-icons nil)
