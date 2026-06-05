@@ -1442,7 +1442,7 @@
 
 (use-package dockerfile-mode
   :straight t
-  :magic ("Dockerfile" . dockerfile-mode))
+  :defer t)
 
 ;;; MARKDOWN
 
