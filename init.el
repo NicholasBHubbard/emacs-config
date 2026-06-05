@@ -141,7 +141,6 @@
 
 (use-package ef-themes
   :straight t
-  :ensure t
   :custom
   (modus-themes-disable-other-themes t)
   :config
