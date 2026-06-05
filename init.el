@@ -1367,8 +1367,6 @@
   ("C-c c" . agent-shell-help-menu)
   (:map agent-shell-mode-map
         ("C-q" . bury-buffer))
-  :hook
-  (agent-shell-mode-hook . (lambda () (setq-local comint-move-point-for-output t)))
   :config
   (exec-path-from-shell-copy-envs
    '("CLAUDE_CODE_EFFORT_LEVEL"
