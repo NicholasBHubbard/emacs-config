@@ -105,15 +105,6 @@
   :straight t
   :demand t)
 
-;;; GCMH
-
-(use-package gcmh
-  :straight t
-  :blackout
-  :demand t
-  :config
-  (gcmh-mode 1))
-
 ;;; EXEC PATH FROM SHELL
 
 (use-package exec-path-from-shell
