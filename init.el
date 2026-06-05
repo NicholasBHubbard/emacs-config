@@ -641,30 +641,30 @@
 
 (use-package multiple-cursors
   :straight t
+  :preface
+  (define-prefix-command 'my/multiple-cursors-map)
   :custom
   (mc/always-run-for-all t)
+  :bind-keymap*
+  ("C-c m" . my/multiple-cursors-map)
   :bind*
-  ("C-c m" . multiple-cursors-hydra/body)
+  ("C->" . mc/mark-next-like-this)
+  ("C-<" . mc/mark-previous-like-this)
   (:map mc/keymap ("RET" . nil))
-  :pretty-hydra
-  ((:color pink :quit-key "q")
-   ("Mark"
-    (("n" mc/mark-next-like-this "next")
-     ("p" mc/mark-previous-like-this "previous")
-     ("a" mc/mark-all-like-this "all")
-     ("d" mc/mark-all-like-this-dwim "dwim"))
-    "Adjust"
-    (("s" mc/skip-to-next-like-this "skip next")
-     ("S" mc/skip-to-previous-like-this "skip previous")
-     ("u" mc/unmark-next-like-this "unmark next")
-     ("U" mc/unmark-previous-like-this "unmark previous"))
-    "Lines"
-    (("l" mc/edit-lines "edit lines" :exit t)
-     ("b" mc/edit-beginnings-of-lines "beginnings" :exit t)
-     ("e" mc/edit-ends-of-lines "ends" :exit t))
-    "Insert Ascending"
-    (("#" mc/insert-numbers "numbers")
-     ("A" mc/insert-letters "letters")))))
+  (:map my/multiple-cursors-map
+        ("n" . mc/mark-next-like-this)
+        ("p" . mc/mark-previous-like-this)
+        ("a" . mc/mark-all-like-this)
+        ("d" . mc/mark-all-like-this-dwim)
+        ("s" . mc/skip-to-next-like-this)
+        ("S" . mc/skip-to-previous-like-this)
+        ("u" . mc/unmark-next-like-this)
+        ("U" . mc/unmark-previous-like-this)
+        ("l" . mc/edit-lines)
+        ("b" . mc/edit-beginnings-of-lines)
+        ("e" . mc/edit-ends-of-lines)
+        ("#" . mc/insert-numbers)
+        ("A" . mc/insert-letters)))
 
 ;;; EMACS LISP
 
