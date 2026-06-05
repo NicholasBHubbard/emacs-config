@@ -913,7 +913,8 @@
      ("wd" wdired-change-to-wdired-mode "Wdired"))
     "Find"
     (("fg" find-grep-dired "Find Grep Regexp")
-     ("fn" find-name-dired "Find Name"))
+     ("fn" find-name-dired "Find Name")
+     ("is" dired-maybe-insert-subdir "Insert Subdir" :exit nil))
     "Mark"
     (("ma" (lambda () (interactive) (dired-unmark-all-marks) (dired-toggle-marks)) "All" :color red)
      ("um" dired-unmark-all-marks "Unmark All" :exit nil)
