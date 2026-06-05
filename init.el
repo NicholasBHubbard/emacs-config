@@ -547,6 +547,7 @@
 ;;; SHELL POP
 
 (use-package shell-pop
+  :straight (shell-pop :type git :host github :repo "NicholasBHubbard/shell-pop-el" :branch "per-window-and-nested-popups")
   :straight t
   :custom
   (shell-pop-window-position "bottom")
@@ -555,6 +556,8 @@
   (shell-pop-restore-window-configuration nil)
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
+  (shell-pop-per-window t)
+  (shell-pop-pop-under-shell t)
   :bind*
   ("M-SPC" . (lambda () (interactive)
                (let ((default-directory (if (file-remote-p default-directory)
@@ -566,7 +569,8 @@
                                               "~" default-directory)))
                    (call-interactively #'shell-pop)
                    (comint-clear-buffer)))))
-;;; SHX
+
+;;;SHX
 
 (use-package shx
   :straight t
