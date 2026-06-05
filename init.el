@@ -99,6 +99,20 @@
 	  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;;; BLACKOUT
+
+(use-package blackout
+  :straight t)
+
+;;; GCMH
+
+(use-package gcmh
+  :straight t
+  :blackout
+  :demand t
+  :config
+  (gcmh-mode 1))
+
 ;;; EXEC PATH FROM SHELL
 
 (use-package exec-path-from-shell
@@ -139,11 +153,6 @@
   (modus-themes-disable-other-themes t)
   :config
   (load-theme 'ef-dark t))
-
-;;; BLACKOUT
-
-(use-package blackout
-  :straight t)
 
 ;;; HYDRA
 
