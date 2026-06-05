@@ -102,7 +102,8 @@
 ;;; BLACKOUT
 
 (use-package blackout
-  :straight t)
+  :straight t
+  :demand t)
 
 ;;; GCMH
 
