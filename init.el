@@ -1504,3 +1504,12 @@
 
 (use-package autotest-mode
   :mode ("\\.at\\'" . autotest-mode))
+
+;;; MIDNIGHT
+
+(use-package midnight
+  :hook (emacs-startup-hook . midnight-mode)
+  :custom
+  (midnight-delay-set 16200) ; 4:30AM
+  (clean-buffer-list-kill-regexps
+   '("\\`\\*Man " "\\`\\*helpful " "\\`magit-process: " "\\`magit-diff: ")))
