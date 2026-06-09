@@ -577,7 +577,7 @@
                    (call-interactively #'shell-pop)
                    (comint-clear-buffer)))))
 
-;;;SHX
+;;; SHX
 
 (use-package shx
   :straight t
