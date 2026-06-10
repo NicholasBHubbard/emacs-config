@@ -901,19 +901,16 @@
   (connection-local-set-profiles
    '(:application tramp :protocol "scp")
    'remote-direct-async-process)
-
-  (setq tramp-default-method "ssh"
-        remote-file-name-inhibit-locks t
-        tramp-copy-size-limit (* 1024 1024)
-        tramp-use-scp-direct-remote-copying t
-        remote-file-name-inhibit-auto-save-visited t
-        tramp-default-remote-shell "/bin/bash"
-        tramp-connection-local-default-shell-variables
-        '((shell-file-name . "/bin/bash")
-          (shell-command-switch . "-c"))
-        tramp-ssh-controlmaster-options
-        (concat "-o ControlPath=~/.ssh/ssh-connection:%%r@%%h:%%p "
-                "-o ControlMaster=auto -o ControlPersist=yes")))
+  :custom
+  (tramp-default-method "ssh")
+  (remote-file-name-inhibit-locks t)
+  (tramp-copy-size-limit (* 1024 1024))
+  (tramp-use-scp-direct-remote-copying t)
+  (remote-file-name-inhibit-auto-save-visited t)
+  (tramp-default-remote-shell "/bin/bash")
+  (tramp-connection-local-default-shell-variables
+   '((shell-file-name . "/bin/bash")
+     (shell-command-switch . "-c"))))
 
 ;;; DIRED
 
