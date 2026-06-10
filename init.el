@@ -828,6 +828,10 @@
   :commands (magit magit-status)
   :custom
   (magit-clone-default-directory "~/p/")
+  (magit-tramp-pipe-stty-settings 'pty)
+  (magit-commit-show-diff nil)
+  (magit-branch-direct-configure nil)
+  (magit-refresh-status-buffer nil)
   (git-commit-major-mode 'git-commit-elisp-text-mode)
   :config
   (magit-auto-revert-mode 1))
@@ -889,14 +893,26 @@
 ;;; TRAMP
 
 (use-package tramp
+  :defer t
   :init
-  (setq tramp-default-method "ssh")
-  (setq tramp-default-remote-shell "/bin/bash")
-  (setq tramp-connection-local-default-shell-variables
+  (connection-local-set-profile-variables
+   'remote-direct-async-process
+   '((tramp-direct-async-process . t)))
+  (connection-local-set-profiles
+   '(:application tramp :protocol "scp")
+   'remote-direct-async-process)
+
+  (setq tramp-default-method "ssh"
+        remote-file-name-inhibit-locks t
+        tramp-copy-size-limit (* 1024 1024)
+        tramp-use-scp-direct-remote-copying t
+        remote-file-name-inhibit-auto-save-visited t
+        tramp-default-remote-shell "/bin/bash"
+        tramp-connection-local-default-shell-variables
         '((shell-file-name . "/bin/bash")
-          (shell-command-switch . "-c")))
-  (setq tramp-ssh-controlmaster-options
-        (concat "-o ControlPath=\~/.ssh/ssh-connection:%%r@%%h:%%p "
+          (shell-command-switch . "-c"))
+        tramp-ssh-controlmaster-options
+        (concat "-o ControlPath=~/.ssh/ssh-connection:%%r@%%h:%%p "
                 "-o ControlMaster=auto -o ControlPersist=yes")))
 
 ;;; DIRED
