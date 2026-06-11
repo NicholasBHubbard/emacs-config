@@ -1487,6 +1487,7 @@
   (agent-shell-preferred-agent-config (agent-shell-openai-make-codex-config))
   (agent-shell-anthropic-default-model-id "opus")
   (agent-shell-header-style 'text)
+  (agent-shell-session-restore-verbosity 'minimal)
   (agent-shell-show-config-icons nil)
   (agent-shell-dot-subdir-function
    (lambda (subdir)
