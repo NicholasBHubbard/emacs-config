@@ -323,6 +323,7 @@
   ("C-;" . ace-window)
   :custom
   (aw-dispatch-always nil)
+  (aw-scope 'frame)
   (aw-dispatch-when-more-than 2)
   (aw-minibuffer-flag t))
 
