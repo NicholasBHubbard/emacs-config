@@ -1485,8 +1485,8 @@
      "ANTHROPIC_VERTEX_PROJECT_ID"))
   :hook
   (agent-shell-mode . (lambda ()
-                        (setq-local comint-scroll-to-bottom-on-output t)
-                        (setq-local comint-move-point-for-output t)
+                        (setq-local comint-move-point-for-output 'all)
+                        (setq-local comint-scroll-show-maximum-output t)
                         (setq-local window-point-insertion-type t)))
   :custom
   (agent-shell-preferred-agent-config (agent-shell-openai-make-codex-config))
