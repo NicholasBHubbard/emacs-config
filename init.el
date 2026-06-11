@@ -1483,6 +1483,11 @@
      "CLOUD_ML_REGION"
      "CLAUDE_CODE_USE_VERTEX"
      "ANTHROPIC_VERTEX_PROJECT_ID"))
+  :hook
+  (agent-shell-mode . (lambda ()
+                        (setq-local comint-scroll-to-bottom-on-output t)
+                        (setq-local comint-move-point-for-output t)
+                        (setq-local window-point-insertion-type t))))
   :custom
   (agent-shell-preferred-agent-config (agent-shell-openai-make-codex-config))
   (agent-shell-anthropic-default-model-id "opus")
