@@ -554,7 +554,6 @@
 ;;; SHELL POP
 
 (use-package shell-pop
-  :straight (shell-pop :type git :host github :repo "NicholasBHubbard/shell-pop-el" :branch "per-window-and-nested-popups")
   :straight t
   :custom
   (shell-pop-window-position "bottom")
@@ -893,7 +892,7 @@
 ;;; TRAMP
 
 (use-package tramp
-  :defer t
+  ;; :defer t
   :init
   (connection-local-set-profile-variables
    'remote-direct-async-process
