@@ -46,7 +46,7 @@
   :config
   (when-let ((font (seq-find (lambda (font) (find-font (font-spec :family font)))
                              '("Red Hat Mono" "Adwaita Mono" "Monospace"))))
-    (set-face-attribute 'default nil :family font :height 130))
+    (set-face-attribute 'default nil :family font :height 120))
   (setq-default require-final-newline t)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
