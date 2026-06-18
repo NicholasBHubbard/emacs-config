@@ -468,7 +468,7 @@
   :custom
   (auth-source-debug nil)
   (auth-source-do-cache nil)
-  (auth-sources '("~/.authinfo.json.gpg" password-store))
+  (auth-sources '(password-store "~/.authinfo.json.gpg"))
   :config
   (auth-source-pass-enable))
 
