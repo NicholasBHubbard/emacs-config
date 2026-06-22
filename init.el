@@ -1038,7 +1038,7 @@
 
 (use-package cperl-mode
   :hook
-  (perl-mode-hook  . cperl-mode)
+  (perl-mode-hook . cperl-mode)
   :custom
   (cperl-invalid-face nil)
   (cperl-indent-level 4)
