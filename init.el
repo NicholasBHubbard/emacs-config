@@ -733,7 +733,7 @@
   (erc-track-position-in-mode-line nil)
   (erc-max-buffer-size 1150)
   (erc-user-full-name erc-nick)
-  (erc-modules '(autojoin button completion fill imenu irccontrols list match menu move-to-prompt netsplit networks readonly ring stamp track))
+  (erc-modules '(erc-modules '(button completion fill irccontrols match move-to-prompt networks notifications ring stamp)))
   :bind
   (:map erc-mode-map
         ("C-q" . bury-buffer))
