@@ -644,7 +644,7 @@
 (use-package expand-region
   :straight t
   :custom
-  (expand-region-smart-cursor t)
+  (expand-region-smart-cursor nil)
   (expand-region-skip-whitespace nil)
   (expand-region-subword-enabled t)
   :bind*
