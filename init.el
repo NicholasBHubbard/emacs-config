@@ -428,6 +428,7 @@
 (use-package project
   :defer t
   :custom
+  (project-vc-extra-root-markers '(".project"))
   (project-list-file (expand-file-name ".projects" user-emacs-directory))
   (project-switch-commands 'project-dired))
 
