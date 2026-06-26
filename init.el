@@ -558,6 +558,19 @@
                        (shell-dirtrack-mode -1)
 		               (add-hook 'comint-output-filter-functions #'comint-osc-process-output nil t))))
 
+;;; GHOSTEL
+
+(use-package ghostel
+  :straight t
+  :commands (ghostel ghostel-project)
+  :custom
+  (ghostel-module-auto-install 'download)
+  (ghostel-initial-input-mode 'line)
+  (ghostel-shell-integration t)
+  (ghostel-tramp-shell-integration t)
+  (ghostel-line-mode-use-bash-completion t)
+  (ghostel-enable-osc52 t))
+
 ;;; BASH COMPLETION
 
 (use-package bash-completion
@@ -1326,7 +1339,6 @@
 ;;; GNUS
 
 (use-package gnus
-  :defer t
   :commands gnus
   :hook
   (gnus-summary-exit-hook . (lambda () (dolist (buf (buffers-with-mode 'gnus-article-mode))
