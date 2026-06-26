@@ -33,6 +33,7 @@
   (ring-bell-function #'ignore)
   (revert-without-query '(".*"))
   (use-package-enable-imenu-support t)
+  (nobreak-char-display nil)
   (scroll-margin 1)
   (display-line-numbers-widen t)
   (undo-in-region t)
