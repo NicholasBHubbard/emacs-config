@@ -569,7 +569,10 @@
   (ghostel-shell-integration t)
   (ghostel-tramp-shell-integration t)
   (ghostel-line-mode-use-bash-completion t)
-  (ghostel-enable-osc52 t))
+  (ghostel-enable-osc52 t)
+  :bind*
+  (:map ghostel-line-mode-map
+        ([S-return] . (lambda () (interactive) (ghostel-clear-scrollback) (ghostel-line-mode-send)))))
 
 ;;; BASH COMPLETION
 
