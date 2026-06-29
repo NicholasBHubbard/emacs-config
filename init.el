@@ -1421,11 +1421,10 @@
 
 (use-package agent-shell
   :straight t
-  :commands agent-shell
+  :commands (agent-shell-openai-start-codex agent-shell-anthropic-start-claude-code)
   :bind*
   ("C-c c" . agent-shell-help-menu)
-  (:map agent-shell-mode-map
-        ("C-q" . bury-buffer))
+  (:map agent-shell-mode-map ("C-q" . bury-buffer))
   :config
   (exec-path-from-shell-copy-envs
    '("CLAUDE_CODE_EFFORT_LEVEL"
