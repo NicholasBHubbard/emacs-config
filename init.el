@@ -1123,7 +1123,7 @@
 
 (use-package zig-mode
   :straight t
-  :mode ("\\.zig\\'" . zig-mode))
+  :mode ("\\.\\(?:zig\\|zon\\)\\'" . zig-mode))
 
 ;;; RUST
 
