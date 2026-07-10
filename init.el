@@ -1106,8 +1106,8 @@
 ;;; HASKELL
 
 (use-package haskell-mode
-  :mode ("\\.hs\\'" . haskell-mode)
-  :straight t)
+  :straight t
+  :mode ("\\.hs\\'" . haskell-mode))
 
 (use-package ghcid
   :straight (ghcid :type git :host github :repo "NicholasBHubbard/ghcid.el")
