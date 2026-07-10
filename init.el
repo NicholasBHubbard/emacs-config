@@ -1119,6 +1119,12 @@
 ;;   :hook
 ;;   (haskell-mode . lsp))
 
+;;; ZIG
+
+(use-package zig-mode
+  :straight t
+  :mode ("\\.zig\\'" . zig-mode))
+
 ;;; RUST
 
 (use-package rust-mode
