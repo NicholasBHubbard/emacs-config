@@ -994,6 +994,12 @@
      ("su" dired-mark-suffix "Suffix" :exit nil)
      ("di" dired-mark-directories "Directories" :exit nil)))))
 
+(use-package dired-subtree
+  :straight t
+  :after dired
+  :bind
+  (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
+
 ;;; MAN
 
 (use-package man
