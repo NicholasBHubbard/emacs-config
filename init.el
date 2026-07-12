@@ -952,7 +952,7 @@
   (dired-mode-hook . auto-revert-mode)
   (dired-mode-hook . (lambda () (rename-buffer (concat "dired: " dired-directory))))
   :custom
-  (dired-listing-switches "-DAlh --group-directories-first")
+  (dired-listing-switches "-Alh --group-directories-first")
   (dired-recursive-copies 'always)
   (dired-recursive-deletes 'always)
   (dired-kill-when-opening-new-dired-buffer t)
