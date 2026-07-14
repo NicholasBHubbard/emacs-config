@@ -526,8 +526,6 @@
   (compilation-ask-about-save nil)
   (compilation-scroll-output t)
   (compilation-max-output-line-length nil)
-  :config
-  (defadvice compile (before ad-compile-smart activate) (ad-set-arg 1 t))
   :hook
   (compilation-filter-hook . (lambda ()
                                (let ((inhibit-read-only t))
