@@ -996,6 +996,8 @@
 (use-package dired-subtree
   :straight t
   :after dired
+  :custom
+  (dired-subtree-line-prefix "│    ")
   :bind
   (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
 
