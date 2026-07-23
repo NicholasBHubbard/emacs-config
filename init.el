@@ -1126,6 +1126,12 @@
 ;;   :hook
 ;;   (haskell-mode . lsp))
 
+;;; GO
+
+(use-package go-mode
+  :straight t
+  :mode ("\\.go\\'" . go-mode))
+
 ;;; ZIG
 
 (use-package zig-mode
