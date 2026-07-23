@@ -375,6 +375,20 @@
   (wgrep-auto-save-buffer t)
   (wgrep-change-readonly-file t))
 
+;;; PERSPECTIVE
+
+(use-package perspective
+  :straight t
+  :after consult
+  :config
+  (add-to-list 'consult-buffer-sources persp-consult-source)
+  :hook
+  (after-init-hook . persp-mode)
+  (kill-emacs-hook . persp-state-save)
+  :custom
+  (persp-modestring-short t)
+  (persp-show-modestring t))
+
 ;;; VERTICO
 
 (use-package vertico
