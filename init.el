@@ -169,28 +169,6 @@
         ("q"   . hydra-keyboard-quit)
         ("C-g" . hydra-keyboard-quit)))
 
-;;; SMARTPARENS
-
-(use-package smartparens
-  :straight t
-  :blackout
-  :hook
-  (prog-mode-hook . smartparens-mode)
-  (text-mode-hook . smartparens-mode)
-  (markdown-mode-hook . smartparens-mode)
-  :config
-  (require 'smartparens-config)
-  :bind
-  (:map smartparens-mode-map
-        ("M-("   . sp-wrap-round)
-        ("M-)"   . sp-unwrap-sexp)
-        ("C-M-f" . sp-forward-sexp)
-        ("C-M-b" . sp-backward-sexp)
-        ("C-M-k" . sp-kill-sexp))
-  :custom
-  (sp-highlight-pair-overlay nil)
-  (sp-highlight-wrap-overlay nil))
-
 ;; ;;; YASNIPPET
 
 ;; (use-package yasnippet
@@ -649,6 +627,13 @@
   ("C-=" . er/expand-region)
   ("C-+" . er/contract-region))
 
+;;; ELECTRIC PAIR
+
+(use-package elec-pair
+  :hook
+  (prog-mode-hook . electric-pair-local-mode)
+  (text-mode-hook . electric-pair-local-mode))
+
 ;;; MULTIPLE CURSORS
 
 (use-package multiple-cursors
@@ -684,16 +669,14 @@
   :hook
   (emacs-lisp-mode-hook . rainbow-delimiters-mode)
   (emacs-lisp-mode-hook . aggressive-indent-mode)
-  (emacs-lisp-mode-hook . smartparens-strict-mode))
 
 ;;; IELM
 
-(use-package ielm
-  :commands ielm
-  :hook
-  (ielm-mode-hook . rainbow-delimiters-mode)
-  (ielm-mode-hook . aggressive-indent-mode)
-  (ielm-mode-hook . smartparens-strict-mode))
+  (use-package ielm
+    :commands ielm
+    :hook
+    (ielm-mode-hook . rainbow-delimiters-mode)
+    (ielm-mode-hook . aggressive-indent-mode))
 
 ;;; ELDOC
 
