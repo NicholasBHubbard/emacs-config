@@ -263,9 +263,11 @@
 (use-package recentf
   :init
   (recentf-mode 1)
+  :bind*
+  ("C-c r" . recentf)
   :custom
-  (recentf-save-file (concat user-emacs-directory ".recentf"))
-  (recentf-auto-cleanup 'never)
+  (recentf-save-file (expand-file-name ".recentf" user-emacs-directory))
+  (recentf-auto-cleanup 180)
   (recentf-max-saved-items 500)
   (recentf-exclude '("^/tmp/" "^/ssh:" "^/sudo:" "/elpa/" "COMMIT_EDITMSG" ".*-autoloads\\.el$" file-remote-p)))
 
