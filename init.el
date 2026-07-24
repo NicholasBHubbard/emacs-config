@@ -377,28 +377,28 @@
 
 ;;; ACTIVITIES
 
-(use-package activities
-  :straight t
-  :init
-  (activities-mode 1)
-  (activities-tabs-mode 1)
-  :bind*
-  ("M-o" . activities-hydra/body)
-  :custom
-  (activities-name-prefix "A: ")
-  :pretty-hydra
-  ((:color blue :quit-key "q")
-   ("activities"
-    (("SPC" activities-switch "switch")
-     ("o" activities-switch-buffer "switch buffer")
-     ("n" activities-new "new")
-     ("r" activities-resume "resume")
-     ("k" activities-kill "kill")
-     ("D" activities-discard "delete")
-     ("s" activities-suspend "suspend")
-     ("d" activities-define "define")
-     ("R" activities-revert "revert")
-     ("l" activities-list "list")))))
+;; (use-package activities
+;;   :straight t
+;;   :init
+;;   (activities-mode 1)
+;;   (activities-tabs-mode 1)
+;;   :bind*
+;;   ("M-o" . activities-hydra/body)
+;;   :custom
+;;   (activities-name-prefix "A: ")
+;;   :pretty-hydra
+;;   ((:color blue :quit-key "q")
+;;    ("activities"
+;;     (("SPC" activities-switch "switch")
+;;      ("o" activities-switch-buffer "switch buffer")
+;;      ("n" activities-new "new")
+;;      ("r" activities-resume "resume")
+;;      ("k" activities-kill "kill")
+;;      ("D" activities-discard "delete")
+;;      ("s" activities-suspend "suspend")
+;;      ("d" activities-define "define")
+;;      ("R" activities-revert "revert")
+;;      ("l" activities-list "list")))))
 
 ;;; PERSPECTIVE
 
