@@ -391,11 +391,15 @@
   :defer t
   :custom
   (tab-bar-new-tab-choice "*scratch*")
+  (tab-bar-select-tab-modifiers '(meta))
   (tab-bar-tab-hints t)
   (tab-bar-auto-width nil)
   (tab-bar-new-tab-to 'right)
   (tab-bar-new-button-show nil)
-  (tab-bar-close-button-show nil))
+  (tab-bar-close-button-show nil)
+  :custom-face
+  (tab-bar-tab ((t (:foreground "dark green"))))
+  (tab-bar-tab-inactive ((t (:foreground "red")))))
 
 ;;; PROJECT
 
