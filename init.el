@@ -418,9 +418,7 @@
   :after project
   :custom
   (otpp-bury-on-kill-buffer-when-multiple-tabs nil)
-  :bind*
-  ("C-x t p" . otpp-prefix)
-  :config
+  :init
   (otpp-mode 1)
   (otpp-override-mode 1))
 
