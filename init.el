@@ -393,9 +393,10 @@
      ("o" activities-switch-buffer "switch buffer")
      ("n" activities-new "new")
      ("r" activities-resume "resume")
-     ("d" activities-define "define")
-     ("s" activities-suspend "suspend")
      ("k" activities-kill "kill")
+     ("D" activities-discard "delete")
+     ("s" activities-suspend "suspend")
+     ("d" activities-define "define")
      ("R" activities-revert "revert")
      ("l" activities-list "list")))))
 
