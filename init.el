@@ -386,6 +386,8 @@
   :hook
   (after-init-hook . persp-mode)
   (kill-emacs-hook . persp-state-save)
+  :bind*
+  ("M-O" . persp-switch)
   :custom
   (persp-modestring-short t)
   (persp-show-modestring t))
