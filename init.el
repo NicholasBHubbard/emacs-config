@@ -122,12 +122,6 @@
   (exec-path-from-shell-copy-envs
    '("SUDO_ASKPASS")))
 
-;;; BUFFERS WITH MODE
-
-(use-package buffers-with-mode
-  :straight (buffers-with-mode :type git :host github :repo "NicholasBHubbard/buffers-with-mode")
-  :commands buffers-with-mode)
-
 ;;; SERVER
 
 (use-package server
@@ -753,7 +747,10 @@
         (with-current-buffer " *slackserver-ssh-znc-tunnel*"
           (add-hook
            'kill-buffer-hook
-           #'(lambda () (dolist (buf (buffers-with-mode 'erc-mode)) (kill-buffer buf))) nil t)))))
+           #'(lambda ()
+               (dolist (buf (match-buffers '(derived-mode . erc-mode)))
+                 (kill-buffer buf)))
+           nil t)))))
 
   (defun my/erc (&optional arg)
     (interactive "P")
@@ -1302,9 +1299,10 @@
 (use-package gnus
   :commands gnus
   :hook
-  (gnus-summary-exit-hook . (lambda () (dolist (buf (buffers-with-mode 'gnus-article-mode))
-                                         (when-let ((win (get-buffer-window buf)))
-                                           (delete-window win)))))
+  (gnus-summary-exit-hook . (lambda ()
+                              (dolist (buf (match-buffers '(derived-mode . gnus-article-mode)))
+                                (when-let ((win (get-buffer-window buf)))
+                                  (delete-window win)))))
   (gnus-started-hook . gnus-group-list-all-groups)
   :bind
   (:map gnus-article-mode-map
