@@ -379,10 +379,10 @@
 
 (use-package perspective
   :straight t
-  :after consult
   :config
-  (consult-customize consult-source-buffer :hidden t :default nil)
-  (add-to-list 'consult-buffer-sources persp-consult-source)
+  (with-eval-after-load 'consult
+    (consult-customize consult-source-buffer :hidden t :default nil)
+    (add-to-list 'consult-buffer-sources persp-consult-source))
   :hook
   (after-init-hook . persp-mode)
   (kill-emacs-hook . persp-state-save)
