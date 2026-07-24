@@ -55,7 +55,7 @@
   (setq-default fill-column 80)
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (setq-default c-basic-offset 4)
-  ;; (invert-face 'default)
+  (invert-face 'default)
   (scroll-bar-mode 0)
   (menu-bar-mode 0)
   (set-fringe-mode 0)
@@ -152,12 +152,12 @@
 
 ;;; EF THEMES
 
-(use-package ef-themes
-  :straight t
-  :custom
-  (modus-themes-disable-other-themes t)
-  :config
-  (load-theme 'ef-dark t))
+;; (use-package ef-themes
+;;   :straight t
+;;   :custom
+;;   (modus-themes-disable-other-themes t)
+;;   :config
+;;   (load-theme 'ef-dark t))
 
 ;;; HYDRA
 
@@ -272,6 +272,7 @@
 ;;; FLYMAKE
 
 (use-package flymake
+  :defer t
   :commands (flymake-mode flymake-start)
   :custom
   (flymake-no-changes-timeout nil)
@@ -310,13 +311,6 @@
 ;;   (unless (file-directory-p org-directory)
 ;;     (make-directory org-directory)))
 
-;;; WHICH FUNCTION
-
-(use-package which-func
-  :commands which-function-mode
-  :hook
-  (prog-mode-hook . (lambda () (which-function-mode 1))))
-
 ;;; PRESCIENT
 
 (use-package prescient
@@ -330,41 +324,6 @@
               (lambda (orig-fn &rest args)
                 (let ((coding-system-for-write 'utf-8))
                   (apply orig-fn args)))))
-
-;;; CONSULT
-
-(use-package consult
-  :straight t
-  :custom
-  (consult-buffer-sources '(consult-source-project-root consult-source-recent-file))
-  (consult-preview-key 'any)
-  :bind*
-  ("M-g g"  . consult-goto-line)
-  ("M-O"   . (lambda () (interactive)
-               (setq consult-preview-key "M-SPC")
-               (unwind-protect
-                   (call-interactively #'consult-buffer)
-                 (setq consult-preview-key 'any))))
-  ("C-z"   . consult-global-mark)
-  ("C-S-y" . consult-yank-from-kill-ring)
-  ("C-c f" . consult-find)
-  ("C-c s" . consult-grep))
-
-;;; CONSULT DIR
-
-;; (use-package consult-dir
-;;   :straight t
-;;   :after consult
-;;   :bind*
-;;   ("M-O" . consult-dir)
-;;   :custom
-;;   (consult-dir-project-list-function #'consult-dir-project-dirs)
-;;   (consult-dir-sources
-;;    '(consult-dir--source-default
-;;      consult-dir--source-project
-;;      consult-dir--source-recentf
-;;      consult-dir--source-tramp-local
-;;      consult-dir--source-tramp-ssh)))
 
 ;;; WGREP
 
@@ -467,21 +426,35 @@
   :custom
   (dabbrev-case-fold-search nil))
 
+;;; TAB BAR
+
+(use-package tab-bar
+  :defer t
+  :custom
+  (tab-bar-new-tab-choice "*scratch*")
+  (tab-bar-tab-hints t)
+  (tab-bar-auto-width nil)
+  (tab-bar-new-tab-to 'right)
+  (tab-bar-new-button-show nil)
+  (tab-bar-close-button-show nil))
+
 ;;; PROJECT
 
 (use-package project
   :defer t
   :custom
+  (project-mode-line t)
   (project-vc-extra-root-markers '(".project"))
   (project-list-file (expand-file-name ".projects" user-emacs-directory))
   (project-switch-commands 'project-dired))
 
-(use-package disproject
+;;; OTPP
+
+(use-package otpp
   :straight t
-  :custom
-  (disproject-shell-command #'project-shell)
-  :bind*
-  ("C-c p" . disproject-dispatch))
+  :after project
+  :config
+  (otpp-mode 1))
 
 ;;; AGGRESSIVE INDENT
 
