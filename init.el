@@ -336,49 +336,6 @@
   (wgrep-auto-save-buffer t)
   (wgrep-change-readonly-file t))
 
-;;; ACTIVITIES
-
-;; (use-package activities
-;;   :straight t
-;;   :init
-;;   (activities-mode 1)
-;;   (activities-tabs-mode 1)
-;;   :bind*
-;;   ("M-o" . activities-hydra/body)
-;;   :custom
-;;   (activities-name-prefix "A: ")
-;;   :pretty-hydra
-;;   ((:color blue :quit-key "q")
-;;    ("activities"
-;;     (("SPC" activities-switch "switch")
-;;      ("o" activities-switch-buffer "switch buffer")
-;;      ("n" activities-new "new")
-;;      ("r" activities-resume "resume")
-;;      ("k" activities-kill "kill")
-;;      ("D" activities-discard "delete")
-;;      ("s" activities-suspend "suspend")
-;;      ("d" activities-define "define")
-;;      ("R" activities-revert "revert")
-;;      ("l" activities-list "list")))))
-
-;;; PERSPECTIVE
-
-;; (use-package perspective
-;;   :straight t
-;;   :config
-;;   (with-eval-after-load 'consult
-;;     (consult-customize consult-source-buffer :hidden t :default nil)
-;;     (add-to-list 'consult-buffer-sources persp-consult-source))
-;;   :hook
-;;   (after-init-hook . persp-mode)
-;;   (kill-emacs-hook . persp-state-save)
-;;   :bind*
-;;   ("M-O" . persp-switch)
-;;   :custom
-;;   (persp-state-default-file (expand-file-name ".perspective" user-emacs-directory))
-;;   (persp-modestring-short t)
-;;   (persp-show-modestring t))
-
 ;;; VERTICO
 
 (use-package vertico
@@ -1051,13 +1008,6 @@
   (lsp-enable-folding nil)
   (lsp-idle-delay 0.5)
   (lsp-enable-symbol-highlighting nil))
-
-(use-package consult-lsp
-  :straight t
-  :after lsp-mode
-  :bind*
-  (:map lsp-mode-map
-        ("C-c l" . consult-lsp-diagnostics)))
 
 ;;; CPERL
 
