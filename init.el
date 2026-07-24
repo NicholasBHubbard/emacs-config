@@ -384,17 +384,19 @@
   (activities-tabs-mode 1)
   :bind*
   ("M-o" . activities-hydra/body)
+  :custom
+  (activities-name-prefix "A: ")
   :pretty-hydra
   ((:color blue :quit-key "q")
    ("activities"
-    (("n" activities-new "new")
-     ("a" activities-switch "switch")
+    (("SPC" activities-switch "switch")
      ("o" activities-switch-buffer "switch buffer")
-     ("d" activities-define "define")
+     ("n" activities-new "new")
      ("r" activities-resume "resume")
+     ("d" activities-define "define")
      ("s" activities-suspend "suspend")
      ("k" activities-kill "kill")
-     ("r" activities-revert "revert")
+     ("R" activities-revert "revert")
      ("l" activities-list "list")))))
 
 ;;; PERSPECTIVE
