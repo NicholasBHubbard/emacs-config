@@ -417,7 +417,8 @@
   :bind*
   ("C-x t p" . otpp-prefix)
   :config
-  (otpp-mode 1))
+  (otpp-mode 1)
+  (otpp-override-mode 1))
 
 ;;; AGGRESSIVE INDENT
 
