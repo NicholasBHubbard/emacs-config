@@ -352,19 +352,19 @@
 
 ;;; CONSULT DIR
 
-(use-package consult-dir
-  :straight t
-  :after consult
-  :bind*
-  ("M-O" . consult-dir)
-  :custom
-  (consult-dir-project-list-function #'consult-dir-project-dirs)
-  (consult-dir-sources
-   '(consult-dir--source-default
-     consult-dir--source-project
-     consult-dir--source-recentf
-     consult-dir--source-tramp-local
-     consult-dir--source-tramp-ssh)))
+;; (use-package consult-dir
+;;   :straight t
+;;   :after consult
+;;   :bind*
+;;   ("M-O" . consult-dir)
+;;   :custom
+;;   (consult-dir-project-list-function #'consult-dir-project-dirs)
+;;   (consult-dir-sources
+;;    '(consult-dir--source-default
+;;      consult-dir--source-project
+;;      consult-dir--source-recentf
+;;      consult-dir--source-tramp-local
+;;      consult-dir--source-tramp-ssh)))
 
 ;;; WGREP
 
@@ -381,6 +381,7 @@
   :straight t
   :after consult
   :config
+  (consult-customize consult-source-buffer :hidden t :default nil)
   (add-to-list 'consult-buffer-sources persp-consult-source)
   :hook
   (after-init-hook . persp-mode)
