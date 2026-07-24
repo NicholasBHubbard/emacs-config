@@ -336,11 +336,11 @@
 (use-package consult
   :straight t
   :custom
-  (consult-buffer-sources '(consult-source-buffer consult-source-project-root consult-source-recent-file))
+  (consult-buffer-sources '(consult-source-project-root consult-source-recent-file))
   (consult-preview-key 'any)
   :bind*
   ("M-g g"  . consult-goto-line)
-  ("M-o"   . (lambda () (interactive)
+  ("M-O"   . (lambda () (interactive)
                (setq consult-preview-key "M-SPC")
                (unwind-protect
                    (call-interactively #'consult-buffer)
@@ -375,22 +375,45 @@
   (wgrep-auto-save-buffer t)
   (wgrep-change-readonly-file t))
 
+;;; ACTIVITIES
+
+(use-package activities
+  :straight t
+  :init
+  (activities-mode 1)
+  (activities-tabs-mode 1)
+  :bind*
+  ("M-o" . activities-hydra/body)
+  :pretty-hydra
+  ((:color blue :quit-key "q")
+   ("activities"
+    (("n" activities-new "new")
+     ("a" activities-switch "switch")
+     ("o" activities-switch-buffer "switch buffer")
+     ("d" activities-define "define")
+     ("r" activities-resume "resume")
+     ("s" activities-suspend "suspend")
+     ("k" activities-kill "kill")
+     ("r" activities-revert "revert")
+     ("l" activities-list "list")))))
+
 ;;; PERSPECTIVE
 
-(use-package perspective
-  :straight t
-  :config
-  (with-eval-after-load 'consult
-    (consult-customize consult-source-buffer :hidden t :default nil)
-    (add-to-list 'consult-buffer-sources persp-consult-source))
-  :hook
-  (after-init-hook . persp-mode)
-  (kill-emacs-hook . persp-state-save)
-  :bind*
-  ("M-O" . persp-switch)
-  :custom
-  (persp-modestring-short t)
-  (persp-show-modestring t))
+;; (use-package perspective
+;;   :straight t
+;;   :config
+;;   (with-eval-after-load 'consult
+;;     (consult-customize consult-source-buffer :hidden t :default nil)
+;;     (add-to-list 'consult-buffer-sources persp-consult-source))
+;;   :hook
+;;   (after-init-hook . persp-mode)
+;;   (kill-emacs-hook . persp-state-save)
+;;   :bind*
+;;   ("M-O" . persp-switch)
+;;   :custom
+;;   (persp-state-default-file (expand-file-name ".perspective" user-emacs-directory))
+;;   (persp-modestring-short t)
+;;   (persp-show-modestring t))
 
 ;;; VERTICO
 
