@@ -621,11 +621,10 @@
   :straight t
   :custom
   (expand-region-smart-cursor nil)
-  (expand-region-skip-whitespace nil)
-  (expand-region-subword-enabled t)
+  (expand-region-skip-whitespace t)
+  (expand-region-subword-enabled nil)
   :bind*
-  ("C-=" . er/expand-region)
-  ("C-+" . er/contract-region))
+  ("C-=" . er/expand-region))
 
 ;;; ELECTRIC PAIR
 
