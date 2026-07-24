@@ -1016,6 +1016,8 @@
   :after dired
   :custom
   (dired-subtree-line-prefix "│    ")
+  (dired-subtree-line-prefix-face nil)
+  (dired-subtree-use-backgrounds t)
   :bind
   (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
 
