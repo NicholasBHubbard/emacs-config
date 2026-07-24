@@ -412,6 +412,8 @@
 (use-package otpp
   :straight t
   :after project
+  :custom
+  (otpp-bury-on-kill-buffer-when-multiple-tabs nil)
   :config
   (otpp-mode 1))
 
