@@ -1460,20 +1460,6 @@
   :custom
   (pdf-view-restore-filename (concat user-emacs-directory ".pdf-view-restore")))
 
-;;; ALERT
-
-;; (use-package alert
-;;   :straight t
-;;   :commands alert
-;;   :init
-;;   (setq alert-default-style 'notifier))
-
-;;; DAPE
-
-(use-package dape
-  :straight t
-  :commands dape)
-
 ;;; DOCKER
 
 (use-package docker
