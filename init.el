@@ -661,7 +661,7 @@
 (use-package elisp-mode
   :hook
   (emacs-lisp-mode-hook . rainbow-delimiters-mode)
-  (emacs-lisp-mode-hook . aggressive-indent-mode)
+  (emacs-lisp-mode-hook . aggressive-indent-mode))
 
 ;;; IELM
 
