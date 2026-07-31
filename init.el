@@ -1312,6 +1312,7 @@
         ("q" . gnus-summary-expand-window))
   :custom
   (gnus-group-buffer "*gnus*")
+  (gnus-default-directory "~")
   (gnus-select-method '(nnnil nil))
   (gnus-startup-file (concat user-emacs-directory ".newsrc"))
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
