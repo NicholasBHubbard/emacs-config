@@ -389,7 +389,7 @@
   :straight t
   :after project
   :custom
-  (otpp-bury-on-kill-buffer-when-multiple-tabs t)
+  (otpp-bury-on-kill-buffer-when-multiple-tabs nil)
   :init
   (otpp-mode 1)
   (otpp-override-mode 1))
