@@ -544,6 +544,7 @@
   (shell-pop-window-position "bottom")
   (shell-pop-full-span nil)
   (shell-pop-window-size 37)
+  (shell-pop-default-directory "~")
   (shell-pop-restore-window-configuration nil)
   (shell-pop-cleanup-buffer-at-process-exit t)
   (shell-pop-autocd-to-working-dir nil)
