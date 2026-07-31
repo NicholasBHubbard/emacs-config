@@ -364,6 +364,7 @@
   :custom
   (tab-bar-new-tab-choice "*scratch*")
   (tab-bar-select-tab-modifiers '(meta))
+  (tab-bar-separator " ")
   (tab-bar-tab-hints t)
   (tab-bar-auto-width nil)
   (tab-bar-new-tab-to 'right)
