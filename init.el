@@ -370,8 +370,8 @@
   (tab-bar-new-button-show nil)
   (tab-bar-close-button-show nil)
   :custom-face
-  (tab-bar-tab ((t (:foreground "dark green"))))
-  (tab-bar-tab-inactive ((t (:foreground "red")))))
+  (tab-bar-tab ((t (:inherit (success fixed-pitch default) :background unspecified))))
+  (tab-bar-tab-inactive ((t (:inherit (error tab-bar-tab) :background unspecified)))))
 
 ;;; PROJECT
 
