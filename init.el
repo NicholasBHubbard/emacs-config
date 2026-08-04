@@ -751,7 +751,8 @@
 
   (defun my/erc (&optional arg)
     (interactive "P")
-    (when-let ((pass (password-store-get "znc-admin")))
+    (when-let ((pass (password-store-get "znc-admin"))
+               (default-directory "~"))
       (my/slackserver-ssh-znc-tunnel arg)
       ;; (erc-tls :server "localhost"
       ;;          :port 6697
