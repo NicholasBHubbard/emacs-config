@@ -1334,6 +1334,8 @@
              (nnimap-split-fancy
               (| ("subject" "^Bounce probe.*" "INBOX.junk")
                  (from "MAILER-DAEMON@[^ ]+\\.posteo\\.de" "INBOX.send-confirmation")
+                 ("cc" "ci_activity@noreply\\.github\\.com" "INBOX.CI")
+                 ("X-GitLab-Pipeline-Id" ".*" "INBOX.CI")
                  (list "perl5-porters@perl\\.org" "INBOX.ml.p5p")
                  (list "linux-btrfs@vger\\.kernel\\.org" "INBOX.ml.btrfs")
                  (list "linux-bcachefs@vger\\.kernel\\.org" "INBOX.ml.bcachefs")
