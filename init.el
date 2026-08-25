@@ -716,8 +716,8 @@
   (defun my/erc-znc-request-playback (_server _nick)
     (erc-send-line "ZNC *playback PLAY * 0" #'ignore))
 
-  (defun my/slackserver-ssh-znc-tunnel (&optional arg)
-    (let ((tunnel-process (get-process "slackserver-ssh-znc-tunnel")))
+  (defun my/debserver-ssh-znc-tunnel (&optional arg)
+    (let ((tunnel-process (get-process "debserver-ssh-znc-tunnel")))
       (when (and tunnel-process
                  (or arg (not (process-live-p tunnel-process))))
         (message "Deleting existing SSH tunnel...")
@@ -727,21 +727,21 @@
       (when (or (not tunnel-process) (not (process-live-p tunnel-process)))
         (message "Starting SSH tunnel...")
         (unless (processp
-                 (make-process :name "slackserver-ssh-znc-tunnel"
-                               :command '("ssh" "-p" "22"
+                 (make-process :name "debserver-ssh-znc-tunnel"
+                               :command '("ssh"
                                           "-L" "6697:localhost:6697" "-n" "-N"
-                                          "-o" "ServerAliveInterval=60"
+                                          "-o" "ServerAliveInterval=30"
                                           "-o" "ServerAliveCountMax=3"
-                                          "slackserver")
-                               :buffer " *slackserver-ssh-znc-tunnel*"
+                                          "debserver")
+                               :buffer " *debserver-ssh-znc-tunnel*"
                                :connection-type 'pty
                                :sentinel #'(lambda (_ msg)
                                              (when (string-match "exited abnormally" msg)
-                                               (when-let ((buf (get-buffer " *slackserver-ssh-znc-tunnel*")))
+                                               (when-let ((buf (get-buffer " *debserver-ssh-znc-tunnel*")))
                                                  (kill-buffer buf))))))
           (user-error "Failed to create ssh tunnel"))
         (sleep-for 5)
-        (with-current-buffer " *slackserver-ssh-znc-tunnel*"
+        (with-current-buffer " *debserver-ssh-znc-tunnel*"
           (add-hook
            'kill-buffer-hook
            #'(lambda ()
@@ -753,7 +753,7 @@
     (interactive "P")
     (when-let ((pass (password-store-get "znc-admin"))
                (default-directory "~"))
-      (my/slackserver-ssh-znc-tunnel arg)
+      (my/debserver-ssh-znc-tunnel arg)
       ;; (erc-tls :server "localhost"
       ;;          :port 6697
       ;;          :id "*znc-perl-server*"
@@ -1312,6 +1312,7 @@
   (gnus-startup-file (concat user-emacs-directory ".newsrc"))
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
   (gnus-use-full-window nil)
+  (gnus-always-read-dribble-file t)
   (gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))
   (gnus-auto-select-next nil)
   (gnus-search-use-parsed-queries t)
