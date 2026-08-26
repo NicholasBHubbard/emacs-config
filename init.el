@@ -1274,12 +1274,12 @@
   (message-server-alist
    '(("nicholashubbard@posteo.net" . "smtp posteo.de 587 nicholashubbard@posteo.net")
      ("nhubbard@redhat.com" . "smtp smtp.gmail.com 587 nhubbard@redhat.com")))
-  (mml-secure-openpgp-signers '("508022AE06C2C446D8072447C700A066BB25F148"))
+  (mml-secure-openpgp-signers '("1B047444A3CDC5320D33F5187319CE683E94B9B0"))
   (message-signature
    (let ((nl (propertize "\n" 'hard t)))
      (concat "Nicholas B. Hubbard" nl
              "Keys: https://github.com/NicholasBHubbard/public-keys" nl
-             "Key ID: 508022AE06C2C446D8072447C700A066BB25F148")))
+             "Key ID: 1B047444A3CDC5320D33F5187319CE683E94B9B0")))
   :hook
   (message-send-hook . mml-secure-message-sign-pgpmime)
   (message-sent-hook . message-put-addresses-in-ecomplete))
