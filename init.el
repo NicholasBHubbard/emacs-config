@@ -386,6 +386,7 @@
   :after project
   :custom
   (otpp-bury-on-kill-buffer-when-multiple-tabs nil)
+  (otpp-find-file-integration nil)
   :init
   (otpp-mode 1)
   (otpp-override-mode 1))
