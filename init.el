@@ -78,6 +78,8 @@
   (text-mode-hook . display-line-numbers-mode)
   (prog-mode-hook . display-fill-column-indicator-mode)
   (text-mode-hook . display-fill-column-indicator-mode)
+  :custom-face
+  (mode-line-active ((t (:inherit mode-line :inverse-video t))))
   :bind*
   ("C-S-<backspace>" . (lambda () (interactive) (call-interactively #'kill-whole-line)))
   ("C-M-p"       . (lambda () (interactive) (scroll-up 1)))
