@@ -997,6 +997,13 @@
   (lsp-idle-delay 0.5)
   (lsp-enable-symbol-highlighting nil))
 
+;;; TREESIT
+
+(use-package treesit
+  :custom
+  (treesit-enabled-modes t)
+  (treesit-auto-install-grammar 'always))
+
 ;;; CPERL
 
 (use-package cperl-mode
