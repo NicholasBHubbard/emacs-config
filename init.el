@@ -6,12 +6,6 @@
 (setq debug-on-error t)
 (add-hook 'after-init-hook #'(lambda () (setq debug-on-error nil)))
 
-(when (and (fboundp 'native-comp-available-p)
-           (native-comp-available-p))
-  (setq native-comp-deferred-compilation t
-        native-comp-async-jobs-number (max 1 (- (num-processors) 2))
-        native-comp-async-report-warnings-errors 'silent))
-
 ;;; USE PACKAGE
 
 (use-package use-package
