@@ -37,6 +37,7 @@
   (revert-without-query '(".*"))
   (use-package-enable-imenu-support t)
   (nobreak-char-display nil)
+  (electric-indent-actions '(yank))
   (scroll-margin 1)
   (display-line-numbers-widen t)
   (undo-in-region t)
@@ -247,6 +248,7 @@
   :commands (flymake-mode flymake-start)
   :custom
   (flymake-no-changes-timeout nil)
+  (flymake-show-diagnostics-at-end-of-line 'fancy)
   (flymake-fringe-indicator-position nil)
   (flymake-fringe-indicators nil))
 
@@ -377,9 +379,9 @@
 (use-package project
   :defer t
   :custom
-  (project-mode-line t)
   (project-vc-extra-root-markers '(".project"))
   (project-list-file (expand-file-name ".projects" user-emacs-directory))
+  (project-mode-line 'non-remote)
   (project-switch-commands 'project-dired))
 
 ;;; OTPP
@@ -400,12 +402,6 @@
   :straight t
   :blackout
   :commands aggressive-indent-mode)
-
-;;; YANK INDENT
-
-(use-package yank-indent
-  :straight (:host github :repo "jimeh/yank-indent")
-  :commands yank-indent-mode)
 
 ;;; CLEAN KILL RING
 
@@ -662,7 +658,9 @@
 (use-package elisp-mode
   :hook
   (emacs-lisp-mode-hook . rainbow-delimiters-mode)
-  (emacs-lisp-mode-hook . aggressive-indent-mode))
+  (emacs-lisp-mode-hook . aggressive-indent-mode)
+  :custom
+  (elisp-fontify-semantically t))
 
 ;;; IELM
 
