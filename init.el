@@ -6,6 +6,12 @@
 (setq debug-on-error t)
 (add-hook 'after-init-hook #'(lambda () (setq debug-on-error nil)))
 
+(when (and (fboundp 'native-comp-available-p)
+           (native-comp-available-p))
+  (setq native-comp-deferred-compilation t
+        native-comp-async-jobs-number (max 1 (- (num-processors) 2))
+        native-comp-async-report-warnings-errors 'silent))
+
 ;;; USE PACKAGE
 
 (use-package use-package
@@ -1006,24 +1012,24 @@
 
 ;;; CPERL
 
-(use-package cperl-mode
-  :hook
-  (perl-mode-hook . cperl-mode)
-  :custom
-  (cperl-invalid-face nil)
-  (cperl-indent-level 4)
-  (cperl-close-parent-offset (- cperl-indent-level))
-  (cperl-indent-parens-as-block t)
-  (cperl-electric-keywords nil)
-  (cperl-electric-parens nil)
-  (cperl-extra-newline-before-brace-multiline nil)
-  (cperl-auto-newline nil)
-  :custom-face
-  (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
-  (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
-  :bind
-  (:map cperl-mode-map
-        ("{" . nil)))
+;; (use-package cperl-mode
+;;   :hook
+;;   (perl-mode-hook . cperl-mode)
+;;   :custom
+;;   (cperl-invalid-face nil)
+;;   (cperl-indent-level 4)
+;;   (cperl-close-parent-offset (- cperl-indent-level))
+;;   (cperl-indent-parens-as-block t)
+;;   (cperl-electric-keywords nil)
+;;   (cperl-electric-parens nil)
+;;   (cperl-extra-newline-before-brace-multiline nil)
+;;   (cperl-auto-newline nil)
+;;   :custom-face
+;;   (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
+;;   (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
+;;   :bind
+;;   (:map cperl-mode-map
+;;         ("{" . nil)))
 
 ;;; PYTHON
 
@@ -1495,15 +1501,15 @@
 
 ;;; JIRA
 
-(use-package jira
-  :straight t
-  :commands (jira-issues jira-issues-menu)
-  :custom
-  (jira-base-url "https://redhat.atlassian.net")
-  (jira-username "nhubbard@redhat.com")
-  (jira-token (password-store-get "jira-token"))
-  (jira-token-is-personal-access-token nil)
-  (jira-api-version 2))
+;; (use-package jira
+;;   :straight t
+;;   :commands (jira-issues jira-issues-menu)
+;;   :custom
+;;   (jira-base-url "https://redhat.atlassian.net")
+;;   (jira-username "nhubbard@redhat.com")
+;;   (jira-token (password-store-get "jira-token"))
+;;   (jira-token-is-personal-access-token nil)
+;;   (jira-api-version 2))
 
 ;;; AUTOTEST
 
