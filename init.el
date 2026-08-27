@@ -1,5 +1,8 @@
 ;;;; init.el -*- lexical-binding: t; -*-
 
+(when (version< emacs-version "31")
+  (error "This configuration requires Emacs 31 or newer; running %s" emacs-version))
+
 (setq debug-on-error t)
 (add-hook 'after-init-hook #'(lambda () (setq debug-on-error nil)))
 
