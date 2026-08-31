@@ -49,8 +49,8 @@
   (gc-cons-threshold (* 2 gc-cons-threshold))
   (display-buffer-base-action '(display-buffer-same-window))
   :config
-  (when-let ((font (seq-find (lambda (font) (find-font (font-spec :family font)))
-                             '("Red Hat Mono" "Adwaita Mono" "Monospace"))))
+  (when-let* ((font (seq-find (lambda (font) (find-font (font-spec :family font)))
+                              '("Red Hat Mono" "Adwaita Mono" "Monospace"))))
     (set-face-attribute 'default nil :family font :height 120))
   (setq-default require-final-newline t)
   (setq-default indent-tabs-mode nil)
@@ -739,7 +739,7 @@
                                :connection-type 'pty
                                :sentinel #'(lambda (_ msg)
                                              (when (string-match "exited abnormally" msg)
-                                               (when-let ((buf (get-buffer " *debserver-ssh-znc-tunnel*")))
+                                               (when-let* ((buf (get-buffer " *debserver-ssh-znc-tunnel*")))
                                                  (kill-buffer buf))))))
           (user-error "Failed to create ssh tunnel"))
         (sleep-for 5)
@@ -753,8 +753,8 @@
 
   (defun my/erc (&optional arg)
     (interactive "P")
-    (when-let ((pass (password-store-get "znc-admin"))
-               (default-directory "~"))
+    (when-let* ((pass (password-store-get "znc-admin"))
+                (default-directory "~"))
       (my/debserver-ssh-znc-tunnel arg)
       ;; (erc-tls :server "localhost"
       ;;          :port 6697
@@ -1307,7 +1307,7 @@
   :hook
   (gnus-summary-exit-hook . (lambda ()
                               (dolist (buf (match-buffers '(derived-mode . gnus-article-mode)))
-                                (when-let ((win (get-buffer-window buf)))
+                                (when-let* ((win (get-buffer-window buf)))
                                   (delete-window win)))))
   (gnus-started-hook . gnus-group-list-all-groups)
   :bind
