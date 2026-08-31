@@ -239,9 +239,30 @@
   ("C-c r" . recentf)
   :custom
   (recentf-save-file (expand-file-name ".recentf" user-emacs-directory))
-  (recentf-auto-cleanup 180)
+  (recentf-auto-cleanup 600)
+  (recentf-autosave-interval 300)
   (recentf-max-saved-items 500)
-  (recentf-exclude '("^/tmp/" "^/ssh:" "^/sudo:" "/elpa/" "COMMIT_EDITMSG" ".*-autoloads\\.el$" file-remote-p)))
+  (recentf-exclude '("^/tmp/"
+                     "^/sudo:"
+                     "/elpa/"
+                     "/COMMIT_EDITMSG\\'"
+                     "-autoloads\\.el\\'")))
+
+;;; REGISTER
+
+(use-package register
+  :defer t
+  :custom
+  (register-use-preview t))
+
+;;; BOOKMARKS
+
+(use-package bookmark
+  :defer t
+  :custom
+  (bookmark-default-file (expand-file-name "bookmarks" user-emacs-directory))
+  (bookmark-save-flag 1)
+  (bookmark-sort-flag 'last-modified))
 
 ;;; FLYMAKE
 
