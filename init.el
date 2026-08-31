@@ -239,6 +239,7 @@
   ("C-c r" . recentf)
   :custom
   (recentf-save-file (expand-file-name ".recentf" user-emacs-directory))
+  (recentf-show-messages nil)
   (recentf-auto-cleanup 600)
   (recentf-autosave-interval 300)
   (recentf-max-saved-items 500)
