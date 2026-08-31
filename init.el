@@ -406,7 +406,7 @@
   (project-vc-extra-root-markers '(".project"))
   (project-list-file (expand-file-name ".projects" user-emacs-directory))
   (project-mode-line 'non-remote)
-  (project-switch-commands 'project-dired))
+  (project-switch-commands #'project-prefix-or-any-command))
 
 ;;; OTPP
 
