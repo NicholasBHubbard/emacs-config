@@ -1407,6 +1407,7 @@
   (agent-shell-preferred-agent-config (agent-shell-openai-make-codex-config))
   (agent-shell-openai-default-session-mode-id "agent-full-access")
   (agent-shell-anthropic-default-model-id "opus")
+  (agent-shell-context-sources nil)
   (agent-shell-header-style 'text)
   (agent-shell-session-restore-verbosity 'minimal)
   (agent-shell-show-config-icons nil)
