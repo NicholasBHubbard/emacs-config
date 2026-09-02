@@ -234,7 +234,8 @@
     (interactive)
     (display-buffer-override-next-command
      (lambda (&rest _)
-       (cons (aw-select nil) 'reuse)))))
+       (let ((aw-dispatch-when-more-than 1))
+         (cons (aw-select nil) 'reuse))))))
 
 ;;; RECENTF
 
