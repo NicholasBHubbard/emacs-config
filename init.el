@@ -406,6 +406,7 @@
   (project-vc-extra-root-markers '(".project"))
   (project-list-file (expand-file-name ".projects" user-emacs-directory))
   (project-mode-line 'non-remote)
+  (project-compilation-buffer-name-function #'project-prefixed-buffer-name)
   (project-switch-commands #'project-prefix-or-any-command))
 
 ;;; OTPP
@@ -1009,8 +1010,16 @@
   :straight t
   :blackout
   :commands (lsp lsp-deferred)
+  :bind
+  ("C-c l" . lsp)
   :custom
+  (lsp-keymap-prefix "C-c l")
+  (lsp-completion-provider :capf)
+  (lsp-diagnostics-provider :flymake)
   (lsp-auto-guess-root t)
+  (lsp-enable-on-type-formatting nil)
+  (lsp-keep-workspace-alive nil)
+  (lsp-headerline-breadcrumb-enable nil)
   (lsp-enable-snippet nil)
   (lsp-enable-folding nil)
   (lsp-idle-delay 0.5)
