@@ -1321,6 +1321,7 @@
   :hook
   (message-mode-hook . visual-line-mode)
   (message-mode-hook . use-hard-newlines)
+  (message-mode-hook . (lambda () (display-fill-column-indicator-mode -1)))
   (message-send-hook . mml-secure-message-sign-pgpmime)
   (message-sent-hook . message-put-addresses-in-ecomplete))
 
