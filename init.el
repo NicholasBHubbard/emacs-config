@@ -325,15 +325,6 @@
                 (let ((coding-system-for-write 'utf-8))
                   (apply orig-fn args)))))
 
-;;; WGREP
-
-(use-package wgrep
-  :straight t
-  :commands wgrep-change-to-wgrep-mode
-  :custom
-  (wgrep-auto-save-buffer t)
-  (wgrep-change-readonly-file t))
-
 ;;; VERTICO
 
 (use-package vertico
