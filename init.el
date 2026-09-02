@@ -290,10 +290,11 @@
   (make-directory (setopt org-directory "~/org/") t)
   :bind*
   ("C-c t" . org-todo-list)
-  ("C-c r" . (lambda () (interactive "sRemember: ")) (org-capture-string text "i"))
+  ("C-c a" . org-agenda-list)
+  ("C-c n" . (lambda (text) (interactive "sRemember: ") (org-capture-string text "i")))
   :custom
   (org-default-notes-file (expand-file-name "inbox.org" org-directory))
-  (org-agenda-files (list org-default-notes-file))
+  (org-agenda-files (list org-directory))
   (org-agenda-window-setup 'current-window)
   (org-startup-folded 'content)
   (org-return-follows-link t)
@@ -312,7 +313,7 @@
 (use-package prescient
   :straight t
   :custom
-  (prescient-save-file (concat user-emacs-directory "prescient"))
+  (prescient-save-file (expand-file-name ".prescient" user-emacs-directory))
   (prescient-sort-full-matches-first t)
   :config
   (prescient-persist-mode 1)
@@ -1285,11 +1286,10 @@
 ;;; SMTPMAIL
 
 (use-package smtpmail
-  :commands message-send-and-exit
+  :defer t
   :custom
   ;; (send-mail-function 'smtpmail-send-it)
   (smtpmail-smtp-user nil)
-  (smtpmail-default-smtp-server "posteo.de")
   (smtpmail-smtp-server "posteo.de")
   (smtpmail-smtp-service 587)
   (smtpmail-stream-type 'starttls))
@@ -1304,14 +1304,14 @@
 (use-package message
   :commands (compose-mail message-send)
   :custom
+  (message-fill-column nil)
   (message-mail-alias-type 'ecomplete)
   (message-self-insert-commands nil)
   (message-expand-name-standard-ui t)
   (message-kill-buffer-on-exit t)
   (message-send-mail-function #'message-smtpmail-send-it)
   (message-server-alist
-   '(("nicholashubbard@posteo.net" . "smtp posteo.de 587 nicholashubbard@posteo.net")
-     ("nhubbard@redhat.com" . "smtp smtp.gmail.com 587 nhubbard@redhat.com")))
+   '(("nicholashubbard@posteo.net" . "smtp posteo.de 587 nicholashubbard@posteo.net")))
   (mml-secure-openpgp-signers '("1B047444A3CDC5320D33F5187319CE683E94B9B0"))
   (message-signature
    (let ((nl (propertize "\n" 'hard t)))
@@ -1319,26 +1319,16 @@
              "Keys: https://github.com/NicholasBHubbard/public-keys" nl
              "Key ID: 1B047444A3CDC5320D33F5187319CE683E94B9B0")))
   :hook
+  (message-mode-hook . visual-line-mode)
+  (message-mode-hook . use-hard-newlines)
   (message-send-hook . mml-secure-message-sign-pgpmime)
   (message-sent-hook . message-put-addresses-in-ecomplete))
-
-;;; MESSAGES ARE FLOWING
-
-(use-package messages-are-flowing
-  :straight t
-  :after message
-  :hook
-  (message-mode-hook . messages-are-flowing-use-and-mark-hard-newlines))
 
 ;;; GNUS
 
 (use-package gnus
   :commands gnus
   :hook
-  (gnus-summary-exit-hook . (lambda ()
-                              (dolist (buf (match-buffers '(derived-mode . gnus-article-mode)))
-                                (when-let* ((win (get-buffer-window buf)))
-                                  (delete-window win)))))
   (gnus-started-hook . gnus-group-list-all-groups)
   :bind
   (:map gnus-article-mode-map
@@ -1346,8 +1336,9 @@
   :custom
   (gnus-group-buffer "*gnus*")
   (gnus-default-directory "~")
+  (mail-user-agent 'gnus-user-agent)
   (gnus-select-method '(nnnil nil))
-  (gnus-startup-file (concat user-emacs-directory ".newsrc"))
+  (gnus-startup-file (expand-file-name ".newsrc" user-emacs-directory))
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
   (gnus-use-full-window nil)
   (gnus-always-read-dribble-file t)
@@ -1357,18 +1348,15 @@
   (gnus-use-trees nil)
   (mm-verify-option 'known)
   (mm-decrypt-option 'known)
-  (gnus-always-read-dribble-file nil)
-  (gnus-parameters '((".*" (display . all))))
   (gnus-use-scoring nil)
   (gnus-summary-next-group-on-exit nil)
-  (gnus-posting-styles '(("^nnimap\\+nhubbard@redhat\\.com:" (address "nhubbard@redhat.com"))))
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
              (nnimap-address "posteo.de")
-             (nnimap-inbox ("INBOX" "Sent"))
+             (nnimap-inbox ("INBOX"))
              (nnimap-server-port "993")
-             (nnimap-stream ssl)
+             (nnimap-stream tls)
              (nnmail-split-fancy-match-partial-words t)
              (nnimap-split-methods 'nnimap-split-fancy)
              (nnimap-split-fancy
@@ -1381,14 +1369,7 @@
                  (list "linux-bcachefs@vger\\.kernel\\.org" "INBOX.ml.bcachefs")
                  (list "linux-unionfs@vger\\.kernel\\.org" "INBOX.ml.overlayfs")
                  (list "linux-crypto@vger\\.kernel\\.org" "INBOX.ml.linux-crypto")
-                 "INBOX")))
-     (nnimap "nhubbard@redhat.com"
-             (nnimap-user "nhubbard@redhat.com")
-             (nnimap-address "imap.gmail.com")
-             (nnimap-server-port "993")
-             (nnimap-stream ssl)
-             (nnimap-authenticator xoauth2)
-             (nnimap-inbox ("INBOX" "[Gmail]/Sent Mail"))))))
+                 "INBOX"))))))
 
 ;;; GPTEL
 
@@ -1498,7 +1479,7 @@
   :hook
   (pdf-view-mode-hook . pdf-view-restore-mode)
   :custom
-  (pdf-view-restore-filename (concat user-emacs-directory ".pdf-view-restore")))
+  (pdf-view-restore-filename (expand-file-name ".pdf-view-restore" user-emacs-directory)))
 
 ;;; DOCKER
 
