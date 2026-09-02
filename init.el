@@ -1346,6 +1346,8 @@
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
   (gnus-use-full-window nil)
   (gnus-always-read-dribble-file t)
+  (gnus-message-archive-group "nnimap+nicholashubbard@posteo.net:Sent")
+  (gnus-gcc-mark-as-read t)
   (gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))
   (gnus-auto-select-next nil)
   (gnus-search-use-parsed-queries t)
@@ -1354,6 +1356,7 @@
   (mm-decrypt-option 'known)
   (gnus-use-scoring nil)
   (gnus-summary-next-group-on-exit nil)
+  (gnus-summary-thread-gathering-function #'gnus-gather-threads-by-references)
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
