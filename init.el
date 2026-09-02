@@ -904,6 +904,7 @@
      ("p" diff-hl-previous-hunk "previous hunk")
      ("s" diff-hl-stage-current-hunk "stage hunk")
      ("r" diff-hl-revert-hunk "revert hunk")
+     ("h" diff-hl-show-hunk "show hunk" :exit t)
      ("g" magit-status "magit" :exit t)))))
 
 ;;; TRAMP
