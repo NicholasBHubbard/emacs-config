@@ -874,6 +874,7 @@
 (use-package diff-hl
   :straight t
   :init
+  (make-variable-buffer-local 'diff-hl-timer)
   (global-diff-hl-mode 1)
   :custom
   (diff-hl-show-staged-changes nil)
