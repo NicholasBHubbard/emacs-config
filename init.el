@@ -286,21 +286,26 @@
 ;;; ORG
 
 (use-package org
+  :init
+  (make-directory (setopt org-directory "~/org/") t)
   :bind*
   ("C-c t" . org-todo-list)
   ("C-c r" . (lambda () (interactive "sRemember: ")) (org-capture-string text "i"))
   :custom
-  (org-directory (expand-file-name "org" user-emacs-directory))
   (org-default-notes-file (expand-file-name "inbox.org" org-directory))
   (org-agenda-files (list org-default-notes-file))
+  (org-agenda-window-setup 'current-window)
+  (org-startup-folded 'content)
+  (org-return-follows-link t)
+  (org-log-done 'time)
   (org-capture-templates
    '(("i" "Inbox" entry
       (file org-default-notes-file)
       "* %i\n  %U\n  %a"
       :prepend t
       :immediate-finish t)))
-  :config
-  (make-directory org-directory))
+  :hook
+  (org-after-todo-state-change-hook . save-buffer))
 
 ;;; PRESCIENT
 
