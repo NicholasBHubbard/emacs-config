@@ -20,7 +20,6 @@
   :custom
   (user-full-name "Nicholas Hubbard")
   (user-mail-address "nicholashubbard@posteo.net")
-  (confirm-kill-emacs #'y-or-n-p)
   (enable-recursive-minibuffers t)
   (display-time-format "%H:%M")
   (display-time-default-load-average nil)
@@ -47,7 +46,6 @@
   (auto-revert-verbose nil)
   (window-sides-vertical t)
   (gc-cons-threshold (* 2 gc-cons-threshold))
-  (display-buffer-base-action '(display-buffer-same-window))
   :config
   (when-let* ((font (seq-find (lambda (font) (find-font (font-spec :family font)))
                               '("Red Hat Mono" "Adwaita Mono" "Monospace"))))
@@ -223,12 +221,19 @@
 (use-package ace-window
   :straight t
   :bind*
-  ("C-;" . ace-window)
+  ("C-;" . ace-select-window)
+  ("C-c w" . my/ace-display-next-buffer)
   :custom
-  (aw-dispatch-always nil)
   (aw-scope 'frame)
+  (aw-dispatch-always nil)
   (aw-dispatch-when-more-than 2)
-  (aw-minibuffer-flag t))
+  (aw-minibuffer-flag t)
+  :config
+  (defun my/ace-display-next-buffer ()
+    (interactive)
+    (display-buffer-override-next-command
+     (lambda (&rest _)
+       (cons (aw-select nil) 'reuse)))))
 
 ;;; RECENTF
 
