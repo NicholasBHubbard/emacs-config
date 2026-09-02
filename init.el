@@ -295,6 +295,9 @@
   :custom
   (org-default-notes-file (expand-file-name "inbox.org" org-directory))
   (org-agenda-files (list org-directory))
+  (org-agenda-show-all-dates nil)
+  (org-agenda-use-time-grid nil)
+  (org-agenda-prefix-format '((agenda . " %?-12t")))
   (org-agenda-window-setup 'current-window)
   (org-startup-folded 'content)
   (org-return-follows-link t)
