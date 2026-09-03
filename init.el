@@ -1340,6 +1340,8 @@
 
 (use-package gnus
   :defer t
+  :init
+  (with-eval-after-load 'gnus (setq gnus-select-method '(nnnil "")))
   :hook
   (gnus-started-hook . gnus-group-list-all-groups)
   :bind
@@ -1357,7 +1359,6 @@
   (gnus-gcc-mark-as-read t)
   (gnus-buttonized-mime-types '("multipart/signed" "multipart/encrypted"))
   (gnus-auto-select-next nil)
-  (gnus-select-method nil)
   (gnus-search-use-parsed-queries t)
   (gnus-use-trees nil)
   (mm-verify-option 'known)
