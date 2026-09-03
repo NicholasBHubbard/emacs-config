@@ -1000,28 +1000,25 @@
   :bind*
   ("C-c G" . google-this))
 
-;;; LSP MODE
+;;; EGLOT
 
-(use-package lsp-mode
-  :straight t
-  :blackout
-  :commands (lsp lsp-deferred)
+(use-package eglot
   :bind
-  ("C-c l" . lsp)
+  ("C-c l" . eglot)
   :custom
-  (lsp-keymap-prefix "C-c l")
-  (lsp-completion-provider :capf)
-  (lsp-clients-clangd-args '("--header-insertion-decorators=0"
-                             "--completion-style=detailed"))
-  (lsp-diagnostics-provider :flymake)
-  (lsp-auto-guess-root t)
-  (lsp-enable-on-type-formatting nil)
-  (lsp-keep-workspace-alive nil)
-  (lsp-headerline-breadcrumb-enable nil)
-  (lsp-enable-snippet nil)
-  (lsp-enable-folding nil)
-  (lsp-idle-delay 0.5)
-  (lsp-enable-symbol-highlighting nil))
+  (eglot-autoshutdown t)
+  (eglot-extend-to-xref t)
+  (eglot-code-action-indications nil)
+  (eglot-ignored-server-capabilities
+   '(:documentHighlightProvider
+     :documentOnTypeFormattingProvider
+     :inlayHintProvider
+     :semanticTokensProvider))
+  :config
+  (add-to-list 'eglot-server-programs
+               '((c-ts-mode c++-ts-mode)
+                 . ("clangd" "--header-insertion-decorators=0"
+                    "--completion-style=detailed"))))
 
 ;;; TREESIT
 
