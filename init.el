@@ -572,7 +572,9 @@
                (get-buffer-process
                 (shell-pop--shell-buffer-name shell-pop-last-shell-buffer-index))))
          (call-interactively #'shell-pop)
-         (comint-clear-buffer)))))
+         (when (and (bound-and-true-p shell-pop--is-shell-buffer)
+                    (derived-mode-p 'comint-mode))
+           (comint-clear-buffer))))))
 
 ;;; SHX
 
