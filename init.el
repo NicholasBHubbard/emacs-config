@@ -106,6 +106,10 @@
 	  (goto-char (point-max))
 	  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+(setq straight-vc-git-default-clone-depth '(1 single-branch)
+      straight-built-in-pseudo-packages
+      (append (mapcar #'car package--builtin-versions)
+              straight-built-in-pseudo-packages))
 
 ;;; BLACKOUT
 
@@ -669,11 +673,11 @@
 
 ;;; IELM
 
-  (use-package ielm
-    :commands ielm
-    :hook
-    (ielm-mode-hook . rainbow-delimiters-mode)
-    (ielm-mode-hook . aggressive-indent-mode))
+(use-package ielm
+  :commands ielm
+  :hook
+  (ielm-mode-hook . rainbow-delimiters-mode)
+  (ielm-mode-hook . aggressive-indent-mode))
 
 ;;; ELDOC
 
@@ -1017,15 +1021,6 @@
   :custom
   (treesit-enabled-modes t)
   (treesit-auto-install-grammar 'always))
-
-;;; COMBOBULATE
-
-(use-package combobulate
-  :straight t
-  :hook
-  (prog-mode-hook . combobulate-mode)
-  :custom
-  (combobulate-key-prefix "C-c o"))
 
 ;;; CPERL
 
