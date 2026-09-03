@@ -1030,6 +1030,15 @@
   (treesit-enabled-modes t)
   (treesit-auto-install-grammar 'always))
 
+;;; COMBOBULATE
+
+(use-package combobulate
+  :straight t
+  :hook
+  (prog-mode-hook . combobulate-mode)
+  :custom
+  (combobulate-key-prefix "C-c o"))
+
 ;;; CPERL
 
 ;; (use-package cperl-mode
