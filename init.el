@@ -1055,9 +1055,9 @@
 
 (use-package python
   :mode ("\\.py\\'" . python-mode)
-  :config
-  (add-to-list 'eglot-server-programs
-               '(python-base-mode . ("ty" "server"))))
+  :custom
+  (python-indent-guess-indent-offset-verbose nil)
+  (python-shell-dedicated 'project))
 
 (use-package pet
   :straight t
