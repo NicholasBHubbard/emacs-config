@@ -1003,7 +1003,8 @@
 ;;; EGLOT
 
 (use-package eglot
-  :bind
+  :commands (eglot eglot-ensure)
+  :bind*
   ("C-c l" . eglot)
   :custom
   (eglot-autoshutdown t)
@@ -1015,6 +1016,8 @@
      :inlayHintProvider
      :semanticTokensProvider))
   :config
+  (add-to-list 'eglot-server-programs
+               '(python-base-mode . ("ty" "server")))
   (add-to-list 'eglot-server-programs
                '((c-ts-mode c++-ts-mode)
                  . ("clangd" "--header-insertion-decorators=0"
@@ -1051,14 +1054,30 @@
 ;;; PYTHON
 
 (use-package python
-  :mode ("\\.py\\'" . python-mode))
+  :mode ("\\.py\\'" . python-mode)
+  :config
+  (add-to-list 'eglot-server-programs
+               '(python-base-mode . ("ty" "server"))))
 
-;; (use-package pet
-;;   :straight t
-;;   :blackout
-;;   :after python
-;;   :config
-;;   (add-hook 'python-base-mode-hook 'pet-mode -10))
+(use-package pet
+  :straight t
+  :blackout
+  :after python
+  :init
+  (add-hook 'python-base-mode-hook 'pet-mode -10)
+  :hook
+  (pet-after-buffer-local-vars-setup
+   . (lambda ()
+       (setq-local flymake-ruff-program
+                   (pet-executable-find "ruff")))))
+
+(use-package flymake-ruff
+  :straight t
+  :after eglot
+  :hook
+  (eglot-managed-mode-hook . flymake-ruff-load)
+  :custom
+  (flymake-ruff-program '("ruff")))
 
 ;;; PROLOG
 
