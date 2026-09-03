@@ -406,17 +406,22 @@
   (project-compilation-buffer-name-function #'project-prefixed-buffer-name)
   (project-switch-commands #'project-prefix-or-any-command))
 
-;;; OTPP
+;;; ISEARCH
 
-;; (use-package otpp
-;;   :straight t
-;;   :after project
-;;   :custom
-;;   (otpp-bury-on-kill-buffer-when-multiple-tabs nil)
-;;   (otpp-find-file-integration nil)
-;;   :init
-;;   (otpp-mode 1)
-;;   (otpp-override-mode 1))
+(use-package isearch
+  :custom
+  (search-default-mode t)
+  (isearch-lazy-count t)
+  (isearch-repeat-on-direction-change t)
+  (isearch-wrap-pause 'no-ding)
+  (search-highlight-submatches nil)
+  :hook
+  (isearch-update-post-hook
+   . (lambda () (and isearch-success (not isearch-just-started) (recenter))))
+  :bind*
+  (:map isearch-mode-map
+        ("C-n" . isearch-repeat-forward)
+        ("C-p" . isearch-repeat-backward)))
 
 ;;; AGGRESSIVE INDENT
 
@@ -459,20 +464,6 @@
   :blackout
   :commands rainbow-delimiters-mode)
 
-;;; CTRLF
-
-(use-package ctrlf
-  :straight t
-  :custom
-  (ctrlf-auto-recenter t)
-  (ctrlf-go-to-end-of-match nil)
-  (ctrlf-default-search-style 'regexp)
-  :bind*
-  ("C-s" . ctrlf-forward-default)
-  (:map ctrlf-minibuffer-mode-map
-        ("C-n" . ctrlf-next-match)
-        ("C-p" . ctrlf-previous-match)))
-
 ;;; PROCED
 
 (use-package proced
@@ -482,13 +473,6 @@
   (proced-auto-update-interval 1)
   (proced-goal-attribute nil)
   (proced-enable-color-flag t))
-
-;;; ISEARCH
-
-(use-package isearch
-  :defer t
-  :custom
-  (isearch-wrap-pause 'no-ding))
 
 ;;; COMPILE
 
