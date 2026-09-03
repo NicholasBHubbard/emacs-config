@@ -20,7 +20,8 @@
   :custom
   (user-full-name "Nicholas Hubbard")
   (user-mail-address "nicholashubbard@posteo.net")
-  (confirm-kill-emacs t)
+  (confirm-kill-emacs #'yes-or-no-p)
+  (use-short-answers t)
   (enable-recursive-minibuffers t)
   (display-time-format "%H:%M")
   (display-time-default-load-average nil)
@@ -44,7 +45,6 @@
   (scroll-margin 1)
   (display-line-numbers-widen t)
   (undo-in-region t)
-  (use-short-answers t)
   (inhibit-startup-screen t)
   (mode-line-percent-position nil)
   (auto-revert-verbose nil)
