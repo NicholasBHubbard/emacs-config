@@ -558,17 +558,21 @@
   (shell-pop-per-window t)
   (shell-pop-pop-under-shell t)
   :bind*
-  ("M-SPC" . (lambda () (interactive)
-               (let ((default-directory (if (file-remote-p default-directory)
-                                            "~" default-directory)))
-                 (call-interactively #'shell-pop))))
-  ("M-S-SPC" . (lambda () (interactive)
-                 (let ((shell-pop-autocd-to-working-dir t)
-                       (default-directory (if (file-remote-p default-directory)
-                                              "~" default-directory)))
-                   (call-interactively #'shell-pop)
-                   (comint-send-input)
-                   (comint-clear-buffer)))))
+  ("M-SPC"
+   . (lambda () (interactive)
+       (let ((default-directory (if (file-remote-p default-directory)
+                                    "~" default-directory)))
+         (call-interactively #'shell-pop))))
+  ("M-S-SPC"
+   . (lambda () (interactive)
+       (let* ((default-directory (if (file-remote-p default-directory)
+                                     "~" default-directory))
+              (shell-pop-default-directory default-directory)
+              (shell-pop-autocd-to-working-dir
+               (get-buffer-process
+                (shell-pop--shell-buffer-name shell-pop-last-shell-buffer-index))))
+         (call-interactively #'shell-pop)
+         (comint-clear-buffer)))))
 
 ;;; SHX
 
