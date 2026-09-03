@@ -1333,7 +1333,6 @@
   (gnus-group-buffer "*gnus*")
   (gnus-default-directory "~")
   (mail-user-agent 'gnus-user-agent)
-  (gnus-select-method '(nnnil nil))
   (gnus-startup-file (expand-file-name ".newsrc" user-emacs-directory))
   (gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date))
   (gnus-use-full-window nil)
