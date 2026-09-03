@@ -20,6 +20,7 @@
   :custom
   (user-full-name "Nicholas Hubbard")
   (user-mail-address "nicholashubbard@posteo.net")
+  (confirm-kill-emacs t)
   (enable-recursive-minibuffers t)
   (display-time-format "%H:%M")
   (display-time-default-load-average nil)
