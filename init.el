@@ -1011,6 +1011,8 @@
   :custom
   (lsp-keymap-prefix "C-c l")
   (lsp-completion-provider :capf)
+  (lsp-clients-clangd-args '("--header-insertion-decorators=0"
+                             "--completion-style=detailed"))
   (lsp-diagnostics-provider :flymake)
   (lsp-auto-guess-root t)
   (lsp-enable-on-type-formatting nil)
