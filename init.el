@@ -567,6 +567,7 @@
                        (default-directory (if (file-remote-p default-directory)
                                               "~" default-directory)))
                    (call-interactively #'shell-pop)
+                   (comint-send-input)
                    (comint-clear-buffer)))))
 
 ;;; SHX
