@@ -567,10 +567,11 @@
    . (lambda () (interactive)
        (let* ((default-directory (if (file-remote-p default-directory)
                                      "~" default-directory))
+              (index (shell-pop--target-index current-prefix-arg))
               (shell-pop-default-directory default-directory)
               (shell-pop-autocd-to-working-dir
                (get-buffer-process
-                (shell-pop--shell-buffer-name shell-pop-last-shell-buffer-index))))
+                (shell-pop--shell-buffer-name index))))
          (call-interactively #'shell-pop)
          (when (and (bound-and-true-p shell-pop--is-shell-buffer)
                     (derived-mode-p 'comint-mode))
