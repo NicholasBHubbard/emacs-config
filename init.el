@@ -1375,6 +1375,7 @@
   (gnus-use-scoring nil)
   (gnus-summary-next-group-on-exit nil)
   (gnus-summary-thread-gathering-function #'gnus-gather-threads-by-references)
+  (gnus-parameters '((".*" (display . all))))
   (gnus-secondary-select-methods
    '((nnimap "nicholashubbard@posteo.net"
              (nnimap-user "nicholashubbard@posteo.net")
