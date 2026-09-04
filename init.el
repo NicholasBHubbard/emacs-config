@@ -44,7 +44,6 @@
   (electric-indent-actions '(yank))
   (scroll-margin 1)
   (display-line-numbers-widen t)
-  (undo-in-region t)
   (inhibit-startup-screen t)
   (mode-line-percent-position nil)
   (auto-revert-verbose nil)
@@ -409,7 +408,14 @@
   (project-list-file (expand-file-name ".projects" user-emacs-directory))
   (project-mode-line 'non-remote)
   (project-compilation-buffer-name-function #'project-prefixed-buffer-name)
-  (project-switch-commands #'project-prefix-or-any-command))
+  (project-switch-commands #'project-prefix-or-any-command)
+  :config
+  (setf (car (member '(derived-mode . comint-mode)
+                     project-kill-buffer-conditions))
+        '(and (derived-mode . comint-mode)
+              (not
+               (lambda (buffer)
+                 (local-variable-p 'shell-pop--is-shell-buffer buffer))))))
 
 ;;; ISEARCH
 
@@ -1345,6 +1351,7 @@
 (use-package gnus
   :defer t
   :init
+  (setq gnus-group-buffer "*gnus*")
   (with-eval-after-load 'gnus (setq gnus-select-method '(nnnil "")))
   :hook
   (gnus-started-hook . gnus-group-list-all-groups)
@@ -1352,7 +1359,6 @@
   (:map gnus-article-mode-map
         ("q" . gnus-summary-expand-window))
   :custom
-  (gnus-group-buffer "*gnus*")
   (gnus-default-directory "~")
   (mail-user-agent 'gnus-user-agent)
   (gnus-startup-file (expand-file-name ".newsrc" user-emacs-directory))
