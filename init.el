@@ -833,9 +833,10 @@
 (use-package magit
   :straight t
   :commands (magit magit-status)
+  :init
+  (setq magit-tramp-pipe-stty-settings 'pty)
   :custom
   (magit-clone-default-directory "~/p/")
-  (magit-tramp-pipe-stty-settings 'pty)
   (magit-commit-show-diff nil)
   (magit-branch-direct-configure nil)
   (magit-refresh-status-buffer nil)
