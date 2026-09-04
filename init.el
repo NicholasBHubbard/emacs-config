@@ -922,11 +922,7 @@
   (remote-file-name-inhibit-locks t)
   (tramp-copy-size-limit (* 1024 1024))
   (tramp-use-scp-direct-remote-copying t)
-  (remote-file-name-inhibit-auto-save-visited t)
-  (tramp-default-remote-shell "/bin/bash")
-  (tramp-connection-local-default-shell-variables
-   '((shell-file-name . "/bin/bash")
-     (shell-command-switch . "-c"))))
+  (remote-file-name-inhibit-auto-save-visited t))
 
 ;;; DIRED
 
