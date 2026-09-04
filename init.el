@@ -851,7 +851,7 @@
   :config
   (magit-todos-mode 1)
   :custom
-  (magit-todos-keywords-list '("TODO" "HACK"))
+  (magit-todos-keywords '("TODO" "HACK"))
   (magit-todos-branch-list nil))
 
 ;;; VC
