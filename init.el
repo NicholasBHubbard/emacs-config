@@ -410,12 +410,15 @@
   (project-compilation-buffer-name-function #'project-prefixed-buffer-name)
   (project-switch-commands #'project-prefix-or-any-command)
   :config
-  (setf (car (member '(derived-mode . comint-mode)
-                     project-kill-buffer-conditions))
-        '(and (derived-mode . comint-mode)
-              (not
-               (lambda (buffer)
-                 (local-variable-p 'shell-pop--is-shell-buffer buffer))))))
+  (setq project-kill-buffer-conditions
+        (cl-substitute
+         #'(lambda (buf)
+             (with-current-buffer buf
+               (and (derived-mode-p 'comint-mode)
+                    (not (bound-and-true-p shell-pop--is-shell-buffer)))))
+         '(derived-mode . comint-mode)
+         project-kill-buffer-conditions
+         :test #'equal)))
 
 ;;; ISEARCH
 
