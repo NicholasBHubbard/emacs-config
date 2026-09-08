@@ -1038,24 +1038,24 @@
 
 ;;; CPERL
 
-;; (use-package cperl-mode
-;;   :hook
-;;   (perl-mode-hook . cperl-mode)
-;;   :custom
-;;   (cperl-invalid-face nil)
-;;   (cperl-indent-level 4)
-;;   (cperl-close-parent-offset (- cperl-indent-level))
-;;   (cperl-indent-parens-as-block t)
-;;   (cperl-electric-keywords nil)
-;;   (cperl-electric-parens nil)
-;;   (cperl-extra-newline-before-brace-multiline nil)
-;;   (cperl-auto-newline nil)
-;;   :custom-face
-;;   (cperl-array-face ((t :inherit font-lock-variable-name-face)) face-defface-spec)
-;;   (cperl-hash-face  ((t :inherit font-lock-variable-name-face)) face-defface-spec)
-;;   :bind
-;;   (:map cperl-mode-map
-;;         ("{" . nil)))
+(use-package cperl-mode
+  :hook
+  (perl-mode-hook . cperl-mode)
+  :custom
+  (cperl-invalid-face nil)
+  (cperl-indent-level 4)
+  (cperl-close-paren-offset (- cperl-indent-level))
+  (cperl-indent-parens-as-block t)
+  (cperl-electric-keywords nil)
+  (cperl-electric-parens nil)
+  (cperl-extra-newline-before-brace-multiline nil)
+  (cperl-auto-newline nil)
+  :custom-face
+  (cperl-array-face ((t :inherit font-lock-variable-name-face)))
+  (cperl-hash-face  ((t :inherit font-lock-variable-name-face)))
+  :bind
+  (:map cperl-mode-map
+        ("{" . nil)))
 
 ;;; PYTHON
 
