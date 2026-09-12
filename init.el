@@ -1390,6 +1390,7 @@
                  ("cc" "ci_activity@noreply\\.github\\.com" "INBOX.CI")
                  ("X-GitLab-Pipeline-Id" ".*" "INBOX.CI")
                  (list "perl5-porters@perl\\.org" "INBOX.ml.p5p")
+                 (list "slackbuilds-users@slackbuilds\\.org" "INBOX.ml.slackbuilds")
                  (list "linux-btrfs@vger\\.kernel\\.org" "INBOX.ml.btrfs")
                  (list "linux-bcachefs@vger\\.kernel\\.org" "INBOX.ml.bcachefs")
                  (list "linux-unionfs@vger\\.kernel\\.org" "INBOX.ml.overlayfs")
