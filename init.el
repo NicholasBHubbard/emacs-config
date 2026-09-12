@@ -1323,7 +1323,8 @@
 (use-package message
   :commands (compose-mail message-send)
   :custom
-  (message-fill-column nil)
+  (message-fill-column 72)
+  (fill-flowed-encode-column 72)
   (message-mail-alias-type 'ecomplete)
   (message-self-insert-commands nil)
   (message-expand-name-standard-ui t)
