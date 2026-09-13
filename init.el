@@ -316,6 +316,7 @@
       :prepend t
       :immediate-finish t)))
   :hook
+  (org-mode-hook . (lambda () (visual-line-mode 1)))
   (org-after-todo-state-change-hook . save-buffer))
 
 ;;; PRESCIENT
@@ -354,7 +355,9 @@
   :init
   (global-corfu-mode 1)
   (corfu-history-mode 1)
+  (corfu-popupinfo-mode 1)
   :custom
+  (corfu-popupinfo-delay '(0.2 . 0.1))
   (corfu-auto t)
   (corfu-auto-delay 0.1)
   (corfu-auto-prefix 3)
@@ -370,9 +373,10 @@
 
 (use-package cape
   :straight t
+  :defer t
   :init
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev))
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
 
 ;;; DABBREV
 
@@ -1323,7 +1327,7 @@
 (use-package message
   :commands (compose-mail message-send)
   :custom
-  (message-fill-column 72)
+  (message-fill-column nil)
   (fill-flowed-encode-column 72)
   (message-mail-alias-type 'ecomplete)
   (message-self-insert-commands nil)
