@@ -1501,11 +1501,11 @@
   (pdf-tools-install t)
   (pdf-loader-install t)
   :custom
-  (pdf-view-display-size 'fit-page)
   (pdf-view-resize-factor 1.1)
   :hook
+  (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
   (pdf-view-mode-hook . pdf-view-midnight-minor-mode)
-  (TeX-after-compilation-finished-functions . TeX-revert-document-buffer))
+  (pdf-view-mode-hook . pdf-view-auto-slice-minor-mode))
 
 (use-package pdf-view-restore
   :straight t
