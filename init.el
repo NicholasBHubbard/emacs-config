@@ -1502,6 +1502,7 @@
   (pdf-loader-install t)
   :custom
   (pdf-view-display-size 'fit-page)
+  (pdf-view-resize-factor 1.1)
   :hook
   (pdf-view-mode-hook . pdf-view-midnight-minor-mode)
   (TeX-after-compilation-finished-functions . TeX-revert-document-buffer))
