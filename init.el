@@ -1500,12 +1500,9 @@
   :config
   (pdf-tools-install t)
   (pdf-loader-install t)
-  :custom
-  (pdf-view-resize-factor 1.1)
   :hook
   (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
-  (pdf-view-mode-hook . pdf-view-midnight-minor-mode)
-  (pdf-view-mode-hook . pdf-view-auto-slice-minor-mode))
+  (pdf-view-mode-hook . pdf-view-midnight-minor-mode))
 
 (use-package pdf-view-restore
   :straight t
