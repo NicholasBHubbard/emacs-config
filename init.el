@@ -285,7 +285,7 @@
   :defer t
   :commands (flymake-mode flymake-start)
   :custom
-  (flymake-no-changes-timeout nil)
+  (flymake-no-changes-timeout most-positive-fixnum)
   (flymake-start-on-save-buffer t)
   (flymake-show-diagnostics-at-end-of-line 'fancy)
   (flymake-fringe-indicator-position nil)
@@ -359,7 +359,7 @@
   (corfu-popupinfo-mode 1)
   :custom
   (corfu-popupinfo-delay '(0.2 . 0.1))
-  (corfu-auto t)
+  (corfu-auto nil)
   (corfu-auto-delay 0.1)
   (corfu-auto-prefix 3)
   (corfu-auto-trigger nil)
@@ -1018,6 +1018,7 @@
   ("C-c l" . eglot)
   :custom
   (eglot-autoshutdown t)
+  (eglot-send-changes-idle-time most-positive-fixnum)
   (eglot-extend-to-xref t)
   (eglot-code-action-indications nil)
   (eglot-ignored-server-capabilities
