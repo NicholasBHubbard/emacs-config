@@ -285,7 +285,8 @@
   :defer t
   :commands (flymake-mode flymake-start)
   :custom
-  (flymake-no-changes-timeout nil)
+  (flymake-no-changes-timeout 0.5)
+  (flymake-start-on-save-buffer t)
   (flymake-show-diagnostics-at-end-of-line 'fancy)
   (flymake-fringe-indicator-position nil)
   (flymake-fringe-indicators nil))
