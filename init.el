@@ -1104,11 +1104,6 @@
 (use-package mercury-mode
   :mode ("\\.m\\'" . mercury-mode))
 
-;;; CC MODE
-
-(use-package cc-mode
-  :defer t)
-
 ;;; C TS MODE
 
 (use-package c-ts-mode
