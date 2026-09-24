@@ -553,7 +553,8 @@
   :straight t
   :after shell
   :custom
-  (bash-completion-use-separate-processes nil)
+  ;; Keep completion's DEBUG trap from overwriting Bash's $_.
+  (bash-completion-use-separate-processes t)
   :config
   (bash-completion-setup))
 
@@ -1107,6 +1108,13 @@
 
 (use-package cc-mode
   :defer t)
+
+;;; C TS MODE
+
+(use-package c-ts-mode
+  :defer t
+  :custom
+  (c-ts-indent-offset 4))
 
 ;;; HASKELL
 
