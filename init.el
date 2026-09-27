@@ -364,7 +364,7 @@
   (corfu-auto-prefix 3)
   (corfu-auto-trigger nil)
   (corfu-cycle t)
-  (corfu-on-exact-match nil)
+  (corfu-on-exact-match 'show)
   (corfu-preselect 'prompt)
   (corfu-preview-current nil)
   (corfu-quit-at-boundary t)
