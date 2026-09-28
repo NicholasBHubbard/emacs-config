@@ -710,6 +710,7 @@
   :custom
   (eldoc-idle-delay 0.5)
   (eldoc-echo-area-use-multiline-p nil)
+  (eldoc-echo-area-prefer-doc-buffer nil)
   (eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly))
 
 ;;; HELPFUL
