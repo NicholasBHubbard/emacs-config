@@ -1026,6 +1026,7 @@
   (eglot-ignored-server-capabilities
    '(:documentHighlightProvider
      :documentOnTypeFormattingProvider
+     :hoverProvider
      :inlayHintProvider
      :semanticTokensProvider))
   :config
