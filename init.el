@@ -1035,6 +1035,14 @@
                  . ("clangd" "--header-insertion-decorators=0"
                     "--completion-style=detailed"))))
 
+;;; ELDOC BOX
+
+(use-package eldoc-box
+  :straight t
+  :hook (eglot-managed-mode . eldoc-box-hover-mode)
+  :bind*
+  (:map eglot-mode-map ("C-c i" . eldoc-box-help-at-point)))
+
 ;;; TREESIT
 
 (use-package treesit
