@@ -287,7 +287,7 @@
   :custom
   (flymake-no-changes-timeout most-positive-fixnum)
   (flymake-start-on-save-buffer t)
-  (flymake-show-diagnostics-at-end-of-line 'fancy)
+  (flymake-show-diagnostics-at-end-of-line nil)
   (flymake-fringe-indicator-position nil)
   (flymake-fringe-indicators nil))
 
