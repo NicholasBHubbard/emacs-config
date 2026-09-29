@@ -1026,7 +1026,6 @@
   (eglot-ignored-server-capabilities
    '(:documentHighlightProvider
      :documentOnTypeFormattingProvider
-     :hoverProvider
      :inlayHintProvider
      :semanticTokensProvider))
   :config
@@ -1041,7 +1040,8 @@
 
 (use-package eldoc-box
   :straight t
-  :hook (eglot-managed-mode . eldoc-box-hover-mode)
+  :custom
+  (eldoc-box-clear-with-C-g t)
   :bind*
   (:map eglot-mode-map ("C-c i" . eldoc-box-help-at-point)))
 
