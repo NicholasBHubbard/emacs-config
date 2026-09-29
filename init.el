@@ -713,6 +713,17 @@
   (eldoc-echo-area-prefer-doc-buffer nil)
   (eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly))
 
+
+;;; ELDOC BOX
+
+(use-package eldoc-box
+  :straight t
+  :after eldoc
+  :custom
+  (eldoc-box-clear-with-C-g t)
+  :bind*
+  ("C-c h" . eldoc-box-help-at-point))
+
 ;;; HELPFUL
 
 (use-package helpful
@@ -1035,15 +1046,6 @@
                '((c-ts-mode c++-ts-mode)
                  . ("clangd" "--header-insertion-decorators=0"
                     "--completion-style=detailed"))))
-
-;;; ELDOC BOX
-
-(use-package eldoc-box
-  :straight t
-  :custom
-  (eldoc-box-clear-with-C-g t)
-  :bind*
-  (:map eglot-mode-map ("C-c i" . eldoc-box-help-at-point)))
 
 ;;; TREESIT
 
