@@ -1116,9 +1116,9 @@
 (use-package mercury-mode
   :mode ("\\.m\\'" . mercury-mode))
 
-;;; C TS MODE
+;;; C OR C++ TS MODE
 
-(use-package c-ts-mode
+(use-package c-or-c++-ts-mode
   :defer t
   :custom
   (c-ts-indent-offset 4))
