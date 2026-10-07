@@ -1043,9 +1043,13 @@
   (add-to-list 'eglot-server-programs
                '(python-base-mode . ("ty" "server")))
   (add-to-list 'eglot-server-programs
-               '((c-ts-mode c++-ts-mode)
-                 . ("clangd" "--header-insertion-decorators=0"
-                    "--completion-style=detailed"))))
+               ((c-ts-mode c++-ts-mode)
+                . ("clangd"
+                   "-j=8"
+                   "--clang-tidy"
+                   "-header-insertion=never"
+                   "--header-insertion-decorators=0"
+                   "--completion-style=detailed"))))
 
 ;;; TREESIT
 
