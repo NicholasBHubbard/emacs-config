@@ -1047,6 +1047,7 @@
                 . ("clangd"
                    "-j=8"
                    "--clang-tidy"
+                   "--completion-style=detailed"
                    "-header-insertion=never"
                    "--header-insertion-decorators=0"
                    "--completion-style=detailed"))))
