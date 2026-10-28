@@ -736,6 +736,20 @@
   ("C-h SPC" . helpful-at-point)
   ("C-h F" . helpful-function))
 
+;;; SSH TUNNELS
+
+(use-package ssh-tunnels
+  :straight t
+  :commands (ssh-tunnels ssh-tunnels-run-tunnel ssh-tunnels-kill-tunnel)
+  :autoload ssh-tunnels--get-tunnel-by-name
+  :custom
+  (ssh-tunnels-configurations
+   '((:name "debserver-ssh-znc-tunnel"
+      :local-port 6697
+      :remote-port 6697
+      :host "localhost"
+      :login "debserver"))))
+
 ;;; ERC
 
 (use-package erc
@@ -762,44 +776,18 @@
   (defun my/erc-znc-request-playback (_server _nick)
     (erc-send-line "ZNC *playback PLAY * 0" #'ignore))
 
-  (defun my/debserver-ssh-znc-tunnel (&optional arg)
-    (let ((tunnel-process (get-process "debserver-ssh-znc-tunnel")))
-      (when (and tunnel-process
-                 (or arg (not (process-live-p tunnel-process))))
-        (message "Deleting existing SSH tunnel...")
-        (delete-process tunnel-process)
-        (setq tunnel-process nil)
-        (sleep-for 2))
-      (when (or (not tunnel-process) (not (process-live-p tunnel-process)))
-        (message "Starting SSH tunnel...")
-        (unless (processp
-                 (make-process :name "debserver-ssh-znc-tunnel"
-                               :command '("ssh"
-                                          "-L" "6697:localhost:6697" "-n" "-N"
-                                          "-o" "ServerAliveInterval=30"
-                                          "-o" "ServerAliveCountMax=3"
-                                          "debserver")
-                               :buffer " *debserver-ssh-znc-tunnel*"
-                               :connection-type 'pty
-                               :sentinel #'(lambda (_ msg)
-                                             (when (string-match "exited abnormally" msg)
-                                               (when-let* ((buf (get-buffer " *debserver-ssh-znc-tunnel*")))
-                                                 (kill-buffer buf))))))
-          (user-error "Failed to create ssh tunnel"))
-        (sleep-for 5)
-        (with-current-buffer " *debserver-ssh-znc-tunnel*"
-          (add-hook
-           'kill-buffer-hook
-           #'(lambda ()
-               (dolist (buf (match-buffers '(derived-mode . erc-mode)))
-                 (kill-buffer buf)))
-           nil t)))))
-
   (defun my/erc (&optional arg)
+    "Connect to ZNC through its SSH tunnel.
+With prefix ARG, restart the tunnel before connecting."
     (interactive "P")
     (when-let* ((pass (password-store-get "znc-admin"))
                 (default-directory "~"))
-      (my/debserver-ssh-znc-tunnel arg)
+      (let* ((name "debserver-ssh-znc-tunnel")
+             (tunnel (ssh-tunnels--get-tunnel-by-name name)))
+        (when arg
+          (ssh-tunnels-kill-tunnel name))
+        (unless (ssh-tunnels--check tunnel)
+          (ssh-tunnels-run-tunnel name)))
       ;; (erc-tls :server "localhost"
       ;;          :port 6697
       ;;          :id "*znc-perl-server*"
